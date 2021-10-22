@@ -6,7 +6,7 @@ const usersRouter = require("./routes/users");
 const path = require("path");
 require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
 
-const db = require("../db/index");
+const db = require("./db/index");
 const app = express();
 
 app.use(logger("dev"));

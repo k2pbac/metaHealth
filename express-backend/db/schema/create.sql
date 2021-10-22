@@ -11,7 +11,7 @@ CREATE TABLE employee_accounts (
   password TEXT NOT NULL,
   phone_number VARCHAR(255) NOT NULL,
   email_address VARCHAR(255) NOT NULL,
-  is_doctor BOOLEAN DEFAULT NULL,
+  is_doctor BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE patient_records (
@@ -36,7 +36,7 @@ CREATE TABLE patient_accounts (
   insurance_member_id VARCHAR(255) DEFAULT NULL,
   insurance_policy_number VARCHAR(255) DEFAULT NULL,
   insurance_plan_name VARCHAR(255) DEFAULT NULL,
-  medical_history_id INTEGER DEFAULT NULL,
+  medical_history_id INTEGER DEFAULT NULL
 );
 
 --Will need to update this table (normalize)
