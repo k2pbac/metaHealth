@@ -1,4 +1,4 @@
-# MetaHealth
+# Meta Health
 
 ## Setup
 
