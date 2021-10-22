@@ -1,34 +1,34 @@
-DROP TABLE IF EXISTS available_interviewers CASCADE;
-DROP TABLE IF EXISTS interviews CASCADE;
-DROP TABLE IF EXISTS interviewers CASCADE;
+DROP TABLE IF EXISTS patient_records CASCADE;
+DROP TABLE IF EXISTS patient_accounts CASCADE;
+DROP TABLE IF EXISTS employee_accounts CASCADE;
+DROP TABLE IF EXISTS clinics CASCADE;
 DROP TABLE IF EXISTS appointments CASCADE;
-DROP TABLE IF EXISTS days CASCADE;
 
-CREATE TABLE days (
+CREATE TABLE patient_records (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL
 );
 -- patient
-CREATE TABLE appointments (
+CREATE TABLE patient_accounts (
   id SERIAL PRIMARY KEY NOT NULL,
   time VARCHAR(255) NOT NULL,
   day_id INTEGER REFERENCES days(id) ON DELETE CASCADE
 );
 -- clinic
-CREATE TABLE interviewers (
+CREATE TABLE employee_accounts (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
   avatar VARCHAR(255) NOT NULL
 );
 -- appointments
-CREATE TABLE interviews (
+CREATE TABLE clinics (
   id SERIAL PRIMARY KEY NOT NULL,
   student VARCHAR(255) NOT NULL,
   interviewer_id INTEGER REFERENCES interviewers(id) ON DELETE CASCADE,
   appointment_id INTEGER UNIQUE REFERENCES appointments(id) ON DELETE CASCADE
 );
 
-CREATE TABLE available_interviewers (
+CREATE TABLE appointments (
   id SERIAL PRIMARY KEY NOT NULL,
   day_id INTEGER REFERENCES days(id) ON DELETE CASCADE,
   interviewer_id INTEGER REFERENCES interviewers(id) ON DELETE CASCADE
