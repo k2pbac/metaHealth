@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "DEBUG=express-backend:* node ./bin/www",
+    "start": "DEBUG=express-backend:* nodemon ./bin/www",
     "db:reset": "node ./db/reset.js"
   },
   "dependencies": {
