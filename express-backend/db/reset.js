@@ -1,5 +1,6 @@
 // load .env data into process.env
-require("dotenv").config();
+const path = require("path");
+require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
 
 // other dependencies
 const fs = require("fs");
@@ -15,10 +16,10 @@ const client = new Client();
 // Loads the schema files from db/schema
 const runSchemaFiles = function () {
   console.log(chalk.cyan(`-> Loading Schema Files ...`));
-  const schemaFilenames = fs.readdirSync("./schema");
+  const schemaFilenames = fs.readdirSync(process.env.PATH1);
 
   for (const fn of schemaFilenames) {
-    const sql = fs.readFileSync(`./schema/${fn}`, "utf8");
+    const sql = fs.readFileSync(`${process.env.PATH1}/${fn}`, "utf8");
     console.log(`\t-> Running ${chalk.green(fn)}`);
     client.querySync(sql);
   }
@@ -26,10 +27,10 @@ const runSchemaFiles = function () {
 
 const runSeedFiles = function () {
   console.log(chalk.cyan(`-> Loading Seeds ...`));
-  const schemaFilenames = fs.readdirSync("./seeds");
+  const schemaFilenames = fs.readdirSync(process.env.PATH2);
 
   for (const fn of schemaFilenames) {
-    const sql = fs.readFileSync(`./seeds/${fn}`, "utf8");
+    const sql = fs.readFileSync(`${process.env.PATH2}/${fn}`, "utf8");
     console.log(`\t-> Running ${chalk.green(fn)}`);
     client.querySync(sql);
   }
