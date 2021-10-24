@@ -21,6 +21,10 @@
     "build-storybook": "build-storybook -s public",
     "db:reset": "node ./express-backend/db/reset.js"
   },
+  "resolutions": {
+    "babel-loader": "8.0.5",
+    "babel-jest": "24.7.1"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -34,7 +38,6 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.4.3",
     "@storybook/addon-actions": "^5.0.10",
     "@storybook/addon-backgrounds": "^5.0.10",
     "@storybook/addon-links": "^5.0.10",
@@ -42,7 +45,6 @@
     "@storybook/react": "^5.0.10",
     "@testing-library/jest-dom": "^4.0.0",
     "@testing-library/react": "^8.0.7",
-    "babel-loader": "^8.0.5",
     "node-sass": "^4.14.0"
   },
   "jest": {
