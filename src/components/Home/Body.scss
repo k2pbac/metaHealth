@@ -1,4 +1,9 @@
+$mynewcolor: #77cccc;
 main {
+  h1 {
+    font-family: "Nunito", sans-serif;
+    margin-bottom: 15px;
+  }
   div.middle {
     position: relative;
   }
@@ -9,6 +14,8 @@ main {
     opacity: 0.9;
   }
   section {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    font-family: "Heebo", sans-serif;
     position: absolute;
     bottom: 0;
     transform: translate(40%, 50%);
@@ -20,7 +27,15 @@ main {
     font-size: 1.5rem;
     p {
       text-align: start;
-      line-height: 2rem;
+      line-height: 2.5rem;
+      font-size: 1.2rem;
+    }
+    button {
+      float: left;
+      margin-top: 15px;
+    }
+    button:hover {
+      background-color: #273c48 !important;
     }
   }
 }

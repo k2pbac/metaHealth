@@ -1,5 +1,7 @@
 import React from "react";
 import "components/Home/Body.scss";
+import Button from "react-bootstrap/Button";
+
 const Body = (props) => {
   return (
     <main>
@@ -8,11 +10,18 @@ const Body = (props) => {
         <section>
           <h1>Welcome to Meta Health</h1>
           <p>
-            We are a profressional community, working day and night to make
+            We are a profressional organization, working day and night to make
             getting in touch with a health care provider easier. Whether you are
             looking for a family doctor, a walk-in clinic, a physiotherapist, or
             anything in between, we will help you.
           </p>
+          <Button
+            variant="outline-dark"
+            size="lg"
+            className="blue-outline rounded-0"
+          >
+            Get More Info
+          </Button>
         </section>
       </div>
     </main>
