@@ -16,23 +16,4 @@ header {
       height: 150px;
     }
   }
-  div.middle {
-    position: relative;
-  }
-  img {
-    height: 400px;
-    width: 100%;
-    object-fit: cover;
-    opacity: 0.9;
-  }
-  section {
-    position: absolute;
-    bottom: 0;
-    transform: translate(50%, 20%);
-    left: 0%;
-    background-color: white;
-    width: 50%;
-    padding: 20px;
-    text-align: center;
-  }
 }
