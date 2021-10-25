@@ -22,6 +22,9 @@ import TestimonialList from "components/Home/TestimonialList";
 import LoginSelectionPanel from "components/Register_and_Login_Selection/LoginSelectionPanel";
 import RegisterSelectionPanel from "components/Register_and_Login_Selection/RegisterSelectionPanel";
 
+//View Profile Page Imports
+import EmployeeProfile from "components/View_Profile/EmployeeProfile";
+import PatientProfile from "components/View_Profile/PatientProfile";
 
 
 
@@ -83,6 +86,22 @@ const PatientData = [
     role: "Patient",
   },
 ];
+
+const patient_accounts = {
+  id: 1,
+  name: "Michael Scott", 
+  username: "Mic123",
+  avatar: "https://upload.wikimedia.org/wikipedia/en/d/dc/MichaelScott.png", 
+  date_of_birth: 'Jul 12 1980',
+  profile_decription: "I love vaccines!",
+  phone_number: "416-123-1234",
+  email_address: "Michael123@gmail.com",
+  address: "23 Dundas St. Toronto, ON",
+  insurance_member_id: "12345ABCDEF",
+  insurance_policy_number: "12345678YZ",
+  insurance_plan_name: "OHIP",
+  medical_history_id: "" 
+};
 
 //*********************************************************Navbar Stories*****************************************************
 //*********************************************************************************************************************************
@@ -150,3 +169,54 @@ storiesOf("Home", module)
 storiesOf("Registration and Login Selection", module)
 .add("LoginSelectionPanel", () => <LoginSelectionPanel onPatientLogin={action("Patient Login")} onEmployeeLogin={action("Employee Login")}></LoginSelectionPanel>)
 .add("RegisterSelectionPanel", () => <RegisterSelectionPanel onPatientRegister={action("Patient Register")} onEmployeeRegister={action("Employee Register")}></RegisterSelectionPanel>)
+
+
+//View Profile Pages
+storiesOf("View Profile", module)
+.add("Patient Profile", () => 
+<PatientProfile 
+name = {patient_accounts.name}
+username = {patient_accounts.username}
+avatar = {patient_accounts.avatar}
+date_of_birth = {patient_accounts.date_of_birth}
+profile_decription = {patient_accounts.profile_decription}
+phone_number = {patient_accounts.phone_number}
+email_address = {patient_accounts.email_address}
+address = {patient_accounts.address}
+insurance_member_id = {patient_accounts.insurance_member_id}
+insurance_policy_number = {patient_accounts.insurance_policy_number}
+insurance_plan_name = {patient_accounts.insurance_plan_name}
+></PatientProfile>)
+.add("Employee Profile", () => 
+<EmployeeProfile 
+name = {patient_accounts.name}
+username = {patient_accounts.username}
+avatar = {patient_accounts.avatar}
+date_of_birth = {patient_accounts.date_of_birth}
+profile_decription = {patient_accounts.profile_decription}
+phone_number = {patient_accounts.phone_number}
+email_address = {patient_accounts.email_address}
+address = {patient_accounts.address}
+insurance_member_id = {patient_accounts.insurance_member_id}
+insurance_policy_number = {patient_accounts.insurance_policy_number}
+insurance_plan_name = {patient_accounts.insurance_plan_name}
+></EmployeeProfile>)
+
+
+
+
+// const patient_accounts = {
+//   id: 1,
+//   name: "Michael Scott", 
+//   username: "Mic123",
+//   avatar: "https://upload.wikimedia.org/wikipedia/en/d/dc/MichaelScott.png", 
+//   date_of_birth: new Date('Jul 12 1980'),
+//   profile_decription: "I love vaccines!",
+//   phone_number: "416-123-1234",
+//   email_address: "Michael123@gmail.com",
+//   address: "23 Dundas St. Toronto, ON",
+//   insurance_member_id: "12345ABCDEF",
+//   insurance_policy_number: "12345678YZ",
+//   insurance_plan_name: "OHIP",
+//   medical_history_id: "" 
+// };
