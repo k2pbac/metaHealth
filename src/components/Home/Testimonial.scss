@@ -1,0 +1,29 @@
+div.card {
+  padding: 25px;
+  border-radius: 5%;
+  margin-left: 5px;
+  margin-right: 10px;
+  .text-muted {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  .quotes {
+    height: 25px;
+    margin-bottom: 5px;
+  }
+  .card-img-bottom {
+    margin-top: 2rem;
+    border-radius: 50%;
+    height: 35px;
+    width: 35px;
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+  .card-subtitle {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.1rem;
+  }
+  .card-subtitle.text-muted {
+    font-size: 0.7rem;
+  }
+}

@@ -1,13 +1,7 @@
 import React from "react";
-
-import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
-import "index.scss";
-import Home from "components/Home/Home";
-import Body from "components/Home/Body";
-import Header from "components/Home/Header";
-import Testimonial from "components/Home/Testimonial";
-import TestimonialList from "components/Home/TestimonialList";
+import "components/Home/Body.scss";
+import Button from "react-bootstrap/Button";
+import TestimonialList from "./TestimonialList";
 
 const EmployeeData = [
   {
@@ -66,29 +60,30 @@ const PatientData = [
     role: "Patient",
   },
 ];
-storiesOf("Home", module)
-  .add("Header", () => <Header></Header>)
-  .add("Body", () => <Body></Body>)
-  .add("Employee-Testimonial", () => (
-    <Testimonial
-      companyName={EmployeeData[0].companyName}
-      description={EmployeeData[0].description}
-      image={EmployeeData[0].image}
-      name={EmployeeData[0].name}
-      position={EmployeeData[0].position}
-      role={EmployeeData[0].role}
-    ></Testimonial>
-  ))
-  .add("Patient-Testimonial", () => (
-    <Testimonial
-      companyName={PatientData[0].companyName}
-      role={PatientData[0].role}
-      name={PatientData[0].name}
-      position={PatientData[0].position}
-      image={PatientData[0].image}
-      description={PatientData[0].description}
-    ></Testimonial>
-  ))
-  .add("Patient-Testimonial List", () => (
-    <TestimonialList peopleData={PatientData}></TestimonialList>
-  ));
+const Body = (props) => {
+  return (
+    <main>
+      <div className="middle">
+        <img src="https://images.unsplash.com/photo-1558403194-611308249627?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2070&q=80"></img>
+        <section>
+          <h1>Welcome to Meta Health</h1>
+          <p>
+            We are a profressional organization, working day and night to make
+            getting in touch with a health care provider easier. Whether you are
+            looking for a family doctor, a walk-in clinic, a physiotherapist, or
+            anything in between, we will help you.
+          </p>
+          <Button
+            variant="outline-dark"
+            size="lg"
+            className="blue-outline rounded-0"
+          >
+            Get More Info
+          </Button>
+        </section>
+      </div>
+    </main>
+  );
+};
+
+export default Body;
