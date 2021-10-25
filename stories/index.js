@@ -17,6 +17,7 @@ import Body from "components/Home/Body";
 import Header from "components/Home/Header";
 import Testimonial from "components/Home/Testimonial";
 import TestimonialList from "components/Home/TestimonialList";
+import Footer from "components/Footer";
 
 const EmployeeData = [
   {
@@ -136,3 +137,5 @@ storiesOf("Home", module)
   .add("Patient-Testimonial List", () => (
     <TestimonialList peopleData={PatientData}></TestimonialList>
   ));
+
+storiesOf("Footer", module).add("Footer", () => <Footer></Footer>);
