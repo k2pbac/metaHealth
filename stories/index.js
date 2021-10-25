@@ -17,14 +17,11 @@ import Body from "components/Home/Body";
 import Header from "components/Home/Header";
 import Testimonial from "components/Home/Testimonial";
 import TestimonialList from "components/Home/TestimonialList";
+import Footer from "components/Footer";
 
 // Registration and Login Selection Pages Imports
 import LoginSelectionPanel from "components/Register_and_Login_Selection/LoginSelectionPanel";
 import RegisterSelectionPanel from "components/Register_and_Login_Selection/RegisterSelectionPanel";
-
-
-
-
 
 const EmployeeData = [
   {
@@ -145,8 +142,19 @@ storiesOf("Home", module)
     <TestimonialList peopleData={PatientData}></TestimonialList>
   ));
 
+storiesOf("Footer", module).add("Footer", () => <Footer></Footer>);
 
 // Registration and Login Selection Pages
 storiesOf("Registration and Login Selection", module)
-.add("LoginSelectionPanel", () => <LoginSelectionPanel onPatientLogin={action("Patient Login")} onEmployeeLogin={action("Employee Login")}></LoginSelectionPanel>)
-.add("RegisterSelectionPanel", () => <RegisterSelectionPanel onPatientRegister={action("Patient Register")} onEmployeeRegister={action("Employee Register")}></RegisterSelectionPanel>)
+  .add("LoginSelectionPanel", () => (
+    <LoginSelectionPanel
+      onPatientLogin={action("Patient Login")}
+      onEmployeeLogin={action("Employee Login")}
+    ></LoginSelectionPanel>
+  ))
+  .add("RegisterSelectionPanel", () => (
+    <RegisterSelectionPanel
+      onPatientRegister={action("Patient Register")}
+      onEmployeeRegister={action("Employee Register")}
+    ></RegisterSelectionPanel>
+  ));
