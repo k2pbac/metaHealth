@@ -1,5 +1,13 @@
 $mynewcolor: #77cccc;
 main {
+  .more-info {
+    height: 600px;
+    margin-bottom: 5rem;
+  }
+  .testimonials {
+    text-align: center;
+    font-family: "Nunito", sans-serif;
+  }
   h1 {
     font-family: "Nunito", sans-serif;
     margin-bottom: 15px;
@@ -18,7 +26,7 @@ main {
     font-family: "Heebo", sans-serif;
     position: absolute;
     bottom: 0;
-    transform: translate(40%, 50%);
+    transform: translate(40%, 0%);
     left: 0%;
     background-color: white;
     width: 60%;
