@@ -16,8 +16,15 @@ import Body from "components/Home/Body";
 import Header from "components/Home/Header";
 import Testimonial from "components/Home/Testimonial";
 import TestimonialList from "components/Home/TestimonialList";
+
 import { EmployeeData } from "components/Home/EmployeeData";
 import { PatientData } from "components/Home/PatientData";
+
+import Footer from "components/Footer";
+
+// Registration and Login Selection Pages Imports
+import LoginSelectionPanel from "components/Register_and_Login_Selection/LoginSelectionPanel";
+import RegisterSelectionPanel from "components/Register_and_Login_Selection/RegisterSelectionPanel";
 
 //*********************************************************Navbar Stories*****************************************************
 //*********************************************************************************************************************************
@@ -98,3 +105,20 @@ storiesOf("Home Page with Nav", module).add("Nav with logged in", () => {
     </>
   );
 });
+
+storiesOf("Footer", module).add("Footer", () => <Footer></Footer>);
+
+// Registration and Login Selection Pages
+storiesOf("Registration and Login Selection", module)
+  .add("LoginSelectionPanel", () => (
+    <LoginSelectionPanel
+      onPatientLogin={action("Patient Login")}
+      onEmployeeLogin={action("Employee Login")}
+    ></LoginSelectionPanel>
+  ))
+  .add("RegisterSelectionPanel", () => (
+    <RegisterSelectionPanel
+      onPatientRegister={action("Patient Register")}
+      onEmployeeRegister={action("Employee Register")}
+    ></RegisterSelectionPanel>
+  ));
