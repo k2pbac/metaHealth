@@ -93,18 +93,32 @@ storiesOf("Home", module)
     return <Home></Home>;
   });
 
-storiesOf("Home Page with Nav", module).add("Nav with logged in", () => {
-  return (
-    <>
-      <LoggedInEmployee
-        onLogout={action("Logout")}
-        name="Sam Henry"
-        avatar="images/doctor.jpg"
-      ></LoggedInEmployee>
-      <Home></Home>
-    </>
-  );
-});
+storiesOf("Home Page", module)
+  .add("Nav with logged in", () => {
+    return (
+      <>
+        <LoggedInEmployee
+          onLogout={action("Logout")}
+          name="Sam Henry"
+          avatar="images/doctor.jpg"
+        ></LoggedInEmployee>
+        <Home></Home>
+      </>
+    );
+  })
+  .add("Nav (logged in) and Footer", () => {
+    return (
+      <>
+        <LoggedInEmployee
+          onLogout={action("Logout")}
+          name="Sam Henry"
+          avatar="images/doctor.jpg"
+        ></LoggedInEmployee>
+        <Home></Home>
+        <Footer></Footer>
+      </>
+    );
+  });
 
 storiesOf("Footer", module).add("Footer", () => <Footer></Footer>);
 
