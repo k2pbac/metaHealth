@@ -49,10 +49,20 @@ const PatientData = [
     companyName: "Health Ontario",
     description:
       "Great Work with this website. The only thing I think that you could improve is the amount of clinics that you support. As mine is currently unsupported",
-    image:
-      "https://images.unsplash.com/photo-1500048993953-d23a436266cf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2069&q=80",
+    image: "https://upload.wikimedia.org/wikipedia/en/d/dc/MichaelScott.png",
     name: "Bryant Franecki",
     position: "Member since 2010",
+    role: "Patient",
+  },
+  {
+    id: 3,
+    companyName: "North York General",
+    description:
+      "I love this hospital and this application makes it easier to make an appointment",
+    image:
+      "https://images.unsplash.com/photo-1550791871-0bcd47c97881?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
+    name: "Lamar Kassulke",
+    position: "Member since 1990",
     role: "Patient",
   },
 ];

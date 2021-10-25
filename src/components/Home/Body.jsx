@@ -48,6 +48,17 @@ const PatientData = [
     position: "Member since 2010",
     role: "Patient",
   },
+  {
+    id: 3,
+    companyName: "North York General",
+    description:
+      "I love this hospital and this application makes it easier to make an appointment",
+    image:
+      "https://images.unsplash.com/photo-1550791871-0bcd47c97881?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
+    name: "Lamar Kassulke",
+    position: "Member since 1990",
+    role: "Patient",
+  },
 ];
 const Body = (props) => {
   return (
