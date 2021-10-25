@@ -1,26 +1,32 @@
 import React from "react";
-import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
+import Button from "react-bootstrap/Button";
 import "components/Home/Header.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Header = (props) => {
   return (
-    <Container fluid>
-      <header>
-        <div className="professionals">
-          <Image src="images/M.H.png" />
-          <h2>
-            A <span>Good</span> and <span>Healthy</span> body is the reason
-            behind a healthy mind. <br />
-          </h2>
-          <p>
-            Meta Health, connecting patients with health care professionals
-            since 2021.
-          </p>
-        </div>
-      </header>
-    </Container>
+    <header>
+      <div className="top-bar d-flex justify-content-center align-items-center flex-column sticky">
+        <h2 className="text-dark fs-5">
+          Meta Health has just started a new patient referral promotion
+        </h2>
+        <Button className="promo-button" variant="outline-warning">
+          Get More Info
+        </Button>
+      </div>
+      <div className="professionals">
+        <Image src="images/M.H.png" />
+        <h2>
+          A <span>Good</span> and <span>Healthy</span> body is the reason behind
+          a healthy mind. <br />
+        </h2>
+        <p>
+          Meta Health, connecting patients with health care professionals since
+          2021.
+        </p>
+      </div>
+    </header>
   );
 };
 

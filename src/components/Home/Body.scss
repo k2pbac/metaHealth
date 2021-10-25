@@ -4,15 +4,12 @@ main {
     height: 600px;
     margin-bottom: 5rem;
   }
-  .testimonials {
-    text-align: center;
-    font-family: "Nunito", sans-serif;
-  }
   h1 {
     font-family: "Nunito", sans-serif;
     margin-bottom: 15px;
   }
   div.middle {
+    z-index: -9999;
     position: relative;
   }
   img {

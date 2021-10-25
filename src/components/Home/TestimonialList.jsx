@@ -21,7 +21,7 @@ const TestimonialList = ({ peopleData }) => {
 
   return (
     <div className="d-flex flex-column align-items-center">
-      <h1 className="text-center">{peopleData[0].role} Testimonials</h1>
+      <h1 className="text-center mb-4">{peopleData[0].role} Testimonials</h1>
       <div className="d-flex">{people}</div>
     </div>
   );

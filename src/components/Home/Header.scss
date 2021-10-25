@@ -1,7 +1,30 @@
 header {
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    margin-top: 115px;
+  }
+  .top-bar {
+    height: 120px;
+    background-color: #ffcd00;
+    .promo-button {
+      height: 35px;
+      color: #273c48;
+      border-color: #273c48;
+    }
+    .promo-button:hover {
+      background-color: #273c48;
+      color: #fff;
+    }
+    h2 {
+      font-family: "Nunito", sans-serif;
+      margin-bottom: 15px;
+    }
+  }
   div.professionals {
-    margin-top: 50px;
-    height: 500px;
+    margin-top: 250px;
+    height: 550px;
     text-align: center;
     h2 {
       span {

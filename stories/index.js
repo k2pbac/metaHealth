@@ -3,7 +3,6 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import "index.scss";
-
 //NavBar Imports
 import NavbarHeader from "components/Navbar/NavHeader";
 import Button from "components/Button";
@@ -82,4 +81,20 @@ storiesOf("Home", module)
   ))
   .add("Employee Testimonial List", () => (
     <TestimonialList peopleData={EmployeeData}></TestimonialList>
-  ));
+  ))
+  .add("Home Page", () => {
+    return <Home></Home>;
+  });
+
+storiesOf("Home Page with Nav", module).add("Nav with logged in", () => {
+  return (
+    <>
+      <LoggedInEmployee
+        onLogout={action("Logout")}
+        name="Sam Henry"
+        avatar="images/doctor.jpg"
+      ></LoggedInEmployee>
+      <Home></Home>
+    </>
+  );
+});
