@@ -4,6 +4,14 @@ footer {
   .small-text {
     font-size: 0.9rem;
   }
+  svg {
+    color: white;
+  }
+  svg:hover {
+    color: #ffcd00;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+  }
   .list-unstyled {
     a {
       color: white;
@@ -11,7 +19,7 @@ footer {
       font-family: "Nunito";
     }
     a:hover {
-      color: red;
+      color: #ffcd00;
     }
   }
 }

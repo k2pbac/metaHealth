@@ -2,6 +2,12 @@ import React from "react";
 import Image from "react-bootstrap/Image";
 import "./Footer.scss";
 import ListGroup from "react-bootstrap/ListGroup";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+
+library.add(fab);
+
 const Footer = (props) => {
   return (
     <footer className="page-footer pt-4">
@@ -13,21 +19,20 @@ const Footer = (props) => {
                 <span className="fs-5">M</span>eta Health, connecting patients
                 with health care professionals since 2021.
               </p>
-              <label for="basic-url">Follow us</label>
+              <label>Follow us</label>
               <ListGroup className="justify-content-center" horizontal>
-                <Image
-                  className="p-2"
-                  src="https://img.icons8.com/color/36/000000/twitter--v1.png"
-                />
-                <Image
-                  className="p-2"
-                  src="https://img.icons8.com/nolan/36/instagram-new.png"
-                ></Image>
-                <Image
-                  className="p-2"
-                  src="https://img.icons8.com/color/36/000000/facebook.png"
-                ></Image>
-                <Image src="https://img.icons8.com/plasticine/48/000000/snapchat.png" />
+                <a className="p-2">
+                  <FontAwesomeIcon size="2x" icon={["fab", "github"]} />
+                </a>
+                <a className="p-2">
+                  <FontAwesomeIcon size="2x" icon={["fab", "facebook"]} />
+                </a>
+                <a className="p-2">
+                  <FontAwesomeIcon size="2x" icon={["fab", "twitter"]} />
+                </a>
+                <a className="p-2">
+                  <FontAwesomeIcon size="2x" icon={["fab", "snapchat"]} />
+                </a>
               </ListGroup>
             </div>
           </div>
