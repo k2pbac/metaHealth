@@ -25,6 +25,7 @@ import Footer from "components/Footer";
 // Registration and Login Selection Pages Imports
 import LoginSelectionPanel from "components/Register_and_Login_Selection/LoginSelectionPanel";
 import RegisterSelectionPanel from "components/Register_and_Login_Selection/RegisterSelectionPanel";
+import Section from "components/Home/Section";
 
 //*********************************************************Navbar Stories*****************************************************
 //*********************************************************************************************************************************
@@ -89,6 +90,7 @@ storiesOf("Home", module)
   .add("Employee Testimonial List", () => (
     <TestimonialList peopleData={EmployeeData}></TestimonialList>
   ))
+  .add("Patient Section", () => <Section></Section>)
   .add("Home Page", () => {
     return <Home></Home>;
   });
