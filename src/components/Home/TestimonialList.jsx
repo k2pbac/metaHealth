@@ -19,7 +19,12 @@ const TestimonialList = ({ peopleData }) => {
     );
   });
 
-  return <div className="d-flex">{people}</div>;
+  return (
+    <div className="d-flex flex-column align-items-center">
+      <h1 className="text-center">{peopleData[0].role} Testimonials</h1>
+      <div className="d-flex">{people}</div>
+    </div>
+  );
 };
 
 export default TestimonialList;
