@@ -8,10 +8,18 @@ import Badge from "react-bootstrap/Badge";
 
 const PatientForm = ({ formData }) => {
   const [infoSelected, setInfoSelected] = useState("");
+  const formBadges = {};
+  let count = 1;
+  for (let data in formData.fields) {
+    formBadges[`badge${count}`] = {
+      currentVal: 0,
+      totalFields: formData.fields[data].length,
+      filledFields: {},
+    };
+    count++;
+  }
   const [badgesInfo, setBadgesInfo] = useState({
-    badge1: { currentVal: 0, totalFields: 2, filledFields: {} },
-    badge2: { currentVal: 0, totalFields: 4, filledFields: {} },
-    badge3: { currentVal: 0, totalFields: 3, filledFields: {} },
+    ...formBadges,
   });
 
   let formArray = [
