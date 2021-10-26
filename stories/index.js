@@ -19,6 +19,7 @@ import TestimonialList from "components/Home/TestimonialList";
 
 import { EmployeeData } from "components/Home/EmployeeData";
 import { PatientData } from "components/Home/PatientData";
+import { formData } from "components/Patient_Registration/FormData";
 
 import Footer from "components/Footer";
 
@@ -143,5 +144,5 @@ storiesOf("Registration and Login Selection", module)
 // Patient and Employee Registration Form
 
 storiesOf("Registration Form", module).add("Patient's form", () => (
-  <PatientForm></PatientForm>
+  <PatientForm formData={formData}></PatientForm>
 ));
