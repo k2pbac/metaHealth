@@ -7,18 +7,19 @@ const PatientForm = (props) => {
   const [infoSelected, setInfoSelected] = useState(0);
 
   const handleUserClick = (viewNumber) => {
-    setInfoSelected(viewNumber);
+    if (viewNumber === infoSelected) setInfoSelected(0);
+    else setInfoSelected(viewNumber);
   };
 
   return (
     <Container className="text-center w-75 shadow-sm border p-5 patient-form m-auto">
-      <h1 className="mb-5">Register</h1>
+      <h1 className="mb-5">Patient Registration</h1>
       <Form className="w-50 m-auto">
         <div
           className="mb-2 user-info bg-light d-flex justify-content-center align-items-center border"
           onClick={() => handleUserClick(1)}
         >
-          Account Info
+          Account Info - 0/2
         </div>
         {infoSelected === 1 && (
           <>
@@ -33,17 +34,17 @@ const PatientForm = (props) => {
           </>
         )}
         <div
-          className="user-info bg-light d-flex justify-content-center align-items-center border"
+          className="mb-2 user-info bg-light d-flex justify-content-center align-items-center border"
           onClick={() => handleUserClick(2)}
         >
-          Personal Info
+          Personal Info - 0/4
         </div>
 
         {infoSelected === 2 && (
           <>
             <Form.Group className="mb-3" controlId="DOB">
               <Form.Label>Date of Birth</Form.Label>
-              <Form.Control type="text" placeholder="Enter Date of Birth" />
+              <Form.Control type="text" placeholder="Date of Birth" />
             </Form.Group>
             <Form.Group className="mb-3" controlId="Gender">
               <Form.Label>Gender</Form.Label>
@@ -51,12 +52,37 @@ const PatientForm = (props) => {
             </Form.Group>
             <Form.Group className="mb-3" controlId="ProfileDesc">
               <Form.Label>Profile Description</Form.Label>
-              <span></span>
-              <Form.Control type="text" placeholder="Profile Description" />
+              <Form.Control type="text" placeholder="Description" />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="Address">
+              <Form.Label>Address</Form.Label>
+              <Form.Control type="text" placeholder="Address" />
             </Form.Group>
           </>
         )}
-        <Button variant="primary" type="submit">
+        <div
+          className="user-info bg-light d-flex justify-content-center align-items-center border"
+          onClick={() => handleUserClick(3)}
+        >
+          Insurance Info - 0/3
+        </div>
+        {infoSelected === 3 && (
+          <>
+            <Form.Group className="mb-3" controlId="plan-name">
+              <Form.Label>Plan Name</Form.Label>
+              <Form.Control type="text" placeholder="Plan Name" />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="member_id">
+              <Form.Label>Member ID</Form.Label>
+              <Form.Control type="text" placeholder="Member ID" />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="policy-number">
+              <Form.Label>Policy Number</Form.Label>
+              <Form.Control type="text" placeholder="Policy Number" />
+            </Form.Group>
+          </>
+        )}
+        <Button className="mt-4" variant="outline-success" type="submit">
           Submit
         </Button>
       </Form>
