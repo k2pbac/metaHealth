@@ -55,8 +55,16 @@ const TestimonialList = ({ patientData, employeeData }) => {
     <div className="d-flex flex-column align-items-center">
       <h1 className="text-center mb-4">{currentRole} Testimonials</h1>
       <div className="d-flex list-container">
-        {currentView && <FadeIn className="d-flex">{patients}</FadeIn>}
-        {!currentView && <FadeIn className="d-flex">{employees}</FadeIn>}
+        {currentView && (
+          <FadeIn delay="150" className="d-flex">
+            {patients}
+          </FadeIn>
+        )}
+        {!currentView && (
+          <FadeIn delay="150" className="d-flex">
+            {employees}
+          </FadeIn>
+        )}
         <a onClick={updateView} className="arrow-right">
           <FontAwesomeIcon size="2x" icon={faArrowRight} />
         </a>
