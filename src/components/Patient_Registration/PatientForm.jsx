@@ -3,6 +3,7 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./PatientForm.scss";
+import FadeIn from "react-fade-in";
 const PatientForm = (props) => {
   const [infoSelected, setInfoSelected] = useState(0);
 
@@ -16,13 +17,13 @@ const PatientForm = (props) => {
       <h1 className="mb-5">Patient Registration</h1>
       <Form className="w-50 m-auto">
         <div
-          className="mb-2 user-info bg-light d-flex justify-content-center align-items-center border"
+          className="mb-2 hvr-fade info bg-light d-flex justify-content-center align-items-center border"
           onClick={() => handleUserClick(1)}
         >
-          Account Info - 0/2
+          Account Info
         </div>
         {infoSelected === 1 && (
-          <>
+          <FadeIn>
             <Form.Group className="mb-3" controlId="formBasicName">
               <Form.Label>Username</Form.Label>
               <Form.Control type="text" placeholder="Enter username" />
@@ -31,20 +32,20 @@ const PatientForm = (props) => {
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" placeholder="Password" />
             </Form.Group>
-          </>
+          </FadeIn>
         )}
         <div
-          className="mb-2 user-info bg-light d-flex justify-content-center align-items-center border"
+          className="mb-2 hvr-fade info bg-light d-flex justify-content-center align-items-center border"
           onClick={() => handleUserClick(2)}
         >
-          Personal Info - 0/4
+          Personal Info
         </div>
 
         {infoSelected === 2 && (
-          <>
+          <FadeIn>
             <Form.Group className="mb-3" controlId="DOB">
               <Form.Label>Date of Birth</Form.Label>
-              <Form.Control type="text" placeholder="Date of Birth" />
+              <Form.Control type="date" placeholder="Year"></Form.Control>
             </Form.Group>
             <Form.Group className="mb-3" controlId="Gender">
               <Form.Label>Gender</Form.Label>
@@ -58,16 +59,16 @@ const PatientForm = (props) => {
               <Form.Label>Address</Form.Label>
               <Form.Control type="text" placeholder="Address" />
             </Form.Group>
-          </>
+          </FadeIn>
         )}
         <div
-          className="user-info bg-light d-flex justify-content-center align-items-center border"
+          className="info hvr-fade bg-light d-flex justify-content-center align-items-center border"
           onClick={() => handleUserClick(3)}
         >
-          Insurance Info - 0/3
+          Insurance Info
         </div>
         {infoSelected === 3 && (
-          <>
+          <FadeIn>
             <Form.Group className="mb-3" controlId="plan-name">
               <Form.Label>Plan Name</Form.Label>
               <Form.Control type="text" placeholder="Plan Name" />
@@ -80,9 +81,9 @@ const PatientForm = (props) => {
               <Form.Label>Policy Number</Form.Label>
               <Form.Control type="text" placeholder="Policy Number" />
             </Form.Group>
-          </>
+          </FadeIn>
         )}
-        <Button className="mt-4" variant="outline-success" type="submit">
+        <Button className="mt-4" variant="success" type="submit">
           Submit
         </Button>
       </Form>
