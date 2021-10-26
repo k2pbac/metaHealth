@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
+import { Form as bForm } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import "./PatientForm.scss";
+import "./Form.scss";
 import FadeIn from "react-fade-in";
 import Badge from "react-bootstrap/Badge";
 
-const PatientForm = ({ formData }) => {
+const Form = ({ formData }) => {
   const [infoSelected, setInfoSelected] = useState("");
   const formBadges = {};
   let count = 1;
@@ -34,6 +34,11 @@ const PatientForm = ({ formData }) => {
   const [formValues, setFormValues] = useState({
     ...formFieldObject,
   });
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(event);
+  };
 
   const handleClick = (viewNumber) => {
     if (viewNumber === infoSelected) setInfoSelected(0);
@@ -88,16 +93,22 @@ const PatientForm = ({ formData }) => {
         {infoSelected === `badge${index + 1}` && (
           <FadeIn>
             {formData.fields[key].map((el) => (
-              <Form.Group className="mb-1" controlId={el.value} key={el.value}>
-                <Form.Label>{el.value}</Form.Label>
-                <Form.Control
+              <bForm.Group
+                className=" w-50 mx-auto my-3"
+                controlId={el.value}
+                key={el.value}
+              >
+                <bForm.Label>{el.value}</bForm.Label>
+                <bForm.Control
                   name={el.value}
-                  value={formValues.username}
-                  type={el.text}
+                  value={formValues[el.value]}
+                  type={el.type}
                   placeholder={`Enter a ${el.value}`}
                   onChange={handleInputChange}
+                  autoComplete="on"
+                  className="text-center"
                 />
-              </Form.Group>
+              </bForm.Group>
             ))}
           </FadeIn>
         )}
@@ -106,14 +117,20 @@ const PatientForm = ({ formData }) => {
   });
 
   return (
-    <Container className="text-center shadow-sm border p-5 patient-form m-auto">
+    <Container className="text-center shadow-sm border p-5 form m-auto">
       <h1 className="mb-5">{formData["type"]} Registration</h1>
-      <Form className="w-50 m-auto">
+      <bForm className="w-50 m-auto">
         {formInputs}
-        <Button className="mt-5" size="sm" variant="success" type="submit">
+        <Button
+          className="mt-5"
+          size="sm"
+          variant="success"
+          type="submit"
+          onSubmit={(e) => handleSubmit(e)}
+        >
           Submit
         </Button>
-      </Form>
+      </bForm>
       <span className="d-block mt-4">
         Already a user? <a href="#!">Login</a>
       </span>
@@ -121,4 +138,4 @@ const PatientForm = ({ formData }) => {
   );
 };
 
-export default PatientForm;
+export default Form;

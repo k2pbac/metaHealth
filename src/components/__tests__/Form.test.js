@@ -2,17 +2,17 @@ import React from "react";
 
 import { render, cleanup, fireEvent } from "@testing-library/react";
 
-import PatientForm from "components/Patient_Registration/PatientForm";
+import Form from "components/RegisterForm/Form";
 
 afterEach(cleanup);
 
 it("renders without crashing", () => {
-  render(<PatientForm />);
+  render(<Form />);
 });
 
 it("renders a clickable button", () => {
   const handleClick = jest.fn();
-  const { getByText } = render(<PatientForm></PatientForm>);
+  const { getByText } = render(<Form></Form>);
 
   const button = getByText("User Info");
 
