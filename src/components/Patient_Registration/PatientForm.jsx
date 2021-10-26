@@ -83,10 +83,13 @@ const PatientForm = (props) => {
             </Form.Group>
           </FadeIn>
         )}
-        <Button className="mt-4" variant="success" type="submit">
+        <Button className="mt-4" variant="outline-success" type="submit">
           Submit
         </Button>
       </Form>
+      <span className="d-block mt-4">
+        Already a user? <a href="#!">Login</a>
+      </span>
     </Container>
   );
 };
