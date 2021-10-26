@@ -84,11 +84,11 @@ storiesOf("Home", module)
       description={PatientData[0].description}
     ></Testimonial>
   ))
-  .add("Patient-Testimonial List", () => (
-    <TestimonialList peopleData={PatientData}></TestimonialList>
-  ))
-  .add("Employee Testimonial List", () => (
-    <TestimonialList peopleData={EmployeeData}></TestimonialList>
+  .add("Testimonial List", () => (
+    <TestimonialList
+      patientData={PatientData}
+      employeeData={EmployeeData}
+    ></TestimonialList>
   ))
   .add("Patient Section", () => <Section reverse={true}></Section>)
   .add("Home Page", () => {

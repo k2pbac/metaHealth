@@ -12,7 +12,10 @@ const Home = (props) => {
       <Header></Header>
       <Body></Body>
       <Section></Section>
-      <TestimonialList peopleData={PatientData}></TestimonialList>
+      <TestimonialList
+        patientData={PatientData}
+        employeeData={EmployeeData}
+      ></TestimonialList>
     </>
   );
 };
