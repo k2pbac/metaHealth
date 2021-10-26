@@ -90,7 +90,7 @@ storiesOf("Home", module)
   .add("Employee Testimonial List", () => (
     <TestimonialList peopleData={EmployeeData}></TestimonialList>
   ))
-  .add("Patient Section", () => <Section></Section>)
+  .add("Patient Section", () => <Section reverse={true}></Section>)
   .add("Home Page", () => {
     return <Home></Home>;
   });

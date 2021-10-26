@@ -1,8 +1,31 @@
-section {
+section.section {
+  margin-bottom: 100px;
+  hr {
+    border: 0;
+    clear: both;
+    display: block;
+    background-color: black;
+    opacity: 0.4;
+    width: 80%;
+  }
+  hr:not([size]) {
+    height: 1px;
+  }
   img {
-    height: 450px;
-    width: 400px;
+    height: 350px;
+    width: 650px;
     object-fit: cover;
     object-position: center;
+  }
+  p {
+    width: 30%;
+    font-size: 1.3rem;
+    font-family: Nunito;
+    padding: 50px;
+    padding-top: 25px;
+  }
+  .content {
+    padding-left: 100px;
+    padding-right: 100px;
   }
 }
