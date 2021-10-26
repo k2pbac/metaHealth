@@ -26,6 +26,7 @@ import Footer from "components/Footer";
 import LoginSelectionPanel from "components/Register_and_Login_Selection/LoginSelectionPanel";
 import RegisterSelectionPanel from "components/Register_and_Login_Selection/RegisterSelectionPanel";
 import Section from "components/Home/Section";
+import PatientForm from "components/Patient_Registration/PatientForm";
 
 //*********************************************************Navbar Stories*****************************************************
 //*********************************************************************************************************************************
@@ -138,3 +139,9 @@ storiesOf("Registration and Login Selection", module)
       onEmployeeRegister={action("Employee Register")}
     ></RegisterSelectionPanel>
   ));
+
+// Patient and Employee Registration Form
+
+storiesOf("Registration Form", module).add("Patient's form", () => (
+  <PatientForm></PatientForm>
+));
