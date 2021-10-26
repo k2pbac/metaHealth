@@ -8,21 +8,28 @@ import Badge from "react-bootstrap/Badge";
 
 const PatientForm = (props) => {
   const [infoSelected, setInfoSelected] = useState(0);
-
+  const [badgesInfo, setBadgesInfo] = useState({
+    badge1: { currentVal: 0, totalFields: 2 },
+    badge2: { currentVal: 0, totalFields: 4 },
+    badge3: { currentVal: 0, totalFields: 3 },
+  });
   const handleUserClick = (viewNumber) => {
     if (viewNumber === infoSelected) setInfoSelected(0);
     else setInfoSelected(viewNumber);
   };
 
   return (
-    <Container className="text-center w-75 shadow-sm border p-5 patient-form m-auto">
+    <Container className="text-center shadow-sm border p-5 patient-form m-auto">
       <h1 className="mb-5">Patient Registration</h1>
       <Form className="w-50 m-auto">
         <div
           className="mb-2 hvr-fade info bg-light d-flex justify-content-center align-items-center border"
           onClick={() => handleUserClick(1)}
         >
-          Account Info <Badge bg="secondary">0/2</Badge>
+          Account Info{" "}
+          <Badge bg="secondary">
+            {badgesInfo.badge1.currentVal}/{badgesInfo.badge1.totalFields}
+          </Badge>
         </div>
         {infoSelected === 1 && (
           <FadeIn>
@@ -40,7 +47,10 @@ const PatientForm = (props) => {
           className="mb-2 hvr-fade info bg-light d-flex justify-content-center align-items-center border"
           onClick={() => handleUserClick(2)}
         >
-          Personal Info <Badge bg="secondary">0/4</Badge>
+          Personal Info{" "}
+          <Badge bg="secondary">
+            {badgesInfo.badge2.currentVal}/{badgesInfo.badge2.totalFields}
+          </Badge>
         </div>
 
         {infoSelected === 2 && (
@@ -67,7 +77,10 @@ const PatientForm = (props) => {
           className="info hvr-fade bg-light d-flex justify-content-center align-items-center border"
           onClick={() => handleUserClick(3)}
         >
-          Insurance Info <Badge bg="secondary">0/3</Badge>
+          Insurance Info{" "}
+          <Badge bg="secondary">
+            {badgesInfo.badge3.currentVal}/{badgesInfo.badge3.totalFields}
+          </Badge>
         </div>
         {infoSelected === 3 && (
           <FadeIn>
@@ -85,7 +98,7 @@ const PatientForm = (props) => {
             </Form.Group>
           </FadeIn>
         )}
-        <Button className="mt-4" size="sm" variant="success" type="submit">
+        <Button className="mt-5" size="sm" variant="success" type="submit">
           Submit
         </Button>
       </Form>
