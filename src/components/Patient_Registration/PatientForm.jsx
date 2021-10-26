@@ -4,6 +4,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./PatientForm.scss";
 import FadeIn from "react-fade-in";
+import Badge from "react-bootstrap/Badge";
+
 const PatientForm = (props) => {
   const [infoSelected, setInfoSelected] = useState(0);
 
@@ -20,7 +22,7 @@ const PatientForm = (props) => {
           className="mb-2 hvr-fade info bg-light d-flex justify-content-center align-items-center border"
           onClick={() => handleUserClick(1)}
         >
-          Account Info
+          Account Info <Badge bg="secondary">0/2</Badge>
         </div>
         {infoSelected === 1 && (
           <FadeIn>
@@ -38,7 +40,7 @@ const PatientForm = (props) => {
           className="mb-2 hvr-fade info bg-light d-flex justify-content-center align-items-center border"
           onClick={() => handleUserClick(2)}
         >
-          Personal Info
+          Personal Info <Badge bg="secondary">0/4</Badge>
         </div>
 
         {infoSelected === 2 && (
@@ -65,7 +67,7 @@ const PatientForm = (props) => {
           className="info hvr-fade bg-light d-flex justify-content-center align-items-center border"
           onClick={() => handleUserClick(3)}
         >
-          Insurance Info
+          Insurance Info <Badge bg="secondary">0/3</Badge>
         </div>
         {infoSelected === 3 && (
           <FadeIn>
@@ -83,7 +85,7 @@ const PatientForm = (props) => {
             </Form.Group>
           </FadeIn>
         )}
-        <Button className="mt-4" variant="outline-success" type="submit">
+        <Button className="mt-4" size="sm" variant="success" type="submit">
           Submit
         </Button>
       </Form>

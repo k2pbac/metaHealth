@@ -3,6 +3,11 @@
     height: 45px;
     color: black;
     width: 100%;
+    position: relative;
+  }
+  span.badge {
+    position: absolute;
+    right: 15px;
   }
   .info:hover {
     background-color: darkgrey !important;
