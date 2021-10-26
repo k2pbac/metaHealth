@@ -1,29 +1,33 @@
-.navbar{
-padding: 10px;
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-background-color: #273c48;
-align-items: center;
+.navbar {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #273c48;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
 }
 
-.logo{
-height: 6rem;
-width: 20rem;
+.logo {
+  height: 6rem;
+  width: 20rem;
 }
 
-.right-side{
-display: flex;
-justify-content: space-between;
-align-items: center;
+.right-side {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.avatar{
+.avatar {
   display: flex;
   flex-direction: column;
   align-items: center;
   color: white;
-  .avatar-image{
+  .avatar-image {
     height: 4rem;
     width: 4rem;
   }
@@ -36,41 +40,48 @@ align-items: center;
   margin: 6px 0;
 }
 
-.dropdown{
+.dropdown {
   color: aliceblue;
 
   .btn-success {
     color: #fff;
     background-color: transparent;
-    border-color: transparent    
-}
+    border-color: transparent;
+  }
 }
 
 #dropdown-basic::after {
   content: none;
 }
 
-.btn-check:active+.btn-success, .btn-check:checked+.btn-success, .btn-success.active, .btn-success:active, .show>.btn-success.dropdown-toggle {
-  color: #fff;
-  background-color:transparent;
-  border-color: transparent ;
-  box-shadow: 0 0 transparent;
-}
-
-
-.btn-check:focus+.btn-success, .btn-success:focus {
+.btn-check:active + .btn-success,
+.btn-check:checked + .btn-success,
+.btn-success.active,
+.btn-success:active,
+.show > .btn-success.dropdown-toggle {
   color: #fff;
   background-color: transparent;
   border-color: transparent;
   box-shadow: 0 0 transparent;
 }
 
-.btn-check:active+.btn-success:focus, .btn-check:checked+.btn-success:focus, .btn-success.active:focus, .btn-success:active:focus, .show>.btn-success.dropdown-toggle:focus {
+.btn-check:focus + .btn-success,
+.btn-success:focus {
+  color: #fff;
+  background-color: transparent;
+  border-color: transparent;
   box-shadow: 0 0 transparent;
 }
 
+.btn-check:active + .btn-success:focus,
+.btn-check:checked + .btn-success:focus,
+.btn-success.active:focus,
+.btn-success:active:focus,
+.show > .btn-success.dropdown-toggle:focus {
+  box-shadow: 0 0 transparent;
+}
 
-.menu{
+.menu {
   display: flex;
   flex-direction: row;
   align-items: center;

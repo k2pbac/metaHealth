@@ -16,6 +16,7 @@
     "react": "^16.9.0",
     "react-bootstrap": "^2.0.0",
     "react-dom": "^16.9.0",
+    "react-fade-in": "^2.0.1",
     "react-scripts": "3.0.0"
   },
   "scripts": {
