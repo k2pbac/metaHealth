@@ -32,7 +32,7 @@ import LoginSelectionPanel from "components/Register_and_Login_Selection/LoginSe
 import RegisterSelectionPanel from "components/Register_and_Login_Selection/RegisterSelectionPanel";
 import Section from "components/Home/Section";
 import Form from "components/RegisterForm/Form";
-
+import LoginForm from "components/LoginForm/LoginForm";
 //*********************************************************Navbar Stories*****************************************************
 //*********************************************************************************************************************************
 
