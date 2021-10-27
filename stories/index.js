@@ -36,7 +36,10 @@ import RegisterSelectionPanel from "components/Register_and_Login_Selection/Regi
 import Section from "components/Home/Section";
 import Form from "components/RegisterForm/Form";
 import LoginForm from "components/LoginForm/LoginForm";
+
+//Patient and Employee Manage Appoinments Pages Imports
 import Schedule from "components/Schedule/Schedule";
+import PatientSchedule from "components/PatientSchedule/PatientSchedule";
 //*********************************************************Navbar Stories*****************************************************
 //*********************************************************************************************************************************
 
@@ -167,3 +170,7 @@ storiesOf("Schedule", module)
   .add("Employee Schedule", () => (
     <Schedule appointmentData={employeeSchedule}></Schedule>
   ));
+
+storiesOf("Patient Appointments", module).add("View", () => (
+  <PatientSchedule></PatientSchedule>
+));
