@@ -192,13 +192,13 @@ storiesOf("Home", module)
   ));
 
 
-// Registration and Login Selection Pages
+// Registration and Login Selection Pages Stories
 storiesOf("Registration and Login Selection", module)
 .add("LoginSelectionPanel", () => <LoginSelectionPanel onPatientLogin={action("Patient Login")} onEmployeeLogin={action("Employee Login")}></LoginSelectionPanel>)
 .add("RegisterSelectionPanel", () => <RegisterSelectionPanel onPatientRegister={action("Patient Register")} onEmployeeRegister={action("Employee Register")}></RegisterSelectionPanel>)
 
 
-//View Profile Pages
+//View Profile Pages Stories
 storiesOf("View Profile", module)
 .add("Patient Profile", () => 
 <PatientProfile 
@@ -291,20 +291,3 @@ email_address = {employee_accounts[0].email_address}
 employedAt = {employee_accounts[0].employedAt}
 isDoctor = {employee_accounts[0].isDoctor}
 ></EmployeeProfileIndex>)
-
-
-// const patient_accounts = {
-//   id: 1,
-//   name: "Michael Scott", 
-//   username: "Mic123",
-//   avatar: "https://upload.wikimedia.org/wikipedia/en/d/dc/MichaelScott.png", 
-//   date_of_birth: new Date('Jul 12 1980'),
-//   profile_decription: "I love vaccines!",
-//   phone_number: "416-123-1234",
-//   email_address: "Michael123@gmail.com",
-//   address: "23 Dundas St. Toronto, ON",
-//   insurance_member_id: "12345ABCDEF",
-//   insurance_policy_number: "12345678YZ",
-//   insurance_plan_name: "OHIP",
-//   medical_history_id: "" 
-// };
