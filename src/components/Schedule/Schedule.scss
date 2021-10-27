@@ -1,15 +1,21 @@
-table.table {
-  border: 1px solid black;
-  width: 65%;
-  td.timeslots {
-    width: 8rem;
+.fixed_header {
+  width: 400px;
+  table-layout: fixed;
+  border-collapse: collapse;
+  tbody {
+    display: block;
+    width: 100%;
+    overflow: auto;
+    height: 400px;
   }
-  td:first-child {
-    border: none;
-    border-right: black solid 1px;
+  thead tr {
+    display: block;
   }
+
   th,
   td {
-    text-align: center;
+    padding: 5px;
+    text-align: left;
+    width: 300px;
   }
 }

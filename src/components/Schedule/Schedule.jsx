@@ -2,32 +2,32 @@ import React from "react";
 import Table from "react-bootstrap/Table";
 import "./Schedule.scss";
 
-const Schedule = ({ booked }) => {
+const Schedule = ({ appointmentData }) => {
   return (
-    <Table className="table" hover>
-      <thead>
-        <tr>
-          <th></th>
-          <th>Dr. Henry</th>
-          <th>Dr. Michelle</th>
-          <th>Dr. Seuss</th>
-        </tr>
-      </thead>
-      <tbody>
-        {[9, 10, 11, 12, 1, 2, 3, 4, 5].map((timeslot) => (
+    <div className="scrollable-table">
+      <Table className="table fixed_header" hover>
+        <thead>
           <tr>
-            <td className="timeslots">
-              {timeslot < 12 && timeslot >= 9
-                ? timeslot + ":00 AM"
-                : timeslot + ":00 PM"}
-            </td>
-            <td className={`${booked && "dayBooked"}`}>Jacob</td>
-            <td>Jimmy</td>
-            <td>Jerry</td>
+            <th></th>
+            {appointmentData.doctors.map((doctor) => (
+              <>
+                <th>{doctor.name}</th>
+              </>
+            ))}
           </tr>
-        ))}
-      </tbody>
-    </Table>
+        </thead>
+        <tbody>
+          {[9, 10, 11, 12, 1, 2, 3, 4, 5].map((timeslot) => (
+            <tr>
+              <td>{timeslot}</td>
+              <td>row 1-0</td>
+              <td>row 1-1</td>
+              <td>row 1-2</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </div>
   );
 };
 

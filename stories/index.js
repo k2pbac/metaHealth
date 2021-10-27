@@ -24,7 +24,7 @@ import {
   employeeFormData,
   clinicFormData,
 } from "components/RegisterForm/FormData";
-
+import { schedule } from "components/Schedule/AppointmentData";
 import Footer from "components/Footer";
 
 // Registration and Login Selection Pages Imports
@@ -158,5 +158,5 @@ storiesOf("Login Form", module).add("Patient's Form", () => (
 ));
 
 storiesOf("Schedule", module).add("Patient Schedule", () => (
-  <Schedule></Schedule>
+  <Schedule appointmentData={schedule}></Schedule>
 ));
