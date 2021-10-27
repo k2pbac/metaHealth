@@ -1,0 +1,21 @@
+.login-form {
+  padding: 6rem;
+  padding-top: 1rem;
+  form {
+    button {
+      margin-left: 1.5rem;
+      // float: right;
+    }
+    input {
+      border-radius: 0;
+    }
+    .register-link {
+      background-color: #355262;
+      border-color: #273c48;
+    }
+    .login-link {
+      background-color: #355262;
+      border-color: #273c48;
+    }
+  }
+}
