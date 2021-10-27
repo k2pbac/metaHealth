@@ -5,7 +5,6 @@ import Button from "react-bootstrap/Button";
 import "./Form.scss";
 import FadeIn from "react-fade-in";
 import Badge from "react-bootstrap/Badge";
-import Image from "react-bootstrap/Image";
 
 const Form = ({ formData }) => {
   const [infoSelected, setInfoSelected] = useState("");
