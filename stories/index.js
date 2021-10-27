@@ -33,13 +33,69 @@ import Footer from "components/Footer";
 // Registration and Login Selection Pages Imports
 import LoginSelectionPanel from "components/Register_and_Login_Selection/LoginSelectionPanel";
 import RegisterSelectionPanel from "components/Register_and_Login_Selection/RegisterSelectionPanel";
+
+
 import Section from "components/Home/Section";
 import Form from "components/RegisterForm/Form";
 import LoginForm from "components/LoginForm/LoginForm";
 
+
 //Patient and Employee Manage Appoinments Pages Imports
 import Schedule from "components/Schedule/Schedule";
 import PatientSchedule from "components/PatientSchedule/PatientSchedule";
+
+//View Profile Page Imports
+import PatientProfile from "components/View_Profile/PatientProfile";
+import PatientEditProfile from "components/View_Profile/PatientEditProfile";
+import PatientProfileIndex from "components/View_Profile/PatientProfileIndex";
+
+import EmployeeProfile from "components/View_Profile/EmployeeProfile";
+import EmployeeEditProfile from "components/View_Profile/EmployeeEditProfile";
+import EmployeeProfileIndex from "components/View_Profile/EmployeeProfileIndex";
+
+
+const patient_accounts = {
+  id: 1,
+  name: "Michael Scott", 
+  username: "Mic123",
+  avatar: "https://upload.wikimedia.org/wikipedia/en/d/dc/MichaelScott.png", 
+  date_of_birth: 'Jul 12 1980',
+  profile_decription: "I love vaccines!",
+  phone_number: "416-123-1234",
+  email_address: "Michael123@gmail.com",
+  address: "23 Dundas St. Toronto, ON",
+  insurance_member_id: "12345ABCDEF",
+  insurance_policy_number: "12345678YZ",
+  insurance_plan_name: "OHIP",
+  medical_history_id: "" 
+};
+
+const employee_accounts = [
+  {
+  id: 1,
+  name: "Sam Henry", 
+  username: "Sam123",
+  avatar: "https://media.istockphoto.com/photos/happy-healthcare-practitioner-picture-id138205019?k=20&m=138205019&s=612x612&w=0&h=KpsSMVsplkOqTnAJmOye4y6DcciVYIBe5dYDgYXLVW4=", 
+  profile_decription: "I love working with my patients",
+  phone_number: "416-321-1234",
+  email_address: "SamHenry123@gmail.com",
+  employedAt: "Toronto Public Clinic, 123 Yonge St. Toronto,ON M3B 2T1",
+  isDoctor: true
+},
+{
+  id: 2,
+  name: "Cindy Mitchel", 
+  username: "Cindy123",
+  avatar: "https://dentalreceptionist.ca/wp-content/uploads/2018/09/iStock-910148934-650x500.jpg", 
+  profile_decription: "I'll assist you with in-clinic check-ins",
+  phone_number: "416-123-5234",
+  email_address: "Cindy123@gmail.com",
+  employedAt: "Toronto Public Clinic, 123 Yonge St. Toronto,ON M3B 2T1",
+  isDoctor: false
+}
+];
+
+
 //*********************************************************Navbar Stories*****************************************************
 //*********************************************************************************************************************************
 
@@ -137,20 +193,117 @@ storiesOf("Home Page", module)
 
 storiesOf("Footer", module).add("Footer", () => <Footer></Footer>);
 
-// Registration and Login Selection Pages
+// Registration and Login Selection Pages Stories
 storiesOf("Registration and Login Selection", module)
-  .add("LoginSelectionPanel", () => (
-    <LoginSelectionPanel
-      onPatientLogin={action("Patient Login")}
-      onEmployeeLogin={action("Employee Login")}
-    ></LoginSelectionPanel>
-  ))
-  .add("RegisterSelectionPanel", () => (
-    <RegisterSelectionPanel
-      onPatientRegister={action("Patient Register")}
-      onEmployeeRegister={action("Employee Register")}
-    ></RegisterSelectionPanel>
-  ));
+.add("LoginSelectionPanel", () => <LoginSelectionPanel onPatientLogin={action("Patient Login")} onEmployeeLogin={action("Employee Login")}></LoginSelectionPanel>)
+.add("RegisterSelectionPanel", () => <RegisterSelectionPanel onPatientRegister={action("Patient Register")} onEmployeeRegister={action("Employee Register")}></RegisterSelectionPanel>)
+.add("LoginSelectionPanel", () => (
+  <LoginSelectionPanel
+    onPatientLogin={action("Patient Login")}
+    onEmployeeLogin={action("Employee Login")}
+  ></LoginSelectionPanel>
+))
+.add("RegisterSelectionPanel", () => (
+  <RegisterSelectionPanel
+    onPatientRegister={action("Patient Register")}
+    onEmployeeRegister={action("Employee Register")}
+  ></RegisterSelectionPanel>
+));
+
+//View Profile Pages Stories
+storiesOf("View Profile", module)
+.add("Patient Profile", () => 
+<PatientProfile 
+name = {patient_accounts.name}
+username = {patient_accounts.username}
+avatar = {patient_accounts.avatar}
+date_of_birth = {patient_accounts.date_of_birth}
+profile_decription = {patient_accounts.profile_decription}
+phone_number = {patient_accounts.phone_number}
+email_address = {patient_accounts.email_address}
+address = {patient_accounts.address}
+insurance_member_id = {patient_accounts.insurance_member_id}
+insurance_policy_number = {patient_accounts.insurance_policy_number}
+insurance_plan_name = {patient_accounts.insurance_plan_name}
+></PatientProfile>)
+.add("Patient Edit Profile", () => 
+<PatientEditProfile 
+name = {patient_accounts.name}
+username = {patient_accounts.username}
+avatar = {patient_accounts.avatar}
+date_of_birth = {patient_accounts.date_of_birth}
+profile_decription = {patient_accounts.profile_decription}
+phone_number = {patient_accounts.phone_number}
+email_address = {patient_accounts.email_address}
+address = {patient_accounts.address}
+insurance_member_id = {patient_accounts.insurance_member_id}
+insurance_policy_number = {patient_accounts.insurance_policy_number}
+insurance_plan_name = {patient_accounts.insurance_plan_name}
+></PatientEditProfile>)
+.add("Patient Profile Index", () => 
+<PatientProfileIndex 
+name = {patient_accounts.name}
+username = {patient_accounts.username}
+avatar = {patient_accounts.avatar}
+date_of_birth = {patient_accounts.date_of_birth}
+profile_decription = {patient_accounts.profile_decription}
+phone_number = {patient_accounts.phone_number}
+email_address = {patient_accounts.email_address}
+address = {patient_accounts.address}
+insurance_member_id = {patient_accounts.insurance_member_id}
+insurance_policy_number = {patient_accounts.insurance_policy_number}
+insurance_plan_name = {patient_accounts.insurance_plan_name}
+></PatientProfileIndex>)
+
+
+.add("Employee Profile", () => 
+<EmployeeProfile 
+name = {employee_accounts[1].name}
+username = {employee_accounts[1].username}
+avatar = {employee_accounts[1].avatar}
+profile_decription = {employee_accounts[1].profile_decription}
+phone_number = {employee_accounts[1].phone_number}
+email_address = {employee_accounts[1].email_address}
+employedAt = {employee_accounts[1].employedAt}
+isDoctor = {employee_accounts[1].isDoctor}
+></EmployeeProfile>)
+
+.add("Employee Edit Profile", () => 
+<EmployeeEditProfile 
+name = {employee_accounts[1].name}
+username = {employee_accounts[1].username}
+avatar = {employee_accounts[1].avatar}
+profile_decription = {employee_accounts[1].profile_decription}
+phone_number = {employee_accounts[1].phone_number}
+email_address = {employee_accounts[1].email_address}
+employedAt = {employee_accounts[1].employedAt}
+isDoctor = {employee_accounts[1].isDoctor}
+></EmployeeEditProfile>)
+
+.add("Employee Profile Index", () => 
+<EmployeeProfileIndex 
+name = {employee_accounts[1].name}
+username = {employee_accounts[1].username}
+avatar = {employee_accounts[1].avatar}
+profile_decription = {employee_accounts[1].profile_decription}
+phone_number = {employee_accounts[1].phone_number}
+email_address = {employee_accounts[1].email_address}
+employedAt = {employee_accounts[1].employedAt}
+isDoctor = {employee_accounts[1].isDoctor}
+></EmployeeProfileIndex>)
+
+.add("Employee Profile Index (Doctor)", () => 
+<EmployeeProfileIndex 
+name = {employee_accounts[0].name}
+username = {employee_accounts[0].username}
+avatar = {employee_accounts[0].avatar}
+profile_decription = {employee_accounts[0].profile_decription}
+phone_number = {employee_accounts[0].phone_number}
+email_address = {employee_accounts[0].email_address}
+employedAt = {employee_accounts[0].employedAt}
+isDoctor = {employee_accounts[0].isDoctor}
+></EmployeeProfileIndex>)
+
 
 // Patient and Employee Registration Form
 
@@ -163,6 +316,7 @@ storiesOf("Login Form", module).add("Patient's Form", () => (
   <LoginForm></LoginForm>
 ));
 
+
 storiesOf("Schedule", module)
   .add("Patient Schedule", () => (
     <Schedule appointmentData={patientSchedule}></Schedule>
@@ -174,3 +328,4 @@ storiesOf("Schedule", module)
 storiesOf("Patient Appointments", module).add("View", () => (
   <PatientSchedule></PatientSchedule>
 ));
+
