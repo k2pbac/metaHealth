@@ -19,6 +19,11 @@ import TestimonialList from "components/Home/TestimonialList";
 
 import { EmployeeData } from "components/Home/EmployeeData";
 import { PatientData } from "components/Home/PatientData";
+import {
+  patientFormData,
+  employeeFormData,
+  clinicFormData,
+} from "components/RegisterForm/FormData";
 
 import Footer from "components/Footer";
 
@@ -26,6 +31,7 @@ import Footer from "components/Footer";
 import LoginSelectionPanel from "components/Register_and_Login_Selection/LoginSelectionPanel";
 import RegisterSelectionPanel from "components/Register_and_Login_Selection/RegisterSelectionPanel";
 import Section from "components/Home/Section";
+import Form from "components/RegisterForm/Form";
 
 //*********************************************************Navbar Stories*****************************************************
 //*********************************************************************************************************************************
@@ -138,3 +144,10 @@ storiesOf("Registration and Login Selection", module)
       onEmployeeRegister={action("Employee Register")}
     ></RegisterSelectionPanel>
   ));
+
+// Patient and Employee Registration Form
+
+storiesOf("Registration Form", module)
+  .add("Patient's form", () => <Form formData={patientFormData}></Form>)
+  .add("Employee's Form", () => <Form formData={employeeFormData}></Form>)
+  .add("Clinic Form", () => <Form formData={clinicFormData}></Form>);
