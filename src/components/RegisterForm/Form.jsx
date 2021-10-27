@@ -86,6 +86,7 @@ const Form = ({ formData }) => {
         >
           {key}
           <Badge
+            pill
             bg={`${
               (badgesInfo[`badge${index + 1}`].currentVal <
                 badgesInfo[`badge${index + 1}`].totalFields &&
