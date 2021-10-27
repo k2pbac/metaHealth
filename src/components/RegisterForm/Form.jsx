@@ -5,11 +5,9 @@ import Button from "react-bootstrap/Button";
 import "./Form.scss";
 import FadeIn from "react-fade-in";
 import Badge from "react-bootstrap/Badge";
-import Image from "react-bootstrap/Image";
 
 const Form = ({ formData }) => {
   const [infoSelected, setInfoSelected] = useState("");
-  const [checkState, setCheckState] = useState(false);
   const formBadges = {};
   let count = 1;
   for (let data in formData.fields) {
@@ -31,7 +29,7 @@ const Form = ({ formData }) => {
   ];
   let formFieldObject = {};
   for (const key of formArray) {
-    formFieldObject[key] = "";
+    formFieldObject[key] = {};
   }
   const [formValues, setFormValues] = useState({
     ...formFieldObject,
@@ -48,17 +46,21 @@ const Form = ({ formData }) => {
   };
   const handleInputChange = (event) => {
     event.persist();
+    console.log(formValues);
     setFormValues((prev) => {
       let newForm = Object.assign({}, prev);
-      event.target.value === "on" || event.target.value === "off"
-        ? (newForm[event.target.name] = checkState)
-        : (newForm[event.target.name] = event.target.value);
+      if (event.target.type === "radio") {
+        for (let el in newForm[event.target.value]) {
+          newForm[event.target.value][el] = false;
+        }
+        if (event.target.checked) {
+          newForm[event.target.value][event.target.name] = true;
+        }
+      } else {
+        newForm[event.target.name]["value"] = event.target.value;
+      }
       return newForm;
     });
-    // if (event.target.value === "on" || event.target.value === "off") {
-    //   let newValue = checkState === "on" || checkState === true ? false : true;
-    //   setCheckState((prev) => newValue);
-    // }
     if (!badgesInfo[infoSelected].filledFields[event.target.id]) {
       badgesInfo[infoSelected].filledFields[event.target.id] = true;
       setBadgesInfo((prev) => ({
@@ -66,11 +68,7 @@ const Form = ({ formData }) => {
         ...prev[infoSelected].currentVal++,
       }));
     } else {
-      if (
-        !event.target.value.length ||
-        event.target.value === "on" ||
-        event.target.value === "off"
-      ) {
+      if (!event.target.value.length || event.target.checked === false) {
         setBadgesInfo((prev) => {
           delete prev[infoSelected].filledFields[event.target.id];
           return {
@@ -111,7 +109,7 @@ const Form = ({ formData }) => {
                     <BootstrapForm.Control
                       id={el.value}
                       name={el.value}
-                      value={formValues[el.value]}
+                      value={formValues[el.value]["value"]}
                       type={el.type}
                       placeholder={`Enter a ${el.value}`}
                       onChange={handleInputChange}
@@ -124,21 +122,26 @@ const Form = ({ formData }) => {
                     <BootstrapForm.Label className="d-block">
                       {el.value}
                     </BootstrapForm.Label>
-                    {el.options.map((option) => (
-                      <div key={option}>
-                        <label className={"control-label"} htmlFor={el.value}>
-                          {option}
-                        </label>
-                        <input
-                          className="mr-3 d-inline"
-                          name={el.value}
-                          onChange={handleInputChange}
-                          type={el.type}
-                          label={el.value}
-                          checked={checkState}
-                        />
-                      </div>
-                    ))}
+                    <div className="d-flex justify-content-center">
+                      {el.options.map((option) => (
+                        <div
+                          key={option}
+                          className="d-flex justify-content-center align-items-center"
+                        >
+                          <label className={"control-label"} htmlFor={el.value}>
+                            {option}
+                          </label>
+                          <input
+                            className="radio-input"
+                            name={option}
+                            onChange={handleInputChange}
+                            type={el.type}
+                            value={el.value}
+                            checked={formValues[el.value][option] || false}
+                          />
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 )}
               </BootstrapForm.Group>
