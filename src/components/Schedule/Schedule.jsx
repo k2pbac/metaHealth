@@ -24,12 +24,24 @@ const Schedule = ({ appointmentData }) => {
                 : timeslot + ":00 PM"}
             </td>
             {appointmentData.appointments.map((appointment) => {
-              console.log(timeslot, appointment.time);
-
               if (timeslot === appointment.time) {
                 return (
-                  <td className="booked" key={appointment.id}>
-                    {appointmentData.patients[appointment.patient_id].name}
+                  <td
+                    className={`${
+                      ((appointmentData.isEmployee ||
+                        appointmentData.patient ===
+                          appointmentData.patients[appointment.patient_id]
+                            .name) &&
+                        "booked") ||
+                      "bg-secondary"
+                    }`}
+                    key={appointment.id}
+                  >
+                    {(appointmentData.isEmployee ||
+                      appointmentData.patient ===
+                        appointmentData.patients[appointment.patient_id]
+                          .name) &&
+                      appointmentData.patients[appointment.patient_id].name}
                   </td>
                 );
               }

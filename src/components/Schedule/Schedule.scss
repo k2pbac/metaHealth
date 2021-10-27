@@ -32,9 +32,14 @@
     width: 300px;
   }
   td:not(:first-child):hover {
-    background-color: lightgray;
+    background-color: lightslategrey;
+  }
+  td:not(:first-child).booked:hover {
+    background-color: rgb(37, 125, 184);
   }
   .booked {
-    background-color: lightskyblue;
+    background-color: rgb(41, 152, 226);
+    font-weight: bold;
+    font-size: 0.9rem;
   }
 }
