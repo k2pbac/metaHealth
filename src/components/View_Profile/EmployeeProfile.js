@@ -1,45 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
 import classNames from "classnames"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Image from 'react-bootstrap/Image';
+import Button from "react-bootstrap/Button";
 
 import "components/View_Profile/Profile.scss"
+
+
+
 
 
 export default function EmployeeProfile(props) {
 
   const {
-    name, 
+    name,
     username,
-    avatar, 
-    date_of_birth, 
+    avatar,
     profile_decription,
     phone_number,
     email_address,
-    address,
-    insurance_member_id,
-    insurance_policy_number,
-    insurance_plan_name,
+    employedAt,
+    isDoctor,
+    onEdit
   } = props;
 
   const navClass = classNames('view-profile');
 
-  
+  const img = "images/doctor_verified.png"
 
   return (
     <div className="profile">
-      <Image class = "profile-image" src={avatar} alt = {name} roundedCircle></Image>
-      <div class = "profile-name">{name}</div>
-      <div class = "profile-username">{username}</div>
-      <div class = "profile-dob">{date_of_birth}</div>
-      <div class = "profile-desription">{profile_decription}</div>
-      <div class = "profile-phone">{phone_number}</div>
-      <div class = "profile-email">{email_address}</div>
-      <div class = "profile-address">{address}</div>
-      <div class = "profile-insid">{insurance_member_id}</div>
-      <div class = "profile-polnum">{insurance_policy_number}</div>
-      <div class = "profile-insplan">{insurance_plan_name}</div>
+      <section className="left-section">
+        <Image className="profile-image" src={avatar} alt={name}></Image>
+        {isDoctor === true &&
+        <Image className="doctor-verified" src={img} alt = "Doctor Verified"></Image>
+        }
+        <Button variant="outline-dark"
+            size="lg"
+            className="blue-outline rounded-0" 
+            onClick = {onEdit}
+            >Edit Profile</Button>
+      </section>
+      <section className="middle-section">
+        <div className="personal">
+          <h1>Personal Information: </h1>
+          <div className="profile-name"><h2>Name:</h2> {name}</div>
+          <div className="profile-username"><h2>Username:</h2> {username}</div>
+          <div className="profile-desription"><h2>Profile Description:</h2> {profile_decription}</div>
+          <div className = "profile-employment"><h2>Employed at:</h2> {employedAt}</div>
+        </div>
+      </section>
+      <section className= "right-section">
+        <div className="contact">
+          <h1>Contact Information:</h1>
+          <div className="profile-phone"><h2>Phone Number:</h2> {phone_number}</div>
+          <div className="profile-email"><h2>Email:</h2> {email_address}</div>
+        </div>
+      </section>
     </div>
-  )
+    )
 }

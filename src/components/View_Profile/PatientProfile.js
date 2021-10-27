@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import classNames from "classnames"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Image from 'react-bootstrap/Image';
+import Button from "react-bootstrap/Button";
 
 import "components/View_Profile/Profile.scss"
+
+import {useVisualMode} from "../hooks/useVisualMode"
+
+
+const SHOW = "SHOW";
+const EDIT = "EDIT";
 
 
 export default function PatientProfile(props) {
@@ -21,17 +28,21 @@ export default function PatientProfile(props) {
     insurance_member_id,
     insurance_policy_number,
     insurance_plan_name,
+    onEdit
   } = props;
 
   const navClass = classNames('view-profile');
-
 
 
   return (
     <div className="profile">
       <section className="left-section">
         <Image className="profile-image" src={avatar} alt={name}></Image>
-        <a href="url">Edit Profile</a>
+        <Button variant="outline-dark"
+            size="lg"
+            className="blue-outline rounded-0" 
+            onClick = {onEdit}
+            >Edit Profile</Button>
       </section>
       <section className="middle-section">
         <div className="personal">
@@ -58,5 +69,5 @@ export default function PatientProfile(props) {
         </div>
       </section>
     </div>
-  )
+    )
 }
