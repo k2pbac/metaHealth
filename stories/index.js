@@ -32,7 +32,7 @@ import LoginSelectionPanel from "components/Register_and_Login_Selection/LoginSe
 import RegisterSelectionPanel from "components/Register_and_Login_Selection/RegisterSelectionPanel";
 import Section from "components/Home/Section";
 import Form from "components/RegisterForm/Form";
-
+import LoginForm from "components/LoginForm/LoginForm";
 //*********************************************************Navbar Stories*****************************************************
 //*********************************************************************************************************************************
 
@@ -148,6 +148,10 @@ storiesOf("Registration and Login Selection", module)
 // Patient and Employee Registration Form
 
 storiesOf("Registration Form", module)
-  .add("Patient's form", () => <Form formData={patientFormData}></Form>)
+  .add("Patient's Form", () => <Form formData={patientFormData}></Form>)
   .add("Employee's Form", () => <Form formData={employeeFormData}></Form>)
   .add("Clinic Form", () => <Form formData={clinicFormData}></Form>);
+
+storiesOf("Login Form", module).add("Patient's Form", () => (
+  <LoginForm></LoginForm>
+));
