@@ -3,6 +3,10 @@
   .control-label {
     margin-right: 10px;
   }
+  img {
+    width: 75px;
+    height: 75px;
+  }
   .info {
     height: 45px;
     color: black;
@@ -12,6 +16,7 @@
   span.badge {
     position: absolute;
     right: 15px;
+    background-color: #273c48;
   }
   .info:hover {
     background-color: darkgrey !important;

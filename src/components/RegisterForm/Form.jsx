@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import "./Form.scss";
 import FadeIn from "react-fade-in";
 import Badge from "react-bootstrap/Badge";
+import Image from "react-bootstrap/Image";
 
 const Form = ({ formData }) => {
   const [infoSelected, setInfoSelected] = useState("");
@@ -88,10 +89,8 @@ const Form = ({ formData }) => {
           <Badge
             pill
             bg={`${
-              (badgesInfo[`badge${index + 1}`].currentVal <
-                badgesInfo[`badge${index + 1}`].totalFields &&
-                "secondary") ||
-              "success"
+              badgesInfo[`badge${index + 1}`].currentVal <
+                badgesInfo[`badge${index + 1}`].totalFields || "success"
             }`}
           >
             {badgesInfo[`badge${index + 1}`].currentVal}/
@@ -141,13 +140,13 @@ const Form = ({ formData }) => {
 
   return (
     <Container className="text-center shadow-sm border p-5 form m-auto">
-      <h1 className="mb-5">{formData["type"]} Registration</h1>
+      <h1 className="mb-5">{formData["type"]} Registration </h1>
       <BootstrapForm className="w-50 m-auto">
         {formInputs}
         <Button
           className="mt-5"
           size="sm"
-          variant="success"
+          variant="outline-success"
           type="submit"
           onSubmit={(e) => handleSubmit(e)}
         >
