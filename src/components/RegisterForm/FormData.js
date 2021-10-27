@@ -37,3 +37,22 @@ module.exports.employeeFormData = {
     ],
   },
 };
+
+module.exports.clinicFormData = {
+  type: "Clinic",
+  fields: {
+    "Clinic Details": [
+      { value: "Name", type: "text" },
+      { value: "Address", type: "text" },
+    ],
+    "Additional Information": [
+      { value: "EIN/TIN Number", type: "text" },
+      { value: "Insurance Number", type: "text" },
+      { value: "Tax ID Number", type: "text" },
+      {
+        value: "Policies, procedures and compliance documentation",
+        type: "file",
+      },
+    ],
+  },
+};
