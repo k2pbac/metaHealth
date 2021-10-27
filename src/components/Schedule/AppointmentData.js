@@ -1,5 +1,5 @@
 module.exports.schedule = {
-  doctors: [
+  appointments: [
     {
       id: 1,
       name: "Dr. Henry",

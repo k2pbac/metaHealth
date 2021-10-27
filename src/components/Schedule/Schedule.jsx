@@ -4,30 +4,30 @@ import "./Schedule.scss";
 
 const Schedule = ({ appointmentData }) => {
   return (
-    <div className="scrollable-table">
-      <Table className="table fixed_header" hover>
-        <thead>
-          <tr>
-            <th></th>
-            {appointmentData.doctors.map((doctor) => (
-              <>
-                <th>{doctor.name}</th>
-              </>
+    <Table className="table scrollable-table">
+      <thead>
+        <tr>
+          <th></th>
+          {appointmentData.appointments.map((doctor) => (
+            <th key={doctor.id}>{doctor.name}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {[9, 10, 11, 12, 1, 2, 3, 4, 5].map((timeslot, index) => (
+          <tr key={index}>
+            <td>
+              {timeslot < 12 && timeslot >= 9
+                ? timeslot + ":00 AM"
+                : timeslot + ":00 PM"}
+            </td>
+            {appointmentData.appointments.map((doctor, index) => (
+              <td>{timeslot === doctor}</td>
             ))}
           </tr>
-        </thead>
-        <tbody>
-          {[9, 10, 11, 12, 1, 2, 3, 4, 5].map((timeslot) => (
-            <tr>
-              <td>{timeslot}</td>
-              <td>row 1-0</td>
-              <td>row 1-1</td>
-              <td>row 1-2</td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-    </div>
+        ))}
+      </tbody>
+    </Table>
   );
 };
 

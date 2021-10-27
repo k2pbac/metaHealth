@@ -1,21 +1,37 @@
-.fixed_header {
-  width: 400px;
-  table-layout: fixed;
+.scrollable-table {
+  width: 1000px;
+  // table-layout: fixed;
   border-collapse: collapse;
+  border: 1px solid black;
   tbody {
     display: block;
-    width: 100%;
-    overflow: auto;
-    height: 400px;
+    overflow: scroll;
+    height: 300px;
   }
   thead tr {
     display: block;
   }
 
+  td {
+    border: none;
+  }
+
+  td:nth-child(1) {
+    border-right: 1px solid black;
+    width: 120px;
+  }
+  th:nth-child(1) {
+    width: 120px;
+  }
+
   th,
   td {
-    padding: 5px;
-    text-align: left;
+    vertical-align: middle;
+    text-align: center;
+    padding: 1rem;
     width: 300px;
+  }
+  td:not(:first-child):hover {
+    background-color: lightgray;
   }
 }
