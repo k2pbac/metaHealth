@@ -19,7 +19,10 @@ import TestimonialList from "components/Home/TestimonialList";
 
 import { EmployeeData } from "components/Home/EmployeeData";
 import { PatientData } from "components/Home/PatientData";
-import { formData } from "components/RegisterForm/FormData";
+import {
+  patientFormData,
+  employeeFormData,
+} from "components/RegisterForm/FormData";
 
 import Footer from "components/Footer";
 
@@ -143,6 +146,6 @@ storiesOf("Registration and Login Selection", module)
 
 // Patient and Employee Registration Form
 
-storiesOf("Registration Form", module).add("Patient's form", () => (
-  <Form formData={formData}></Form>
-));
+storiesOf("Registration Form", module)
+  .add("Patient's form", () => <Form formData={patientFormData}></Form>)
+  .add("Employee's Form", () => <Form formData={employeeFormData}></Form>);

@@ -1,5 +1,8 @@
 .form {
   width: 50%;
+  .control-label {
+    margin-right: 10px;
+  }
   .info {
     height: 45px;
     color: black;

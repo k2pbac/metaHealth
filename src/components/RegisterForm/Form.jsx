@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
-import { Form as bForm } from "react-bootstrap";
+import { Form as BootstrapForm } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import "./Form.scss";
 import FadeIn from "react-fade-in";
@@ -8,6 +8,7 @@ import Badge from "react-bootstrap/Badge";
 
 const Form = ({ formData }) => {
   const [infoSelected, setInfoSelected] = useState("");
+  const [checkState, setCheckState] = useState(false);
   const formBadges = {};
   let count = 1;
   for (let data in formData.fields) {
@@ -48,9 +49,15 @@ const Form = ({ formData }) => {
     event.persist();
     setFormValues((prev) => {
       let newForm = Object.assign({}, prev);
-      newForm[event.target.name] = event.target.value;
+      event.target.value === "on" || event.target.value === "off"
+        ? (newForm[event.target.name] = checkState)
+        : (newForm[event.target.name] = event.target.value);
       return newForm;
     });
+    if (event.target.value === "on" || event.target.value === "off") {
+      let newValue = checkState === "on" || checkState === true ? false : true;
+      setCheckState((prev) => newValue);
+    }
     if (!badgesInfo[infoSelected].filledFields[event.target.id]) {
       badgesInfo[infoSelected].filledFields[event.target.id] = true;
       setBadgesInfo((prev) => ({
@@ -58,7 +65,7 @@ const Form = ({ formData }) => {
         ...prev[infoSelected].currentVal++,
       }));
     } else {
-      if (!event.target.value.length) {
+      if (!event.target.value.length || checkState === true) {
         setBadgesInfo((prev) => {
           delete prev[infoSelected].filledFields[event.target.id];
           return {
@@ -93,22 +100,37 @@ const Form = ({ formData }) => {
         {infoSelected === `badge${index + 1}` && (
           <FadeIn>
             {formData.fields[key].map((el) => (
-              <bForm.Group
-                className=" w-50 mx-auto my-3"
-                controlId={el.value}
-                key={el.value}
-              >
-                <bForm.Label>{el.value}</bForm.Label>
-                <bForm.Control
-                  name={el.value}
-                  value={formValues[el.value]}
-                  type={el.type}
-                  placeholder={`Enter a ${el.value}`}
-                  onChange={handleInputChange}
-                  autoComplete="on"
-                  className="text-center"
-                />
-              </bForm.Group>
+              <BootstrapForm.Group className=" mx-auto my-3" key={el.value}>
+                {(el.type !== "checkbox" && (
+                  <>
+                    <BootstrapForm.Label>{el.value}</BootstrapForm.Label>
+                    <BootstrapForm.Control
+                      id={el.value}
+                      name={el.value}
+                      value={formValues[el.value]}
+                      type={el.type}
+                      placeholder={`Enter a ${el.value}`}
+                      onChange={handleInputChange}
+                      autoComplete="on"
+                      className="mx-auto text-center"
+                    />
+                  </>
+                )) || (
+                  <div className={"form-group"}>
+                    <label className={"control-label"} htmlFor={el.value}>
+                      {el.value}
+                    </label>
+                    <input
+                      className="mx-auto text-center"
+                      name={el.value}
+                      onChange={handleInputChange}
+                      type="checkbox"
+                      label={el.value}
+                      checked={checkState}
+                    />
+                  </div>
+                )}
+              </BootstrapForm.Group>
             ))}
           </FadeIn>
         )}
@@ -119,7 +141,7 @@ const Form = ({ formData }) => {
   return (
     <Container className="text-center shadow-sm border p-5 form m-auto">
       <h1 className="mb-5">{formData["type"]} Registration</h1>
-      <bForm className="w-50 m-auto">
+      <BootstrapForm className="w-50 m-auto">
         {formInputs}
         <Button
           className="mt-5"
@@ -130,7 +152,7 @@ const Form = ({ formData }) => {
         >
           Submit
         </Button>
-      </bForm>
+      </BootstrapForm>
       <span className="d-block mt-4">
         Already a user? <a href="#!">Login</a>
       </span>
