@@ -8,8 +8,10 @@ const Schedule = ({ appointmentData }) => {
       <thead>
         <tr>
           <th></th>
-          {appointmentData.appointments.map((doctor) => (
-            <th key={doctor.id}>{doctor.name}</th>
+          {Object.keys(appointmentData.doctors).map((doctor) => (
+            <th key={appointmentData.doctors[doctor].id}>
+              {appointmentData.doctors[doctor].name}
+            </th>
           ))}
         </tr>
       </thead>
@@ -21,9 +23,18 @@ const Schedule = ({ appointmentData }) => {
                 ? timeslot + ":00 AM"
                 : timeslot + ":00 PM"}
             </td>
-            {appointmentData.appointments.map((doctor, index) => (
-              <td>{timeslot === doctor}</td>
-            ))}
+            {appointmentData.appointments.map((appointment) => {
+              console.log(timeslot, appointment.time);
+
+              if (timeslot === appointment.time) {
+                return (
+                  <td className="booked" key={appointment.id}>
+                    {appointmentData.patients[appointment.patient_id].name}
+                  </td>
+                );
+              }
+              return <td key={appointment.id}></td>;
+            })}
           </tr>
         ))}
       </tbody>

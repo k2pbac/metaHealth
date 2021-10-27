@@ -2,55 +2,59 @@ module.exports.schedule = {
   appointments: [
     {
       id: 1,
-      name: "Dr. Henry",
-      appointments: [
-        {
-          time: 9,
-          patient_id: 1,
-        },
-        {
-          time: 3,
-          patient_id: 2,
-        },
-      ],
+      time: 9,
+      patient_id: 1,
+      doctor_id: 1,
     },
     {
       id: 2,
-      name: "Dr. Michelle",
-      appointments: [
-        {
-          time: 2,
-          patient_id: 3,
-        },
-      ],
+      time: 3,
+      patient_id: 2,
+      doctor_id: 1,
     },
     {
       id: 3,
-      name: "Dr. Seuss",
-      appointments: [
-        {
-          time: 10,
-          patient_id: 4,
-        },
-      ],
-    },
-  ],
-  patients: [
-    {
-      id: 1,
-      name: "Jerry Cres",
-    },
-    {
-      id: 2,
-      name: "Jimmy neutron",
-    },
-    {
-      id: 3,
-      name: "Michael Scott",
+      time: 2,
+      patient_id: 3,
+      doctor_id: 2,
     },
     {
       id: 4,
-      name: "Sean McGoose",
+      time: 10,
+      patient_id: 4,
+      doctor_id: 3,
     },
   ],
+  patients: {
+    1: {
+      id: 1,
+      name: "Jerry Cres",
+    },
+    2: {
+      id: 2,
+      name: "Jimmy neutron",
+    },
+    3: {
+      id: 3,
+      name: "Michael Scott",
+    },
+    4: {
+      id: 4,
+      name: "Sean McGoose",
+    },
+  },
+  doctors: {
+    1: {
+      id: 1,
+      name: "Dr. Henry",
+    },
+    2: {
+      id: 2,
+      name: "Dr. Michelle",
+    },
+    3: {
+      id: 3,
+      name: "Dr. Seuss",
+    },
+  },
 };
