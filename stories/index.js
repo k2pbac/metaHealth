@@ -33,6 +33,7 @@ import RegisterSelectionPanel from "components/Register_and_Login_Selection/Regi
 import Section from "components/Home/Section";
 import Form from "components/RegisterForm/Form";
 import LoginForm from "components/LoginForm/LoginForm";
+import Schedule from "components/Schedule/Schedule";
 //*********************************************************Navbar Stories*****************************************************
 //*********************************************************************************************************************************
 
@@ -154,4 +155,8 @@ storiesOf("Registration Form", module)
 
 storiesOf("Login Form", module).add("Patient's Form", () => (
   <LoginForm></LoginForm>
+));
+
+storiesOf("Schedule", module).add("Patient Schedule", () => (
+  <Schedule></Schedule>
 ));

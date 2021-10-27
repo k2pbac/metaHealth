@@ -1,0 +1,15 @@
+table.table {
+  border: 1px solid black;
+  width: 65%;
+  td.timeslots {
+    width: 8rem;
+  }
+  td:first-child {
+    border: none;
+    border-right: black solid 1px;
+  }
+  th,
+  td {
+    text-align: center;
+  }
+}
