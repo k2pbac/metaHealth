@@ -13,7 +13,7 @@ const LoginForm = (props) => {
           <Form.Control type="text" placeholder="Enter username" />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-4" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" placeholder="Password" />
         </Form.Group>
