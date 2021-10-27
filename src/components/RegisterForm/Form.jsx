@@ -55,10 +55,10 @@ const Form = ({ formData }) => {
         : (newForm[event.target.name] = event.target.value);
       return newForm;
     });
-    if (event.target.value === "on" || event.target.value === "off") {
-      let newValue = checkState === "on" || checkState === true ? false : true;
-      setCheckState((prev) => newValue);
-    }
+    // if (event.target.value === "on" || event.target.value === "off") {
+    //   let newValue = checkState === "on" || checkState === true ? false : true;
+    //   setCheckState((prev) => newValue);
+    // }
     if (!badgesInfo[infoSelected].filledFields[event.target.id]) {
       badgesInfo[infoSelected].filledFields[event.target.id] = true;
       setBadgesInfo((prev) => ({
@@ -105,7 +105,7 @@ const Form = ({ formData }) => {
           <FadeIn>
             {formData.fields[key].map((el) => (
               <BootstrapForm.Group className=" mx-auto my-3" key={el.value}>
-                {(el.type !== "checkbox" && (
+                {(el.type !== "radio" && (
                   <>
                     <BootstrapForm.Label>{el.value}</BootstrapForm.Label>
                     <BootstrapForm.Control
@@ -121,17 +121,24 @@ const Form = ({ formData }) => {
                   </>
                 )) || (
                   <div className={"form-group"}>
-                    <label className={"control-label"} htmlFor={el.value}>
+                    <BootstrapForm.Label className="d-block">
                       {el.value}
-                    </label>
-                    <input
-                      className="mx-auto text-center"
-                      name={el.value}
-                      onChange={handleInputChange}
-                      type="checkbox"
-                      label={el.value}
-                      checked={checkState}
-                    />
+                    </BootstrapForm.Label>
+                    {el.options.map((option) => (
+                      <div key={option}>
+                        <label className={"control-label"} htmlFor={el.value}>
+                          {option}
+                        </label>
+                        <input
+                          className="mr-3 d-inline"
+                          name={el.value}
+                          onChange={handleInputChange}
+                          type={el.type}
+                          label={el.value}
+                          checked={checkState}
+                        />
+                      </div>
+                    ))}
                   </div>
                 )}
               </BootstrapForm.Group>

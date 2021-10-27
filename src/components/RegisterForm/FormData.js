@@ -33,7 +33,7 @@ module.exports.employeeFormData = {
       { value: "Name", type: "text" },
       { value: "Phone Number", type: "tel" },
       { value: "Email Address", type: "email" },
-      { value: "Are you a doctor?", type: "checkbox" },
+      { value: "Are you a doctor?", type: "radio", options: ["Yes", "No"] },
     ],
   },
 };
