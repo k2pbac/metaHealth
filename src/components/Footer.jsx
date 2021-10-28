@@ -20,19 +20,31 @@ const Footer = (props) => {
                 with health care professionals since 2021.
               </p>
               <label>Follow us</label>
-              <ListGroup className="justify-content-center" horizontal>
-                <a className="p-2">
-                  <FontAwesomeIcon size="2x" icon={["fab", "github"]} />
-                </a>
-                <a className="p-2">
-                  <FontAwesomeIcon size="2x" icon={["fab", "facebook"]} />
-                </a>
-                <a className="p-2">
-                  <FontAwesomeIcon size="2x" icon={["fab", "twitter"]} />
-                </a>
-                <a className="p-2">
-                  <FontAwesomeIcon size="2x" icon={["fab", "snapchat"]} />
-                </a>
+              <ListGroup className="justify-content-center wrapper" horizontal>
+                <div class="icon github">
+                  <div class="tooltip">Github</div>
+                  <a className="p-2">
+                    <FontAwesomeIcon icon={["fab", "github"]} />
+                  </a>
+                </div>
+                <div class="icon facebook">
+                  <div class="tooltip">Facebook</div>
+                  <a className="p-2">
+                    <FontAwesomeIcon icon={["fab", "facebook"]} />
+                  </a>
+                </div>
+                <div class="icon twitter">
+                  <div class="tooltip">Twitter</div>
+                  <a className="p-2">
+                    <FontAwesomeIcon icon={["fab", "twitter"]} />
+                  </a>
+                </div>
+                <div class="icon instagram">
+                  <div class="tooltip">Instagram</div>
+                  <a className="p-2">
+                    <FontAwesomeIcon icon={["fab", "instagram"]} />
+                  </a>
+                </div>
               </ListGroup>
             </div>
           </div>
