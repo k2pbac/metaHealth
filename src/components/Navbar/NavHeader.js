@@ -14,12 +14,16 @@ export default function Navbar(props) {
 
   return (
     <nav className={navClass}>
-      <img className="logo" src={logo} alt="Meta Health Logo"></img>
+      <Link to={"./"}>
+        <img className="logo" src={logo} alt="Meta Health Logo"></img>
+      </Link>
       <div>
         <Link to={"./login"}>
           <Button>Login</Button>
         </Link>
-        <Button>Signup</Button>
+        <Link to={"./register"}>
+          <Button>Signup</Button>
+        </Link>
       </div>
     </nav>
   );

@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 const LoginForm = (props) => {
   return (
-    <Container className="login-form bg-light w-50 h-100 text-center shadow-sm">
+    <Container className="login-form w-50 h-100 text-center shadow">
       <h1 className="mb-4">Login</h1>
       <Form className="w-50 mx-auto">
         <Form.Group className="mb-3" controlId="username">
