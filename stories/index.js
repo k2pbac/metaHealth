@@ -345,6 +345,10 @@ storiesOf("Patient Appointments", module).add("View", () => (
   <PatientSchedule patient={patient}></PatientSchedule>
 ));
 
-storiesOf("Manage Appointments Page", module).add("Full Page", () => (
-  <ManageAppointments></ManageAppointments>
-));
+storiesOf("Manage Appointments Page", module)
+  .add("Full Page for Patient", () => (
+    <ManageAppointments isEmployee={false}></ManageAppointments>
+  ))
+  .add("Full Page for Employee", () => (
+    <ManageAppointments isEmployee={true}></ManageAppointments>
+  ));
