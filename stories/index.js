@@ -52,6 +52,7 @@ import PatientProfileIndex from "components/View_Profile/PatientProfileIndex";
 import EmployeeProfile from "components/View_Profile/EmployeeProfile";
 import EmployeeEditProfile from "components/View_Profile/EmployeeEditProfile";
 import EmployeeProfileIndex from "components/View_Profile/EmployeeProfileIndex";
+import PatientDetails from "components/ManageAppointments/PatientDetails";
 
 const patient_accounts = {
   id: 1,
@@ -352,3 +353,8 @@ storiesOf("Manage Appointments Page", module)
   .add("Full Page for Employee", () => (
     <ManageAppointments isEmployee={true}></ManageAppointments>
   ));
+
+storiesOf("Individual Patient Records Page", module).add(
+  "Patient Details",
+  () => <PatientDetails></PatientDetails>
+);
