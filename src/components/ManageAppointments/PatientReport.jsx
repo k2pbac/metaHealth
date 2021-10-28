@@ -4,7 +4,7 @@ import { patientReportData } from "./patientReportData";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import Column from "react-bootstrap/Col";
-import { FloatingLabel, Form } from "react-bootstrap";
+import { Col, FloatingLabel, Form } from "react-bootstrap";
 const PatientReport = ({ report }) => {
   return (
     <Row
@@ -33,36 +33,70 @@ const PatientReport = ({ report }) => {
       >
         <Column>
           <Form>
-            <FloatingLabel controlId="floatingTextarea2" label="Information">
-              <Form.Control
-                as="textarea"
-                placeholder="Leave a comment here"
-                style={{ height: "150px", width: "75%" }}
-                value={patientReportData.reportDetails.information}
-              />
-            </FloatingLabel>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
-              <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-              </Form.Text>
+            <Form.Group className="mb-3" controlId="info">
+              <FloatingLabel
+                className="report-area w-75"
+                controlId="floatingTextarea2"
+                label="Information"
+              >
+                <Form.Control
+                  as="textarea"
+                  placeholder="Leave a comment here"
+                  style={{ height: "150px" }}
+                  value={patientReportData.reportDetails.information}
+                  className="my-2"
+                />
+              </FloatingLabel>
             </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Check me out" />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
+            <Row className="g-2 d-flex flex-row">
+              <Column xs="auto" className="w-25">
+                <FloatingLabel
+                  controlId="floatingInputGrid"
+                  label="Prescription Medication"
+                >
+                  <Form.Control
+                    type="text"
+                    placeholder=""
+                    value={
+                      patientReportData.reportDetails.medication_prescribed ||
+                      ""
+                    }
+                  />
+                </FloatingLabel>
+              </Column>
+              <Column md="auto" className="w-25">
+                <FloatingLabel
+                  controlId="floatingInputGrid2"
+                  label="Referrals"
+                  className=""
+                >
+                  <Form.Control
+                    value={patientReportData.reportDetails.referral || ""}
+                    type="text"
+                    placeholder=""
+                  />
+                </FloatingLabel>
+              </Column>
+              <Column style={{ paddingLeft: "25px" }} xs="auto" className="">
+                <Button
+                  variant="secondary"
+                  style={{ width: "100px", marginRight: "10px" }}
+                  type="submit"
+                >
+                  Edit
+                </Button>
+                <Button
+                  style={{ width: "100px" }}
+                  variant="danger"
+                  type="submit"
+                >
+                  Delete
+                </Button>
+              </Column>
+            </Row>
           </Form>
           <></>
         </Column>
-        <Column></Column>
       </Row>
     </Row>
   );
