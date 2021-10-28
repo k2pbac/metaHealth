@@ -1,4 +1,4 @@
-module.exports.patientReport = {
+module.exports.patientReportData = {
   clinic: "Toronto Public Clinic",
   address: "123 Yonge St. Toronto, ON M3B 2T1",
   patient: {
