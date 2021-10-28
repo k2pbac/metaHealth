@@ -17,7 +17,7 @@ export default function ClinicCard(props) {
 
   return (
     <div className="clinic-card">
-      <div>
+      <div className="clinic-image-container">
         <Image className="clinic-image" src={image} alt={name}></Image>
       </div>
       <div className="clinic-name">{name}</div>

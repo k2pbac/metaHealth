@@ -388,5 +388,5 @@ storiesOf("Book Appointment", module)
   <ClinicCard name={clinics[0].name} address={clinics[0].address} image={clinics[0].image}></ClinicCard>
 ))
 .add("Book Appointments Page (Patients)", () => (
-  <BookAppointments name={clinics[0].name} address={clinics[0].address}></BookAppointments>
+  <BookAppointments clinicsList={clinics}></BookAppointments>
 ))
