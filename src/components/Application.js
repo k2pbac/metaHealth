@@ -74,7 +74,9 @@ export default function Application(props) {
           )}
         />
 
-        {/*  */}
+        {/* Manage Appointments Routes for Employee and Patient - will need to figure out how to pass params */}
+        {/* View Patient Medical Records Routes will also need params passed  */}
+        {/* Add/Edit Patient Medical Record Page route will need clinic params */}
       </Switch>
       <Footer></Footer>
     </>
