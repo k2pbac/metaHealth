@@ -68,7 +68,10 @@ const Form = ({ formData }) => {
         ...prev[infoSelected].currentVal++,
       }));
     } else {
-      if (!event.target.value.length || event.target.checked === false) {
+      if (
+        !event.target.value.length ||
+        (event.target.type === "radio" && event.target.checked === false)
+      ) {
         setBadgesInfo((prev) => {
           delete prev[infoSelected].filledFields[event.target.id];
           return {
