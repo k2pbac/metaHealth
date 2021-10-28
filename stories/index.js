@@ -53,6 +53,13 @@ import EmployeeProfile from "components/View_Profile/EmployeeProfile";
 import EmployeeEditProfile from "components/View_Profile/EmployeeEditProfile";
 import EmployeeProfileIndex from "components/View_Profile/EmployeeProfileIndex";
 
+// Book Appointments Imports
+import ClinicCard from "components/BookAppointments/ClinicCard";
+import BookAppointments from "components/BookAppointments/BookAppointments";
+
+
+
+
 const patient_accounts = {
   id: 1,
   name: "Michael Scott",
@@ -95,6 +102,27 @@ const employee_accounts = [
     isDoctor: false,
   },
 ];
+
+const clinics = [
+{
+  id:1,
+  name: "Toronto Public Clinic",
+  address: "123 Yonge St. Toronto, ON M3B 2T1",
+  image: "https://www.bannerhealth.com/-/media/images/project/bh/location-images/florence/banner-health-clinic-florence.ashx?h=318&w=478&hash=F1FF82CC61E5028148B77B46AB9D74BF",
+},
+{
+  id:2,
+  name: "Patients Walk-In Clinic",
+  address: "700 Don Mills Rd. Toronto, ON M3C 2T3",
+  image: "https://www.bannerhealth.com/-/media/images/project/bh/location-images/florence/banner-health-clinic-florence.ashx?h=318&w=478&hash=F1FF82CC61E5028148B77B46AB9D74BF"
+},
+{
+  id:3,
+  name: "Bay Walk-In Clinic",
+  address: "555 Bay St. Toronto, ON M4B 3S1",
+  image: "https://www.bannerhealth.com/-/media/images/project/bh/location-images/florence/banner-health-clinic-florence.ashx?h=318&w=478&hash=F1FF82CC61E5028148B77B46AB9D74BF"
+},
+]
 
 //*********************************************************Navbar Stories*****************************************************
 //*********************************************************************************************************************************
@@ -352,3 +380,13 @@ storiesOf("Manage Appointments Page", module)
   .add("Full Page for Employee", () => (
     <ManageAppointments isEmployee={true}></ManageAppointments>
   ));
+
+
+//Book Appointments Page Stories
+storiesOf("Book Appointment", module)
+.add("Clinic Card", () => (
+  <ClinicCard name={clinics[0].name} address={clinics[0].address} image={clinics[0].image}></ClinicCard>
+))
+.add("Book Appointments Page (Patients)", () => (
+  <BookAppointments clinicsList={clinics}></BookAppointments>
+))
