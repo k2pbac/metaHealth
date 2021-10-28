@@ -7,7 +7,6 @@ import Button from "react-bootstrap/Button";
 
 import "components/View_Profile/Profile.scss"
 
-import {useVisualMode} from "../hooks/useVisualMode"
 
 
 const SHOW = "SHOW";
