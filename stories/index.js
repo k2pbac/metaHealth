@@ -42,6 +42,7 @@ import LoginForm from "components/LoginForm/LoginForm";
 import Schedule from "components/Schedule/Schedule";
 import PatientSchedule from "components/PatientSchedule/PatientSchedule";
 import { patient } from "components/PatientSchedule/patient_appointment";
+import ManageAppointments from "components/ManageAppointments/ManageAppointments";
 
 //View Profile Page Imports
 import PatientProfile from "components/View_Profile/PatientProfile";
@@ -330,6 +331,8 @@ storiesOf("Login Form", module).add("Patient's Form", () => (
   <LoginForm></LoginForm>
 ));
 
+// Manage Appointments components and page
+
 storiesOf("Schedule", module)
   .add("Patient Schedule", () => (
     <Schedule appointmentData={patientSchedule}></Schedule>
@@ -341,3 +344,11 @@ storiesOf("Schedule", module)
 storiesOf("Patient Appointments", module).add("View", () => (
   <PatientSchedule patient={patient}></PatientSchedule>
 ));
+
+storiesOf("Manage Appointments Page", module)
+  .add("Full Page for Patient", () => (
+    <ManageAppointments isEmployee={false}></ManageAppointments>
+  ))
+  .add("Full Page for Employee", () => (
+    <ManageAppointments isEmployee={true}></ManageAppointments>
+  ));
