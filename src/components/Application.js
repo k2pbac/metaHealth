@@ -15,8 +15,32 @@ import {
   patientFormData,
   clinicFormData,
 } from "./RegisterForm/FormData";
+import BookAppointments from "./BookAppointments/BookAppointments";
 import PatientProfileIndex from "./View_Profile/PatientProfileIndex";
 
+const clinics = [
+  {
+    id: 1,
+    name: "Toronto Public Clinic",
+    address: "123 Yonge St. Toronto, ON M3B 2T1",
+    image:
+      "https://www.bannerhealth.com/-/media/images/project/bh/location-images/florence/banner-health-clinic-florence.ashx?h=318&w=478&hash=F1FF82CC61E5028148B77B46AB9D74BF",
+  },
+  {
+    id: 2,
+    name: "Patients Walk-In Clinic",
+    address: "700 Don Mills Rd. Toronto, ON M3C 2T3",
+    image:
+      "https://www.bannerhealth.com/-/media/images/project/bh/location-images/florence/banner-health-clinic-florence.ashx?h=318&w=478&hash=F1FF82CC61E5028148B77B46AB9D74BF",
+  },
+  {
+    id: 3,
+    name: "Bay Walk-In Clinic",
+    address: "555 Bay St. Toronto, ON M4B 3S1",
+    image:
+      "https://www.bannerhealth.com/-/media/images/project/bh/location-images/florence/banner-health-clinic-florence.ashx?h=318&w=478&hash=F1FF82CC61E5028148B77B46AB9D74BF",
+  },
+];
 export default function Application(props) {
   return (
     <>
@@ -43,6 +67,14 @@ export default function Application(props) {
           component={() => <Form formData={clinicFormData}></Form>}
         />
         <Route path="/patient-profile" component={PatientProfileIndex} />
+        <Route
+          path="/clinics"
+          component={() => (
+            <BookAppointments clinicsList={clinics}></BookAppointments>
+          )}
+        />
+
+        {/*  */}
       </Switch>
       <Footer></Footer>
     </>
