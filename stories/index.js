@@ -52,6 +52,8 @@ import PatientProfileIndex from "components/View_Profile/PatientProfileIndex";
 import EmployeeProfile from "components/View_Profile/EmployeeProfile";
 import EmployeeEditProfile from "components/View_Profile/EmployeeEditProfile";
 import EmployeeProfileIndex from "components/View_Profile/EmployeeProfileIndex";
+import PatientDetails from "components/ManageAppointments/PatientDetails";
+import PatientReport from "components/ManageAppointments/PatientReport";
 
 // Book Appointments Imports
 import ClinicCard from "components/BookAppointments/ClinicCard";
@@ -380,6 +382,11 @@ storiesOf("Manage Appointments Page", module)
   .add("Full Page for Employee", () => (
     <ManageAppointments isEmployee={true}></ManageAppointments>
   ));
+
+
+storiesOf("Individual Patient Records Page", module)
+  .add("Patient Details", () => <PatientDetails></PatientDetails>)
+  .add("Existing Patient Report", () => <PatientReport></PatientReport>);
 
 
 //Book Appointments Page Stories
