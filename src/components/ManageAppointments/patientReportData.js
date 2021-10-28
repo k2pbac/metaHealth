@@ -7,14 +7,46 @@ module.exports.patientReportData = {
     phone: "416-123-1234",
     email: "Michael123@gmail.com",
   },
-  reportDetails: {
-    created_on: "June 10th, 2016",
-    created_by: "Dr. Sam Henry",
-    last_updated: "June 12th, 2016",
-    last_updated_by: "Dr. Sam Henry",
-    information:
-      "Patient sprained their ankle while playing football. Told them they will need to get rest and ice their ankle. Also to take pain killers if needed. ",
-    medication_prescribed: "N/A",
-    referral: "N/A",
-  },
+  reports: [
+    {
+      created_on: "June 10th, 2016",
+      created_by: "Dr. Sam Henry",
+      last_updated: "June 12th, 2016",
+      last_updated_by: "Dr. Sam Henry",
+      information:
+        "Patient sprained their ankle while playing football. Told them they will need to get rest and ice their ankle. Also to take pain killers if needed. ",
+      medication_prescribed: "N/A",
+      referral: "N/A",
+    },
+    {
+      created_on: "June 10th, 2016",
+      created_by: "Dr. Sam Henry",
+      last_updated: "June 12th, 2016",
+      last_updated_by: "Dr. Sam Henry",
+      information:
+        "Patient sprained their ankle while playing football. Told them they will need to get rest and ice their ankle. Also to take pain killers if needed. ",
+      medication_prescribed: "N/A",
+      referral: "N/A",
+    },
+    {
+      created_on: "June 10th, 2016",
+      created_by: "Dr. Sam Henry",
+      last_updated: "June 12th, 2016",
+      last_updated_by: "Dr. Sam Henry",
+      information:
+        "Patient sprained their ankle while playing football. Told them they will need to get rest and ice their ankle. Also to take pain killers if needed. ",
+      medication_prescribed: "N/A",
+      referral: "N/A",
+    },
+    {
+      created_on: "June 10th, 2016",
+      created_by: "Dr. Sam Henry",
+      last_updated: "June 12th, 2016",
+      last_updated_by: "Dr. Sam Henry",
+      information:
+        "Patient sprained their ankle while playing football. Told them they will need to get rest and ice their ankle. Also to take pain killers if needed. ",
+      medication_prescribed: "N/A",
+      referral: "N/A",
+    },
+  ],
 };

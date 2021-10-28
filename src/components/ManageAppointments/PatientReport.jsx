@@ -1,11 +1,10 @@
 import React from "react";
 import "./PatientReport.scss";
-import { patientReportData } from "./patientReportData";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import Column from "react-bootstrap/Col";
-import { Col, FloatingLabel, Form } from "react-bootstrap";
-const PatientReport = ({ report }) => {
+import { FloatingLabel, Form } from "react-bootstrap";
+const PatientReport = ({ report, clinic, patient }) => {
   return (
     <Row
       className="report-container py-4"
@@ -13,8 +12,8 @@ const PatientReport = ({ report }) => {
     >
       <Row className="d-flex dates-container">
         <Column>
-          <p>Created on {patientReportData.reportDetails.created_on}</p>
-          <p>Created by {patientReportData.reportDetails.created_by}</p>
+          <p>Created on {patientReportData.report.created_on}</p>
+          <p>Created by {patientReportData.report.created_by}</p>
         </Column>
         <Column className="d-flex align-items-end flex-column">
           <p>Last updated {patientReportData.reportDetails.last_updated}</p>

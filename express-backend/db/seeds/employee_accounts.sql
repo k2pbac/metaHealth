@@ -1,1 +1,0 @@
-INSERT INTO employee_accounts (name, username, password, phone_number, email_address, is_doctor) VALUES('Enrique Torp', 'admin', 'password', '123-456-7890')
