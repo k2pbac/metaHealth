@@ -9,9 +9,10 @@ module.exports.patientReportData = {
   },
   reports: [
     {
-      created_on: "June 10th, 2016",
+      id: 1,
+      created_on: "June 10, 2016",
       created_by: "Dr. Sam Henry",
-      last_updated: "June 12th, 2016",
+      last_updated: "June 12, 2016",
       last_updated_by: "Dr. Sam Henry",
       information:
         "Patient sprained their ankle while playing football. Told them they will need to get rest and ice their ankle. Also to take pain killers if needed. ",
@@ -19,9 +20,10 @@ module.exports.patientReportData = {
       referral: "N/A",
     },
     {
-      created_on: "June 10th, 2016",
+      id: 2,
+      created_on: "June 10, 2016",
       created_by: "Dr. Sam Henry",
-      last_updated: "June 12th, 2016",
+      last_updated: "June 12, 2016",
       last_updated_by: "Dr. Sam Henry",
       information:
         "Patient sprained their ankle while playing football. Told them they will need to get rest and ice their ankle. Also to take pain killers if needed. ",
@@ -29,9 +31,10 @@ module.exports.patientReportData = {
       referral: "N/A",
     },
     {
-      created_on: "June 10th, 2016",
+      id: 3,
+      created_on: "June 10, 2016",
       created_by: "Dr. Sam Henry",
-      last_updated: "June 12th, 2016",
+      last_updated: "June 12, 2016",
       last_updated_by: "Dr. Sam Henry",
       information:
         "Patient sprained their ankle while playing football. Told them they will need to get rest and ice their ankle. Also to take pain killers if needed. ",
@@ -39,9 +42,10 @@ module.exports.patientReportData = {
       referral: "N/A",
     },
     {
-      created_on: "June 10th, 2016",
+      id: 4,
+      created_on: "June 10, 2016",
       created_by: "Dr. Sam Henry",
-      last_updated: "June 12th, 2016",
+      last_updated: "June 12, 2016",
       last_updated_by: "Dr. Sam Henry",
       information:
         "Patient sprained their ankle while playing football. Told them they will need to get rest and ice their ankle. Also to take pain killers if needed. ",
