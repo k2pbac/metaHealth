@@ -10,10 +10,11 @@ CREATE TABLE clinics (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
   address VARCHAR(255) NOT NULL,
+  avatar VARCHAR(255) DEFAULT NULL,
   clinic_owner_id INTEGER NOT NULL,
   ein_number VARCHAR(10) DEFAULT NULL,
   insurance_number VARCHAR(30) DEFAULT NULL,
-  tax_id_number VARCHAR(30) DEFAULT NULL
+  tax_id_number VARCHAR(30) DEFAULT NULL,
 );
 
 CREATE TABLE employee_accounts (
@@ -25,6 +26,7 @@ CREATE TABLE employee_accounts (
   gender VARCHAR(255) DEFAULT NULL,
   phone_number VARCHAR(255) NOT NULL,
   email_address VARCHAR(255) NOT NULL,
+  avatar VARCHAR(255) DEFAULT NULL,
   is_doctor BOOLEAN DEFAULT FALSE,
   clinic_id INTEGER REFERENCES clinics(id)
 );
@@ -41,6 +43,7 @@ CREATE TABLE patient_accounts (
   phone_number VARCHAR(255) NOT NULL,
   email_address VARCHAR(255) NOT NULL,
   address VARCHAR(255) NOT NULL,
+  avatar VARCHAR(255) DEFAULT NULL,
   health_card_number VARCHAR(255) DEFAULT NULL,
   insurance_member_id VARCHAR(255) DEFAULT NULL,
   insurance_policy_number VARCHAR(255) DEFAULT NULL,

@@ -43,7 +43,6 @@ const clinics = [
   },
 ];
 export default function Application(props) {
-  const userSelector = useSelector((state) => state.user);
   const isLoggedSelector = useSelector((state) => state.isLogged);
   const [isLogged, setIsLogged] = useState(isLoggedSelector);
 
