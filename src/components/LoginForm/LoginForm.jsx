@@ -17,13 +17,18 @@ const LoginForm = (props) => {
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" placeholder="Password" />
         </Form.Group>
-        <div className="d-flex justify-content-center">
-          <Button className="register-link" type="submit">
-            Sign Up
-          </Button>
-          <Button className="login-link" type="button">
+        <div class="d-flex justify-content-center flex-column align-items-center">
+          <Button
+            style={{ paddingLeft: "40px", paddingRight: "40px" }}
+            variant="outline-success"
+            type="submit"
+            className="mx-0"
+          >
             Login
           </Button>
+          <span className="mt-2 text-center" style={{ fontSize: "0.8rem" }}>
+            <a href="#!">Forgot your password?</a>
+          </span>
         </div>
       </Form>
     </Container>

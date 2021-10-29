@@ -9,7 +9,7 @@ import Navbar from "./Navbar/NavHeader";
 import LoginSelectionPanel from "./Register_and_Login_Selection/LoginSelectionPanel";
 import LoginForm from "./LoginForm/LoginForm";
 import RegisterSelectionPanel from "./Register_and_Login_Selection/RegisterSelectionPanel";
-import Form from "./RegisterForm/Form";
+import RegisterForm from "./RegisterForm/RegisterForm";
 import {
   employeeFormData,
   patientFormData,
@@ -56,15 +56,21 @@ export default function Application(props) {
         <Route path="/register" component={RegisterSelectionPanel} />
         <Route
           path="/register-patient"
-          component={() => <Form formData={patientFormData}></Form>}
+          component={() => (
+            <RegisterForm formData={patientFormData}></RegisterForm>
+          )}
         />
         <Route
           path="/register-employee"
-          component={() => <Form formData={employeeFormData}></Form>}
+          component={() => (
+            <RegisterForm formData={employeeFormData}></RegisterForm>
+          )}
         />
         <Route
           path="/register-clinic"
-          component={() => <Form formData={clinicFormData}></Form>}
+          component={() => (
+            <RegisterForm formData={clinicFormData}></RegisterForm>
+          )}
         />
         <Route path="/patient-profile" component={PatientProfileIndex} />
         <Route
