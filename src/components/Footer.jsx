@@ -21,26 +21,26 @@ const Footer = (props) => {
               </p>
               <label>Follow us</label>
               <ListGroup className="justify-content-center wrapper" horizontal>
-                <div class="icon github">
-                  <div class="tooltip">Github</div>
+                <div className="icon github">
+                  <div className="tooltip">Github</div>
                   <a className="p-2">
                     <FontAwesomeIcon icon={["fab", "github"]} />
                   </a>
                 </div>
-                <div class="icon facebook">
-                  <div class="tooltip">Facebook</div>
+                <div className="icon facebook">
+                  <div className="tooltip">Facebook</div>
                   <a className="p-2">
                     <FontAwesomeIcon icon={["fab", "facebook"]} />
                   </a>
                 </div>
-                <div class="icon twitter">
-                  <div class="tooltip">Twitter</div>
+                <div className="icon twitter">
+                  <div className="tooltip">Twitter</div>
                   <a className="p-2">
                     <FontAwesomeIcon icon={["fab", "twitter"]} />
                   </a>
                 </div>
-                <div class="icon instagram">
-                  <div class="tooltip">Instagram</div>
+                <div className="icon instagram">
+                  <div className="tooltip">Instagram</div>
                   <a className="p-2">
                     <FontAwesomeIcon icon={["fab", "instagram"]} />
                   </a>
