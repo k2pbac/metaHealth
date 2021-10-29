@@ -23,7 +23,7 @@ const Header = (props) => {
     <header>
       <div
         className={`top-bar d-flex justify-content-center align-items-center flex-column sticky ${
-          (scrollPosition >= 470 && "hidden") || "visible"
+          (scrollPosition >= 465 && "hidden") || "visible"
         }`}
       >
         <h2 className="text-dark fs-5">

@@ -26,6 +26,9 @@ body {
   min-height: 100vh;
 }
 
+.container {
+  margin-top: 6% !important;
+}
 @media only screen and (max-width: 960px) {
   html {
     font-size: 12px;
