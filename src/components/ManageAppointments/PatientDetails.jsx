@@ -4,7 +4,7 @@ import "./PatientDetails.scss";
 import { patientReportData } from "./patientReportData";
 const PatientDetails = ({ patient }) => {
   return (
-    <div className="border p-4 w-25 d-flex flex-column">
+    <div className="border p-4 d-flex flex-column" style={{ height: "80vh" }}>
       <div className="mb-5">
         <h3>{patientReportData.clinic}</h3>
         <p className="w-50 text-start">{patientReportData.address}</p>
