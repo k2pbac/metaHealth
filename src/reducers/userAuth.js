@@ -3,8 +3,10 @@
 const authReducer = (state = null, action) => {
   switch (action.type) {
     case "LOGIN":
+      localStorage.setItem("user", action.user.username);
       return action.user;
     case "LOGOUT":
+      localStorage.removeItem("user");
       return null;
     default:
       return null;

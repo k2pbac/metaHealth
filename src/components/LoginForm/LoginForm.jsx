@@ -5,8 +5,7 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import { useDispatch } from "react-redux";
 import { loginUser } from "actions";
-import { Redirect } from "react-router";
-import { Route } from "react-router";
+import { Redirect, Route, Switch } from "react-router";
 import Home from "components/Home";
 
 const LoginForm = (props) => {
@@ -18,9 +17,15 @@ const LoginForm = (props) => {
     event.preventDefault();
     dispatch(loginUser(username, password));
     return (
-      <Route exact path="/">
-        <Redirect to="/" />
-      </Route>
+      <Switch>
+        <Route
+          exact
+          path="/login-patient"
+          render={() => {
+            return <Redirect to="/" />;
+          }}
+        />
+      </Switch>
     );
   };
 

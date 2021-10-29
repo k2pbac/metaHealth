@@ -1,7 +1,6 @@
 import React from "react";
 import classNames from "classnames";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Navbar from "react-bootstrap/Navbar";
 import Dropdown from "react-bootstrap/Dropdown";
 import Image from "react-bootstrap/Image";
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import classNames from "classnames";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "react-bootstrap/Navbar";
@@ -14,17 +14,19 @@ import { logoutUser } from "actions";
 
 export default function LoggedInPatient(props) {
   const { name, avatar } = props;
-
+  const [user, setUser] = useState(localStorage.getItem("user"));
   const navClass = classNames("navbar");
   const dispatch = useDispatch();
   // Link to logo image
   const logo = "images/logo.png";
-  const isLogged = useSelector((state) => state.isLogged);
-  const username = useSelector((state) => state.user.username);
 
   const onLogout = () => {
-    dispatch(logoutUser(username));
+    dispatch(logoutUser());
   };
+
+  useEffect(() => {
+    setUser(localStorage.getItem("user") || "");
+  }, [localStorage.getItem("user")]);
 
   return (
     <nav className={navClass}>
@@ -39,7 +41,7 @@ export default function LoggedInPatient(props) {
             alt={name}
             roundedCircle
           ></Image>
-          {isLogged && <label>Hello, {username}</label>}
+          {localStorage.getItem("isLogged") && <label>Hello, {user}</label>}
         </div>
 
         <div className="menu">
