@@ -60,6 +60,7 @@ import ClinicCard from "components/BookAppointments/ClinicCard";
 import BookAppointments from "components/BookAppointments/BookAppointments";
 import { patientReportData } from "components/ManageAppointments/patientReportData";
 import PatientReportList from "components/ManageAppointments/PatientReportList";
+import PatientReportView from "components/ManageAppointments/PatientReportView";
 
 const patient_accounts = {
   id: 1,
@@ -396,7 +397,10 @@ storiesOf("Individual Patient Records Page", module)
   .add("Existing Patient Report", () => (
     <PatientReport report={patientReportData.reports[0]}></PatientReport>
   ))
-  .add("Patient Report List", () => <PatientReportList></PatientReportList>);
+  .add("Patient Report List", () => <PatientReportList></PatientReportList>)
+  .add("Full Patient Reports View", () => (
+    <PatientReportView></PatientReportView>
+  ));
 
 //Book Appointments Page Stories
 storiesOf("Book Appointment", module)
