@@ -58,9 +58,17 @@ import PatientReport from "components/ManageAppointments/PatientReport";
 // Book Appointments Imports
 import ClinicCard from "components/BookAppointments/ClinicCard";
 import BookAppointments from "components/BookAppointments/BookAppointments";
+
+
+//Patient Medical Records Page Imports
+import {patientDataList} from "components/PatientMedicalRecords/patientDataList"
+import PatientMedicalRecords from "components/PatientMedicalRecords/PatientMedicalRecords";
+
+
 import { patientReportData } from "components/ManageAppointments/patientReportData";
 import PatientReportList from "components/ManageAppointments/PatientReportList";
 import PatientReportView from "components/ManageAppointments/PatientReportView";
+
 
 const patient_accounts = {
   id: 1,
@@ -128,6 +136,7 @@ const clinics = [
       "https://www.bannerhealth.com/-/media/images/project/bh/location-images/florence/banner-health-clinic-florence.ashx?h=318&w=478&hash=F1FF82CC61E5028148B77B46AB9D74BF",
   },
 ];
+
 
 //*********************************************************Navbar Stories*****************************************************
 //*********************************************************************************************************************************
@@ -404,6 +413,22 @@ storiesOf("Individual Patient Records Page", module)
 
 //Book Appointments Page Stories
 storiesOf("Book Appointment", module)
+
+.add("Clinic Card", () => (
+  <ClinicCard name={clinics[0].name} address={clinics[0].address} image={clinics[0].image}></ClinicCard>
+))
+.add("Book Appointments Page (Patients)", () => (
+  <BookAppointments clinicsList={clinics}></BookAppointments>
+))
+
+
+// Patient Medical Records Page Stories
+storiesOf("Patient Medical Records Search", module)
+.add("Patient Medical Record")
+.add("Patient Medical Records Index", () => (
+<PatientMedicalRecords patientsList={patientDataList}></PatientMedicalRecords>
+))
+
   .add("Clinic Card", () => (
     <ClinicCard
       name={clinics[0].name}
