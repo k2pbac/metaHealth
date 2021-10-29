@@ -3,14 +3,26 @@ import "./LoginForm.scss";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
+import { useDispatch } from "react-redux";
+import { loginUser } from "actions";
+import { Redirect } from "react-router";
+import { Route } from "react-router";
+import Home from "components/Home";
 
 const LoginForm = (props) => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(username, password);
-  };
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(loginUser(username, password));
+    return (
+      <Route exact path="/">
+        <Redirect to="/" />
+      </Route>
+    );
+  };
 
   return (
     <Container className="login-form w-50 h-100 text-center shadow">

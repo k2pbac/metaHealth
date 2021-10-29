@@ -17,6 +17,7 @@ import {
 } from "./RegisterForm/FormData";
 import BookAppointments from "./BookAppointments/BookAppointments";
 import PatientProfileIndex from "./View_Profile/PatientProfileIndex";
+import { useSelector } from "react-redux";
 
 const clinics = [
   {
@@ -42,9 +43,12 @@ const clinics = [
   },
 ];
 export default function Application(props) {
+  const isLogged = useSelector((state) => state.isLogged);
+  const username = useSelector((state) => state.username);
   return (
     <>
-      <Navbar></Navbar>
+      {!isLogged && <Navbar></Navbar>}
+      {isLogged && <LoggedInPatient></LoggedInPatient>}
       <Switch>
         <Route exact path="/" component={Home} />
 
