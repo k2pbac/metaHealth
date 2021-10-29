@@ -13,6 +13,15 @@ const PatientReportList = ({ createNewReport, setCreateNewReport }) => {
     getReportIds[i] = false;
   }
 
+  const getReportEditing = () => {
+    for (let reportIndex in editing) {
+      if (editing[reportIndex] === true) {
+        return true;
+      }
+    }
+    return false;
+  };
+
   const [editing, setEditing] = useState(getReportIds);
 
   useEffect(() => {
@@ -56,17 +65,20 @@ const PatientReportList = ({ createNewReport, setCreateNewReport }) => {
     setCreateNewReport(() => false);
   }, [createNewReport]);
 
-  return reports.map((report, index) => (
-    <PatientReport
-      key={report.id}
-      report={report}
-      clinic={patientReportData.clinic}
-      patient={patientReportData.patient}
-      editing={editing[index]}
-      setEditing={setEditing}
-      reportNumber={index}
-    ></PatientReport>
-  ));
+  return reports.map((report, index) => {
+    return (
+      <PatientReport
+        key={report.id}
+        report={report}
+        clinic={patientReportData.clinic}
+        patient={patientReportData.patient}
+        editing={editing[index]}
+        setEditing={setEditing}
+        reportIndex={index}
+        currentlyEditing={() => getReportEditing()}
+      ></PatientReport>
+    );
+  });
 };
 
 export default PatientReportList;

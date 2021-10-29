@@ -5,12 +5,20 @@ import Button from "react-bootstrap/Button";
 import Column from "react-bootstrap/Col";
 import { FloatingLabel, Form } from "react-bootstrap";
 
-const PatientReport = ({ report, editing, setEditing, reportNumber }) => {
+const PatientReport = ({
+  report,
+  editing,
+  setEditing,
+  reportIndex,
+  currentlyEditing,
+}) => {
   const [reportData, setReportData] = useState({
     info: report.information || "",
     medication: report.medication_prescribed || "",
     referral: report.referral || "",
   });
+
+  const isEditing = currentlyEditing();
 
   return (
     <Row
@@ -19,7 +27,11 @@ const PatientReport = ({ report, editing, setEditing, reportNumber }) => {
     >
       <Row className="d-flex dates-container">
         <Column>
-          {editing && <span>Currently Editing: {editing}</span>}
+          {editing && (
+            <span style={{ fontSize: "0.8rem", fontWeight: "bold" }}>
+              Currently Editing
+            </span>
+          )}
           <p>Created on {report.created_on || ""}</p>
           <p>Created by {report.created_by || ""}</p>
         </Column>
@@ -86,15 +98,15 @@ const PatientReport = ({ report, editing, setEditing, reportNumber }) => {
                 </FloatingLabel>
               </Column>
               <Column style={{ paddingLeft: "25px" }} xs="auto" className="">
-                {!editing && (
+                {!editing && !isEditing && (
                   <Button
-                    variant="secondary"
+                    variant="primary"
                     style={{ width: "100px", marginRight: "10px" }}
                     type="button"
                     onClick={() =>
                       setEditing((prev) => {
                         let newForm = Object.assign({}, prev);
-                        newForm[reportNumber] = true;
+                        newForm[reportIndex] = true;
                         return newForm;
                       })
                     }
@@ -111,7 +123,7 @@ const PatientReport = ({ report, editing, setEditing, reportNumber }) => {
                       onClick={() =>
                         setEditing((prev) => {
                           let newForm = Object.assign({}, prev);
-                          newForm[reportNumber] = false;
+                          newForm[reportIndex] = false;
                           return newForm;
                         })
                       }
