@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Column from "react-bootstrap/Col";
 import { FloatingLabel, Form } from "react-bootstrap";
 
-const PatientReport = ({ report }) => {
+const PatientReport = ({ report, editing, setEditing, reportNumber }) => {
   const [reportData, setReportData] = useState({
     info: report.information || "",
     medication: report.medication_prescribed || "",
@@ -19,6 +19,7 @@ const PatientReport = ({ report }) => {
     >
       <Row className="d-flex dates-container">
         <Column>
+          {editing && <span>Currently Editing: {editing}</span>}
           <p>Created on {report.created_on || ""}</p>
           <p>Created by {report.created_by || ""}</p>
         </Column>
@@ -50,6 +51,7 @@ const PatientReport = ({ report }) => {
                   value={reportData.info}
                   onChange={(e) => setReportData(e.target.value)}
                   className="my-2"
+                  disabled={!editing}
                 />
               </FloatingLabel>
             </Form.Group>
@@ -64,6 +66,7 @@ const PatientReport = ({ report }) => {
                     placeholder=""
                     value={reportData.medication}
                     onChange={(e) => setReportData(e.target.value)}
+                    disabled={!editing}
                   />
                 </FloatingLabel>
               </Column>
@@ -78,24 +81,52 @@ const PatientReport = ({ report }) => {
                     type="text"
                     placeholder=""
                     onChange={(e) => setReportData(e.target.value)}
+                    disabled={!editing}
                   />
                 </FloatingLabel>
               </Column>
               <Column style={{ paddingLeft: "25px" }} xs="auto" className="">
-                <Button
-                  variant="secondary"
-                  style={{ width: "100px", marginRight: "10px" }}
-                  type="submit"
-                >
-                  Edit
-                </Button>
-                <Button
-                  style={{ width: "100px" }}
-                  variant="danger"
-                  type="submit"
-                >
-                  Delete
-                </Button>
+                {!editing && (
+                  <Button
+                    variant="secondary"
+                    style={{ width: "100px", marginRight: "10px" }}
+                    type="button"
+                    onClick={() =>
+                      setEditing((prev) => {
+                        let newForm = Object.assign({}, prev);
+                        newForm[reportNumber] = true;
+                        return newForm;
+                      })
+                    }
+                  >
+                    Edit
+                  </Button>
+                )}
+                {editing && (
+                  <>
+                    <Button
+                      style={{ width: "100px", marginRight: "10px" }}
+                      variant="success"
+                      type="button"
+                      onClick={() =>
+                        setEditing((prev) => {
+                          let newForm = Object.assign({}, prev);
+                          newForm[reportNumber] = false;
+                          return newForm;
+                        })
+                      }
+                    >
+                      Save
+                    </Button>
+                    <Button
+                      style={{ width: "100px" }}
+                      variant="danger"
+                      type="button"
+                    >
+                      Delete
+                    </Button>
+                  </>
+                )}
               </Column>
             </Row>
           </Form>

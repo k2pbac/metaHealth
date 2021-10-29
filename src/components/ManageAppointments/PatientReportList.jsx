@@ -7,7 +7,14 @@ import PatientReport from "./PatientReport";
 
 const PatientReportList = ({ createNewReport, setCreateNewReport }) => {
   const [reports, setReports] = useState(patientReportData.reports);
-  let newReports;
+
+  let getReportIds = {};
+  for (let i = 0; i < patientReportData.reports.length; i++) {
+    getReportIds[i] = false;
+  }
+
+  const [editing, setEditing] = useState(getReportIds);
+
   useEffect(() => {
     if (createNewReport === true) {
       const monthNames = [
@@ -49,12 +56,15 @@ const PatientReportList = ({ createNewReport, setCreateNewReport }) => {
     setCreateNewReport(() => false);
   }, [createNewReport]);
 
-  return reports.map((report) => (
+  return reports.map((report, index) => (
     <PatientReport
       key={report.id}
       report={report}
       clinic={patientReportData.clinic}
       patient={patientReportData.patient}
+      editing={editing[index]}
+      setEditing={setEditing}
+      reportNumber={index}
     ></PatientReport>
   ));
 };
