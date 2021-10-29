@@ -4,7 +4,7 @@ import "./Schedule.scss";
 
 const Schedule = ({ appointmentData }) => {
   return (
-    <Table className="table scrollable-table">
+    <Table className="schedule table scrollable-table">
       <thead>
         <tr>
           <th></th>
