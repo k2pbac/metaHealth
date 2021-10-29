@@ -9,6 +9,7 @@ import { FloatingLabel } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 const PatientReportView = (props) => {
   const [createNewReport, setCreateNewReport] = useState(false);
+
   return (
     <Container className="patient-view">
       <Row className="d-flex justify-content-center align-items-center">

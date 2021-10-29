@@ -21,7 +21,6 @@ const PatientReportList = ({ createNewReport, setCreateNewReport }) => {
     }
     return false;
   };
-
   const [editing, setEditing] = useState(getReportIds);
 
   useEffect(() => {
@@ -75,6 +74,14 @@ const PatientReportList = ({ createNewReport, setCreateNewReport }) => {
         editing={editing[index]}
         setEditing={setEditing}
         reportIndex={index}
+        deleteReport={() =>
+          setReports((prev) => {
+            let newArr = prev;
+            newArr.splice(index, 1);
+            console.log(newArr);
+            return newArr;
+          })
+        }
         currentlyEditing={() => getReportEditing()}
       ></PatientReport>
     );

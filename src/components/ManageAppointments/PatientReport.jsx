@@ -11,6 +11,7 @@ const PatientReport = ({
   setEditing,
   reportIndex,
   currentlyEditing,
+  deleteReport,
 }) => {
   const [reportData, setReportData] = useState({
     info: report.information || "",
@@ -20,6 +21,10 @@ const PatientReport = ({
 
   const isEditing = currentlyEditing();
 
+  const removeReport = () => {
+    deleteReport();
+    setEditing(false);
+  };
   return (
     <Row
       className="report-container py-4 mb-3"
@@ -134,6 +139,7 @@ const PatientReport = ({
                       style={{ width: "100px" }}
                       variant="danger"
                       type="button"
+                      onClick={() => removeReport()}
                     >
                       Delete
                     </Button>
