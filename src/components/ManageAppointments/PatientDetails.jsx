@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./PatientDetails.scss";
 import { patientReportData } from "./patientReportData";
-const PatientDetails = ({ patient }) => {
+const PatientDetails = ({ patient, setCreateNewReport }) => {
   return (
     <div className="border p-4 d-flex flex-column" style={{ height: "700px" }}>
       <div className="mb-5">
@@ -15,7 +15,7 @@ const PatientDetails = ({ patient }) => {
           <p>{patientReportData.patient[key]}</p>
         ))}
         <div className="mt-5">
-          <a href="#!">Create a new report</a>
+          <a onClick={() => setCreateNewReport(true)}>Create a new report</a>
         </div>
       </div>
     </div>
