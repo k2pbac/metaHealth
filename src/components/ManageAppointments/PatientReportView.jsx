@@ -54,7 +54,7 @@ const PatientReportView = (props) => {
               style={{
                 overflow: "hidden",
                 overflowY: "scroll",
-                height: "80vh",
+                height: "640px",
               }}
             >
               <PatientReportList></PatientReportList>
