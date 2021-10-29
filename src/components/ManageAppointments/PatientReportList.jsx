@@ -34,6 +34,7 @@ const PatientReportList = ({ createNewReport, setCreateNewReport }) => {
           today.getFullYear();
       setReports((prev) => [
         {
+          id: prev[prev.length - 1].id + 1,
           created_on: date,
           created_by: "Dr. Sam Henry",
           last_updated: date,
@@ -50,6 +51,7 @@ const PatientReportList = ({ createNewReport, setCreateNewReport }) => {
 
   return reports.map((report) => (
     <PatientReport
+      key={report.id}
       report={report}
       clinic={patientReportData.clinic}
       patient={patientReportData.patient}

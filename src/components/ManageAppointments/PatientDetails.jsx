@@ -12,7 +12,7 @@ const PatientDetails = ({ patient, setCreateNewReport }) => {
       <div className="text-center">
         <h1 className="text-center mb-5">Patient</h1>
         {Object.keys(patientReportData.patient).map((key) => (
-          <p>{patientReportData.patient[key]}</p>
+          <p key={key}>{patientReportData.patient[key]}</p>
         ))}
         <div className="mt-5">
           <a onClick={() => setCreateNewReport(true)}>Create a new report</a>

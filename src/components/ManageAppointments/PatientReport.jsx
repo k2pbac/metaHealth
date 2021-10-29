@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "./PatientReport.scss";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import Column from "react-bootstrap/Col";
 import { FloatingLabel, Form } from "react-bootstrap";
+
 const PatientReport = ({ report }) => {
+  const [reportData, setReportData] = useState({
+    info: report.information || "",
+    medication: report.medication_prescribed || "",
+    referral: report.referral || "",
+  });
+
   return (
     <Row
       className="report-container py-4 mb-3"
@@ -40,7 +47,8 @@ const PatientReport = ({ report }) => {
                   as="textarea"
                   placeholder="Leave a comment here"
                   style={{ height: "150px" }}
-                  value={report.information || ""}
+                  value={reportData.info}
+                  onChange={(e) => setReportData(e.target.value)}
                   className="my-2"
                 />
               </FloatingLabel>
@@ -54,7 +62,8 @@ const PatientReport = ({ report }) => {
                   <Form.Control
                     type="text"
                     placeholder=""
-                    value={report.medication_prescribed || ""}
+                    value={reportData.medication}
+                    onChange={(e) => setReportData(e.target.value)}
                   />
                 </FloatingLabel>
               </Column>
@@ -65,9 +74,10 @@ const PatientReport = ({ report }) => {
                   className=""
                 >
                   <Form.Control
-                    value={report.referral || ""}
+                    value={reportData.referral}
                     type="text"
                     placeholder=""
+                    onChange={(e) => setReportData(e.target.value)}
                   />
                 </FloatingLabel>
               </Column>

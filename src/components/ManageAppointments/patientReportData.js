@@ -9,6 +9,7 @@ module.exports.patientReportData = {
   },
   reports: [
     {
+      id: 1,
       created_on: "June 10, 2016",
       created_by: "Dr. Sam Henry",
       last_updated: "June 12, 2016",
@@ -19,6 +20,7 @@ module.exports.patientReportData = {
       referral: "N/A",
     },
     {
+      id: 2,
       created_on: "June 10, 2016",
       created_by: "Dr. Sam Henry",
       last_updated: "June 12, 2016",
@@ -29,6 +31,7 @@ module.exports.patientReportData = {
       referral: "N/A",
     },
     {
+      id: 3,
       created_on: "June 10, 2016",
       created_by: "Dr. Sam Henry",
       last_updated: "June 12, 2016",
@@ -39,6 +42,7 @@ module.exports.patientReportData = {
       referral: "N/A",
     },
     {
+      id: 4,
       created_on: "June 10, 2016",
       created_by: "Dr. Sam Henry",
       last_updated: "June 12, 2016",
