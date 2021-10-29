@@ -1,0 +1,71 @@
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.medical-records{
+  display:flex;
+  flex-direction: column;
+  
+}
+
+.medical-records .form-label{
+  font-weight: bold;
+}
+
+.table-container{
+  margin: 20px;
+  padding: 5px;
+  box-shadow: 0 0 20px rgba(#273c48, 0.2);
+  overflow: auto;
+  height: 400px;
+}
+
+.content-table{
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  min-width: 100%;
+  margin: auto;
+}
+
+.content-table thead tr{
+  background-color: #273c48;
+  color: white;
+  text-align: left;
+  font-weight: bold;
+
+}
+
+.content-table th,
+.content-table td {
+  padding: 12px 15px;
+}
+
+.content-table tbody tr{
+  border-bottom: 1px solid #dddddd;
+}
+
+.content-table tbody tr:nth-of-type(even){
+  background-color: #f3f3f3;
+}
+
+
+.content-table tbody tr:hover{
+  background-color:rgba($color: #273c48, $alpha: 0.3) ;
+  box-shadow: 0 0 20px rgba(#273c48, 0.2);
+}
+
+
+.records{
+
+}
+
+.patient-search{
+height: 10%;
+width: 40%;
+padding: 20px;
+}
+
+

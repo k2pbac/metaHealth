@@ -59,7 +59,9 @@ import PatientReport from "components/ManageAppointments/PatientReport";
 import ClinicCard from "components/BookAppointments/ClinicCard";
 import BookAppointments from "components/BookAppointments/BookAppointments";
 
-
+//Patient Medical Records Page Imports
+import {patientDataList} from "components/PatientMedicalRecords/patientDataList"
+import PatientMedicalRecords from "components/PatientMedicalRecords/PatientMedicalRecords";
 
 
 const patient_accounts = {
@@ -125,6 +127,7 @@ const clinics = [
   image: "https://www.bannerhealth.com/-/media/images/project/bh/location-images/florence/banner-health-clinic-florence.ashx?h=318&w=478&hash=F1FF82CC61E5028148B77B46AB9D74BF"
 },
 ]
+
 
 //*********************************************************Navbar Stories*****************************************************
 //*********************************************************************************************************************************
@@ -396,4 +399,12 @@ storiesOf("Book Appointment", module)
 ))
 .add("Book Appointments Page (Patients)", () => (
   <BookAppointments clinicsList={clinics}></BookAppointments>
+))
+
+
+// Patient Medical Records Page Stories
+storiesOf("Patient Medical Records Search", module)
+.add("Patient Medical Record")
+.add("Patient Medical Records Index", () => (
+<PatientMedicalRecords patientsList={patientDataList}></PatientMedicalRecords>
 ))
