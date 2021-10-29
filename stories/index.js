@@ -413,29 +413,27 @@ storiesOf("Individual Patient Records Page", module)
 
 //Book Appointments Page Stories
 storiesOf("Book Appointment", module)
-
 .add("Clinic Card", () => (
   <ClinicCard name={clinics[0].name} address={clinics[0].address} image={clinics[0].image}></ClinicCard>
 ))
 .add("Book Appointments Page (Patients)", () => (
   <BookAppointments clinicsList={clinics}></BookAppointments>
 ))
+.add("Clinic Card", () => (
+  <ClinicCard
+    name={clinics[0].name}
+    address={clinics[0].address}
+    image={clinics[0].image}
+  ></ClinicCard>
+))
+.add("Book Appointments Page (Patients)", () => (
+  <BookAppointments clinicsList={clinics}></BookAppointments>
+));
 
 
 // Patient Medical Records Page Stories
 storiesOf("Patient Medical Records Search", module)
-.add("Patient Medical Record")
 .add("Patient Medical Records Index", () => (
 <PatientMedicalRecords patientsList={patientDataList}></PatientMedicalRecords>
 ))
 
-  .add("Clinic Card", () => (
-    <ClinicCard
-      name={clinics[0].name}
-      address={clinics[0].address}
-      image={clinics[0].image}
-    ></ClinicCard>
-  ))
-  .add("Book Appointments Page (Patients)", () => (
-    <BookAppointments clinicsList={clinics}></BookAppointments>
-  ));

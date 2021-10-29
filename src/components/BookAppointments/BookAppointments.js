@@ -18,6 +18,7 @@ export default function BookAppointments(props) {
   return (
     <div className="book-appointments">
       <Form.Group className="appointment-search" controlId="appointment-search">
+      <Form.Label className="form-label">Clinic Name: </Form.Label>
         <Form.Control type="search" placeholder="Search" />
       </Form.Group>
       <div className="container">

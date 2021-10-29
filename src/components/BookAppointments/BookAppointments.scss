@@ -43,6 +43,10 @@
   margin: 0;
 }
 
+.book-appointments .form-label{
+  font-weight: bold;
+}
+
 .book-appointments .container {
   display: grid;
   grid-template-columns: 1fr repeat(12, minmax(auto, 60px)) 1fr;
@@ -61,9 +65,7 @@
 .appointment-search {
   height: 10%;
   width: 40%;
-  text-align: right;
   padding: 20px;
-  margin-bottom: -10%;
 }
 
 @media only screen and (max-width: 1000px) {
