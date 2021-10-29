@@ -18,7 +18,7 @@ export default function LoginSelectionPanel(props) {
     <div className="container">
       <div className="row d-flex justify-content-center">
         <div className="col-md-4">
-          <Link to={"login-patient"}>
+          <Link to={"./login-patient"}>
             <div className="selection-panel" onClick={onPatientLogin}>
               <Image
                 className="selection-image1"
@@ -35,7 +35,7 @@ export default function LoginSelectionPanel(props) {
         </div>
 
         <div className="col-md-4">
-          <Link to={"employee-patient"}>
+          <Link to={"./login-employee"}>
             <div className="selection-panel" onClick={onEmployeeLogin}>
               <Image
                 className="selection-image2"
