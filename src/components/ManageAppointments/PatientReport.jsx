@@ -12,14 +12,12 @@ const PatientReport = ({ report, clinic, patient }) => {
     >
       <Row className="d-flex dates-container">
         <Column>
-          <p>Created on {patientReportData.report.created_on}</p>
-          <p>Created by {patientReportData.report.created_by}</p>
+          <p>Created on {report.created_on}</p>
+          <p>Created by {report.created_by}</p>
         </Column>
         <Column className="d-flex align-items-end flex-column">
-          <p>Last updated {patientReportData.reportDetails.last_updated}</p>
-          <p>
-            Last updated by {patientReportData.reportDetails.last_updated_by}
-          </p>
+          <p>Last updated {report.last_updated}</p>
+          <p>Last updated by {report.last_updated_by}</p>
         </Column>
       </Row>
       <Row
@@ -42,7 +40,7 @@ const PatientReport = ({ report, clinic, patient }) => {
                   as="textarea"
                   placeholder="Leave a comment here"
                   style={{ height: "150px" }}
-                  value={patientReportData.reportDetails.information}
+                  value={report.information}
                   className="my-2"
                 />
               </FloatingLabel>
@@ -56,10 +54,7 @@ const PatientReport = ({ report, clinic, patient }) => {
                   <Form.Control
                     type="text"
                     placeholder=""
-                    value={
-                      patientReportData.reportDetails.medication_prescribed ||
-                      ""
-                    }
+                    value={report.medication_prescribed || ""}
                   />
                 </FloatingLabel>
               </Column>
@@ -70,7 +65,7 @@ const PatientReport = ({ report, clinic, patient }) => {
                   className=""
                 >
                   <Form.Control
-                    value={patientReportData.reportDetails.referral || ""}
+                    value={report.referral || ""}
                     type="text"
                     placeholder=""
                   />
