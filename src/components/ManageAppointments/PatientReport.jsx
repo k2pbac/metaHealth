@@ -49,7 +49,7 @@ const PatientReport = ({ report }) => {
               <Column xs="auto" className="w-25">
                 <FloatingLabel
                   controlId="floatingInputGrid"
-                  label="Prescription Medication"
+                  label="Prescription"
                 >
                   <Form.Control
                     type="text"
