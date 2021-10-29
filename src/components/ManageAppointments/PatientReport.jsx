@@ -7,7 +7,7 @@ import { FloatingLabel, Form } from "react-bootstrap";
 const PatientReport = ({ report }) => {
   return (
     <Row
-      className="report-container py-4 w-75 mb-3"
+      className="report-container py-4 mb-3"
       style={{ paddingRight: "40px", paddingLeft: "40px" }}
     >
       <Row className="d-flex dates-container">

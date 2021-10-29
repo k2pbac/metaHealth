@@ -14,7 +14,7 @@ const PatientReportView = (props) => {
         <Col xs={4} className="p-0">
           <PatientDetails></PatientDetails>
         </Col>
-        <Col xs={8} style={{ height: "80vh" }}>
+        <Col xs={8} style={{ height: "700px" }}>
           <Row className="d-flex justify-content-center flex-column">
             <div class="d-flex p-0">
               <Col md={3}>
