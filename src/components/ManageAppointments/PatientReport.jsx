@@ -1,26 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import "./PatientReport.scss";
-import { patientReportData } from "./patientReportData";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import Column from "react-bootstrap/Col";
-import { Col, FloatingLabel, Form } from "react-bootstrap";
-const PatientReport = ({ report }) => {
+import { FloatingLabel, Form } from "react-bootstrap";
+
+const PatientReport = ({
+  report,
+  editing,
+  setEditing,
+  reportIndex,
+  currentlyEditing,
+  deleteReport,
+}) => {
+  const [reportData, setReportData] = useState({
+    info: report.information || "",
+    medication: report.medication_prescribed || "",
+    referral: report.referral || "",
+  });
+
+  const isEditing = currentlyEditing();
+
+  const removeReport = () => {
+    deleteReport();
+    setEditing(false);
+  };
   return (
     <Row
-      className="report-container py-4"
+      className="report-container py-4 mb-3"
       style={{ paddingRight: "40px", paddingLeft: "40px" }}
     >
       <Row className="d-flex dates-container">
         <Column>
-          <p>Created on {patientReportData.reportDetails.created_on}</p>
-          <p>Created by {patientReportData.reportDetails.created_by}</p>
+          {editing && (
+            <span style={{ fontSize: "0.8rem", fontWeight: "bold" }}>
+              Currently Editing
+            </span>
+          )}
+          <p>Created on {report.created_on || ""}</p>
+          <p>Created by {report.created_by || ""}</p>
         </Column>
         <Column className="d-flex align-items-end flex-column">
-          <p>Last updated {patientReportData.reportDetails.last_updated}</p>
-          <p>
-            Last updated by {patientReportData.reportDetails.last_updated_by}
-          </p>
+          <p>Last updated {report.last_updated || ""}</p>
+          <p>Last updated by {report.last_updated_by || ""}</p>
         </Column>
       </Row>
       <Row
@@ -43,8 +65,10 @@ const PatientReport = ({ report }) => {
                   as="textarea"
                   placeholder="Leave a comment here"
                   style={{ height: "150px" }}
-                  value={patientReportData.reportDetails.information}
+                  value={reportData.info}
+                  onChange={(e) => setReportData(e.target.value)}
                   className="my-2"
+                  disabled={!editing}
                 />
               </FloatingLabel>
             </Form.Group>
@@ -52,15 +76,14 @@ const PatientReport = ({ report }) => {
               <Column xs="auto" className="w-25">
                 <FloatingLabel
                   controlId="floatingInputGrid"
-                  label="Prescription Medication"
+                  label="Prescription"
                 >
                   <Form.Control
                     type="text"
                     placeholder=""
-                    value={
-                      patientReportData.reportDetails.medication_prescribed ||
-                      ""
-                    }
+                    value={reportData.medication}
+                    onChange={(e) => setReportData(e.target.value)}
+                    disabled={!editing}
                   />
                 </FloatingLabel>
               </Column>
@@ -71,27 +94,57 @@ const PatientReport = ({ report }) => {
                   className=""
                 >
                   <Form.Control
-                    value={patientReportData.reportDetails.referral || ""}
+                    value={reportData.referral}
                     type="text"
                     placeholder=""
+                    onChange={(e) => setReportData(e.target.value)}
+                    disabled={!editing}
                   />
                 </FloatingLabel>
               </Column>
               <Column style={{ paddingLeft: "25px" }} xs="auto" className="">
-                <Button
-                  variant="secondary"
-                  style={{ width: "100px", marginRight: "10px" }}
-                  type="submit"
-                >
-                  Edit
-                </Button>
-                <Button
-                  style={{ width: "100px" }}
-                  variant="danger"
-                  type="submit"
-                >
-                  Delete
-                </Button>
+                {!editing && !isEditing && (
+                  <Button
+                    variant="primary"
+                    style={{ width: "100px", marginRight: "10px" }}
+                    type="button"
+                    onClick={() =>
+                      setEditing((prev) => {
+                        let newForm = Object.assign({}, prev);
+                        newForm[reportIndex] = true;
+                        return newForm;
+                      })
+                    }
+                  >
+                    Edit
+                  </Button>
+                )}
+                {editing && (
+                  <>
+                    <Button
+                      style={{ width: "100px", marginRight: "10px" }}
+                      variant="success"
+                      type="button"
+                      onClick={() =>
+                        setEditing((prev) => {
+                          let newForm = Object.assign({}, prev);
+                          newForm[reportIndex] = false;
+                          return newForm;
+                        })
+                      }
+                    >
+                      Save
+                    </Button>
+                    <Button
+                      style={{ width: "100px" }}
+                      variant="danger"
+                      type="button"
+                      onClick={() => removeReport()}
+                    >
+                      Delete
+                    </Button>
+                  </>
+                )}
               </Column>
             </Row>
           </Form>

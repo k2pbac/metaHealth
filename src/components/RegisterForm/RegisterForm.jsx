@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
-import { Form as BootstrapForm } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import "./Form.scss";
+import "./RegisterForm.scss";
 import FadeIn from "react-fade-in";
 import Badge from "react-bootstrap/Badge";
 
-const Form = ({ formData }) => {
+const RegisterForm = ({ formData }) => {
   const [infoSelected, setInfoSelected] = useState("");
   const formBadges = {};
   let count = 1;
@@ -105,11 +105,11 @@ const Form = ({ formData }) => {
         {infoSelected === `badge${index + 1}` && (
           <FadeIn>
             {formData.fields[key].map((el) => (
-              <BootstrapForm.Group className=" mx-auto my-3" key={el.value}>
+              <Form.Group className=" mx-auto my-3" key={el.value}>
                 {(el.type !== "radio" && (
                   <>
-                    <BootstrapForm.Label>{el.value}</BootstrapForm.Label>
-                    <BootstrapForm.Control
+                    <Form.Label>{el.value}</Form.Label>
+                    <Form.Control
                       id={el.value}
                       name={el.value}
                       value={formValues[el.value]["value"]}
@@ -122,9 +122,7 @@ const Form = ({ formData }) => {
                   </>
                 )) || (
                   <div className={"form-group"}>
-                    <BootstrapForm.Label className="d-block">
-                      {el.value}
-                    </BootstrapForm.Label>
+                    <Form.Label className="d-block">{el.value}</Form.Label>
                     <div className="d-flex justify-content-center">
                       {el.options.map((option) => (
                         <div
@@ -147,7 +145,7 @@ const Form = ({ formData }) => {
                     </div>
                   </div>
                 )}
-              </BootstrapForm.Group>
+              </Form.Group>
             ))}
           </FadeIn>
         )}
@@ -156,25 +154,26 @@ const Form = ({ formData }) => {
   });
 
   return (
-    <Container className="text-center shadow-sm border p-5 form m-auto">
+    <Container className="text-center shadow-sm border p-5 form">
       <h1 className="mb-5">{formData["type"]} Registration </h1>
-      <BootstrapForm className="w-50 m-auto">
+      <Form className="w-50 m-auto">
         {formInputs}
-        <Button
-          className="mt-5"
-          size="sm"
-          variant="outline-success"
-          type="submit"
-          onSubmit={(e) => handleSubmit(e)}
-        >
-          Submit
-        </Button>
-      </BootstrapForm>
-      <span className="d-block mt-4">
-        Already a user? <a href="#!">Login</a>
-      </span>
+        <div class="d-flex justify-content-center flex-column align-items-center">
+          <Button
+            size="sm"
+            variant="outline-success"
+            type="submit"
+            onSubmit={(e) => handleSubmit(e)}
+          >
+            Register
+          </Button>
+          <span className="d-block mt-4">
+            Already a user? <a href="#!">Login</a>
+          </span>
+        </div>
+      </Form>
     </Container>
   );
 };
 
-export default Form;
+export default RegisterForm;

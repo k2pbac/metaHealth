@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "react-bootstrap/Image";
 import "./Section.scss";
-import Button from "react-bootstrap/Button";
+
 const Section = (props) => {
   const reverseSection = "flex-row-reverse";
   return (

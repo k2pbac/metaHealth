@@ -24,8 +24,8 @@ header {
     }
   }
   div.professionals {
-    margin-top: 250px;
-    height: 550px;
+    margin-top: 200px;
+    height: 430px;
     text-align: center;
     h2 {
       span {
@@ -40,4 +40,14 @@ header {
       height: 175px;
     }
   }
+}
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 1s, opacity 1s linear;
+}
+.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 1s linear;
 }

@@ -35,8 +35,8 @@ import LoginSelectionPanel from "components/Register_and_Login_Selection/LoginSe
 import RegisterSelectionPanel from "components/Register_and_Login_Selection/RegisterSelectionPanel";
 
 import Section from "components/Home/Section";
-import Form from "components/RegisterForm/Form";
 import LoginForm from "components/LoginForm/LoginForm";
+import RegisterForm from "components/RegisterForm/RegisterForm";
 
 //Patient and Employee Manage Appoinments Pages Imports
 import Schedule from "components/Schedule/Schedule";
@@ -59,9 +59,15 @@ import PatientReport from "components/ManageAppointments/PatientReport";
 import ClinicCard from "components/BookAppointments/ClinicCard";
 import BookAppointments from "components/BookAppointments/BookAppointments";
 
+
 //Patient Medical Records Page Imports
 import {patientDataList} from "components/PatientMedicalRecords/patientDataList"
 import PatientMedicalRecords from "components/PatientMedicalRecords/PatientMedicalRecords";
+
+
+import { patientReportData } from "components/ManageAppointments/patientReportData";
+import PatientReportList from "components/ManageAppointments/PatientReportList";
+import PatientReportView from "components/ManageAppointments/PatientReportView";
 
 
 const patient_accounts = {
@@ -108,25 +114,28 @@ const employee_accounts = [
 ];
 
 const clinics = [
-{
-  id:1,
-  name: "Toronto Public Clinic",
-  address: "123 Yonge St. Toronto, ON M3B 2T1",
-  image: "https://www.bannerhealth.com/-/media/images/project/bh/location-images/florence/banner-health-clinic-florence.ashx?h=318&w=478&hash=F1FF82CC61E5028148B77B46AB9D74BF",
-},
-{
-  id:2,
-  name: "Patients Walk-In Clinic",
-  address: "700 Don Mills Rd. Toronto, ON M3C 2T3",
-  image: "https://www.bannerhealth.com/-/media/images/project/bh/location-images/florence/banner-health-clinic-florence.ashx?h=318&w=478&hash=F1FF82CC61E5028148B77B46AB9D74BF"
-},
-{
-  id:3,
-  name: "Bay Walk-In Clinic",
-  address: "555 Bay St. Toronto, ON M4B 3S1",
-  image: "https://www.bannerhealth.com/-/media/images/project/bh/location-images/florence/banner-health-clinic-florence.ashx?h=318&w=478&hash=F1FF82CC61E5028148B77B46AB9D74BF"
-},
-]
+  {
+    id: 1,
+    name: "Toronto Public Clinic",
+    address: "123 Yonge St. Toronto, ON M3B 2T1",
+    image:
+      "https://www.bannerhealth.com/-/media/images/project/bh/location-images/florence/banner-health-clinic-florence.ashx?h=318&w=478&hash=F1FF82CC61E5028148B77B46AB9D74BF",
+  },
+  {
+    id: 2,
+    name: "Patients Walk-In Clinic",
+    address: "700 Don Mills Rd. Toronto, ON M3C 2T3",
+    image:
+      "https://www.bannerhealth.com/-/media/images/project/bh/location-images/florence/banner-health-clinic-florence.ashx?h=318&w=478&hash=F1FF82CC61E5028148B77B46AB9D74BF",
+  },
+  {
+    id: 3,
+    name: "Bay Walk-In Clinic",
+    address: "555 Bay St. Toronto, ON M4B 3S1",
+    image:
+      "https://www.bannerhealth.com/-/media/images/project/bh/location-images/florence/banner-health-clinic-florence.ashx?h=318&w=478&hash=F1FF82CC61E5028148B77B46AB9D74BF",
+  },
+];
 
 
 //*********************************************************Navbar Stories*****************************************************
@@ -356,9 +365,15 @@ storiesOf("View Profile", module)
 // Patient and Employee Registration Form
 
 storiesOf("Registration Form", module)
-  .add("Patient's Form", () => <Form formData={patientFormData}></Form>)
-  .add("Employee's Form", () => <Form formData={employeeFormData}></Form>)
-  .add("Clinic Form", () => <Form formData={clinicFormData}></Form>);
+  .add("Patient's Form", () => (
+    <RegisterForm formData={patientFormData}></RegisterForm>
+  ))
+  .add("Employee's Form", () => (
+    <RegisterForm formData={employeeFormData}></RegisterForm>
+  ))
+  .add("Clinic Form", () => (
+    <RegisterForm formData={clinicFormData}></RegisterForm>
+  ));
 
 storiesOf("Login Form", module).add("Patient's Form", () => (
   <LoginForm></LoginForm>
@@ -386,14 +401,19 @@ storiesOf("Manage Appointments Page", module)
     <ManageAppointments isEmployee={true}></ManageAppointments>
   ));
 
-
 storiesOf("Individual Patient Records Page", module)
   .add("Patient Details", () => <PatientDetails></PatientDetails>)
-  .add("Existing Patient Report", () => <PatientReport></PatientReport>);
-
+  .add("Existing Patient Report", () => (
+    <PatientReport report={patientReportData.reports[0]}></PatientReport>
+  ))
+  .add("Patient Report List", () => <PatientReportList></PatientReportList>)
+  .add("Full Patient Reports View", () => (
+    <PatientReportView></PatientReportView>
+  ));
 
 //Book Appointments Page Stories
 storiesOf("Book Appointment", module)
+
 .add("Clinic Card", () => (
   <ClinicCard name={clinics[0].name} address={clinics[0].address} image={clinics[0].image}></ClinicCard>
 ))
@@ -408,3 +428,14 @@ storiesOf("Patient Medical Records Search", module)
 .add("Patient Medical Records Index", () => (
 <PatientMedicalRecords patientsList={patientDataList}></PatientMedicalRecords>
 ))
+
+  .add("Clinic Card", () => (
+    <ClinicCard
+      name={clinics[0].name}
+      address={clinics[0].address}
+      image={clinics[0].image}
+    ></ClinicCard>
+  ))
+  .add("Book Appointments Page (Patients)", () => (
+    <BookAppointments clinicsList={clinics}></BookAppointments>
+  ));

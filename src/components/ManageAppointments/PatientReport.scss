@@ -5,10 +5,15 @@
       font-size: 0.9rem;
     }
   }
+
+  .btn-danger {
+    background-color: rgba(189, 22, 22, 0.794) !important;
+  }
+  .btn-danger:hover {
+    background-color: rgb(117, 33, 33) !important;
+  }
 }
-.btn-danger {
-  background-color: rgba(189, 22, 22, 0.794) !important;
-}
-.btn-danger:hover {
-  background-color: rgb(117, 33, 33) !important;
+
+.report-container:last-child {
+  margin-bottom: 0 !important;
 }
