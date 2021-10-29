@@ -12,12 +12,12 @@ const PatientReport = ({ report }) => {
     >
       <Row className="d-flex dates-container">
         <Column>
-          <p>Created on {report.created_on}</p>
-          <p>Created by {report.created_by}</p>
+          <p>Created on {report.created_on || ""}</p>
+          <p>Created by {report.created_by || ""}</p>
         </Column>
         <Column className="d-flex align-items-end flex-column">
-          <p>Last updated {report.last_updated}</p>
-          <p>Last updated by {report.last_updated_by}</p>
+          <p>Last updated {report.last_updated || ""}</p>
+          <p>Last updated by {report.last_updated_by || ""}</p>
         </Column>
       </Row>
       <Row
@@ -40,7 +40,7 @@ const PatientReport = ({ report }) => {
                   as="textarea"
                   placeholder="Leave a comment here"
                   style={{ height: "150px" }}
-                  value={report.information}
+                  value={report.information || ""}
                   className="my-2"
                 />
               </FloatingLabel>
