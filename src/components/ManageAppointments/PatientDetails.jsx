@@ -15,7 +15,15 @@ const PatientDetails = ({ patient, setCreateNewReport }) => {
           <p key={key}>{patientReportData.patient[key]}</p>
         ))}
         <div className="mt-5">
-          <a onClick={() => setCreateNewReport(true)}>Create a new report</a>
+          <a
+            className="create-report-link"
+            style={{ cursor: "pointer", textDecoration: "underline" }}
+            onClick={() => {
+              setCreateNewReport(true);
+            }}
+          >
+            Create a new report
+          </a>
         </div>
       </div>
     </div>

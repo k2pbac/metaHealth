@@ -60,6 +60,11 @@ const PatientReportList = ({ createNewReport, setCreateNewReport }) => {
         },
         ...prev,
       ]);
+      setEditing((prev) => {
+        let newForm = Object.assign({}, prev);
+        newForm[0] = true;
+        return newForm;
+      });
     }
     setCreateNewReport(() => false);
   }, [createNewReport]);
