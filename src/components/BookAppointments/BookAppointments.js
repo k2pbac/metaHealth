@@ -4,12 +4,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Spinner from "react-bootstrap/Spinner";
 import Form from "react-bootstrap/Form";
-
+import { useSelector } from "react-redux";
 import "components/BookAppointments/BookAppointments.scss";
 
 import ClinicCard from "./ClinicCard";
 
 const BookAppointments = (props) => {
+  const clinicsList_ = useSelector((state) => state.applicationData);
+  console.log(clinicsList_);
   const { clinicsList, clinicName, setClinicName } = props;
   return (
     <div className="book-appointments">
@@ -35,6 +37,7 @@ const BookAppointments = (props) => {
             <section className="cards">
               {Object.keys(clinicsList).map((clinic) => (
                 <ClinicCard
+                  key={clinicsList[clinic].id}
                   name={clinicsList[clinic].name}
                   address={clinicsList[clinic].address}
                   image={clinicsList[clinic].avatar}

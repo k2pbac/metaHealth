@@ -21,12 +21,13 @@ import BookAppointments from "./BookAppointments/BookAppointments";
 import PatientProfileIndex from "./View_Profile/PatientProfileIndex";
 import { useSelector, useStore } from "react-redux";
 import useApplicationData from "hooks/useApplicationData";
+import { displayClinics } from "helpers/selectors";
 
 export default function Application(props) {
   const isLoggedSelector = useSelector((state) => state.isLogged);
   const completeRegisterSelector = useSelector((state) => state.registerUser);
-
   const [isLogged, setIsLogged] = useState(isLoggedSelector);
+  const clinicsList_ = useSelector((state) => state.applicationData) || {};
 
   const {
     appState,
@@ -38,6 +39,8 @@ export default function Application(props) {
     setClinicName,
     clinics,
   } = useApplicationData();
+
+  const clinicsList = displayClinics(clinicsList_, clinicName);
 
   useEffect(() => {
     setIsLogged(localStorage.getItem("isLogged"));
@@ -83,7 +86,7 @@ export default function Application(props) {
           path="/clinics"
           component={() => (
             <BookAppointments
-              clinicsList={clinics}
+              clinicsList={clinicsList}
               clinicName={clinicName}
               setClinicName={setClinicName}
             ></BookAppointments>

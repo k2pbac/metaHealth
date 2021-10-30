@@ -13,8 +13,6 @@ router.get("/", function (req, res, next) {
       res.json(results.rows);
     }
   );
-
-  // res.render("index", { title: "Express" });
 });
 
 module.exports = router;

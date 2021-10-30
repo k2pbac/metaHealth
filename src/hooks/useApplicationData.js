@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-
+import { getTableData } from "actions";
+import { useDispatch } from "react-redux";
 import axios from "axios";
 
 const useApplicationData = () => {
   const [appState, setAppState] = useState({});
   const [patients, setPatients] = useState({});
   const [patientName, setPatientName] = useState("");
-
+  const dispatch = useDispatch();
   const [clinics, setClinics] = useState({});
   const [clinicName, setClinicName] = useState("");
 
@@ -15,13 +16,22 @@ const useApplicationData = () => {
       axios.get("/api/clinics"),
       axios.get("/api/patients"),
       axios.get("/api/employees"),
+      axios.get("/api/registered"),
     ]).then((all) => {
-      const [first, second, third] = all;
-      setAppState({
+      const [first, second, third, fourth] = all;
+      const data = {
         clinics: first.data,
         patients: second.data,
         employee: third.data,
-      });
+        registered: fourth.data,
+      };
+      // setAppState({
+      //   clinics: first.data,
+      //   patients: second.data,
+      //   employee: third.data,
+      //   registered: fourth.data,
+      // });
+      dispatch(getTableData(data));
     });
   }, []);
 
@@ -34,11 +44,11 @@ const useApplicationData = () => {
   }, [patientName]);
 
   useEffect(() => {
-    // if (clinicName !== "") {
-    //   axios.get(`/api/clinics/${clinicName}`).then((res) => {
-    //     setClinics(res.data);
-    //   });
-    // }
+    if (clinicName !== "") {
+      axios.get(`/api/clinics/${clinicName}`).then((res) => {
+        setClinics(res.data);
+      });
+    }
   }, [clinicName]);
 
   const submitEmployeeRegistration = (user) => {

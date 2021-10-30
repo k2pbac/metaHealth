@@ -2,14 +2,30 @@ const express = require("express");
 const router = express.Router();
 const db = require("../db/index");
 
-/* Get Clinics from API. */
 router.get("/api/clinics", function (req, res, next) {
-  db.query("SELECT * FROM clinics ORDER BY id ASC", (error, results) => {
+  db.query(`SELECT * FROM clinics`, (error, results) => {
     if (error) {
       throw error;
     }
     res.json(results.rows);
   });
+});
+
+/* Get Clinics from API. */
+router.get("/api/clinics/:clinic_name", function (req, res, next) {
+  const { clinic_name } = req.params;
+
+  db.query(
+    `SELECT * FROM clinics
+  WHERE name ILIKE '${clinic_name}%'
+  ORDER BY name;`,
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.json(results.rows);
+    }
+  );
 
   router.get(
     "/api/registered-patients/:clinic_name",

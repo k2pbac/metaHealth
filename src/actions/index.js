@@ -19,3 +19,10 @@ export const registerUser = (user) => {
     user: { user },
   };
 };
+
+export const getTableData = (applicationData) => {
+  return {
+    type: "DATA",
+    payload: applicationData,
+  };
+};
