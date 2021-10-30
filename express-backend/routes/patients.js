@@ -2,23 +2,10 @@ const express = require("express");
 const router = express.Router();
 const db = require("../db/index");
 
-router.get("/api/clinics", function (req, res, next) {
-  db.query(`SELECT * FROM clinics`, (error, results) => {
-    if (error) {
-      throw error;
-    }
-    res.json(results.rows);
-  });
-});
-
-/* Get Clinics from API. */
-router.get("/api/clinics/:clinic_name", function (req, res, next) {
-  const { clinic_name } = req.params;
-
+/* Get Patients from API. */
+router.get("/api/patients", function (req, res, next) {
   db.query(
-    `SELECT * FROM clinics
-  WHERE name ILIKE '${clinic_name}%'
-  ORDER BY name;`,
+    "SELECT * FROM patient_accounts ORDER BY id ASC",
     (error, results) => {
       if (error) {
         throw error;
@@ -28,15 +15,15 @@ router.get("/api/clinics/:clinic_name", function (req, res, next) {
   );
 
   router.get(
-    "/api/registered-patients/:clinic_name",
+    "/api/registered-patients/:patient_name",
     function (req, res, next) {
-      const { clinic_name } = req.params;
+      const { patient_name } = req.params;
 
       db.query(
         `SELECT *, registered.clinic_id FROM patient_accounts 
         JOIN registered on patient_accounts.id = registered.patient_account_id
-        WHERE (first_name ILIKE '${clinic_name}%') 
-        OR (last_name ILIKE '${clinic_name}%')
+        WHERE (first_name ILIKE '${patient_name}%') 
+        OR (last_name ILIKE '${patient_name}%')
         ORDER BY last_name;`,
         (error, results) => {
           if (error) {
@@ -51,3 +38,10 @@ router.get("/api/clinics/:clinic_name", function (req, res, next) {
 });
 
 module.exports = router;
+// SELECT * FROM patient_accounts
+//       JOIN registered on patient_accounts.id = registered.patient_account_id
+//       WHERE (first_name LIKE UPPER('k%'))
+//       OR (first_name LIKE LOWER('k%'))
+//       OR (last_name LIKE UPPER('k%'))
+//       OR (last_name LIKE LOWER('k%'))
+//       ORDER BY last_name;

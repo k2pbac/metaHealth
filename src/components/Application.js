@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Route, Switch } from "react-router-dom";
@@ -12,6 +11,7 @@ import LoginSelectionPanel from "./Register_and_Login_Selection/LoginSelectionPa
 import LoginForm from "./LoginForm/LoginForm";
 import RegisterSelectionPanel from "./Register_and_Login_Selection/RegisterSelectionPanel";
 import RegisterForm from "./RegisterForm/RegisterForm";
+import PatientMedicalRecords from "./PatientMedicalRecords/PatientMedicalRecords";
 import {
   employeeFormData,
   patientFormData,
@@ -21,16 +21,36 @@ import BookAppointments from "./BookAppointments/BookAppointments";
 import PatientProfileIndex from "./View_Profile/PatientProfileIndex";
 import { useSelector, useStore } from "react-redux";
 import useApplicationData from "hooks/useApplicationData";
+import { displayClinics } from "helpers/selectors";
 
 export default function Application(props) {
   const isLoggedSelector = useSelector((state) => state.isLogged);
+  const completeRegisterSelector = useSelector((state) => state.registerUser);
   const [isLogged, setIsLogged] = useState(isLoggedSelector);
+  const clinicsList_ = useSelector((state) => state.applicationData) || {};
 
-  const { clinics } = useApplicationData();
+  const {
+    appState,
+    patients,
+    patientName,
+    setPatientName,
+    submitEmployeeRegistration,
+    clinicName,
+    setClinicName,
+    clinics,
+  } = useApplicationData();
+
+  const clinicsList = displayClinics(clinicsList_, clinicName);
 
   useEffect(() => {
     setIsLogged(localStorage.getItem("isLogged"));
   }, [isLoggedSelector]);
+
+  useEffect(() => {
+    if (completeRegisterSelector) {
+      submitEmployeeRegistration(completeRegisterSelector.user);
+    }
+  }, [completeRegisterSelector]);
   return (
     <>
       {!isLogged && <Navbar></Navbar>}
@@ -61,14 +81,29 @@ export default function Application(props) {
           )}
         />
         <Route path="/patient-profile" component={PatientProfileIndex} />
-        return (
+
         <Route
           path="/clinics"
           component={() => (
-            <BookAppointments clinicsList={clinics}></BookAppointments>
+            <BookAppointments
+              clinicsList={clinicsList}
+              clinicName={clinicName}
+              setClinicName={setClinicName}
+            ></BookAppointments>
           )}
         />
-        );
+
+        <Route
+          path="/clinic-medical-records"
+          component={() => (
+            <PatientMedicalRecords
+              setPatientName={setPatientName}
+              patientName={patientName}
+              patientsList={patients}
+            ></PatientMedicalRecords>
+          )}
+        />
+
         {/* Manage Appointments Routes for Employee and Patient - will need to figure out how to pass params */}
         {/* View Patient Medical Records Routes will also need params passed  */}
         {/* Add/Edit Patient Medical Record Page route will need clinic params */}
