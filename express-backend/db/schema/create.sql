@@ -10,6 +10,7 @@ CREATE TABLE clinics (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
   address VARCHAR(255) NOT NULL,
+  avatar VARCHAR(255) DEFAULT NULL,
   clinic_owner_id INTEGER NOT NULL,
   ein_number VARCHAR(10) DEFAULT NULL,
   insurance_number VARCHAR(30) DEFAULT NULL,
@@ -25,6 +26,7 @@ CREATE TABLE employee_accounts (
   gender VARCHAR(255) DEFAULT NULL,
   phone_number VARCHAR(255) NOT NULL,
   email_address VARCHAR(255) NOT NULL,
+  avatar VARCHAR(255) DEFAULT NULL,
   is_doctor BOOLEAN DEFAULT FALSE,
   clinic_id INTEGER REFERENCES clinics(id)
 );
@@ -41,11 +43,11 @@ CREATE TABLE patient_accounts (
   phone_number VARCHAR(255) NOT NULL,
   email_address VARCHAR(255) NOT NULL,
   address VARCHAR(255) NOT NULL,
+  avatar VARCHAR(255) DEFAULT NULL,
   health_card_number VARCHAR(255) DEFAULT NULL,
   insurance_member_id VARCHAR(255) DEFAULT NULL,
   insurance_policy_number VARCHAR(255) DEFAULT NULL,
-  insurance_plan_name VARCHAR(255) DEFAULT NULL,
-  medical_history_id INTEGER DEFAULT NULL
+  insurance_plan_name VARCHAR(255) DEFAULT NULL
 );
 
 CREATE TABLE patient_records (
@@ -54,8 +56,10 @@ CREATE TABLE patient_records (
   created_at timestamp default CURRENT_DATE,
   updated_at timestamp default CURRENT_DATE,
   medication_prescribed TEXT DEFAULT NULL,
-  date_of_symptoms timestamp NOT NULL
+  date_of_symptoms timestamp NOT NULL,
+  patient_id INTEGER REFERENCES patient_accounts(id) ON DELETE CASCADE
 );
+
 
 CREATE TABLE appointments (
   id SERIAL PRIMARY KEY NOT NULL,
@@ -70,4 +74,4 @@ CREATE TABLE registered (
   id SERIAL PRIMARY KEY NOT NULL,
   clinic_id INTEGER REFERENCES clinics(id) ON DELETE CASCADE,
   patient_account_id INTEGER REFERENCES patient_accounts(id) ON DELETE CASCADE
-)
+);

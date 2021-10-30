@@ -1,19 +1,14 @@
 import React, { useState } from "react";
-import classNames from "classnames"
-import 'bootstrap/dist/css/bootstrap.min.css';
+import classNames from "classnames";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import Form from "react-bootstrap/Form";
 
-import Form from 'react-bootstrap/Form'
-
-import "components/PatientMedicalRecords/PatientMedicalRecords.scss"
-
+import "components/PatientMedicalRecords/PatientMedicalRecords.scss";
 
 export default function PatientMedicalRecords(props) {
-
-  const {
-    patientsList
-  } = props;
+  const { patientsList } = props;
 
   const renderPatients = [];
 
@@ -27,11 +22,12 @@ export default function PatientMedicalRecords(props) {
         <td>{patientsList[element].address}</td>
         <td>{patientsList[element].phone_number}</td>
         <td>{patientsList[element].email_address}</td>
-        <td><a href="">Add/Edit Record</a></td>
+        <td>
+          <a href="">Add/Edit Record</a>
+        </td>
       </tr>
-    )
+    );
   }
-
 
   return (
     <div className="medical-records">
@@ -40,7 +36,7 @@ export default function PatientMedicalRecords(props) {
         <Form.Control type="search" placeholder="Search" />
       </Form.Group>
       <div className="table-container">
-        <table class="content-table">
+        <table class="content-table scrollable-table">
           <thead>
             <tr>
               <th>First Name</th>
@@ -53,13 +49,9 @@ export default function PatientMedicalRecords(props) {
               <th>View Patient Record</th>
             </tr>
           </thead>
-          <tbody>
-            {renderPatients}
-          </tbody>
+          <tbody>{renderPatients}</tbody>
         </table>
-
       </div>
     </div>
-
-  )
+  );
 }

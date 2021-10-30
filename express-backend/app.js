@@ -3,8 +3,10 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
+const clinicsRouter = require("./routes/clinics");
 const path = require("path");
 require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
+const cors = require("cors");
 
 const db = require("./db/index");
 const app = express();
@@ -14,8 +16,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-
-app.use("/home", indexRouter);
-app.use("/users", usersRouter);
+app.use(cors());
+// app.use("/home", indexRouter);
+app.use("/", clinicsRouter);
+// app.use("/users", usersRouter);
 
 module.exports = app;
