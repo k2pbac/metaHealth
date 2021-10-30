@@ -21,5 +21,4 @@ app.use(cors());
 app.use("/", clinicsRouter);
 app.use("/", employeeRouter);
 app.use("/", patientRouter);
-
 module.exports = app;
