@@ -12,6 +12,7 @@ import LoginSelectionPanel from "./Register_and_Login_Selection/LoginSelectionPa
 import LoginForm from "./LoginForm/LoginForm";
 import RegisterSelectionPanel from "./Register_and_Login_Selection/RegisterSelectionPanel";
 import RegisterForm from "./RegisterForm/RegisterForm";
+import PatientMedicalRecords from "./PatientMedicalRecords/PatientMedicalRecords";
 import {
   employeeFormData,
   patientFormData,
@@ -26,7 +27,7 @@ export default function Application(props) {
   const isLoggedSelector = useSelector((state) => state.isLogged);
   const [isLogged, setIsLogged] = useState(isLoggedSelector);
 
-  const { clinics } = useApplicationData();
+  const { appState } = useApplicationData();
 
   useEffect(() => {
     setIsLogged(localStorage.getItem("isLogged"));
@@ -61,14 +62,19 @@ export default function Application(props) {
           )}
         />
         <Route path="/patient-profile" component={PatientProfileIndex} />
-        return (
+
         <Route
           path="/clinics"
           component={() => (
-            <BookAppointments clinicsList={clinics}></BookAppointments>
+            <BookAppointments clinicsList={appState.clinics}></BookAppointments>
           )}
         />
-        );
+
+        <Route
+          path="/clinic-medical-records"
+          component={PatientMedicalRecords}
+        />
+
         {/* Manage Appointments Routes for Employee and Patient - will need to figure out how to pass params */}
         {/* View Patient Medical Records Routes will also need params passed  */}
         {/* Add/Edit Patient Medical Record Page route will need clinic params */}

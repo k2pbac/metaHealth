@@ -2,16 +2,25 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const useApplicationData = () => {
-  const [clinics, setClinics] = useState({});
+  const [appState, setAppState] = useState({});
 
   useEffect(() => {
-    axios.get("http://localhost:3001/clinics").then((response) => {
-      setClinics(response.data);
+    Promise.all([
+      axios.get("/api/clinics"),
+      axios.get("/api/patients"),
+      axios.get("/api/employees"),
+    ]).then((all) => {
+      const [first, second, third] = all;
+      setAppState({
+        clinics: first.data,
+        patients: second.data,
+        employee: third.data,
+      });
     });
   }, []);
 
   return {
-    clinics,
+    appState,
   };
 };
 
