@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const useApplicationData = () => {
-  const [clinics, setClinics] = useState();
+  const [clinics, setClinics] = useState({});
 
   useEffect(() => {
-    axios.get(`/api/clinics`).then((clinics) => {
-      setClinics({ ...clinics.data });
+    axios.get("http://localhost:3001/clinics").then((response) => {
+      setClinics(response.data);
     });
-  }, [clinics]);
+  }, []);
 
   return {
     clinics,
