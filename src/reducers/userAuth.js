@@ -8,6 +8,8 @@ const authReducer = (state = null, action) => {
     case "LOGOUT":
       localStorage.removeItem("user");
       return null;
+    case "REGISTER":
+      return action.user;
     default:
       return null;
   }

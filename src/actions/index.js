@@ -12,3 +12,10 @@ export const logoutUser = (user) => {
     user: null,
   };
 };
+
+export const registerUser = (user) => {
+  return {
+    type: "REGISTER",
+    user: { user },
+  };
+};

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Route, Switch } from "react-router-dom";
@@ -25,13 +24,30 @@ import useApplicationData from "hooks/useApplicationData";
 
 export default function Application(props) {
   const isLoggedSelector = useSelector((state) => state.isLogged);
+  const completeRegisterSelector = useSelector((state) => state.registerUser);
+
   const [isLogged, setIsLogged] = useState(isLoggedSelector);
 
-  const { appState } = useApplicationData();
+  const {
+    appState,
+    patients,
+    patientName,
+    setPatientName,
+    submitEmployeeRegistration,
+    clinicName,
+    setClinicName,
+    clinics,
+  } = useApplicationData();
 
   useEffect(() => {
     setIsLogged(localStorage.getItem("isLogged"));
   }, [isLoggedSelector]);
+
+  useEffect(() => {
+    if (completeRegisterSelector) {
+      submitEmployeeRegistration(completeRegisterSelector.user);
+    }
+  }, [completeRegisterSelector]);
   return (
     <>
       {!isLogged && <Navbar></Navbar>}
@@ -66,13 +82,23 @@ export default function Application(props) {
         <Route
           path="/clinics"
           component={() => (
-            <BookAppointments clinicsList={appState.clinics}></BookAppointments>
+            <BookAppointments
+              clinicsList={clinics}
+              clinicName={clinicName}
+              setClinicName={setClinicName}
+            ></BookAppointments>
           )}
         />
 
         <Route
           path="/clinic-medical-records"
-          component={PatientMedicalRecords}
+          component={() => (
+            <PatientMedicalRecords
+              setPatientName={setPatientName}
+              patientName={patientName}
+              patientsList={patients}
+            ></PatientMedicalRecords>
+          )}
         />
 
         {/* Manage Appointments Routes for Employee and Patient - will need to figure out how to pass params */}

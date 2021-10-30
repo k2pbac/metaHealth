@@ -20,7 +20,7 @@ router.get("/api/patients", function (req, res, next) {
       const { patient_name } = req.params;
 
       db.query(
-        `SELECT * FROM patient_accounts 
+        `SELECT *, registered.clinic_id FROM patient_accounts 
         JOIN registered on patient_accounts.id = registered.patient_account_id
         WHERE (first_name ILIKE '${patient_name}%') 
         OR (last_name ILIKE '${patient_name}%')

@@ -6,7 +6,8 @@ module.exports.patientFormData = {
       { value: "Password", type: "password" },
     ],
     "Personal Info": [
-      { value: "Name", type: "text" },
+      { value: "First Name", type: "text" },
+      { value: "Last Name", type: "text" },
       { value: "Date of birth", type: "date" },
       { value: "Gender", type: "text" },
       { value: "Description", type: "text" },
@@ -30,9 +31,11 @@ module.exports.employeeFormData = {
       { value: "Password", type: "password" },
     ],
     "Personal Info": [
-      { value: "Name", type: "text" },
+      { value: "First Name", type: "text" },
+      { value: "Last Name", type: "text" },
       { value: "Phone Number", type: "tel" },
       { value: "Email Address", type: "email" },
+      { value: "Gender", type: "radio", options: ["Male", "Female"] },
       { value: "Are you a doctor?", type: "radio", options: ["Yes", "No"] },
     ],
   },

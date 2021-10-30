@@ -10,7 +10,7 @@ import "components/BookAppointments/BookAppointments.scss";
 import ClinicCard from "./ClinicCard";
 
 const BookAppointments = (props) => {
-  const { clinicsList } = props;
+  const { clinicsList, clinicName, setClinicName } = props;
   return (
     <div className="book-appointments">
       {(clinicsList && (
@@ -20,7 +20,16 @@ const BookAppointments = (props) => {
             controlId="appointment-search"
           >
             <Form.Label className="form-label">Clinic Name: </Form.Label>
-            <Form.Control type="search" placeholder="Search" />
+            <Form.Control
+              onChange={(e) => {
+                e.preventDefault();
+                setClinicName(e.target.value);
+              }}
+              autoFocus
+              type="search"
+              placeholder="Search"
+              value={clinicName}
+            />
           </Form.Group>
           <div className="container">
             <section className="cards">
