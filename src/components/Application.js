@@ -42,8 +42,7 @@ export default function Application(props) {
     setPatientName,
     clinicName,
     setClinicName,
-    setPatient,
-    patient,
+    updatePatientProfile,
   } = useApplicationData();
 
   const {
@@ -53,7 +52,6 @@ export default function Application(props) {
     authenticatePatient,
   } = userServices;
 
-  // let patientProfileData = {};
   const clinicsList = displayClinics(clinicsList_, clinicName);
 
   useEffect(() => {
@@ -71,6 +69,13 @@ export default function Application(props) {
       }
     }
   }, [userAuth]);
+
+  useEffect(() => {
+    if (userLogged.update_profile) {
+      console.log(userLogged);
+      updatePatientProfile(userLogged.user);
+    }
+  }, [userLogged.user]);
 
   useEffect(() => {
     if (completeRegisterSelector) {
@@ -141,10 +146,7 @@ export default function Application(props) {
         <Route
           path="/patient/profile"
           component={() => (
-            <PatientProfileIndex
-              {...userLogged.user}
-              setPatient={setPatient}
-            ></PatientProfileIndex>
+            <PatientProfileIndex {...userLogged.user}></PatientProfileIndex>
           )}
         />
 

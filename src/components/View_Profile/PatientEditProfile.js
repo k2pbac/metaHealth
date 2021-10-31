@@ -30,7 +30,7 @@ export default function PatientEditProfile(props) {
     insurance_plan_name,
     onSubmit,
     onBack,
-    setPatient,
+    id,
   } = props;
 
   const [firstName, setFirstName] = useState(first_name);
@@ -51,10 +51,10 @@ export default function PatientEditProfile(props) {
   const [insurancePlanName, setInsurancePlanName] =
     useState(insurance_plan_name);
   const navClass = classNames("view-profile");
-
   const submitHandler = (event) => {
     event.preventDefault();
     const newProfile = {
+      id: id,
       first_name: firstName,
       last_name: lastName,
       username: userName,
@@ -70,24 +70,8 @@ export default function PatientEditProfile(props) {
       insurance_plan_name: insurancePlanName,
     };
 
-    // setPatient({
-    //   firstName,
-    //   lastName,
-    //   userName,
-    //   _avatar,
-    //   dateOfBirth,
-    //   profileDescription,
-    //   phoneNumber,
-    //   emailAddress,
-    //   profileAddress,
-    //   insuranceMemberId,
-    //   insurancePolicyNumber,
-    //   insurancePlanName,
-    // });
-
     dispatch(updateProfile(newProfile));
 
-    console.log(newProfile);
     transition(SHOW);
   };
 

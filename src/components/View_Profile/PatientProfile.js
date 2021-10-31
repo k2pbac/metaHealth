@@ -29,8 +29,6 @@ export default function PatientProfile(props) {
   } = props;
 
   const navClass = classNames("view-profile");
-  console.log("rendered patient profile");
-  console.log(props);
 
   return (
     <div className="profile">

@@ -12,8 +12,19 @@ const userLoggedReducer = (state = initialState, action) => {
       localStorage.setItem("user", JSON.stringify(action.user));
       return { ...action.user, loggedIn: true };
     case authConstants.UPDATE_PROFILE:
-      localStorage.setItem("user", JSON.stringify(action.user));
-      return { ...action.user, loggedIn: true };
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          ...JSON.parse(localStorage.getItem("user")),
+          ...action.user,
+        })
+      );
+      return {
+        ...JSON.parse(localStorage.getItem("user")),
+        ...action.user,
+        loggedIn: true,
+        update_profile: true,
+      };
     case authConstants.LOGOUT:
       localStorage.removeItem("user");
       return { loggedIn: false };

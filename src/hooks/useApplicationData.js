@@ -5,13 +5,12 @@ const useApplicationData = () => {
   const [appState, setAppState] = useState({});
   const [patients, setPatients] = useState({});
   // const [patient, setPatientName] = useState("");
-  const [patient, setPatient] = useState({});
   const [clinics, setClinics] = useState({});
   const [clinicName, setClinicName] = useState("");
 
-  useEffect(() => {
+  const updatePatientProfile = (patient) => {
     if (Object.keys(patient).length) {
-      axios.put("/api/patient/profile", { patient }).then((result) => {
+      axios.put("/api/patient/profile", { ...patient }).then((result) => {
         setAppState((prev) => {
           return {
             ...prev,
@@ -23,7 +22,7 @@ const useApplicationData = () => {
         });
       });
     }
-  }, [setPatient]);
+  };
 
   useEffect(() => {
     Promise.all([
@@ -67,8 +66,7 @@ const useApplicationData = () => {
     setClinics,
     clinicName,
     setClinicName,
-    setPatient,
-    patient,
+    updatePatientProfile,
   };
 };
 

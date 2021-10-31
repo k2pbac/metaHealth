@@ -17,24 +17,7 @@ const EDIT = "EDIT";
 export default function PatientProfileIndex(props) {
   const { mode, transition, back } = useVisualMode(SHOW);
   const userLogged = useSelector((state) => state.userLogged);
-  const {
-    first_name,
-    last_name,
-    username,
-    gender,
-    avatar,
-    date_of_birth,
-    profile_description,
-    phone_number,
-    email_address,
-    address,
-    insurance_member_id,
-    insurance_policy_number,
-    insurance_plan_name,
-    setPatient,
-  } = props;
 
-  console.log("rendered user data:", userLogged.user);
   const navClass = classNames("view-profile");
 
   //Save Function: saves the new profile imputs
@@ -59,43 +42,12 @@ export default function PatientProfileIndex(props) {
 
   return (
     <article>
-      {mode === SHOW && (
-        <PatientProfile
-          {...userLogged.user}
-          // first_name={first_name}
-          // last_name={last_name}
-          // username={username}
-          // gender={gender}
-          // avatar={avatar}
-          // date_of_birth={date_of_birth}
-          // profile_description={profile_description}
-          // phone_number={phone_number}
-          // email_address={email_address}
-          // address={address}
-          // insurance_member_id={insurance_member_id}
-          // insurance_policy_number={insurance_policy_number}
-          // insurance_plan_name={insurance_plan_name}
-          onEdit={onEdit}
-        />
-      )}
+      {mode === SHOW && <PatientProfile {...userLogged.user} onEdit={onEdit} />}
       {mode === EDIT && (
         <PatientEditProfile
           {...userLogged.user}
           onSubmit={onSubmit}
           onBack={back}
-          setPatient={setPatient}
-          // first_name={first_name}
-          // last_name={last_name}
-          // username={username}
-          // avatar={avatar}
-          // date_of_birth={date_of_birth}
-          // profile_description={profile_description}
-          // phone_number={phone_number}
-          // email_address={email_address}
-          // address={address}
-          // insurance_member_id={insurance_member_id}
-          // insurance_policy_number={insurance_policy_number}
-          // insurance_plan_name={insurance_plan_name}
         />
       )}
     </article>
