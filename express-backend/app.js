@@ -58,9 +58,10 @@ app.post("/api/employee/login", function (req, res, next) {
     else {
       req.logIn(user, (err) => {
         if (err) throw err;
+        const newUser = { ...user, password: "" };
         res.json({
           message: "Successfully Authenticated",
-          user: user,
+          user: newUser,
         });
       });
     }
@@ -75,9 +76,10 @@ app.post("/api/patient/login", function (req, res, next) {
     else {
       req.logIn(user, (err) => {
         if (err) throw err;
+        const newUser = { ...user, password: "" };
         res.json({
           message: "Successfully Authenticated",
-          user: user,
+          user: newUser,
         });
       });
     }

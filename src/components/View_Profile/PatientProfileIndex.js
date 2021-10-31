@@ -8,7 +8,7 @@ import "components/View_Profile/Profile.scss";
 
 import PatientProfile from "./PatientProfile";
 import PatientEditProfile from "./PatientEditProfile";
-
+import { useSelector } from "react-redux";
 import { useVisualMode } from "../hooks/useVisualMode";
 
 const SHOW = "SHOW";
@@ -16,7 +16,7 @@ const EDIT = "EDIT";
 
 export default function PatientProfileIndex(props) {
   const { mode, transition, back } = useVisualMode(SHOW);
-
+  const userLogged = useSelector((state) => state.userLogged);
   const {
     first_name,
     last_name,
@@ -24,15 +24,17 @@ export default function PatientProfileIndex(props) {
     gender,
     avatar,
     date_of_birth,
-    profile_decription,
+    profile_description,
     phone_number,
     email_address,
     address,
     insurance_member_id,
     insurance_policy_number,
     insurance_plan_name,
+    setPatient,
   } = props;
 
+  console.log("rendered user data:", userLogged.user);
   const navClass = classNames("view-profile");
 
   //Save Function: saves the new profile imputs
@@ -59,38 +61,41 @@ export default function PatientProfileIndex(props) {
     <article>
       {mode === SHOW && (
         <PatientProfile
-          first_name={first_name}
-          last_name={last_name}
-          username={username}
-          gender={gender}
-          avatar={avatar}
-          date_of_birth={date_of_birth}
-          profile_decription={profile_decription}
-          phone_number={phone_number}
-          email_address={email_address}
-          address={address}
-          insurance_member_id={insurance_member_id}
-          insurance_policy_number={insurance_policy_number}
-          insurance_plan_name={insurance_plan_name}
+          {...userLogged.user}
+          // first_name={first_name}
+          // last_name={last_name}
+          // username={username}
+          // gender={gender}
+          // avatar={avatar}
+          // date_of_birth={date_of_birth}
+          // profile_description={profile_description}
+          // phone_number={phone_number}
+          // email_address={email_address}
+          // address={address}
+          // insurance_member_id={insurance_member_id}
+          // insurance_policy_number={insurance_policy_number}
+          // insurance_plan_name={insurance_plan_name}
           onEdit={onEdit}
         />
       )}
       {mode === EDIT && (
         <PatientEditProfile
-          first_name={first_name}
-          last_name={last_name}
-          username={username}
-          avatar={avatar}
-          date_of_birth={date_of_birth}
-          profile_decription={profile_decription}
-          phone_number={phone_number}
-          email_address={email_address}
-          address={address}
-          insurance_member_id={insurance_member_id}
-          insurance_policy_number={insurance_policy_number}
-          insurance_plan_name={insurance_plan_name}
+          {...userLogged.user}
           onSubmit={onSubmit}
           onBack={back}
+          setPatient={setPatient}
+          // first_name={first_name}
+          // last_name={last_name}
+          // username={username}
+          // avatar={avatar}
+          // date_of_birth={date_of_birth}
+          // profile_description={profile_description}
+          // phone_number={phone_number}
+          // email_address={email_address}
+          // address={address}
+          // insurance_member_id={insurance_member_id}
+          // insurance_policy_number={insurance_policy_number}
+          // insurance_plan_name={insurance_plan_name}
         />
       )}
     </article>

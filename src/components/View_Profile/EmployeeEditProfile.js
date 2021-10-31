@@ -14,7 +14,7 @@ export default function EmployeeEditProfile(props) {
     last_name,
     username,
     avatar,
-    profile_decription,
+    profile_description,
     phone_number,
     email_address,
     employedAt,

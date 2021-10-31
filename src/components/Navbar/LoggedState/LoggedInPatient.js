@@ -32,11 +32,11 @@ export default function LoggedInPatient(props) {
         <div className="avatar">
           <Image
             className="avatar-image"
-            src={userLogged.avatar}
+            src={userLogged.user.avatar}
             alt={name}
             roundedCircle
           ></Image>
-          {<label>Hello, {userLogged.first_name}</label>}
+          {<label>Hello, {userLogged.user.first_name}</label>}
         </div>
 
         <div className="menu">

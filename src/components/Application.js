@@ -21,7 +21,7 @@ import BookAppointments from "./BookAppointments/BookAppointments";
 import PatientProfileIndex from "./View_Profile/PatientProfileIndex";
 import { useSelector, useStore, useDispatch } from "react-redux";
 import useApplicationData from "hooks/useApplicationData";
-import { displayClinics } from "helpers/selectors";
+import { displayClinics, viewPatientProfile } from "helpers/selectors";
 import { userServices } from "hooks/userServices";
 import { useHistory } from "react-router-dom";
 import { loginUser } from "../actions/index";
@@ -34,10 +34,17 @@ export default function Application(props) {
   const userLogged = useSelector((state) => state.userLogged);
   const clinicsList_ = useSelector((state) => state.applicationData) || {};
   const dispatch = useDispatch();
-  console.log(userLogged, userAuth);
   const history = useHistory();
-  const { patients, patientName, setPatientName, clinicName, setClinicName } =
-    useApplicationData();
+  const {
+    appState,
+    patients,
+    patientName,
+    setPatientName,
+    clinicName,
+    setClinicName,
+    setPatient,
+    patient,
+  } = useApplicationData();
 
   const {
     submitPatientRegistration,
@@ -46,6 +53,7 @@ export default function Application(props) {
     authenticatePatient,
   } = userServices;
 
+  // let patientProfileData = {};
   const clinicsList = displayClinics(clinicsList_, clinicName);
 
   useEffect(() => {
@@ -132,7 +140,12 @@ export default function Application(props) {
         />
         <Route
           path="/patient/profile"
-          component={() => <PatientProfileIndex></PatientProfileIndex>}
+          component={() => (
+            <PatientProfileIndex
+              {...userLogged.user}
+              setPatient={setPatient}
+            ></PatientProfileIndex>
+          )}
         />
 
         <Route

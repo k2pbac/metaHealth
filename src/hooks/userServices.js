@@ -11,7 +11,7 @@ const authenticatePatient = ({ username, password }) => {
     url: "/api/patient/login",
   })
     .then((res) => {
-      return res.data.user;
+      return { user: res.data.user };
     })
     .catch((err) => {
       console.log(err);
@@ -29,7 +29,7 @@ const authenticateEmployee = ({ username, password }) => {
     url: "/api/employee/login",
   })
     .then((res) => {
-      return res.data.user;
+      return { user: res.data.user };
     })
     .catch((err) => console.log(err));
 };

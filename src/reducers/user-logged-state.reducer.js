@@ -5,10 +5,13 @@ let user = localStorage.getItem("user")
   ? JSON.parse(localStorage.getItem("user"))
   : null;
 
-const initialState = user ? { loggedIn: true, user } : { loggedIn: false };
+const initialState = user ? { loggedIn: true, ...user } : { loggedIn: false };
 const userLoggedReducer = (state = initialState, action) => {
   switch (action.type) {
     case authConstants.USER_LOGIN_SUCCESS:
+      localStorage.setItem("user", JSON.stringify(action.user));
+      return { ...action.user, loggedIn: true };
+    case authConstants.UPDATE_PROFILE:
       localStorage.setItem("user", JSON.stringify(action.user));
       return { ...action.user, loggedIn: true };
     case authConstants.LOGOUT:

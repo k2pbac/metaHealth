@@ -14,7 +14,7 @@ export default function EmployeeProfile(props) {
     username,
     gender,
     avatar,
-    profile_decription,
+    profile_description,
     phone_number,
     email_address,
     employedAt,
@@ -62,7 +62,7 @@ export default function EmployeeProfile(props) {
             <h2>Gender:</h2> {gender}
           </div>
           <div className="profile-desription">
-            <h2>Profile Description:</h2> {profile_decription}
+            <h2>Profile Description:</h2> {profile_description}
           </div>
           <div className="profile-employment">
             <h2>Employed at:</h2> {employedAt}

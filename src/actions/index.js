@@ -32,7 +32,7 @@ export const registerPatient = (user) => {
 export const loginUser = (user) => {
   return {
     type: authConstants.USER_LOGIN_SUCCESS,
-    user: user,
+    user: { ...user },
   };
 };
 
@@ -49,5 +49,12 @@ export const getTableData = (applicationData) => {
   return {
     type: "DATA",
     payload: applicationData,
+  };
+};
+
+export const updateProfile = (user) => {
+  return {
+    type: authConstants.UPDATE_PROFILE,
+    user: { user },
   };
 };

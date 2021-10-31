@@ -18,7 +18,7 @@ export default function PatientProfile(props) {
     gender,
     avatar,
     date_of_birth,
-    profile_decription,
+    profile_description,
     phone_number,
     email_address,
     address,
@@ -29,6 +29,8 @@ export default function PatientProfile(props) {
   } = props;
 
   const navClass = classNames("view-profile");
+  console.log("rendered patient profile");
+  console.log(props);
 
   return (
     <div className="profile">
@@ -47,7 +49,7 @@ export default function PatientProfile(props) {
         <div className="personal">
           <h1>Personal Information: </h1>
           <div className="profile-name">
-            <h2>First Name:</h2> {first_name}
+            <h2>First Name:</h2> {props.first_name}
           </div>
           <div className="profile-name">
             <h2>Last Name:</h2> {last_name}
@@ -65,7 +67,7 @@ export default function PatientProfile(props) {
             <h2>Address:</h2> {address}
           </div>
           <div className="profile-desription">
-            <h2>Profile Description:</h2> {profile_decription}
+            <h2>Profile Description:</h2> {profile_description}
           </div>
         </div>
       </section>

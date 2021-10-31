@@ -4,9 +4,26 @@ import axios from "axios";
 const useApplicationData = () => {
   const [appState, setAppState] = useState({});
   const [patients, setPatients] = useState({});
-  const [patientName, setPatientName] = useState("");
+  // const [patient, setPatientName] = useState("");
+  const [patient, setPatient] = useState({});
   const [clinics, setClinics] = useState({});
   const [clinicName, setClinicName] = useState("");
+
+  useEffect(() => {
+    if (Object.keys(patient).length) {
+      axios.put("/api/patient/profile", { patient }).then((result) => {
+        setAppState((prev) => {
+          return {
+            ...prev,
+            patients: {
+              ...prev.patients,
+              patient,
+            },
+          };
+        });
+      });
+    }
+  }, [setPatient]);
 
   useEffect(() => {
     Promise.all([
@@ -25,31 +42,33 @@ const useApplicationData = () => {
     });
   }, []);
 
-  useEffect(() => {
-    if (patientName !== "") {
-      axios.get(`/api/registered-patients/${patientName}`).then((res) => {
-        setPatients(res.data);
-      });
-    }
-  }, [patientName]);
+  // useEffect(() => {
+  //   if (patientName !== "") {
+  //     axios.get(`/api/registered-patients/${patientName}`).then((res) => {
+  //       setPatients(res.data);
+  //     });
+  //   }
+  // }, [patientName]);
 
-  useEffect(() => {
-    if (clinicName !== "") {
-      axios.get(`/api/clinics/${clinicName}`).then((res) => {
-        setClinics(res.data);
-      });
-    }
-  }, [clinicName]);
+  // useEffect(() => {
+  //   if (clinicName !== "") {
+  //     axios.get(`/api/clinics/${clinicName}`).then((res) => {
+  //       setClinics(res.data);
+  //     });
+  //   }
+  // }, [clinicName]);
 
   return {
     appState,
     patients,
-    patientName,
-    setPatientName,
+    // patientName,
+    // setPatientName,
     clinics,
     setClinics,
     clinicName,
     setClinicName,
+    setPatient,
+    patient,
   };
 };
 

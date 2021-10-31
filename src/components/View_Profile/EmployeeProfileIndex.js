@@ -23,7 +23,7 @@ export default function EmployeeProfileIndex(props) {
     username,
     gender,
     avatar,
-    profile_decription,
+    profile_description,
     phone_number,
     email_address,
     employedAt,
@@ -61,7 +61,7 @@ export default function EmployeeProfileIndex(props) {
           username={username}
           gender={gender}
           avatar={avatar}
-          profile_decription={profile_decription}
+          profile_description={profile_decription}
           phone_number={phone_number}
           email_address={email_address}
           employedAt={employedAt}
@@ -75,7 +75,7 @@ export default function EmployeeProfileIndex(props) {
           last_name={last_name}
           username={username}
           avatar={avatar}
-          profile_decription={profile_decription}
+          profile_description={profile_decription}
           phone_number={phone_number}
           email_address={email_address}
           employedAt={employedAt}
