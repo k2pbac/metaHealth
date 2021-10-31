@@ -55,6 +55,7 @@ module.exports.patientLogin = function (passport) {
           if (error) {
             throw error;
           }
+          console.log(user);
           bcrypt.compare(password, user.rows[0].password, (err, result) => {
             if (err) throw err;
             if (result === true) {

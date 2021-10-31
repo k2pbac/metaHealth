@@ -54,12 +54,14 @@ patientLogin(passport);
 app.post("/api/employee/login", function (req, res, next) {
   passport.authenticate("employee-local", (err, user, info) => {
     if (err) throw err;
-    if (!user) res.send("No User Exists");
+    if (!user) res.send("Username or Password is incorrect");
     else {
       req.logIn(user, (err) => {
         if (err) throw err;
-        res.send("Successfully Authenticated");
-        console.log(req.user);
+        res.json({
+          message: "Successfully Authenticated",
+          user: user,
+        });
       });
     }
   })(req, res, next);
@@ -69,12 +71,14 @@ app.post("/api/employee/login", function (req, res, next) {
 app.post("/api/patient/login", function (req, res, next) {
   passport.authenticate("patient-local", (err, user, info) => {
     if (err) throw err;
-    if (!user) res.send("No User Exists");
+    if (!user) res.send("Username or Password is incorrect");
     else {
       req.logIn(user, (err) => {
         if (err) throw err;
-        res.send("Successfully Authenticated");
-        console.log(req.user);
+        res.json({
+          message: "Successfully Authenticated",
+          user: user,
+        });
       });
     }
   })(req, res, next);

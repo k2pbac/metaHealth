@@ -9,8 +9,6 @@ export const displayClinics = ({ clinics = {} }, clinicName) => {
   if (clinicName) {
     for (let clinic in clinics) {
       if (clinics[clinic].name.match(regex) && clinicName) {
-        console.log(regex);
-        console.log(clinics[clinic].name.match(regex));
         results[clinic] = {
           id: clinics[clinic].id,
           name: clinics[clinic].name,
@@ -20,12 +18,19 @@ export const displayClinics = ({ clinics = {} }, clinicName) => {
       }
     }
   }
-  console.log(results);
   return results;
 };
 
-export const viewPatientMedicalRecords = (patient, clinic) => {
-  //first name,
+export const viewPatientProfile = (patientList, patient_id) => {
+  let results = {};
+
+  if (patientList) {
+    for (let patient in patientList) {
+      if (patientList[patient].id === patient_id) {
+        return patient;
+      }
+    }
+  }
 };
 
 // SELECT *, registered.clinic_id FROM patient_accounts
