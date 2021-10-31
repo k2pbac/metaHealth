@@ -9,11 +9,12 @@ module.exports.patientFormData = {
       { value: "First Name", type: "text" },
       { value: "Last Name", type: "text" },
       { value: "Date of birth", type: "date" },
-      { value: "Gender", type: "text" },
+      { value: "Gender", type: "radio", options: ["Male", "Female"] },
       { value: "Description", type: "text" },
       { value: "Address", type: "text" },
       { value: "Phone Number", type: "tel" },
       { value: "Email Address", type: "email" },
+      { value: "Health Card Number", type: "text" },
     ],
     "Insurance Info": [
       { value: "Plan Name", type: "text" },

@@ -6,9 +6,11 @@ import "./RegisterForm.scss";
 import FadeIn from "react-fade-in";
 import Badge from "react-bootstrap/Badge";
 import { useDispatch } from "react-redux";
-import { registerUser } from "actions";
+import { registerEmployee, registerPatient } from "actions";
+import { useHistory } from "react-router-dom";
 
-const RegisterForm = ({ formData }) => {
+const RegisterForm = ({ formData, isEmployee }) => {
+  const history = useHistory();
   const [infoSelected, setInfoSelected] = useState("");
   const dispatch = useDispatch();
   const formBadges = {};
@@ -39,9 +41,12 @@ const RegisterForm = ({ formData }) => {
   });
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    event.persist();
-    dispatch(registerUser({ ...formValues, clinic_id: 1 }));
+    if (isEmployee) {
+      dispatch(registerEmployee({ ...formValues, clinic_id: 1, isEmployee }));
+    }
+
+    dispatch(registerPatient({ ...formValues, clinic_id: 1, isEmployee }));
+    history.push("/");
   };
 
   const handleClick = (viewNumber) => {

@@ -10,8 +10,6 @@ import "components/BookAppointments/BookAppointments.scss";
 import ClinicCard from "./ClinicCard";
 
 const BookAppointments = (props) => {
-  const clinicsList_ = useSelector((state) => state.applicationData);
-  console.log(clinicsList_);
   const { clinicsList, clinicName, setClinicName } = props;
   return (
     <div className="book-appointments">

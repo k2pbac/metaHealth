@@ -4,29 +4,20 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import { useDispatch } from "react-redux";
-import { loginUser } from "actions";
-import { Redirect, Route, Switch } from "react-router";
-import Home from "components/Home";
+import { authenticateEmployee, authenticatePatient } from "actions";
 
-const LoginForm = (props) => {
+const LoginForm = ({ isEmployee }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(loginUser(username, password));
-    return (
-      <Switch>
-        <Route
-          exact
-          path="/login-patient"
-          render={() => {
-            return <Redirect to="/" />;
-          }}
-        />
-      </Switch>
-    );
+    if (isEmployee) {
+      dispatch(authenticateEmployee(username, password, isEmployee));
+    } else {
+      dispatch(authenticatePatient(username, password, isEmployee));
+    }
   };
 
   return (

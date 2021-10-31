@@ -19,59 +19,122 @@ import {
 } from "./RegisterForm/FormData";
 import BookAppointments from "./BookAppointments/BookAppointments";
 import PatientProfileIndex from "./View_Profile/PatientProfileIndex";
-import { useSelector, useStore } from "react-redux";
+import { useSelector, useStore, useDispatch } from "react-redux";
 import useApplicationData from "hooks/useApplicationData";
-import { displayClinics } from "helpers/selectors";
+import { displayClinics, viewPatientProfile } from "helpers/selectors";
+import { userServices } from "hooks/userServices";
+import { useHistory } from "react-router-dom";
+import { loginUser } from "../actions/index";
+import LoggedInEmployee from "./Navbar/LoggedState/LoggedInEmployee";
+import LoggedOut from "./Navbar/LoggedState/LoggedOut";
 
 export default function Application(props) {
-  const isLoggedSelector = useSelector((state) => state.isLogged);
   const completeRegisterSelector = useSelector((state) => state.registerUser);
-  const [isLogged, setIsLogged] = useState(isLoggedSelector);
+  const userAuth = useSelector((state) => state.userAuth);
+  const userLogged = useSelector((state) => state.userLogged);
   const clinicsList_ = useSelector((state) => state.applicationData) || {};
-
+  const dispatch = useDispatch();
+  const history = useHistory();
   const {
     appState,
     patients,
     patientName,
     setPatientName,
-    submitEmployeeRegistration,
     clinicName,
     setClinicName,
-    clinics,
+    updatePatientProfile,
   } = useApplicationData();
+
+  const {
+    submitPatientRegistration,
+    submitEmployeeRegistration,
+    authenticateEmployee,
+    authenticatePatient,
+  } = userServices;
 
   const clinicsList = displayClinics(clinicsList_, clinicName);
 
   useEffect(() => {
-    setIsLogged(localStorage.getItem("isLogged"));
-  }, [isLoggedSelector]);
+    if (userAuth && !userLogged.loggedIn) {
+      if (userAuth.isEmployee) {
+        authenticateEmployee(userAuth).then((res) => {
+          dispatch(loginUser(res, true));
+          history.push("/");
+        });
+      } else if (!userLogged.loggedIn) {
+        authenticatePatient(userAuth).then((res) => {
+          dispatch(loginUser(res, false));
+          history.push("/");
+        });
+      }
+    }
+  }, [userAuth]);
+
+  useEffect(() => {
+    if (userLogged.update_profile) {
+      console.log(userLogged);
+      updatePatientProfile(userLogged.user);
+    }
+  }, [userLogged.user]);
 
   useEffect(() => {
     if (completeRegisterSelector) {
-      submitEmployeeRegistration(completeRegisterSelector.user);
+      if (completeRegisterSelector.user.isEmployee) {
+        submitEmployeeRegistration(completeRegisterSelector.user).then(
+          (user) => {}
+        );
+      } else {
+        submitPatientRegistration(completeRegisterSelector.user);
+      }
+      // setAppState((prev) => {
+      //   return {
+      //     ...prev,
+      //     employee: {
+      //       ...prev.employee,
+      //       newUser,
+      //     },
+      //   };
+      // });
     }
   }, [completeRegisterSelector]);
   return (
     <>
-      {!isLogged && <Navbar></Navbar>}
-      {isLogged && <LoggedInPatient></LoggedInPatient>}
+      {!userLogged.loggedIn && <LoggedOut></LoggedOut>}
+      {userLogged.loggedIn && !userAuth.isEmployee && (
+        <LoggedInPatient></LoggedInPatient>
+      )}
+      {userLogged.loggedIn && userAuth.isEmployee && (
+        <LoggedInEmployee></LoggedInEmployee>
+      )}
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/login" component={LoginSelectionPanel} />
-        <Route path="/login-patient" component={LoginForm} />
-        <Route path="/login-employee" component={LoginForm} />
+        <Route
+          path="/login-patient"
+          component={() => <LoginForm isEmployee={false}></LoginForm>}
+        />
+        <Route
+          path="/login-employee"
+          component={() => <LoginForm isEmployee={true}></LoginForm>}
+        />
         {/* Change Login form for employee vs patient */}
         <Route path="/register" component={RegisterSelectionPanel} />
         <Route
           path="/register-patient"
           component={() => (
-            <RegisterForm formData={patientFormData}></RegisterForm>
+            <RegisterForm
+              formData={patientFormData}
+              isEmployee={false}
+            ></RegisterForm>
           )}
         />
         <Route
           path="/register-employee"
           component={() => (
-            <RegisterForm formData={employeeFormData}></RegisterForm>
+            <RegisterForm
+              formData={employeeFormData}
+              isEmployee={true}
+            ></RegisterForm>
           )}
         />
         <Route
@@ -80,7 +143,12 @@ export default function Application(props) {
             <RegisterForm formData={clinicFormData}></RegisterForm>
           )}
         />
-        <Route path="/patient-profile" component={PatientProfileIndex} />
+        <Route
+          path="/patient/profile"
+          component={() => (
+            <PatientProfileIndex {...userLogged.user}></PatientProfileIndex>
+          )}
+        />
 
         <Route
           path="/clinics"
