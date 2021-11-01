@@ -19,7 +19,7 @@ export default function RegisterSelectionPanel(props) {
     <div className="container">
       <div className="row d-flex justify-content-center">
         <div className="col-md-4">
-          <Link to={"./register-patient"}>
+          <Link to={"/register/patient"}>
             <div className="selection-panel" onClick={onPatientRegister}>
               <Image
                 className="selection-image1"
@@ -35,7 +35,7 @@ export default function RegisterSelectionPanel(props) {
           </Link>
         </div>
         <div className="col-md-4">
-          <Link to={"./register-employee"}>
+          <Link to={"/register/employee"}>
             <div className="selection-panel" onClick={onEmployeeRegister}>
               <Image
                 className="selection-image2"

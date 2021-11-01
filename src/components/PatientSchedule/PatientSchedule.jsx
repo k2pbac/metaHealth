@@ -20,7 +20,7 @@ const PatientSchedule = ({ patient }) => {
       <Table className="table individual-scrollable-table">
         <tbody>
           {patient.appointments.map((appointment) => (
-            <tr>
+            <tr key={appointment.id}>
               <td>{appointment.date}</td>
               <td>{appointment.time}</td>
               <td>{appointment.clinic}</td>

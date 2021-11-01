@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classNames from "classnames";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import FadeIn from "react-fade-in";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";

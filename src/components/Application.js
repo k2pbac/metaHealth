@@ -25,6 +25,7 @@ import {
   displayClinics,
   viewPatientProfile,
   displayClinicAddress,
+  displayClinicAppointments,
 } from "helpers/selectors";
 import { userServices } from "hooks/userServices";
 import { useHistory } from "react-router-dom";
@@ -66,13 +67,11 @@ export default function Application(props) {
   useEffect(() => {
     if (userAuth && !userLogged.loggedIn) {
       if (userAuth.isEmployee) {
-        console.log("Is employee = true");
         authenticateEmployee(userAuth).then((res) => {
           dispatch(loginUser(res, true));
           history.push("/");
         });
       } else if (!userAuth.isEmployee) {
-        console.log("Is employee = false");
         authenticatePatient(userAuth).then((res) => {
           dispatch(loginUser(res, false));
           history.push("/");
@@ -94,11 +93,10 @@ export default function Application(props) {
     if (completeRegisterSelector) {
       if (completeRegisterSelector.isEmployee) {
         submitEmployeeRegistration(completeRegisterSelector).then((user) => {});
-        dispatch(registerComplete());
       } else {
         submitPatientRegistration(completeRegisterSelector);
-        dispatch(registerComplete());
       }
+      dispatch(registerComplete());
       // setAppState((prev) => {
       //   return {
       //     ...prev,
@@ -121,19 +119,16 @@ export default function Application(props) {
       )}
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/login" component={LoginSelectionPanel} />
         <Route
-          path="/login-patient"
+          path="/login/patient"
           component={() => <LoginForm isEmployee={false}></LoginForm>}
         />
         <Route
-          path="/login-employee"
+          path="/login/employee"
           component={() => <LoginForm isEmployee={true}></LoginForm>}
         />
-        {/* Change Login form for employee vs patient */}
-        <Route path="/register" component={RegisterSelectionPanel} />
         <Route
-          path="/register-patient"
+          path="/register/patient"
           component={() => (
             <RegisterForm
               formData={patientFormData}
@@ -142,7 +137,7 @@ export default function Application(props) {
           )}
         />
         <Route
-          path="/register-employee"
+          path="/register/employee"
           component={() => (
             <RegisterForm
               formData={employeeFormData}
@@ -151,11 +146,14 @@ export default function Application(props) {
           )}
         />
         <Route
-          path="/register-clinic"
+          path="/register/clinic"
           component={() => (
             <RegisterForm formData={clinicFormData}></RegisterForm>
           )}
         />
+        <Route path="/login" component={LoginSelectionPanel} />
+        {/* Change Login form for employee vs patient */}
+        <Route path="/register" component={RegisterSelectionPanel} />
         <Route
           path="/patient/profile"
           component={() => (
@@ -188,7 +186,10 @@ export default function Application(props) {
         <Route
           path={`/clinic/appointments/${localStorage.getItem("clinic_id")}`}
           component={() => (
-            <ManageAppointments clinic={clinic}></ManageAppointments>
+            <ManageAppointments
+              appState={appState}
+              clinic={clinic}
+            ></ManageAppointments>
           )}
         />
 

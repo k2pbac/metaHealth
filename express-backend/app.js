@@ -1,11 +1,15 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+
+//Routes
 const employeeRouter = require("./routes/employees");
 const patientRouter = require("./routes/patients");
 const clinicsRouter = require("./routes/clinics");
 const registeredRouter = require("./routes/registered");
 const userAuthenticationRouter = require("./routes/userAuthentication");
+const appointmentRouter = require("./routes/appointments");
+
 const passport = require("passport");
 const passportLocal = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs");
@@ -91,4 +95,6 @@ app.use("/", employeeRouter);
 app.use("/", patientRouter);
 app.use("/", registeredRouter);
 app.use("/", userAuthenticationRouter);
+app.use("/", appointmentRouter);
+
 module.exports = app;

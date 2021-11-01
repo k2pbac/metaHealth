@@ -9,10 +9,12 @@
   box-shadow: 0 0 20px rgba(#273c48, 0.6);
   padding: 20px;
   margin: 20px;
-}
-
-.profile div {
-  padding-bottom: 10px;
+  div {
+    padding-bottom: 10px;
+  }
+  button:hover {
+    background-color: #273c48 !important;
+  }
 }
 
 .profile-image {
@@ -68,9 +70,6 @@
 button {
   float: left;
   margin-top: 15px;
-}
-button:hover {
-  background-color: #273c48 !important;
 }
 
 .doctor-verified {

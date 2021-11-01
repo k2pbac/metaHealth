@@ -8,17 +8,17 @@ export default function LoggedOut(props) {
   const navClass = classNames("navbar");
 
   // Link to logo image
-  const logo = "images/logo.png";
+  const logo = "/images/logo.png";
   return (
     <nav className={navClass}>
-      <Link to={"./"}>
+      <Link to={"/"}>
         <img className="logo" src={logo} alt="Meta Health Logo"></img>
       </Link>
       <div>
-        <Link to={"./login"}>
+        <Link to={"/login"}>
           <Button>Login</Button>
         </Link>
-        <Link to={"./register"}>
+        <Link to={"/register"}>
           <Button>Signup</Button>
         </Link>
       </div>

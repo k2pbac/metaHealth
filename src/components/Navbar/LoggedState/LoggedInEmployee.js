@@ -14,7 +14,7 @@ export default function LoggedInEmployee(props) {
   const userLogged = useSelector((state) => state.userLogged);
   const navClass = classNames("navbar");
   // Link to logo image
-  const logo = "images/logo.png";
+  const logo = "/images/logo.png";
   const dispatch = useDispatch();
 
   const onLogout = () => {
