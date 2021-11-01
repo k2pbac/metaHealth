@@ -11,19 +11,20 @@ import {
   employeeSchedule,
   patientSchedule,
 } from "components/Schedule/AppointmentData";
-const ManageAppointments = ({ isEmployee }) => {
+const ManageAppointments = ({ clinic, isEmployee }) => {
+  console.log(clinic);
   return (
     <Row className="p-3">
       <Column>
         {(isEmployee && (
           <div className="d-flex flex-column align-items-center">
             <h3>{employeeSchedule.clinic}</h3>
-            <p style={{ width: "50%" }}>{employeeSchedule.address}</p>
+            <p style={{ width: "50%" }}>{clinic.address}</p>
           </div>
         )) || (
           <>
-            <span>{patientSchedule.clinic}</span>
-            <p className="w-25">{patientSchedule.address}</p>
+            <span>{clinic.name}</span>
+            <p className="w-25">{clinic.address}</p>
           </>
         )}
 

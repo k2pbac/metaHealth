@@ -44,11 +44,13 @@ export default function LoggedInEmployee(props) {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">View Profile</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">
+              <Dropdown.Item as={Link} to="/employee/profile">
+                View Profile
+              </Dropdown.Item>
+              <Dropdown.Item as={Link} to="/clinic/appointments">
                 Manage Clinic Appointments
               </Dropdown.Item>
-              <Dropdown.Item href="#/action-3">
+              <Dropdown.Item as={Link} to="/clinic-medical-records">
                 View Patient Medical Records
               </Dropdown.Item>
             </Dropdown.Menu>

@@ -14,9 +14,6 @@ let store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
-//display in console
-// store.subscribe(() => console.log(store.getState()));
-
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>

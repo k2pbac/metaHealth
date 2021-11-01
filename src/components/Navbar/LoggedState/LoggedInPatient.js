@@ -3,7 +3,6 @@ import classNames from "classnames";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Dropdown from "react-bootstrap/Dropdown";
 import Image from "react-bootstrap/Image";
-
 import "components/Navbar/NavHeader.scss";
 import Button from "components/Button";
 import { Link } from "react-router-dom";
@@ -14,7 +13,6 @@ export default function LoggedInPatient(props) {
   const { name, avatar } = props;
   const navClass = classNames("navbar");
   const userLogged = useSelector((state) => state.userLogged);
-  console.log(userLogged);
   const dispatch = useDispatch();
   // Link to logo image
   const logo = "images/logo.png";
@@ -48,9 +46,15 @@ export default function LoggedInPatient(props) {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Link to="/patient/profile">View Profile</Link>
-              <Link to="/clinics">Book Appointments</Link>
-              <Link to="/clinic/appointments">Manage Appointments</Link>
+              <Dropdown.Item as={Link} to="/patient/profile">
+                View Profile
+              </Dropdown.Item>
+              <Dropdown.Item as={Link} to="/clinics">
+                Book Appointments
+              </Dropdown.Item>
+              <Dropdown.Item as={Link} to="/clinic/appointments">
+                Manage Appointments
+              </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
 

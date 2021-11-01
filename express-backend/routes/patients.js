@@ -15,7 +15,6 @@ router.get("/api/patients", function (req, res, next) {
   );
 
   router.put("/api/patient/profile", (req, res, next) => {
-    console.log(req.body);
     const {
       first_name,
       last_name,
@@ -70,7 +69,6 @@ router.get("/api/patients", function (req, res, next) {
           if (error) {
             throw error;
           }
-          console.log(results.rows);
           res.json(results.rows);
         }
       );

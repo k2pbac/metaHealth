@@ -30,13 +30,15 @@ const useApplicationData = () => {
       axios.get("/api/patients"),
       axios.get("/api/employees"),
       axios.get("/api/registered"),
+      axios.get("/api/appointments"),
     ]).then((all) => {
-      const [first, second, third, fourth] = all;
+      const [first, second, third, fourth, fifth, sixth] = all;
       setAppState({
         clinics: first.data,
         patients: second.data,
         employee: third.data,
         registered: fourth.data,
+        appointments: fifth.data,
       });
     });
   }, []);

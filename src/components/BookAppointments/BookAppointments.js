@@ -6,11 +6,13 @@ import Spinner from "react-bootstrap/Spinner";
 import Form from "react-bootstrap/Form";
 import { useSelector } from "react-redux";
 import "components/BookAppointments/BookAppointments.scss";
-
+import { Link } from "react-router-dom";
 import ClinicCard from "./ClinicCard";
+import { displayClinicAddress } from "helpers/selectors";
 
 const BookAppointments = (props) => {
   const { clinicsList, clinicName, setClinicName } = props;
+  console.log(props);
   return (
     <div className="book-appointments">
       {(clinicsList && (
@@ -36,6 +38,7 @@ const BookAppointments = (props) => {
               {Object.keys(clinicsList).map((clinic) => (
                 <ClinicCard
                   key={clinicsList[clinic].id}
+                  id={clinicsList[clinic].id}
                   name={clinicsList[clinic].name}
                   address={clinicsList[clinic].address}
                   image={clinicsList[clinic].avatar}

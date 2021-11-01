@@ -113,7 +113,6 @@ export default function PatientEditProfile(props) {
                 placeholder={first_name}
                 value={firstName || ""}
                 onChange={(e) => {
-                  console.log(e.target.value);
                   setFirstName(e.target.value);
                 }}
               />

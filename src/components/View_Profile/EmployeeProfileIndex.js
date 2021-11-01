@@ -48,7 +48,6 @@ export default function EmployeeProfileIndex(props) {
 
   function onSubmit() {
     //Add code here for Submitting updated information to DB
-    console.log("Submitted");
     transition(SHOW);
   }
 
