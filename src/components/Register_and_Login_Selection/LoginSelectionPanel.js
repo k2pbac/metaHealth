@@ -16,7 +16,10 @@ export default function LoginSelectionPanel(props) {
 
   return (
     <div className="container">
+     <div className="selection-title"><h1>LOGIN</h1></div>
+
       <div className="row d-flex justify-content-center">
+      
         <div className="col-md-4">
           <Link to={"./login-patient"}>
             <div className="selection-panel" onClick={onPatientLogin}>

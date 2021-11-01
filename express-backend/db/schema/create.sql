@@ -30,6 +30,7 @@ CREATE TABLE employee_accounts (
   email_address VARCHAR(255) NOT NULL,
   avatar VARCHAR(255) DEFAULT NULL,
   is_doctor BOOLEAN DEFAULT FALSE,
+  clinic_verified BOOLEAN DEFAULT FALSE,
   clinic_id INTEGER REFERENCES clinics(id)
 );
 
