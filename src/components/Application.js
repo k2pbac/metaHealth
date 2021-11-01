@@ -52,6 +52,7 @@ export default function Application(props) {
     updatePatientProfile,
   } = useApplicationData();
 
+
   const {
     submitPatientRegistration,
     submitEmployeeRegistration,

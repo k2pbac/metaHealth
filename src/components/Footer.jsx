@@ -72,7 +72,7 @@ const Footer = (props) => {
         © 2020 Copyright{" "}
         <Image
           className="logo"
-          src="images/logo.png"
+          src="/images/logo.png"
           alt="Meta Health Logo"
         ></Image>
       </div>

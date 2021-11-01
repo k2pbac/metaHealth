@@ -15,7 +15,7 @@ export default function LoggedInPatient(props) {
   const userLogged = useSelector((state) => state.userLogged);
   const dispatch = useDispatch();
   // Link to logo image
-  const logo = "images/logo.png";
+  const logo = "/images/logo.png";
 
   const onLogout = () => {
     dispatch(logoutUser());
