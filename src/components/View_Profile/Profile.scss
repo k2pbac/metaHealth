@@ -1,4 +1,4 @@
-.profile{
+.profile {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -11,7 +11,11 @@
   margin: 20px;
 }
 
-.profile-image{
+.profile div {
+  padding-bottom: 10px;
+}
+
+.profile-image {
   height: 250px;
   width: 250px;
   object-fit: cover;
@@ -19,45 +23,45 @@
   margin: 0 auto 20px auto;
 }
 
-.left-section{
+.left-section {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.middle-section{
+.middle-section {
   display: flex;
   flex-direction: column;
   text-align: left;
   padding-left: 30px;
 
-  h1{
+  h1 {
     font-size: 20px;
     font-weight: bold;
   }
-  h2{
+  h2 {
     font-size: 15px;
     font-weight: bold;
   }
 }
 
-.right-section{
+.right-section {
   display: flex;
   flex-direction: column;
   text-align: left;
   padding-left: 30px;
 
-  h1{
+  h1 {
     font-size: 20px;
     font-weight: bold;
   }
-  h2{
+  h2 {
     font-size: 15px;
     font-weight: bold;
   }
 }
 
-.medical{
+.medical {
   padding-top: 10px;
 }
 
@@ -69,7 +73,7 @@ button:hover {
   background-color: #273c48 !important;
 }
 
-.doctor-verified{
+.doctor-verified {
   height: 50px;
   width: 200px;
 }

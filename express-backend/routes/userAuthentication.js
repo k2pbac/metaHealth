@@ -18,7 +18,7 @@ router.post("/api/employee/register", (req, res, next) => {
           .then((resultPassword) => {
             db.query(
               `INSERT INTO employee_accounts (first_name, last_name, username, password, gender, phone_number, email_address, avatar, is_doctor)
-          VALUES ('${newUser.first_name}', '${newUser.last_name}', '${newUser.username}', '${resultPassword}', '${newUser.gender}', '${newUser.phone_number}', '${newUser.email_address}', 'https://robohash.org/ipsameosplaceat.png?size=50x50&set=set1','${newUser.is_doctor}') RETURNING id`,
+          VALUES ('${newUser.first_name}', '${newUser.last_name}', '${newUser.username}', '${resultPassword}', '${newUser.gender}', '${newUser.phone_number}', '${newUser.email_address}', '${newUser.avatar}','${newUser.is_doctor}') RETURNING id`,
               (error, results) => {
                 if (error) {
                   throw error;
@@ -57,7 +57,7 @@ router.post("/api/patient/register", function (req, res, next) {
           .then((resultPassword) => {
             db.query(
               `INSERT INTO patient_accounts (first_name, last_name, username, password, date_of_birth, gender, profile_description, phone_number, email_address, address, avatar, health_card_number, insurance_member_id, insurance_policy_number, insurance_plan_name)
-            VALUES ('${newUser.first_name}', '${newUser.last_name}', '${newUser.username}', '${resultPassword}', '${newUser.date_of_birth}', '${newUser.gender}', '${newUser.profile_description}', '${newUser.phone_number}', '${newUser.email_address}', '${newUser.address}', 'https://robohash.org/ipsameosplaceat.png?size=50x50&set=set1', '${newUser.health_card_number}', '${newUser.insurance_member_id}', '${newUser.policy_number}', '${newUser.insurance_plan_name}') RETURNING id`,
+            VALUES ('${newUser.first_name}', '${newUser.last_name}', '${newUser.username}', '${resultPassword}', '${newUser.date_of_birth}', '${newUser.gender}', '${newUser.profile_description}', '${newUser.phone_number}', '${newUser.email_address}', '${newUser.address}', '${newUser.avatar}', '${newUser.health_card_number}', '${newUser.insurance_member_id}', '${newUser.policy_number}', '${newUser.insurance_plan_name}') RETURNING id`,
               (error, results) => {
                 if (error) {
                   throw error;
