@@ -38,6 +38,7 @@ export const viewPatientProfile = ({ patients = [] }, patient_id) => {
 //********************************************************************************************************
 
 export const displayClinicAddress = ({ clinics }, clinic_id) => {
+  console.log(clinics);
   for (let clinic in clinics) {
     if (clinics[clinic].id === parseInt(clinic_id)) {
       return clinics[clinic];
@@ -50,8 +51,15 @@ export const displayClinicAppointments = ({
   employee,
   patients,
   appointments,
+  date = new Date("2021-02-28 23:14:18"),
 }) => {
-  // let  = {};
+  let sorted_patients = {};
+
+  for (let appointment in appointments) {
+    if (appointments[appointment].date === date) {
+      console.log("here");
+    }
+  }
 
   return null;
 };
@@ -61,3 +69,5 @@ export const displayClinicAppointments = ({
 // -- will need a list of patients who have appointments on that day
 //employee_accounts table
 // -- will need a list of doctors who were the doctor for that appointment
+
+//date format 2021-02-28 23:14:18
