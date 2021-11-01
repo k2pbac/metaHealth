@@ -8,17 +8,13 @@ import { Link } from "react-router-dom";
 import "components/BookAppointments/BookAppointments.scss";
 
 export default function ClinicCard(props) {
-  const { name, address, image, id } = props;
-  const storeClinic = () => {
-    localStorage.setItem("clinic_id", id);
-  };
+  const { name, address, image, id, setClinicAddress } = props;
 
   return (
     <Link
-      onClick={storeClinic}
+      onClick={() => setClinicAddress(id)}
       className="clinic-card"
-      to={`/clinic/appointments`}
-      // to={`/clinic/appointments/${id}`}
+      to={`/clinic/appointments/${id}`}
     >
       <div className="clinic-image-container">
         <Image className="clinic-image" src={image} alt={name}></Image>

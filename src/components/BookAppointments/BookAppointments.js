@@ -11,8 +11,8 @@ import ClinicCard from "./ClinicCard";
 import { displayClinicAddress } from "helpers/selectors";
 
 const BookAppointments = (props) => {
-  const { clinicsList, clinicName, setClinicName } = props;
-  
+  const { clinicsList, clinicName, setClinicName, setClinicAddress } = props;
+
   return (
     <div className="book-appointments">
       {(clinicsList && (
@@ -37,6 +37,7 @@ const BookAppointments = (props) => {
             <section className="cards">
               {Object.keys(clinicsList).map((clinic) => (
                 <ClinicCard
+                  setClinicAddress={setClinicAddress}
                   key={clinicsList[clinic].id}
                   id={clinicsList[clinic].id}
                   name={clinicsList[clinic].name}

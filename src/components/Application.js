@@ -60,9 +60,9 @@ export default function Application(props) {
     authenticatePatient,
   } = userServices;
 
-  if (localStorage.getItem("clinic_id")) {
-    clinic = displayClinicAddress(appState, localStorage.getItem("clinic_id"));
-  }
+  const setClinicAddress = (clinic_id) => {
+    clinic = displayClinicAddress(appState, clinic_id);
+  };
 
   useEffect(() => {
     if (userAuth && !userLogged.loggedIn) {
@@ -166,6 +166,7 @@ export default function Application(props) {
           path="/clinics"
           component={() => (
             <BookAppointments
+              setClinicAddress={setClinicAddress}
               clinicsList={clinics}
               clinicName={clinicName}
               setClinicName={setClinicName}
@@ -185,8 +186,7 @@ export default function Application(props) {
         />
 
         <Route
-          // path={`/clinic/appointments/${localStorage.getItem("clinic_id")}`}
-          path={`/clinic/appointments`}
+          path={`/clinic/appointments/:id`}
           component={() => (
             <ManageAppointments
               appState={appState}
