@@ -1,3 +1,7 @@
+insert into patient_accounts (first_name, last_name, username, password, date_of_birth, gender, profile_description, phone_number, email_address, address, avatar, health_card_number, insurance_member_id, insurance_policy_number, insurance_plan_name) values ('admin', 'admin', 'admin', 'admin', '1/1/1992', 'Agender', 'Fusce consequat. Nulla nisl. Nunc nisl.
+
+Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.', '721-629-8874', 'cscurfield0@360.cn', '79484 Dryden Terrace', 'https://robohash.org/quonatuspossimus.png?size=50x50&set=set1', null, '8546397996', '2970917009', 'Bradtke-Bayer');
+
 insert into patient_accounts (first_name, last_name, username, password, date_of_birth, gender, profile_description, phone_number, email_address, address, avatar, health_card_number, insurance_member_id, insurance_policy_number, insurance_plan_name) values ('Cal', 'Scurfield', 'cscurfield0', 'zavzmBd', '1/1/1992', 'Agender', 'Fusce consequat. Nulla nisl. Nunc nisl.
 
 Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.', '721-629-8874', 'cscurfield0@360.cn', '79484 Dryden Terrace', 'https://robohash.org/quonatuspossimus.png?size=50x50&set=set1', null, '8546397996', '2970917009', 'Bradtke-Bayer');

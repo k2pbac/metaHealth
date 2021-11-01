@@ -5,9 +5,14 @@ import Button from "react-bootstrap/Button";
 import "./RegisterForm.scss";
 import FadeIn from "react-fade-in";
 import Badge from "react-bootstrap/Badge";
+import { useDispatch } from "react-redux";
+import { registerEmployee, registerPatient } from "actions";
+import { useHistory } from "react-router-dom";
 
-const RegisterForm = ({ formData }) => {
+const RegisterForm = ({ formData, isEmployee }) => {
+  const history = useHistory();
   const [infoSelected, setInfoSelected] = useState("");
+  const dispatch = useDispatch();
   const formBadges = {};
   let count = 1;
   for (let data in formData.fields) {
@@ -36,8 +41,12 @@ const RegisterForm = ({ formData }) => {
   });
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(event);
+    if (isEmployee) {
+      dispatch(registerEmployee({ ...formValues, clinic_id: 1, isEmployee }));
+    }
+
+    dispatch(registerPatient({ ...formValues, clinic_id: 1, isEmployee }));
+    history.push("/");
   };
 
   const handleClick = (viewNumber) => {
@@ -46,7 +55,6 @@ const RegisterForm = ({ formData }) => {
   };
   const handleInputChange = (event) => {
     event.persist();
-    console.log(formValues);
     setFormValues((prev) => {
       let newForm = Object.assign({}, prev);
       if (event.target.type === "radio") {
@@ -112,7 +120,7 @@ const RegisterForm = ({ formData }) => {
                     <Form.Control
                       id={el.value}
                       name={el.value}
-                      value={formValues[el.value]["value"]}
+                      value={formValues[el.value]["value"] || ""}
                       type={el.type}
                       placeholder={`Enter a ${el.value}`}
                       onChange={handleInputChange}
@@ -156,15 +164,10 @@ const RegisterForm = ({ formData }) => {
   return (
     <Container className="text-center shadow-sm border p-5 form">
       <h1 className="mb-5">{formData["type"]} Registration </h1>
-      <Form className="w-50 m-auto">
+      <Form className="w-50 m-auto" onSubmit={(e) => handleSubmit(e)}>
         {formInputs}
-        <div class="d-flex justify-content-center flex-column align-items-center">
-          <Button
-            size="sm"
-            variant="outline-success"
-            type="submit"
-            onSubmit={(e) => handleSubmit(e)}
-          >
+        <div className="d-flex justify-content-center flex-column align-items-center">
+          <Button size="sm" variant="outline-success" type="submit">
             Register
           </Button>
           <span className="d-block mt-4">

@@ -4,13 +4,15 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Spinner from "react-bootstrap/Spinner";
 import Form from "react-bootstrap/Form";
-
+import { useSelector } from "react-redux";
 import "components/BookAppointments/BookAppointments.scss";
-
+import { Link } from "react-router-dom";
 import ClinicCard from "./ClinicCard";
+import { displayClinicAddress } from "helpers/selectors";
 
 const BookAppointments = (props) => {
-  const { clinicsList } = props;
+  const { clinicsList, clinicName, setClinicName } = props;
+  console.log(props);
   return (
     <div className="book-appointments">
       {(clinicsList && (
@@ -20,12 +22,23 @@ const BookAppointments = (props) => {
             controlId="appointment-search"
           >
             <Form.Label className="form-label">Clinic Name: </Form.Label>
-            <Form.Control type="search" placeholder="Search" />
+            <Form.Control
+              onChange={(e) => {
+                e.preventDefault();
+                setClinicName(e.target.value);
+              }}
+              autoFocus
+              type="search"
+              placeholder="Search"
+              value={clinicName}
+            />
           </Form.Group>
           <div className="container">
             <section className="cards">
               {Object.keys(clinicsList).map((clinic) => (
                 <ClinicCard
+                  key={clinicsList[clinic].id}
+                  id={clinicsList[clinic].id}
                   name={clinicsList[clinic].name}
                   address={clinicsList[clinic].address}
                   image={clinicsList[clinic].avatar}

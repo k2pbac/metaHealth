@@ -3,17 +3,23 @@ import classNames from "classnames";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Dropdown from "react-bootstrap/Dropdown";
 import Image from "react-bootstrap/Image";
-
+import { useSelector, useDispatch } from "react-redux";
 import "components/Navbar/NavHeader.scss";
 import Button from "components/Button";
+import { Link } from "react-router-dom";
+import { logoutUser } from "actions";
 
 export default function LoggedInEmployee(props) {
-  const { name, onLogout, avatar } = props;
-
+  const { name, avatar } = props;
+  const userLogged = useSelector((state) => state.userLogged);
   const navClass = classNames("navbar");
-
   // Link to logo image
   const logo = "images/logo.png";
+  const dispatch = useDispatch();
+
+  const onLogout = () => {
+    dispatch(logoutUser());
+  };
 
   return (
     <nav className={navClass}>
@@ -22,11 +28,11 @@ export default function LoggedInEmployee(props) {
         <div className="avatar">
           <Image
             className="avatar-image"
-            src={avatar}
+            src={userLogged.user.avatar}
             alt={name}
             roundedCircle
           ></Image>
-          <label>Hello, {props.name}</label>
+          <label>Hello, {userLogged.user.first_name}</label>
         </div>
 
         <div className="menu">
@@ -38,17 +44,21 @@ export default function LoggedInEmployee(props) {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">View Profile</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">
+              <Dropdown.Item as={Link} to="/employee/profile">
+                View Profile
+              </Dropdown.Item>
+              <Dropdown.Item as={Link} to="/clinic/appointments">
                 Manage Clinic Appointments
               </Dropdown.Item>
-              <Dropdown.Item href="#/action-3">
+              <Dropdown.Item as={Link} to="/clinic-medical-records">
                 View Patient Medical Records
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
 
-          <Button onClick={onLogout}>Logout</Button>
+          <Link to="./">
+            <Button onClick={onLogout}>Logout</Button>
+          </Link>
         </div>
       </div>
     </nav>

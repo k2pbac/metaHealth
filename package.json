@@ -8,6 +8,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/react-fontawesome": "^0.1.16",
     "axios": "^0.24.0",
+    "bcrypt": "^5.0.1",
     "bootstrap": "^5.1.3",
     "classnames": "^2.2.6",
     "dotenv": "^6.2.0",
@@ -25,7 +26,7 @@
     "react-scripts": "3.0.0",
     "redux": "^4.1.2"
   },
-  "proxy": "http://localhost:3001",
+  "proxy": "http://localhost:3003/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Route, Switch } from "react-router-dom";
@@ -12,6 +11,7 @@ import LoginSelectionPanel from "./Register_and_Login_Selection/LoginSelectionPa
 import LoginForm from "./LoginForm/LoginForm";
 import RegisterSelectionPanel from "./Register_and_Login_Selection/RegisterSelectionPanel";
 import RegisterForm from "./RegisterForm/RegisterForm";
+import PatientMedicalRecords from "./PatientMedicalRecords/PatientMedicalRecords";
 import {
   employeeFormData,
   patientFormData,
@@ -19,39 +19,135 @@ import {
 } from "./RegisterForm/FormData";
 import BookAppointments from "./BookAppointments/BookAppointments";
 import PatientProfileIndex from "./View_Profile/PatientProfileIndex";
-import { useSelector, useStore } from "react-redux";
+import { useSelector, useStore, useDispatch } from "react-redux";
 import useApplicationData from "hooks/useApplicationData";
+import {
+  displayClinics,
+  viewPatientProfile,
+  displayClinicAddress,
+} from "helpers/selectors";
+import { userServices } from "hooks/userServices";
+import { useHistory } from "react-router-dom";
+import { loginUser, registerComplete } from "../actions/index";
+import LoggedInEmployee from "./Navbar/LoggedState/LoggedInEmployee";
+import LoggedOut from "./Navbar/LoggedState/LoggedOut";
+import ManageAppointments from "./ManageAppointments/ManageAppointments";
 
 export default function Application(props) {
-  const isLoggedSelector = useSelector((state) => state.isLogged);
-  const [isLogged, setIsLogged] = useState(isLoggedSelector);
+  const completeRegisterSelector = useSelector((state) => state.registerUser);
+  const userAuth = useSelector((state) => state.userAuth);
+  const userLogged = useSelector((state) => state.userLogged);
+  const dispatch = useDispatch();
+  let clinic = {};
+  const history = useHistory();
+  const {
+    appState,
+    patients,
+    patientName,
+    setPatientName,
+    clinicName,
+    setClinicName,
+    setClinics,
+    clinics,
+    updatePatientProfile,
+  } = useApplicationData();
 
-  const { clinics } = useApplicationData();
+  const {
+    submitPatientRegistration,
+    submitEmployeeRegistration,
+    authenticateEmployee,
+    authenticatePatient,
+  } = userServices;
+
+  if (localStorage.getItem("clinic_id")) {
+    clinic = displayClinicAddress(appState, localStorage.getItem("clinic_id"));
+  }
 
   useEffect(() => {
-    setIsLogged(localStorage.getItem("isLogged"));
-  }, [isLoggedSelector]);
+    if (userAuth && !userLogged.loggedIn) {
+      if (userAuth.isEmployee) {
+        console.log("Is employee = true");
+        authenticateEmployee(userAuth).then((res) => {
+          dispatch(loginUser(res, true));
+          history.push("/");
+        });
+      } else if (!userAuth.isEmployee) {
+        console.log("Is employee = false");
+        authenticatePatient(userAuth).then((res) => {
+          dispatch(loginUser(res, false));
+          history.push("/");
+        });
+      }
+    }
+  }, [userAuth]);
+
+  useEffect(() => {
+    if (userLogged.update_profile) {
+      updatePatientProfile(userLogged.user);
+    }
+  }, [userLogged.user]);
+
+  useEffect(() => {
+    setClinics(displayClinics(appState, clinicName));
+  }, [clinicName]);
+  useEffect(() => {
+    if (completeRegisterSelector) {
+      if (completeRegisterSelector.isEmployee) {
+        submitEmployeeRegistration(completeRegisterSelector).then((user) => {});
+        dispatch(registerComplete());
+      } else {
+        submitPatientRegistration(completeRegisterSelector);
+        dispatch(registerComplete());
+      }
+      // setAppState((prev) => {
+      //   return {
+      //     ...prev,
+      //     employee: {
+      //       ...prev.employee,
+      //       newUser,
+      //     },
+      //   };
+      // });
+    }
+  }, [completeRegisterSelector]);
   return (
     <>
-      {!isLogged && <Navbar></Navbar>}
-      {isLogged && <LoggedInPatient></LoggedInPatient>}
+      {!userLogged.loggedIn && <LoggedOut></LoggedOut>}
+      {userLogged.loggedIn && !userAuth.isEmployee && (
+        <LoggedInPatient></LoggedInPatient>
+      )}
+      {userLogged.loggedIn && userAuth.isEmployee && (
+        <LoggedInEmployee></LoggedInEmployee>
+      )}
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/login" component={LoginSelectionPanel} />
-        <Route path="/login-patient" component={LoginForm} />
-        <Route path="/login-employee" component={LoginForm} />
+        <Route
+          path="/login-patient"
+          component={() => <LoginForm isEmployee={false}></LoginForm>}
+        />
+        <Route
+          path="/login-employee"
+          component={() => <LoginForm isEmployee={true}></LoginForm>}
+        />
         {/* Change Login form for employee vs patient */}
         <Route path="/register" component={RegisterSelectionPanel} />
         <Route
           path="/register-patient"
           component={() => (
-            <RegisterForm formData={patientFormData}></RegisterForm>
+            <RegisterForm
+              formData={patientFormData}
+              isEmployee={false}
+            ></RegisterForm>
           )}
         />
         <Route
           path="/register-employee"
           component={() => (
-            <RegisterForm formData={employeeFormData}></RegisterForm>
+            <RegisterForm
+              formData={employeeFormData}
+              isEmployee={true}
+            ></RegisterForm>
           )}
         />
         <Route
@@ -60,15 +156,42 @@ export default function Application(props) {
             <RegisterForm formData={clinicFormData}></RegisterForm>
           )}
         />
-        <Route path="/patient-profile" component={PatientProfileIndex} />
-        return (
+        <Route
+          path="/patient/profile"
+          component={() => (
+            <PatientProfileIndex {...userLogged.user}></PatientProfileIndex>
+          )}
+        />
+
         <Route
           path="/clinics"
           component={() => (
-            <BookAppointments clinicsList={clinics}></BookAppointments>
+            <BookAppointments
+              clinicsList={clinics}
+              clinicName={clinicName}
+              setClinicName={setClinicName}
+            ></BookAppointments>
           )}
         />
-        );
+
+        <Route
+          path="/clinic-medical-records"
+          component={() => (
+            <PatientMedicalRecords
+              setPatientName={setPatientName}
+              patientName={patientName}
+              patientsList={patients}
+            ></PatientMedicalRecords>
+          )}
+        />
+
+        <Route
+          path={`/clinic/appointments/${localStorage.getItem("clinic_id")}`}
+          component={() => (
+            <ManageAppointments clinic={clinic}></ManageAppointments>
+          )}
+        />
+
         {/* Manage Appointments Routes for Employee and Patient - will need to figure out how to pass params */}
         {/* View Patient Medical Records Routes will also need params passed  */}
         {/* Add/Edit Patient Medical Record Page route will need clinic params */}

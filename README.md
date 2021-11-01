@@ -2,9 +2,13 @@
 
 ## Setup
 
-Install dependencies with `npm install`.
+Install dependencies with `npm install` in "ROOT" folder: (metaHealth/)
+
+Install dependencies with `npm install` in "BACK-END" folder: (metaHealth/express-backend)
 
 ## Running Webpack Development Server
+
+## While in project root folder
 
 ```sh
 npm start
