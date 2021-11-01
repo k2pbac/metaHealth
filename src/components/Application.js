@@ -86,6 +86,7 @@ export default function Application(props) {
   }, [userLogged.user]);
 
   useEffect(() => {
+    console.log(appState);
     setClinics(displayClinics(appState, clinicName));
   }, [clinicName]);
 

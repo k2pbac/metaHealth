@@ -4,7 +4,7 @@
 export const displayClinics = ({ clinics = {} }, clinicName) => {
   let results = {};
   const regex = new RegExp("^" + clinicName + ".*", "i");
-
+  console.log(clinics);
   if (clinicName) {
     for (let clinic in clinics) {
       if (clinics[clinic].name.match(regex) && clinicName) {

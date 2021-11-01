@@ -36,6 +36,7 @@ module.exports.employeeLogin = function (passport) {
         if (error) {
           throw error;
         }
+        console.log(user);
         const userInformation = {
           username: user.rows[0].username,
         };
@@ -44,7 +45,6 @@ module.exports.employeeLogin = function (passport) {
     );
   });
 };
-
 module.exports.patientLogin = function (passport) {
   passport.use(
     "patient-local",
@@ -73,8 +73,9 @@ module.exports.patientLogin = function (passport) {
     cb(null, user.id);
   });
   passport.deserializeUser((id, cb) => {
+    console.log(id);
     db.query(
-      `SELECT * FROM employee_accounts where id = ${id}`,
+      `SELECT * FROM patient_accounts where id = ${id}`,
       (error, user) => {
         if (error) {
           throw error;
@@ -86,18 +87,18 @@ module.exports.patientLogin = function (passport) {
       }
     );
   });
-  passport.deserializeUser((id, cb) => {
-    db.query(
-      `SELECT * FROM patient_accounts where id = ${id}`,
-      (error, user) => {
-        if (error) {
-          throw error;
-        }
-        const userInformation = {
-          username: user.username,
-        };
-        cb(error, userInformation);
-      }
-    );
-  });
+  // passport.deserializeUser((id, cb) => {
+  //   db.query(
+  //     `SELECT * FROM patient_accounts where id = ${id}`,
+  //     (error, user) => {
+  //       if (error) {
+  //         throw error;
+  //       }
+  //       const userInformation = {
+  //         username: user.username,
+  //       };
+  //       cb(error, userInformation);
+  //     }
+  //   );
+  // });
 };
