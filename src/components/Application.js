@@ -21,19 +21,24 @@ import BookAppointments from "./BookAppointments/BookAppointments";
 import PatientProfileIndex from "./View_Profile/PatientProfileIndex";
 import { useSelector, useStore, useDispatch } from "react-redux";
 import useApplicationData from "hooks/useApplicationData";
-import { displayClinics, viewPatientProfile } from "helpers/selectors";
+import {
+  displayClinics,
+  viewPatientProfile,
+  displayClinicAddress,
+} from "helpers/selectors";
 import { userServices } from "hooks/userServices";
 import { useHistory } from "react-router-dom";
 import { loginUser } from "../actions/index";
 import LoggedInEmployee from "./Navbar/LoggedState/LoggedInEmployee";
 import LoggedOut from "./Navbar/LoggedState/LoggedOut";
+import ManageAppointments from "./ManageAppointments/ManageAppointments";
 
 export default function Application(props) {
   const completeRegisterSelector = useSelector((state) => state.registerUser);
   const userAuth = useSelector((state) => state.userAuth);
   const userLogged = useSelector((state) => state.userLogged);
-  const clinicsList_ = useSelector((state) => state.applicationData) || {};
   const dispatch = useDispatch();
+  let clinic = {};
   const history = useHistory();
   const {
     appState,
@@ -42,6 +47,8 @@ export default function Application(props) {
     setPatientName,
     clinicName,
     setClinicName,
+    setClinics,
+    clinics,
     updatePatientProfile,
   } = useApplicationData();
 
@@ -52,7 +59,9 @@ export default function Application(props) {
     authenticatePatient,
   } = userServices;
 
-  const clinicsList = displayClinics(clinicsList_, clinicName);
+  if (localStorage.getItem("clinic_id")) {
+    clinic = displayClinicAddress(appState, localStorage.getItem("clinic_id"));
+  }
 
   useEffect(() => {
     if (userAuth && !userLogged.loggedIn) {
@@ -72,19 +81,22 @@ export default function Application(props) {
 
   useEffect(() => {
     if (userLogged.update_profile) {
-      console.log(userLogged);
       updatePatientProfile(userLogged.user);
     }
   }, [userLogged.user]);
 
   useEffect(() => {
+    console.log(appState);
+    setClinics(displayClinics(appState, clinicName));
+  }, [clinicName]);
+
+  useEffect(() => {
     if (completeRegisterSelector) {
-      if (completeRegisterSelector.user.isEmployee) {
-        submitEmployeeRegistration(completeRegisterSelector.user).then(
-          (user) => {}
-        );
+      console.log(completeRegisterSelector);
+      if (completeRegisterSelector.isEmployee) {
+        submitEmployeeRegistration(completeRegisterSelector).then((user) => {});
       } else {
-        submitPatientRegistration(completeRegisterSelector.user);
+        submitPatientRegistration(completeRegisterSelector);
       }
       // setAppState((prev) => {
       //   return {
@@ -154,7 +166,7 @@ export default function Application(props) {
           path="/clinics"
           component={() => (
             <BookAppointments
-              clinicsList={clinicsList}
+              clinicsList={clinics}
               clinicName={clinicName}
               setClinicName={setClinicName}
             ></BookAppointments>
@@ -169,6 +181,13 @@ export default function Application(props) {
               patientName={patientName}
               patientsList={patients}
             ></PatientMedicalRecords>
+          )}
+        />
+
+        <Route
+          path={`/clinic/appointments/${localStorage.getItem("clinic_id")}`}
+          component={() => (
+            <ManageAppointments clinic={clinic}></ManageAppointments>
           )}
         />
 

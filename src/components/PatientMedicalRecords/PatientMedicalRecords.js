@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 
 export default function PatientMedicalRecords(props) {
   const { patientsList, patientName, setPatientName } = props;
-  // console.log(patientsList);
   const renderPatients = [];
 
   // for (let elements in patientsList) {

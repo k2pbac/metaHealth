@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import "./PatientDetails.scss";
 import { patientReportData } from "./patientReportData";
-const PatientDetails = ({ patient, setCreateNewReport }) => {
+const PatientDetails = ({ setCreateNewReport }) => {
   return (
     <div className="border p-4 d-flex flex-column" style={{ height: "700px" }}>
       <div className="mb-5">

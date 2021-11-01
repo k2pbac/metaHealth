@@ -48,6 +48,8 @@ module.exports.clinicFormData = {
     "Clinic Details": [
       { value: "Name", type: "text" },
       { value: "Address", type: "text" },
+      { value: "Website", type: "text" },
+      { value: "Phone Number", type: "tel" },
     ],
     "Additional Information": [
       { value: "EIN/TIN Number", type: "text" },

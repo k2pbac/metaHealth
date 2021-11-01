@@ -10,6 +10,8 @@ CREATE TABLE clinics (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
   address VARCHAR(255) NOT NULL,
+  website TEXT DEFAULT NULL,
+  phone_number VARCHAR(255) NOT NULL,
   avatar VARCHAR(255) DEFAULT NULL,
   clinic_owner_id INTEGER NOT NULL,
   ein_number VARCHAR(10) DEFAULT NULL,

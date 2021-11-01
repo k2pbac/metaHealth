@@ -42,7 +42,6 @@ router.get("/api/clinics/:clinic_name", function (req, res, next) {
           if (error) {
             throw error;
           }
-          console.log(results.rows);
           res.json(results.rows);
         }
       );

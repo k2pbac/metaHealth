@@ -83,7 +83,6 @@ const PatientReportList = ({ createNewReport, setCreateNewReport }) => {
           setReports((prev) => {
             let newArr = prev;
             newArr.splice(index, 1);
-            console.log(newArr);
             return newArr;
           })
         }

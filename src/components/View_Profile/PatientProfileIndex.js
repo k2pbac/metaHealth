@@ -36,7 +36,6 @@ export default function PatientProfileIndex(props) {
 
   function onSubmit() {
     //Add code here for Submitting updated information to DB
-    console.log("Submitted");
     transition(SHOW);
   }
 
