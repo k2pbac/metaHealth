@@ -32,43 +32,45 @@ const Schedule = ({ appointmentData }) => {
                 Object.keys(appointmentData.doctors).map((doctor, index2) => {
                   return appointmentData.appointments.map(
                     (appointment, index3) => {
-                      // console.log(appointment);
-                      // if (
-                      //   appointmentData.doctors[appointment.employee_account_id]
-                      //     .first_name ===
-                      //     appointmentData.doctors[doctor].first_name &&
-                      //   appointment.time === timeslot &&
-                      //   count < 3
-                      // ) {
-                      //   count++;
-                      //   return (
-                      //     <td
-                      //       className={`${
-                      //         ((appointmentData.isEmployee ||
-                      //           appointmentData.patient ===
-                      //             appointmentData.patients[
-                      //               appointment.patient_account_id
-                      //             ].name) &&
-                      //           "booked") ||
-                      //         "bg-secondary"
-                      //       }`}
-                      //       key={appointment.id}
-                      //     >
-                      //       {(appointmentData.isEmployee ||
-                      //         appointmentData.patient ===
-                      //           appointmentData.patients[appointment.patient_account_id]
-                      //             .name) &&
-                      //         appointmentData.patients[appointment.patient_account_id]
-                      //           .name}
-                      //     </td>
-                      //   );
-                      // } else if (
-                      //   count < 3 &&
-                      //   index3 >= appointmentData.appointments.length - 1
-                      // ) {
-                      //   count++;
-                      //   return <td key={Math.random(434235142)}></td>;
-                      // }
+                      console.log(appointment);
+                      if (
+                        appointmentData.doctors[appointment.employee_account_id]
+                          .first_name ===
+                          appointmentData.doctors[doctor].first_name &&
+                        appointment.time === timeslot &&
+                        count < 3
+                      ) {
+                        count++;
+                        return (
+                          <td
+                            className={`${
+                              ((appointmentData.isEmployee ||
+                                appointmentData.patient ===
+                                  appointmentData.patients[
+                                    appointment.patient_account_id
+                                  ].name) &&
+                                "booked") ||
+                              "bg-secondary"
+                            }`}
+                            key={appointment.id}
+                          >
+                            {(appointmentData.isEmployee ||
+                              appointmentData.patient ===
+                                appointmentData.patients[
+                                  appointment.patient_account_id
+                                ].name) &&
+                              appointmentData.patients[
+                                appointment.patient_account_id
+                              ].name}
+                          </td>
+                        );
+                      } else if (
+                        count < 3 &&
+                        index3 >= appointmentData.appointments.length - 1
+                      ) {
+                        count++;
+                        return <td key={Math.random(434235142)}></td>;
+                      }
                     }
                   );
                 })) || <td></td>}

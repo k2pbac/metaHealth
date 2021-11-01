@@ -9,17 +9,16 @@ import "components/BookAppointments/BookAppointments.scss";
 
 export default function ClinicCard(props) {
   const { name, address, image, id } = props;
-
   const storeClinic = () => {
     localStorage.setItem("clinic_id", id);
-    console.log(localStorage.getItem("clinic_id"));
   };
 
   return (
     <Link
       onClick={storeClinic}
       className="clinic-card"
-      to={`/clinic/appointments/${id}`}
+      to={`/clinic/appointments`}
+      // to={`/clinic/appointments/${id}`}
     >
       <div className="clinic-image-container">
         <Image className="clinic-image" src={image} alt={name}></Image>

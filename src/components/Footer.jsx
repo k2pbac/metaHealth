@@ -13,7 +13,7 @@ const Footer = (props) => {
     <footer className="page-footer pt-4">
       <div className="container-fluid text-center text-md-left">
         <div className="row justify-content-around">
-          <div className="col-md-6 mt-md-0 mt-5">
+          <div className="col-md-6 mt-md-0">
             <div className="d-flex flex-column p-0">
               <p>
                 <span className="fs-5">M</span>eta Health, connecting patients

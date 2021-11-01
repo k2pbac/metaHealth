@@ -53,7 +53,6 @@ export default function Application(props) {
     updatePatientProfile,
   } = useApplicationData();
 
-
   const {
     submitPatientRegistration,
     submitEmployeeRegistration,
@@ -118,6 +117,7 @@ export default function Application(props) {
       {userLogged.loggedIn && userAuth.isEmployee && (
         <LoggedInEmployee></LoggedInEmployee>
       )}
+      {/* <div className="bg-light" style={{ paddingBottom: "3.5rem" }}> */}
       <Switch>
         <Route exact path="/" component={Home} />
         <Route
@@ -185,7 +185,8 @@ export default function Application(props) {
         />
 
         <Route
-          path={`/clinic/appointments/${localStorage.getItem("clinic_id")}`}
+          // path={`/clinic/appointments/${localStorage.getItem("clinic_id")}`}
+          path={`/clinic/appointments`}
           component={() => (
             <ManageAppointments
               appState={appState}
@@ -198,6 +199,7 @@ export default function Application(props) {
         {/* View Patient Medical Records Routes will also need params passed  */}
         {/* Add/Edit Patient Medical Record Page route will need clinic params */}
       </Switch>
+      {/* </div> */}
       <Footer></Footer>
     </>
   );
