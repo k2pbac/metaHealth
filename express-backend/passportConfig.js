@@ -2,49 +2,6 @@ const bcrypt = require("bcryptjs");
 const localStrategy = require("passport-local").Strategy;
 const db = require("./db/index");
 
-module.exports.employeeLogin = function (passport) {
-  passport.use(
-    "employee-local",
-    new localStrategy((username, password, done) => {
-      db.query(
-        `SELECT * FROM employee_accounts where username = '${username}'`,
-        (error, user) => {
-          if (error) {
-            throw error;
-          }
-          bcrypt.compare(password, user.rows[0].password, (err, result) => {
-            if (err) throw err;
-            if (result === true) {
-              return done(null, user.rows[0]);
-            } else {
-              console.log("password didn't match");
-              return done(null, false);
-            }
-          });
-        }
-      );
-    })
-  );
-
-  passport.serializeUser((user, cb) => {
-    cb(null, user.id);
-  });
-  passport.deserializeUser((id, cb) => {
-    db.query(
-      `SELECT * FROM employee_accounts where id = ${id}`,
-      (error, user) => {
-        if (error) {
-          throw error;
-        }
-        console.log(user);
-        const userInformation = {
-          username: user.rows[0].username,
-        };
-        cb(error, userInformation);
-      }
-    );
-  });
-};
 module.exports.patientLogin = function (passport) {
   passport.use(
     "patient-local",
@@ -69,10 +26,10 @@ module.exports.patientLogin = function (passport) {
     })
   );
 
-  passport.serializeUser((user, cb) => {
-    cb(null, user.id);
+  passport.serializeUser((user, done) => {
+    done(null, user.id);
   });
-  passport.deserializeUser((id, cb) => {
+  passport.deserializeUser((id, done) => {
     console.log(id);
     db.query(
       `SELECT * FROM patient_accounts where id = ${id}`,
@@ -81,24 +38,56 @@ module.exports.patientLogin = function (passport) {
           throw error;
         }
         const userInformation = {
-          username: user.rows[0].username,
+          username: "",
         };
-        cb(error, userInformation);
+        done(error, userInformation);
       }
     );
   });
-  // passport.deserializeUser((id, cb) => {
-  //   db.query(
-  //     `SELECT * FROM patient_accounts where id = ${id}`,
-  //     (error, user) => {
-  //       if (error) {
-  //         throw error;
-  //       }
-  //       const userInformation = {
-  //         username: user.username,
-  //       };
-  //       cb(error, userInformation);
-  //     }
-  //   );
-  // });
+};
+
+module.exports.employeeLogin = function (passport) {
+  passport.use(
+    "employee-local",
+    new localStrategy((username, password, done) => {
+      db.query(
+        `SELECT * FROM employee_accounts where username = '${username}'`,
+        (error, user) => {
+          if (error) {
+            throw error;
+          }
+          bcrypt.compare(password, user.rows[0].password, (err, result) => {
+            if (err) throw err;
+            if (result === true) {
+              return done(null, user.rows[0]);
+            } else {
+              console.log("password didn't match");
+              return done(null, false);
+            }
+          });
+        }
+      );
+    })
+  );
+
+  passport.serializeUser((user, done) => {
+    done(null, user.id);
+  });
+  passport.deserializeUser((id, done) => {
+    console.log("LINE 34", id);
+
+    db.query(
+      `SELECT * FROM employee_accounts where id = ${id}`,
+      (error, user) => {
+        if (error) {
+          throw error;
+        }
+        console.log("LINE 42", user);
+        const userInformation = {
+          username: "",
+        };
+        done(error, userInformation);
+      }
+    );
+  });
 };

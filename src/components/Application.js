@@ -28,7 +28,7 @@ import {
 } from "helpers/selectors";
 import { userServices } from "hooks/userServices";
 import { useHistory } from "react-router-dom";
-import { loginUser } from "../actions/index";
+import { loginUser, registerComplete } from "../actions/index";
 import LoggedInEmployee from "./Navbar/LoggedState/LoggedInEmployee";
 import LoggedOut from "./Navbar/LoggedState/LoggedOut";
 import ManageAppointments from "./ManageAppointments/ManageAppointments";
@@ -66,11 +66,13 @@ export default function Application(props) {
   useEffect(() => {
     if (userAuth && !userLogged.loggedIn) {
       if (userAuth.isEmployee) {
+        console.log("Is employee = true");
         authenticateEmployee(userAuth).then((res) => {
           dispatch(loginUser(res, true));
           history.push("/");
         });
-      } else if (!userLogged.loggedIn) {
+      } else if (!userAuth.isEmployee) {
+        console.log("Is employee = false");
         authenticatePatient(userAuth).then((res) => {
           dispatch(loginUser(res, false));
           history.push("/");
@@ -86,17 +88,16 @@ export default function Application(props) {
   }, [userLogged.user]);
 
   useEffect(() => {
-    console.log(appState);
     setClinics(displayClinics(appState, clinicName));
   }, [clinicName]);
-
   useEffect(() => {
     if (completeRegisterSelector) {
-      console.log(completeRegisterSelector);
       if (completeRegisterSelector.isEmployee) {
         submitEmployeeRegistration(completeRegisterSelector).then((user) => {});
+        dispatch(registerComplete());
       } else {
         submitPatientRegistration(completeRegisterSelector);
+        dispatch(registerComplete());
       }
       // setAppState((prev) => {
       //   return {

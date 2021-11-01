@@ -44,7 +44,8 @@ const submitEmployeeRegistration = (user) => {
       gender: Object.keys(user["Gender"])[0],
       phone_number: user["Phone Number"].value,
       email_address: user["Email Address"].value,
-      avatar: "https://i.imgur.com/UIp27UN.png",
+      // avatar: "https://robohash.org/quonatuspossimus.png?size=50x50&set=set1",
+      avatar: "",
       is_doctor:
         user["Are you a doctor?"][Object.keys(user["Are you a doctor?"])[0]],
     };
@@ -65,7 +66,8 @@ const submitPatientRegistration = (user) => {
       phone_number: user["Phone Number"].value,
       email_address: user["Email Address"].value,
       address: user["Address"].value,
-      avatar: "https://i.imgur.com/UIp27UN.png",
+      // avatar: "https://robohash.org/quonatuspossimus.png?size=50x50&set=set1",
+      avatar: "",
       health_card_number: user["Health Card Number"].value,
       insurance_member_id: user["Member ID"].value,
       insurance_policy_number: user["Policy Number"].value,

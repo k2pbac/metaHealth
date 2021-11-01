@@ -28,6 +28,13 @@ export const registerPatient = (user) => {
   };
 };
 
+export const registerComplete = () => {
+  return {
+    type: "REGISTER_COMPLETE",
+    payload: null,
+  };
+};
+
 // Login and logout after authentication (for login)
 export const loginUser = (user) => {
   return {
