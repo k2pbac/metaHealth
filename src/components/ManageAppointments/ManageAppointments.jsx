@@ -15,7 +15,7 @@ import { displayClinicAppointments } from "helpers/selectors";
 const ManageAppointments = ({ clinic, isEmployee, appState }) => {
   const [currentDay, setCurrentDay] = useState(new Date());
   const [appointments, setAppointments] = useState({});
-
+  console.log("Clinic:", clinic);
   useEffect(() => {
     setAppointments({
       ...displayClinicAppointments(

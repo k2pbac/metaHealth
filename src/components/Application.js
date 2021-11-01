@@ -38,18 +38,23 @@ export default function Application(props) {
   const completeRegisterSelector = useSelector((state) => state.registerUser);
   const userAuth = useSelector((state) => state.userAuth);
   const userLogged = useSelector((state) => state.userLogged);
+  // getting individual clinic for manage appointment component
+  const [clinic, setClinic] = useState();
   const dispatch = useDispatch();
-  let clinic = {};
+  // let clinic = {};
   const history = useHistory();
   const {
     appState,
     patients,
     patientName,
     setPatientName,
+    // Clinic name for book appointments component to enter into search bar
     clinicName,
     setClinicName,
+    //Clinics for book appointments component to display clinics after searching
     setClinics,
     clinics,
+
     updatePatientProfile,
   } = useApplicationData();
 
@@ -60,8 +65,11 @@ export default function Application(props) {
     authenticatePatient,
   } = userServices;
 
-  const setClinicAddress = (clinic_id) => {
-    clinic = displayClinicAddress(appState, clinic_id);
+  const setClinicAddress = async (clinic_id) => {
+    const clinic = await displayClinicAddress(appState, clinic_id);
+    console.log(clinic);
+    setClinic({ ...clinic });
+    localStorage.setItem("clinic", JSON.stringify(clinic));
   };
 
   useEffect(() => {
@@ -89,6 +97,7 @@ export default function Application(props) {
   useEffect(() => {
     setClinics(displayClinics(appState, clinicName));
   }, [clinicName]);
+
   useEffect(() => {
     if (completeRegisterSelector) {
       if (completeRegisterSelector.isEmployee) {
@@ -190,7 +199,7 @@ export default function Application(props) {
           component={() => (
             <ManageAppointments
               appState={appState}
-              clinic={clinic}
+              clinic={JSON.parse(localStorage.getItem("clinic"))}
             ></ManageAppointments>
           )}
         />
