@@ -199,7 +199,7 @@ export default function Application(props) {
           component={() => (
             <ManageAppointments
               appState={appState}
-              clinic={JSON.parse(localStorage.getItem("clinic"))}
+              clinic={clinic || JSON.parse(localStorage.getItem("clinic"))}
             ></ManageAppointments>
           )}
         />
