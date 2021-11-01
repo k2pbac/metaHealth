@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import "./ManageAppointments.scss";
 import "react-calendar/dist/Calendar.css";
@@ -11,8 +11,34 @@ import {
   employeeSchedule,
   patientSchedule,
 } from "components/Schedule/AppointmentData";
-const ManageAppointments = ({ clinic, isEmployee }) => {
-  console.log(clinic);
+import { displayClinicAppointments } from "helpers/selectors";
+const ManageAppointments = ({ clinic, isEmployee, appState }) => {
+  const [currentDay, setCurrentDay] = useState(new Date());
+  const [appointments, setAppointments] = useState({});
+
+  useEffect(() => {
+    setAppointments({
+      ...displayClinicAppointments(
+        appState,
+        currentDay.toLocaleDateString("en-US"),
+        clinic.id
+      ),
+      isEmployee,
+    });
+  }, []);
+
+  const handleCalendarChange = (value, event) => {
+    setCurrentDay(value);
+    setAppointments({
+      ...displayClinicAppointments(
+        appState,
+        value.toLocaleDateString("en-US"),
+        clinic.id
+      ),
+      isEmployee,
+    });
+  };
+
   return (
     <Row className="p-3">
       <Column>
@@ -24,18 +50,22 @@ const ManageAppointments = ({ clinic, isEmployee }) => {
         )) || (
           <>
             <span>{clinic.name}</span>
-            <p className="w-25">{clinic.address}</p>
+            <p className="w-50">{clinic.address}</p>
           </>
         )}
 
-        <Calendar className="mb-5" />
+        <Calendar
+          className="mb-5"
+          onChange={handleCalendarChange}
+          value={currentDay}
+        />
         {isEmployee && <a href="#!">View Patient Medical Records</a>}
       </Column>
       <Column>
         <Row>
           <Column>
             {(!isEmployee && (
-              <Schedule appointmentData={patientSchedule}></Schedule>
+              <Schedule appointmentData={appointments}></Schedule>
             )) || <Schedule appointmentData={employeeSchedule}></Schedule>}
           </Column>
           <Column>

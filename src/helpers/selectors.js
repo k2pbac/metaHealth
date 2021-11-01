@@ -4,7 +4,6 @@
 export const displayClinics = ({ clinics = {} }, clinicName) => {
   let results = {};
   const regex = new RegExp("^" + clinicName + ".*", "i");
-  console.log(clinics);
   if (clinicName) {
     for (let clinic in clinics) {
       if (clinics[clinic].name.match(regex) && clinicName) {
@@ -38,7 +37,6 @@ export const viewPatientProfile = ({ patients = [] }, patient_id) => {
 //********************************************************************************************************
 
 export const displayClinicAddress = ({ clinics }, clinic_id) => {
-  console.log(clinics);
   for (let clinic in clinics) {
     if (clinics[clinic].id === parseInt(clinic_id)) {
       return clinics[clinic];
@@ -47,21 +45,40 @@ export const displayClinicAddress = ({ clinics }, clinic_id) => {
   return {};
 };
 
-export const displayClinicAppointments = ({
-  employee,
-  patients,
-  appointments,
-  date = new Date("2021-02-28 23:14:18"),
-}) => {
+export const displayClinicAppointments = (
+  { employee, patients, appointments },
+  date,
+  clinic_id
+) => {
   let sorted_patients = {};
-
+  let sorted_appointments = [];
+  let sorted_doctors = {};
   for (let appointment in appointments) {
-    if (appointments[appointment].date === date) {
-      console.log("here");
+    if (
+      appointments[appointment].clinic_id === clinic_id &&
+      !sorted_doctors[appointments[appointment].employee_account_id]
+    ) {
+      sorted_doctors[appointments[appointment].employee_account_id] =
+        employee[appointments[appointment].employee_account_id - 1];
+    }
+
+    if (
+      appointments[appointment].date === date &&
+      clinic_id === appointments[appointment].clinic_id
+    ) {
+      sorted_appointments.push(appointments[appointment]);
     }
   }
 
-  return null;
+  for (let appointment of sorted_appointments) {
+    sorted_patients[appointment.patient_account_id] =
+      patients[appointment.patient_account_id - 1];
+  }
+  return {
+    appointments: [...sorted_appointments],
+    doctors: { ...sorted_doctors },
+    patients: { ...sorted_patients },
+  };
 };
 //appointments table for appointments
 //patient_account table

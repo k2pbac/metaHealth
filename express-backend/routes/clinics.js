@@ -34,7 +34,6 @@ router.get("/api/clinics/:clinic_name", function (req, res, next) {
 
       db.query(
         `SELECT *, registered.clinic_id FROM patient_accounts 
-        JOIN registered on patient_accounts.id = registered.patient_account_id
         WHERE (first_name ILIKE '${clinic_name}%') 
         OR (last_name ILIKE '${clinic_name}%')
         ORDER BY last_name;`,

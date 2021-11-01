@@ -52,12 +52,12 @@ export const logoutUser = (user) => {
 
 // Dont need
 
-export const getTableData = (applicationData) => {
-  return {
-    type: "DATA",
-    payload: applicationData,
-  };
-};
+// export const getTableData = (applicationData) => {
+//   return {
+//     type: "DATA",
+//     payload: applicationData,
+//   };
+// };
 
 export const updateProfile = (user) => {
   return {
