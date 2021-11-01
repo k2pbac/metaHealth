@@ -91,12 +91,11 @@ export default function Application(props) {
 
   useEffect(() => {
     if (completeRegisterSelector) {
-      if (completeRegisterSelector.user.isEmployee) {
-        submitEmployeeRegistration(completeRegisterSelector.user).then(
-          (user) => {}
-        );
+      console.log(completeRegisterSelector);
+      if (completeRegisterSelector.isEmployee) {
+        submitEmployeeRegistration(completeRegisterSelector).then((user) => {});
       } else {
-        submitPatientRegistration(completeRegisterSelector.user);
+        submitPatientRegistration(completeRegisterSelector);
       }
       // setAppState((prev) => {
       //   return {
