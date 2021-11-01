@@ -38,21 +38,25 @@ export default function Application(props) {
   const completeRegisterSelector = useSelector((state) => state.registerUser);
   const userAuth = useSelector((state) => state.userAuth);
   const userLogged = useSelector((state) => state.userLogged);
+  // getting individual clinic for manage appointment component
+  const [clinic, setClinic] = useState();
   const dispatch = useDispatch();
-  let clinic = {};
+  // let clinic = {};
   const history = useHistory();
   const {
     appState,
     patients,
     patientName,
     setPatientName,
+    // Clinic name for book appointments component to enter into search bar
     clinicName,
     setClinicName,
+    //Clinics for book appointments component to display clinics after searching
     setClinics,
     clinics,
+
     updatePatientProfile,
   } = useApplicationData();
-
 
   const {
     submitPatientRegistration,
@@ -61,9 +65,12 @@ export default function Application(props) {
     authenticatePatient,
   } = userServices;
 
-  if (localStorage.getItem("clinic_id")) {
-    clinic = displayClinicAddress(appState, localStorage.getItem("clinic_id"));
-  }
+  const setClinicAddress = async (clinic_id) => {
+    const clinic = await displayClinicAddress(appState, clinic_id);
+    console.log(clinic);
+    setClinic({ ...clinic });
+    localStorage.setItem("clinic", JSON.stringify(clinic));
+  };
 
   useEffect(() => {
     if (userAuth && !userLogged.loggedIn) {
@@ -90,6 +97,7 @@ export default function Application(props) {
   useEffect(() => {
     setClinics(displayClinics(appState, clinicName));
   }, [clinicName]);
+
   useEffect(() => {
     if (completeRegisterSelector) {
       if (completeRegisterSelector.isEmployee) {
@@ -118,6 +126,7 @@ export default function Application(props) {
       {userLogged.loggedIn && userAuth.isEmployee && (
         <LoggedInEmployee></LoggedInEmployee>
       )}
+      {/* <div className="bg-light" style={{ paddingBottom: "3.5rem" }}> */}
       <Switch>
         <Route exact path="/" component={Home} />
         <Route
@@ -166,6 +175,7 @@ export default function Application(props) {
           path="/clinics"
           component={() => (
             <BookAppointments
+              setClinicAddress={setClinicAddress}
               clinicsList={clinics}
               clinicName={clinicName}
               setClinicName={setClinicName}
@@ -185,11 +195,11 @@ export default function Application(props) {
         />
 
         <Route
-          path={`/clinic/appointments/${localStorage.getItem("clinic_id")}`}
+          path={`/clinic/appointments/:id`}
           component={() => (
             <ManageAppointments
               appState={appState}
-              clinic={clinic}
+              clinic={clinic || JSON.parse(localStorage.getItem("clinic"))}
             ></ManageAppointments>
           )}
         />
@@ -198,6 +208,7 @@ export default function Application(props) {
         {/* View Patient Medical Records Routes will also need params passed  */}
         {/* Add/Edit Patient Medical Record Page route will need clinic params */}
       </Switch>
+      {/* </div> */}
       <Footer></Footer>
     </>
   );
