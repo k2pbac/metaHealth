@@ -12,7 +12,7 @@ import { displayClinicAddress } from "helpers/selectors";
 
 const BookAppointments = (props) => {
   const { clinicsList, clinicName, setClinicName } = props;
-  console.log(props);
+  
   return (
     <div className="book-appointments">
       {(clinicsList && (
