@@ -1,4 +1,5 @@
 import { authConstants } from "constants/auth.constants";
+import axios from "axios";
 //user actions to register and authenticate a user when a login request is made
 export const authenticatePatient = (username, password, isEmployee) => {
   return {
@@ -49,15 +50,6 @@ export const logoutUser = (user) => {
     user: null,
   };
 };
-
-// Dont need
-
-// export const getTableData = (applicationData) => {
-//   return {
-//     type: "DATA",
-//     payload: applicationData,
-//   };
-// };
 
 export const updateProfile = (user) => {
   return {

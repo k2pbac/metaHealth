@@ -10,10 +10,20 @@ router.get("/api/appointments", function (req, res, next) {
     const newResults = results.rows.map((row) => ({
       ...row,
       date: new Date(row.date).toLocaleDateString("en-US"),
-      time: new Date(row.date).getHours() + 1,
+      time: new Date(row.date).getHours(),
     }));
-    console.log(newResults);
     res.json(newResults);
+  });
+});
+
+router.delete("/api/appointment/:id", (req, res, next) => {
+  const { id } = req.params;
+  db.query(`DELETE FROM appointments where id = ${id}`, (error, results) => {
+    if (error) {
+      throw error;
+    }
+
+    res.json(results);
   });
 });
 

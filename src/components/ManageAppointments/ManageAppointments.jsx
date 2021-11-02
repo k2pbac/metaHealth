@@ -12,11 +12,24 @@ import {
   patientSchedule,
 } from "components/Schedule/AppointmentData";
 import { displayClinicAppointments } from "helpers/selectors";
-const ManageAppointments = ({ clinic, isEmployee, appState }) => {
+import { useSelector } from "react-redux";
+import { format } from "date-fns";
+const ManageAppointments = ({
+  clinic,
+  isEmployee,
+  appState,
+  setAppState,
+  bookAppointment,
+  deleteAppointment,
+}) => {
   const [currentDay, setCurrentDay] = useState(new Date());
   const [appointments, setAppointments] = useState({});
-  console.log("Clinic:", clinic);
+  const loggedUser = useSelector((state) => state.userLogged);
+  // const getAppointments()
   useEffect(() => {
+    const date = new Date(currentDay);
+    var formattedDate = format(date, "MMMM do, yyyy");
+
     setAppointments({
       ...displayClinicAppointments(
         appState,
@@ -24,10 +37,18 @@ const ManageAppointments = ({ clinic, isEmployee, appState }) => {
         clinic.id
       ),
       isEmployee,
+      patient: loggedUser.user.first_name,
+      id: loggedUser.user.id,
+      date: formattedDate,
+      clinic_id: clinic.id,
+      bookingDate: currentDay,
     });
-  }, []);
+  }, [appState]);
 
   const handleCalendarChange = (value, event) => {
+    const date = new Date(value);
+    var formattedDate = format(date, "MMMM do, yyyy");
+
     setCurrentDay(value);
     setAppointments({
       ...displayClinicAppointments(
@@ -36,6 +57,11 @@ const ManageAppointments = ({ clinic, isEmployee, appState }) => {
         clinic.id
       ),
       isEmployee,
+      patient: loggedUser.user.first_name,
+      id: loggedUser.user.id,
+      date: formattedDate,
+      clinic_id: clinic.id,
+      bookingDate: value,
     });
   };
 
@@ -65,11 +91,19 @@ const ManageAppointments = ({ clinic, isEmployee, appState }) => {
         <Row>
           <Column>
             {(!isEmployee && (
-              <Schedule appointmentData={appointments}></Schedule>
+              <Schedule
+                setAppointments={setAppointments}
+                bookAppointment={bookAppointment}
+                appointmentData={appointments}
+                deleteAppointment={deleteAppointment}
+              ></Schedule>
             )) || <Schedule appointmentData={employeeSchedule}></Schedule>}
           </Column>
           <Column>
-            <PatientSchedule patient={patient}></PatientSchedule>
+            <PatientSchedule
+              setAppState={setAppState}
+              patient={patient}
+            ></PatientSchedule>
           </Column>
         </Row>
       </Column>

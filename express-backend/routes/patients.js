@@ -76,6 +76,27 @@ router.get("/api/patients", function (req, res, next) {
   );
 });
 
+router.post("/api/patient/book", (req, res, next) => {
+  const { date, clinic_id, patient_account_id, employee_account_id, time } =
+    req.body;
+
+  // 2015-03-25T12:00:00Z
+  let newDate = new Date(date).toLocaleDateString();
+  newDate += time < 10 ? ` 0${time}:00:00` : ` ${time}:00:00`;
+  // console.log("unformatted:", date + "" + time + ":00:00");
+  // console.log("formatted:", newDate);
+  db.query(
+    `INSERT INTO appointments (date, active, clinic_id, patient_account_id, employee_account_id)
+    values ('${newDate}', 'true', '${clinic_id}', ${patient_account_id}, ${employee_account_id} )`,
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.json(results.rows);
+    }
+  );
+});
+
 module.exports = router;
 // SELECT * FROM patient_accounts
 //       JOIN registered on patient_accounts.id = registered.patient_account_id

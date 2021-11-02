@@ -24,6 +24,44 @@ const useApplicationData = () => {
     }
   };
 
+  const bookAppointment = (appointment) => {
+    if (appointment && Object.keys(appointment).length) {
+      let newDate = new Date(appointment.date).toLocaleDateString();
+      newDate +=
+        appointment.time < 10
+          ? ` 0${appointment.time}:00:00`
+          : ` ${appointment.time}:00:00`;
+      console.log(newDate);
+      axios
+        .post("/api/patient/book", { ...appointment })
+        .then((result) => {
+          setAppState((prev) => {
+            return {
+              ...prev,
+              appointments: {
+                ...prev.appointments,
+                ...{ ...appointment, date: newDate },
+              },
+            };
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
+  const deleteAppointment = (appointment_id) => {
+    if (appointment_id) {
+      axios
+        .delete(`/api/appointment/${appointment_id}`)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
   useEffect(() => {
     Promise.all([
       axios.get("/api/clinics"),
@@ -61,6 +99,7 @@ const useApplicationData = () => {
 
   return {
     appState,
+    setAppState,
     patients,
     // patientName,
     // setPatientName,
@@ -69,6 +108,8 @@ const useApplicationData = () => {
     clinicName,
     setClinicName,
     updatePatientProfile,
+    bookAppointment,
+    deleteAppointment,
   };
 };
 
