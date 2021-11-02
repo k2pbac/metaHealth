@@ -96,6 +96,26 @@ router.put("/api/clinics/register/existing", function (req, res, next) {
   );
 });
 
+// Get List of Employees for a Clinic
+
+router.post("/api/clinics/employee/list", function (req, res, next) {
+  const {clinic_id } = req.body;
+
+  db.query(
+    `SELECT * FROM employee_accounts
+     JOIN clinics on clinics.id = clinic_id
+     WHERE clinic_id = ${clinic_id}
+    `,
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      console.log("result.rows:",result.rows)
+      res.json(results.rows);
+    }
+  );
+});
+
 module.exports = router;
 
 

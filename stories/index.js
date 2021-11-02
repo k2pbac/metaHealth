@@ -44,6 +44,8 @@ import Schedule from "components/Schedule/Schedule";
 import PatientSchedule from "components/PatientSchedule/PatientSchedule";
 import { patient } from "components/PatientSchedule/patient_appointment";
 import ManageAppointments from "components/ManageAppointments/ManageAppointments";
+import ClinicEmployeeList from "components/ManageAppointments/ClinicEmployeeList";
+
 
 //View Profile Page Imports
 import PatientProfile from "components/View_Profile/PatientProfile";
@@ -115,6 +117,37 @@ const employee_accounts = [
     phone_number: "416-123-5234",
     email_address: "Cindy123@gmail.com",
     employedAt: "Toronto Public Clinic, 123 Yonge St. Toronto,ON M3B 2T1",
+    isDoctor: false,
+  },
+];
+
+const employeeList = [
+  {
+    id: 1,
+    first_name: "Michael",
+    last_name: "Scott",
+    username: "Sam123",
+    avatar:
+      "https://media.istockphoto.com/photos/happy-healthcare-practitioner-picture-id138205019?k=20&m=138205019&s=612x612&w=0&h=KpsSMVsplkOqTnAJmOye4y6DcciVYIBe5dYDgYXLVW4=",
+    profile_description: "I love working with my patients",
+    phone_number: "416-321-1234",
+    email_address: "SamHenry123@gmail.com",
+    employedAt: "Toronto Public Clinic, 123 Yonge St. Toronto,ON M3B 2T1",
+    clinic_verified: true,
+    isDoctor: true,
+  },
+  {
+    id: 2,
+    first_name: "Michael",
+    last_name: "Scott",
+    username: "Cindy123",
+    avatar:
+      "https://dentalreceptionist.ca/wp-content/uploads/2018/09/iStock-910148934-650x500.jpg",
+    profile_description: "I'll assist you with in-clinic check-ins",
+    phone_number: "416-123-5234",
+    email_address: "Cindy123@gmail.com",
+    employedAt: "Toronto Public Clinic, 123 Yonge St. Toronto,ON M3B 2T1",
+    clinic_verified: false,
     isDoctor: false,
   },
 ];
@@ -387,9 +420,7 @@ storiesOf("Registration Form", module)
   .add("Clinic Form", () => (
     <RegisterForm formData={clinicFormData}></RegisterForm>
   ))
-  .add("Register Employee to an Existing Clinic", () => (
-    <RegisterToAClinicForm formData={}></RegisterToAClinicForm>
-  ));
+  
 
 storiesOf("Login Form", module).add("Patient's Form", () => (
   <LoginForm></LoginForm>
@@ -415,6 +446,10 @@ storiesOf("Manage Appointments Page", module)
   ))
   .add("Full Page for Employee", () => (
     <ManageAppointments isEmployee={true}></ManageAppointments>
+  ))
+  //Employee List Component Stories
+  .add("Employees List of a Clinic", () => (
+    <ClinicEmployeeList employeeList={employeeList}></ClinicEmployeeList>
   ));
 
 storiesOf("Individual Patient Records Page", module)
@@ -452,4 +487,7 @@ storiesOf("Patient Medical Records Search", module)
 .add("Patient Medical Records Index", () => (
 <PatientMedicalRecords patientsList={patientDataList}></PatientMedicalRecords>
 ))
+
+
+
 

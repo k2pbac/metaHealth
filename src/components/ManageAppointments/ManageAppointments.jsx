@@ -14,6 +14,13 @@ import {
 import { displayClinicAppointments, getClinicRecords } from "helpers/selectors";
 import { useSelector } from "react-redux";
 import { format } from "date-fns";
+
+import ClinicEmployeeList from "./ClinicEmployeeList";
+
+import {userServices} from "hooks/userServices"
+const {getEmployeesForClinic} = userServices;
+
+
 const ManageAppointments = ({
   clinic,
   isEmployee,
@@ -25,6 +32,9 @@ const ManageAppointments = ({
   const [currentDay, setCurrentDay] = useState(new Date());
   const [appointments, setAppointments] = useState({});
   const [clinicRecords, setClinicRecords] = useState({});
+  // State for employee list in manage appointment index
+  const [employeeList, setEmployeeList] = useState();
+
   const loggedUser = useSelector((state) => state.userLogged);
 
   // const getAppointments()
@@ -53,6 +63,11 @@ const ManageAppointments = ({
         clinic.id
       ),
     });
+    const setEmployeeList = function(){
+      const clinic_id = JSON.parse(localStorage.getItem("user").user.clinic_id)
+      return getEmployeesForClinic(clinic_id)
+    }
+
   }, [setAppState]);
 
   const handleCalendarChange = (value, event) => {
@@ -127,8 +142,9 @@ const ManageAppointments = ({
                 patient={patient}
                 clinicRecords={clinicRecords}
                 clinicName={clinic.name}
-              ></PatientSchedule>
-            )}
+              ></PatientSchedule>  
+              ) || (<ClinicEmployeeList employeeList={setEmployeeList()}>
+                </ClinicEmployeeList>)}
           </Column>
         </Row>
       </Column>
