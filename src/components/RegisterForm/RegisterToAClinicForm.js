@@ -29,7 +29,7 @@ export default function RegisterToAClinicForm(props) {
     console.log(localStorage.getItem("user"))
     console.log(localStorage.getItem("clinic_id"))
   }
-
+  
   return (
     <article>
     {mode === SHOW && ( 

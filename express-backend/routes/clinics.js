@@ -49,6 +49,28 @@ router.get("/api/clinics/:clinic_name", function (req, res, next) {
 });
 
 
+router.post("/api/clinics/patient/records", function (req, res, next) {
+  const {patient_name, clinic_id} = req.body;
+  console.log("patient_name:", patient_name)
+  console.log("clinic_id:", clinic_id)
+
+  db.query(
+    `SELECT * FROM patient_accounts 
+    JOIN registered ON patient_accounts.id = patient_account_id
+    JOIN clinics ON registered.clinic_id = clinics.id
+    WHERE (patient_accounts.first_name ILIKE '${patient_name}%') 
+    OR (patient_accounts.last_name ILIKE '${patient_name}%')
+    AND clinics.id = ${clinic_id}
+    ORDER BY last_name;`, 
+   (error, results) => {
+    if (error) {
+      throw error;
+    }
+    res.json(results.rows);
+  });
+});
+
+
 router.put("/api/clinics/register/existing", function (req, res, next) {
   const {employee, clinic_id} = req.body;
   console.log("Employee:", employee)
