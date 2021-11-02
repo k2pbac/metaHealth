@@ -31,7 +31,7 @@ CREATE TABLE employee_accounts (
   avatar VARCHAR(255) DEFAULT NULL,
   is_doctor BOOLEAN DEFAULT FALSE,
   clinic_verified BOOLEAN DEFAULT FALSE,
-  clinic_id INTEGER REFERENCES clinics(id)
+  clinic_id INTEGER REFERENCES clinics(id) 
 );
 
 CREATE TABLE patient_accounts (

@@ -30,7 +30,6 @@ module.exports.patientLogin = function (passport) {
     done(null, user.id);
   });
   passport.deserializeUser((id, done) => {
-    console.log(id);
     db.query(
       `SELECT * FROM patient_accounts where id = ${id}`,
       (error, user) => {
@@ -74,15 +73,12 @@ module.exports.employeeLogin = function (passport) {
     done(null, user.id);
   });
   passport.deserializeUser((id, done) => {
-    console.log("LINE 34", id);
-
     db.query(
       `SELECT * FROM employee_accounts where id = ${id}`,
       (error, user) => {
         if (error) {
           throw error;
         }
-        console.log("LINE 42", user);
         const userInformation = {
           username: "",
         };

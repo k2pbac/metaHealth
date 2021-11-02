@@ -3,6 +3,7 @@
   // table-layout: fixed;
   border-collapse: collapse;
   border: 1px solid black;
+
   tbody {
     display: block;
     overflow: scroll;
@@ -29,7 +30,7 @@
     vertical-align: middle;
     text-align: center;
     padding: 1rem;
-    width: 300px;
+    width: 200px;
   }
   td:not(:first-child):hover {
     background-color: lightslategrey;
@@ -42,4 +43,8 @@
     font-weight: bold;
     font-size: 0.9rem;
   }
+}
+
+#popover-basic {
+  z-index: 9999 !important;
 }

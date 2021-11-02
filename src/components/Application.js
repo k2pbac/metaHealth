@@ -44,6 +44,7 @@ export default function Application(props) {
   // let clinic = {};
   const history = useHistory();
   const {
+    setAppState,
     appState,
     patients,
     patientName,
@@ -54,7 +55,8 @@ export default function Application(props) {
     //Clinics for book appointments component to display clinics after searching
     setClinics,
     clinics,
-
+    bookAppointment,
+    deleteAppointment,
     updatePatientProfile,
   } = useApplicationData();
 
@@ -106,15 +108,6 @@ export default function Application(props) {
         submitPatientRegistration(completeRegisterSelector);
       }
       dispatch(registerComplete());
-      // setAppState((prev) => {
-      //   return {
-      //     ...prev,
-      //     employee: {
-      //       ...prev.employee,
-      //       newUser,
-      //     },
-      //   };
-      // });
     }
   }, [completeRegisterSelector]);
   return (
@@ -198,6 +191,9 @@ export default function Application(props) {
           path={`/clinic/appointments/:id`}
           component={() => (
             <ManageAppointments
+              setAppState={setAppState}
+              bookAppointment={bookAppointment}
+              deleteAppointment={deleteAppointment}
               appState={appState}
               clinic={clinic || JSON.parse(localStorage.getItem("clinic"))}
             ></ManageAppointments>
