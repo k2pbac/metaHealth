@@ -93,7 +93,7 @@ export default function PatientMedicalRecords(props) {
                 <td>{patientList[element].phone_number}</td>
                 <td>{patientList[element].email_address}</td>
                 <td>
-                  <Link to={`clinic/patient/${patientList[element].id}`}>
+                  <Link to={`clinic/patient/record/${patientList[element.id]}`}>
                     <a href="">Add/Edit Record</a>
                   </Link>
                 </td>
