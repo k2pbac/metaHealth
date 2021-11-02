@@ -47,7 +47,10 @@ export default function LoggedInEmployee(props) {
               <Dropdown.Item as={Link} to="/employee/profile">
                 View Profile
               </Dropdown.Item>
-              <Dropdown.Item as={Link} to="/clinic/appointments">
+              <Dropdown.Item
+                as={Link}
+                to={`/clinic/appointments/${userLogged.user.clinic_id}`}
+              >
                 Manage Clinic Appointments
               </Dropdown.Item>
               <Dropdown.Item as={Link} to="/clinic-medical-records">

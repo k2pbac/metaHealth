@@ -111,17 +111,25 @@ const ManageAppointments = ({
         <Column>
           <Row>
             <Column>
-              {(!isEmployee && (
+              {(!JSON.parse(localStorage.getItem("isEmployee")) && (
                 <Schedule
                   setAppointments={setAppointments}
                   bookAppointment={bookAppointment}
                   appointmentData={appointments}
                   deleteAppointment={deleteAppointment}
                 ></Schedule>
-              )) || <Schedule appointmentData={employeeSchedule}></Schedule>}
+              )) ||
+                (JSON.parse(localStorage.getItem("isEmployee")) && (
+                  <Schedule
+                    setAppointments={setAppointments}
+                    bookAppointment={bookAppointment}
+                    appointmentData={appointments}
+                    deleteAppointment={deleteAppointment}
+                  ></Schedule>
+                ))}
             </Column>
             <Column>
-              {!isEmployee && (
+              {!JSON.parse(localStorage.getItem("isEmployee")) && (
                 <PatientSchedule
                   patient={patient}
                   clinicRecords={clinicRecords}

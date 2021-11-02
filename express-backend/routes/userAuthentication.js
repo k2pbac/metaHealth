@@ -21,6 +21,7 @@ router.post("/api/employee/register", (req, res, next) => {
           VALUES ('${newUser.first_name}', '${newUser.last_name}', '${newUser.username}', '${resultPassword}', '${newUser.gender}', '${newUser.phone_number}', '${newUser.email_address}', '${newUser.avatar}','${newUser.is_doctor}') RETURNING id`,
               (error, results) => {
                 if (error) {
+                  console.log(error);
                   throw error;
                 }
                 return res.json({
@@ -60,6 +61,7 @@ router.post("/api/patient/register", function (req, res, next) {
             VALUES ('${newUser.first_name}', '${newUser.last_name}', '${newUser.username}', '${resultPassword}', '${newUser.date_of_birth}', '${newUser.gender}', '${newUser.profile_description}', '${newUser.phone_number}', '${newUser.email_address}', '${newUser.address}', '${newUser.avatar}', '${newUser.health_card_number}', '${newUser.insurance_member_id}', '${newUser.policy_number}', '${newUser.insurance_plan_name}') RETURNING id`,
               (error, results) => {
                 if (error) {
+                  console.log(error);
                   throw error;
                 }
                 return res.json({

@@ -10,16 +10,17 @@ import "components/Register_and_Login_Selection/SelectionPanel.scss";
 export default function LoginSelectionPanel(props) {
   const { onPatientLogin, onEmployeeLogin } = props;
 
-  const patient_image = "images/patient_selection.jpg";
-  const employee_image = "images/employee_selection.jpg";
+  const patient_image = "/images/patient_selection.jpg";
+  const employee_image = "/images/employee_selection.jpg";
   const navClass = classNames("selection_panel");
 
   return (
     <div className="container">
-     <div className="selection-title"><h1>LOGIN</h1></div>
+      <div className="selection-title">
+        <h1>LOGIN</h1>
+      </div>
 
       <div className="row d-flex justify-content-center">
-      
         <div className="col-md-4">
           <Link to={"/login/patient"}>
             <div className="selection-panel" onClick={onPatientLogin}>

@@ -132,11 +132,13 @@ const Schedule = ({ appointmentData, bookAppointment, deleteAppointment }) => {
                           const spot = (
                             <td
                               className={`${
-                                ((appointmentData.isEmployee ||
-                                  appointmentData.patient ===
-                                    appointmentData.patients[
-                                      appointment.patient_account_id
-                                    ].first_name) &&
+                                (JSON.parse(
+                                  localStorage.getItem("isEmployee") ||
+                                    appointmentData.patient ===
+                                      appointmentData.patients[
+                                        appointment.patient_account_id
+                                      ].first_name
+                                ) &&
                                   "booked") ||
                                 "bg-secondary"
                               }`}
@@ -150,7 +152,9 @@ const Schedule = ({ appointmentData, bookAppointment, deleteAppointment }) => {
                                 rootClose
                               >
                                 <a>
-                                  {(appointmentData.isEmployee ||
+                                  {(JSON.parse(
+                                    localStorage.getItem("isEmployee")
+                                  ) ||
                                     appointmentData.patient ===
                                       appointmentData.patients[
                                         appointment.patient_account_id

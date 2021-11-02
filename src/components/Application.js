@@ -85,6 +85,19 @@ export default function Application(props) {
     localStorage.setItem("clinic", JSON.stringify(clinic));
   };
 
+  history.listen((nextLocation) => {
+    if (
+      getLocalStorage("isEmployee") &&
+      userLogged &&
+      userLogged.user &&
+      userLogged.user.clinic_id &&
+      nextLocation.pathname ===
+        `/clinic/appointments/${userLogged.user.clinic_id}` &&
+      userLogged.user.clinic_id !== null
+    ) {
+      setClinicAddress(userLogged.user.clinic_id);
+    }
+  });
   useEffect(() => {
     if (userLogged.update_profile) {
       updatePatientProfile(userLogged.user);

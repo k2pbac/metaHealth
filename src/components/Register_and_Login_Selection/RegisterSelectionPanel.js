@@ -10,14 +10,16 @@ import { Link } from "react-router-dom";
 export default function RegisterSelectionPanel(props) {
   const { onPatientRegister, onEmployeeRegister } = props;
 
-  const patient_image = "images/patient-reg.jpg";
-  const employee_image = "images/employee-reg.jpg";
+  const patient_image = "/images/patient-reg.jpg";
+  const employee_image = "/images/employee-reg.jpg";
 
   const navClass = classNames("selection_panel");
 
   return (
     <div className="container">
-      <div className="selection-title"><h1>REGISTER</h1></div>
+      <div className="selection-title">
+        <h1>REGISTER</h1>
+      </div>
       <div className="row d-flex justify-content-center">
         <div className="col-md-4">
           <Link to={"/register/patient"}>
