@@ -37,6 +37,7 @@ import RegisterSelectionPanel from "components/Register_and_Login_Selection/Regi
 import Section from "components/Home/Section";
 import LoginForm from "components/LoginForm/LoginForm";
 import RegisterForm from "components/RegisterForm/RegisterForm";
+import RegisterToAClinicForm from "components/RegisterForm/RegisterToAClinicForm"
 
 //Patient and Employee Manage Appoinments Pages Imports
 import Schedule from "components/Schedule/Schedule";
@@ -70,13 +71,16 @@ import PatientReportList from "components/ManageAppointments/PatientReportList";
 import PatientReportView from "components/ManageAppointments/PatientReportView";
 
 
+
+
 const patient_accounts = {
   id: 1,
-  name: "Michael Scott",
+  first_name: "Michael",
+  last_name: "Scott",
   username: "Mic123",
   avatar: "https://upload.wikimedia.org/wikipedia/en/d/dc/MichaelScott.png",
   date_of_birth: "Jul 12 1980",
-  profile_decription: "I love vaccines!",
+  profile_description: "I love vaccines!",
   phone_number: "416-123-1234",
   email_address: "Michael123@gmail.com",
   address: "23 Dundas St. Toronto, ON",
@@ -89,11 +93,12 @@ const patient_accounts = {
 const employee_accounts = [
   {
     id: 1,
-    name: "Sam Henry",
+    first_name: "Michael",
+    last_name: "Scott",
     username: "Sam123",
     avatar:
       "https://media.istockphoto.com/photos/happy-healthcare-practitioner-picture-id138205019?k=20&m=138205019&s=612x612&w=0&h=KpsSMVsplkOqTnAJmOye4y6DcciVYIBe5dYDgYXLVW4=",
-    profile_decription: "I love working with my patients",
+    profile_description: "I love working with my patients",
     phone_number: "416-321-1234",
     email_address: "SamHenry123@gmail.com",
     employedAt: "Toronto Public Clinic, 123 Yonge St. Toronto,ON M3B 2T1",
@@ -101,11 +106,12 @@ const employee_accounts = [
   },
   {
     id: 2,
-    name: "Cindy Mitchel",
+    first_name: "Michael",
+    last_name: "Scott",
     username: "Cindy123",
     avatar:
       "https://dentalreceptionist.ca/wp-content/uploads/2018/09/iStock-910148934-650x500.jpg",
-    profile_decription: "I'll assist you with in-clinic check-ins",
+    profile_description: "I'll assist you with in-clinic check-ins",
     phone_number: "416-123-5234",
     email_address: "Cindy123@gmail.com",
     employedAt: "Toronto Public Clinic, 123 Yonge St. Toronto,ON M3B 2T1",
@@ -266,11 +272,12 @@ storiesOf("Registration and Login Selection", module)
 storiesOf("View Profile", module)
   .add("Patient Profile", () => (
     <PatientProfile
-      name={patient_accounts.name}
+      first_name={patient_accounts.first_name}
+      last_name={patient_accounts.last_name}
       username={patient_accounts.username}
       avatar={patient_accounts.avatar}
       date_of_birth={patient_accounts.date_of_birth}
-      profile_decription={patient_accounts.profile_decription}
+      profile_description={patient_accounts.profile_description}
       phone_number={patient_accounts.phone_number}
       email_address={patient_accounts.email_address}
       address={patient_accounts.address}
@@ -281,11 +288,12 @@ storiesOf("View Profile", module)
   ))
   .add("Patient Edit Profile", () => (
     <PatientEditProfile
-      name={patient_accounts.name}
+      first_name={patient_accounts.first_name}
+      last_name={patient_accounts.last_name}
       username={patient_accounts.username}
       avatar={patient_accounts.avatar}
       date_of_birth={patient_accounts.date_of_birth}
-      profile_decription={patient_accounts.profile_decription}
+      profile_description={patient_accounts.profile_description}
       phone_number={patient_accounts.phone_number}
       email_address={patient_accounts.email_address}
       address={patient_accounts.address}
@@ -296,11 +304,12 @@ storiesOf("View Profile", module)
   ))
   .add("Patient Profile Index", () => (
     <PatientProfileIndex
-      name={patient_accounts.name}
+      first_name={patient_accounts.first_name}
+      last_name={patient_accounts.last_name}
       username={patient_accounts.username}
       avatar={patient_accounts.avatar}
       date_of_birth={patient_accounts.date_of_birth}
-      profile_decription={patient_accounts.profile_decription}
+      profile_description={patient_accounts.profile_description}
       phone_number={patient_accounts.phone_number}
       email_address={patient_accounts.email_address}
       address={patient_accounts.address}
@@ -310,57 +319,61 @@ storiesOf("View Profile", module)
     ></PatientProfileIndex>
   ))
 
-  .add("Employee Profile", () => (
-    <EmployeeProfile
-      name={employee_accounts[1].name}
-      username={employee_accounts[1].username}
-      avatar={employee_accounts[1].avatar}
-      profile_decription={employee_accounts[1].profile_decription}
-      phone_number={employee_accounts[1].phone_number}
-      email_address={employee_accounts[1].email_address}
-      employedAt={employee_accounts[1].employedAt}
-      isDoctor={employee_accounts[1].isDoctor}
-    ></EmployeeProfile>
-  ))
+  // .add("Employee Profile", () => (
+  //   <EmployeeProfile
+  //     first_name={employee_accounts[1].first_name}
+  //     last_name={employee_accounts[1].last_name}
+  //     username={employee_accounts[1].username}
+  //     avatar={employee_accounts[1].avatar}
+  //     profile_description={employee_accounts[1].profile_description}
+  //     phone_number={employee_accounts[1].phone_number}
+  //     email_address={employee_accounts[1].email_address}
+  //     employedAt={employee_accounts[1].employedAt}
+  //     isDoctor={employee_accounts[1].isDoctor}
+  //   ></EmployeeProfile>
+  // ))
 
-  .add("Employee Edit Profile", () => (
-    <EmployeeEditProfile
-      name={employee_accounts[1].name}
-      username={employee_accounts[1].username}
-      avatar={employee_accounts[1].avatar}
-      profile_decription={employee_accounts[1].profile_decription}
-      phone_number={employee_accounts[1].phone_number}
-      email_address={employee_accounts[1].email_address}
-      employedAt={employee_accounts[1].employedAt}
-      isDoctor={employee_accounts[1].isDoctor}
-    ></EmployeeEditProfile>
-  ))
+  // .add("Employee Edit Profile", () => (
+  //   <EmployeeEditProfile
+  //     first_name={employee_accounts[1].first_name}
+  //     last_name={employee_accounts[1].last_name}
+  //     username={employee_accounts[1].username}
+  //     avatar={employee_accounts[1].avatar}
+  //     profile_description={employee_accounts[1].profile_description}
+  //     phone_number={employee_accounts[1].phone_number}
+  //     email_address={employee_accounts[1].email_address}
+  //     employedAt={employee_accounts[1].employedAt}
+  //     isDoctor={employee_accounts[1].isDoctor}
+  //   ></EmployeeEditProfile>
+  // ))
 
-  .add("Employee Profile Index", () => (
-    <EmployeeProfileIndex
-      name={employee_accounts[1].name}
-      username={employee_accounts[1].username}
-      avatar={employee_accounts[1].avatar}
-      profile_decription={employee_accounts[1].profile_decription}
-      phone_number={employee_accounts[1].phone_number}
-      email_address={employee_accounts[1].email_address}
-      employedAt={employee_accounts[1].employedAt}
-      isDoctor={employee_accounts[1].isDoctor}
-    ></EmployeeProfileIndex>
-  ))
+  // .add("Employee Profile Index", () => (
+  //   <EmployeeProfileIndex
+  //     first_name={employee_accounts[1].first_name}
+  //     last_name={employee_accounts[1].last_name}
+  //     username={employee_accounts[1].username}
+  //     avatar={employee_accounts[1].avatar}
+  //     profile_description={employee_accounts[1].profile_description}
+  //     phone_number={employee_accounts[1].phone_number}
+  //     email_address={employee_accounts[1].email_address}
+  //     employedAt={employee_accounts[1].employedAt}
+  //     isDoctor={employee_accounts[1].isDoctor}
+  //   ></EmployeeProfileIndex>
+  // ))
 
-  .add("Employee Profile Index (Doctor)", () => (
-    <EmployeeProfileIndex
-      name={employee_accounts[0].name}
-      username={employee_accounts[0].username}
-      avatar={employee_accounts[0].avatar}
-      profile_decription={employee_accounts[0].profile_decription}
-      phone_number={employee_accounts[0].phone_number}
-      email_address={employee_accounts[0].email_address}
-      employedAt={employee_accounts[0].employedAt}
-      isDoctor={employee_accounts[0].isDoctor}
-    ></EmployeeProfileIndex>
-  ));
+  // .add("Employee Profile Index (Doctor)", () => (
+  //   <EmployeeProfileIndex
+  //     first_name={employee_accounts[0].first_name}
+  //     last_name={employee_accounts[0].first_name}
+  //     username={employee_accounts[0].username}
+  //     avatar={employee_accounts[0].avatar}
+  //     profile_description={employee_accounts[0].profile_description}
+  //     phone_number={employee_accounts[0].phone_number}
+  //     email_address={employee_accounts[0].email_address}
+  //     employedAt={employee_accounts[0].employedAt}
+  //     isDoctor={employee_accounts[0].isDoctor}
+  //   ></EmployeeProfileIndex>
+  // ));
 
 // Patient and Employee Registration Form
 
@@ -373,6 +386,9 @@ storiesOf("Registration Form", module)
   ))
   .add("Clinic Form", () => (
     <RegisterForm formData={clinicFormData}></RegisterForm>
+  ))
+  .add("Register Employee to an Existing Clinic", () => (
+    <RegisterToAClinicForm formData={}></RegisterToAClinicForm>
   ));
 
 storiesOf("Login Form", module).add("Patient's Form", () => (

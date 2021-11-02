@@ -11,11 +11,13 @@ import LoginSelectionPanel from "./Register_and_Login_Selection/LoginSelectionPa
 import LoginForm from "./LoginForm/LoginForm";
 import RegisterSelectionPanel from "./Register_and_Login_Selection/RegisterSelectionPanel";
 import RegisterForm from "./RegisterForm/RegisterForm";
+import RegisterToAClinicForm from "./RegisterForm/RegisterToAClinicForm"
 import PatientMedicalRecords from "./PatientMedicalRecords/PatientMedicalRecords";
 import {
   employeeFormData,
   patientFormData,
   clinicFormData,
+  registerToAClinicFormData,
 } from "./RegisterForm/FormData";
 import BookAppointments from "./BookAppointments/BookAppointments";
 import PatientProfileIndex from "./View_Profile/PatientProfileIndex";
@@ -152,6 +154,21 @@ export default function Application(props) {
             <RegisterForm formData={clinicFormData}></RegisterForm>
           )}
         />
+
+        <Route
+          path="/register/existing/clinic"
+          component={() => (
+            <RegisterToAClinicForm
+              clinicsList={clinics}
+              clinicName={clinicName}
+              setClinicName={setClinicName}
+            ></RegisterToAClinicForm>
+          )}
+        />
+
+
+
+
         <Route path="/login" component={LoginSelectionPanel} />
         {/* Change Login form for employee vs patient */}
         <Route path="/register" component={RegisterSelectionPanel} />

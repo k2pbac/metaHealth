@@ -53,6 +53,12 @@ export default function LoggedInEmployee(props) {
               <Dropdown.Item as={Link} to="/clinic-medical-records">
                 View Patient Medical Records
               </Dropdown.Item>
+              <Dropdown.Item as={Link} to="/register/clinic">
+                Register a New Clinic
+              </Dropdown.Item>
+              <Dropdown.Item as={Link} to="/register/existing/clinic">
+                Register with an Existing Clinic
+              </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
 

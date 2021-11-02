@@ -29,7 +29,7 @@ export default function EmployeeProfile(props) {
   return (
     <div className="profile">
       <section className="left-section">
-        <Image className="profile-image" src={avatar} alt={name}></Image>
+        <Image className="profile-image" src={avatar} alt={first_name}></Image>
         {isDoctor === true && (
           <Image
             className="doctor-verified"

@@ -62,3 +62,24 @@ module.exports.clinicFormData = {
     ],
   },
 };
+
+module.exports.registerToAClinicFormData = {
+  type: "Employee",
+  fields: {
+    "Clinic Details": [
+      { value: "Name", type: "text" },
+      { value: "Address", type: "text" },
+      { value: "Website", type: "text" },
+      { value: "Phone Number", type: "tel" },
+    ],
+    "Additional Information": [
+      { value: "EIN/TIN Number", type: "text" },
+      { value: "Insurance Number", type: "text" },
+      { value: "Tax ID Number", type: "text" },
+      {
+        value: "Policies, procedures and compliance documentation",
+        type: "file",
+      },
+    ],
+  },
+};
