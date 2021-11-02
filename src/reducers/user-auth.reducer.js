@@ -1,7 +1,9 @@
 //REDUCER -  how our actions transform state from one state to next state - based on action modify store
 import { authConstants } from "constants/auth.constants";
 
-const user = localStorage.getItem("isEmployee") ? localStorage.getItem("isEmployee") : false;
+const user = localStorage.getItem("isEmployee")
+  ? localStorage.getItem("isEmployee")
+  : false;
 
 const authReducer = (state = user, action) => {
   switch (action.type) {

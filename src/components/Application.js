@@ -11,7 +11,7 @@ import LoginSelectionPanel from "./Register_and_Login_Selection/LoginSelectionPa
 import LoginForm from "./LoginForm/LoginForm";
 import RegisterSelectionPanel from "./Register_and_Login_Selection/RegisterSelectionPanel";
 import RegisterForm from "./RegisterForm/RegisterForm";
-import RegisterToAClinicForm from "./RegisterForm/RegisterToAClinicForm"
+import RegisterToAClinicForm from "./RegisterForm/RegisterToAClinicForm";
 import PatientMedicalRecords from "./PatientMedicalRecords/PatientMedicalRecords";
 import {
   employeeFormData,
@@ -75,7 +75,6 @@ export default function Application(props) {
 
   const setClinicAddress = async (clinic_id) => {
     const clinic = await displayClinicAddress(appState, clinic_id);
-    console.log(clinic);
     setClinic({ ...clinic });
     localStorage.setItem("clinic", JSON.stringify(clinic));
   };
@@ -121,10 +120,11 @@ export default function Application(props) {
   return (
     <>
       {!userLogged.loggedIn && <LoggedOut></LoggedOut>}
-      {userLogged.loggedIn && (!isEmployee && !localStorage.getItem("isEmployee")) && (
-        <LoggedInPatient></LoggedInPatient>
-      )}
-      {userLogged.loggedIn && (isEmployee || localStorage.getItem("isEmployee")) && (
+      {userLogged.loggedIn &&
+        (!userAuth.isEmployee || !localStorage.getItem("isEmployee")) && (
+          <LoggedInPatient></LoggedInPatient>
+        )}
+      {userLogged.loggedIn && userLogged.clinic_id && (
         <LoggedInEmployee></LoggedInEmployee>
       )}
       {/* <div className="bg-light" style={{ paddingBottom: "3.5rem" }}> */}
@@ -173,9 +173,6 @@ export default function Application(props) {
             ></RegisterToAClinicForm>
           )}
         />
-
-
-
 
         <Route path="/login" component={LoginSelectionPanel} />
         {/* Change Login form for employee vs patient */}
