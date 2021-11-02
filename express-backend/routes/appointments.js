@@ -22,6 +22,7 @@ router.delete("/api/appointment/:id", (req, res, next) => {
     if (error) {
       throw error;
     }
+    // db.query(`DELETE from patient_records where appointment_id = `);
 
     res.json(results);
   });

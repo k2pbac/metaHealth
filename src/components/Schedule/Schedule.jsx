@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import "./Schedule.scss";
 import Popover from "react-bootstrap/Popover";
