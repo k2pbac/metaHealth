@@ -55,6 +55,7 @@ module.exports.employeeLogin = function (passport) {
           if (error) {
             throw error;
           }
+          console.log(username);
           bcrypt.compare(password, user.rows[0].password, (err, result) => {
             if (err) throw err;
             if (result === true) {

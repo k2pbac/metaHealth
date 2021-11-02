@@ -43,6 +43,11 @@ export default function Application(props) {
 
   const [isEmployee, setIsEmployee] = useState("");
 
+  //Get value of local storage with JSON parse
+  const getLocalStorage = (item) => {
+    return JSON.parse(localStorage.getItem(item));
+  };
+
   // getting individual clinic for manage appointment component
   const [clinic, setClinic] = useState();
 
@@ -80,6 +85,27 @@ export default function Application(props) {
   };
 
   useEffect(() => {
+    if (userLogged.update_profile) {
+      updatePatientProfile(userLogged.user);
+    }
+  }, [userLogged.user]);
+
+  useEffect(() => {
+    setClinics(displayClinics(appState, clinicName));
+  }, [clinicName]);
+
+  useEffect(() => {
+    if (completeRegisterSelector) {
+      if (completeRegisterSelector.isEmployee) {
+        submitEmployeeRegistration(completeRegisterSelector);
+      } else {
+        submitPatientRegistration(completeRegisterSelector);
+      }
+      dispatch(registerComplete());
+    }
+  }, [completeRegisterSelector]);
+
+  useEffect(() => {
     if (userAuth && !userLogged.loggedIn) {
       if (userAuth.isEmployee) {
         authenticateEmployee(userAuth).then((res) => {
@@ -97,37 +123,16 @@ export default function Application(props) {
     }
   }, [userAuth]);
 
-  useEffect(() => {
-    if (userLogged.update_profile) {
-      updatePatientProfile(userLogged.user);
-    }
-  }, [userLogged.user]);
-
-  useEffect(() => {
-    setClinics(displayClinics(appState, clinicName));
-  }, [clinicName]);
-
-  useEffect(() => {
-    if (completeRegisterSelector) {
-      if (completeRegisterSelector.isEmployee) {
-        submitEmployeeRegistration(completeRegisterSelector).then((user) => {});
-      } else {
-        submitPatientRegistration(completeRegisterSelector);
-      }
-      dispatch(registerComplete());
-    }
-  }, [completeRegisterSelector]);
   return (
     <>
       {!userLogged.loggedIn && <LoggedOut></LoggedOut>}
-      {userLogged.loggedIn &&
-        (!userAuth.isEmployee || !localStorage.getItem("isEmployee")) && (
-          <LoggedInPatient></LoggedInPatient>
-        )}
-      {userLogged.loggedIn && userLogged.clinic_id && (
+      {/* Patient Nav View */}
+      {userLogged.loggedIn && getLocalStorage("isEmployee") == false && (
+        <LoggedInPatient></LoggedInPatient>
+      )}
+      {userLogged.loggedIn && getLocalStorage("isEmployee") == true && (
         <LoggedInEmployee></LoggedInEmployee>
       )}
-      {/* <div className="bg-light" style={{ paddingBottom: "3.5rem" }}> */}
       <Switch>
         <Route exact path="/" component={Home} />
         <Route
@@ -215,7 +220,7 @@ export default function Application(props) {
               bookAppointment={bookAppointment}
               deleteAppointment={deleteAppointment}
               appState={appState}
-              clinic={clinic || JSON.parse(localStorage.getItem("clinic"))}
+              clinic={clinic || getLocalStorage("clinic")}
             ></ManageAppointments>
           )}
         />
@@ -224,7 +229,6 @@ export default function Application(props) {
         {/* View Patient Medical Records Routes will also need params passed  */}
         {/* Add/Edit Patient Medical Record Page route will need clinic params */}
       </Switch>
-      {/* </div> */}
       <Footer></Footer>
     </>
   );

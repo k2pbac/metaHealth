@@ -43,9 +43,9 @@ const RegisterForm = ({ formData, isEmployee }) => {
   const handleSubmit = (event) => {
     if (isEmployee) {
       dispatch(registerEmployee({ ...formValues, clinic_id: 1, isEmployee }));
+    } else {
+      dispatch(registerPatient({ ...formValues, clinic_id: 1, isEmployee }));
     }
-
-    dispatch(registerPatient({ ...formValues, clinic_id: 1, isEmployee }));
     history.push("/");
   };
 

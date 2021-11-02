@@ -18,14 +18,15 @@ const ManageAppointments = ({
   clinic,
   isEmployee,
   appState,
-  setAppState,
   bookAppointment,
   deleteAppointment,
+  setAppState,
 }) => {
   const [currentDay, setCurrentDay] = useState(new Date());
   const [appointments, setAppointments] = useState({});
   const [clinicRecords, setClinicRecords] = useState({});
   const loggedUser = useSelector((state) => state.userLogged);
+
   // const getAppointments()
   useEffect(() => {
     const date = new Date(currentDay);
@@ -52,7 +53,7 @@ const ManageAppointments = ({
         clinic.id
       ),
     });
-  }, [appState]);
+  }, [setAppState]);
 
   const handleCalendarChange = (value, event) => {
     const date = new Date(value);
@@ -121,11 +122,13 @@ const ManageAppointments = ({
             )) || <Schedule appointmentData={employeeSchedule}></Schedule>}
           </Column>
           <Column>
-            <PatientSchedule
-              patient={patient}
-              clinicRecords={clinicRecords}
-              clinicName={clinic.name}
-            ></PatientSchedule>
+            {!isEmployee && (
+              <PatientSchedule
+                patient={patient}
+                clinicRecords={clinicRecords}
+                clinicName={clinic.name}
+              ></PatientSchedule>
+            )}
           </Column>
         </Row>
       </Column>
