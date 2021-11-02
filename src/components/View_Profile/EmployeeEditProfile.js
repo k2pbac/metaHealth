@@ -29,7 +29,7 @@ export default function EmployeeEditProfile(props) {
     <Form>
       <div className="profile">
         <section className="left-section">
-          <Image className="profile-image" src={avatar} alt={name}></Image>
+          <Image className="profile-image" src={avatar} alt={first_name}></Image>
           <Button
             variant="outline-dark"
             size="lg"
@@ -71,7 +71,7 @@ export default function EmployeeEditProfile(props) {
               <Form.Control
                 type="profileDescription"
                 as="textarea"
-                placeholder={profile_decription}
+                placeholder={profile_description}
               />
             </Form.Group>
           </div>

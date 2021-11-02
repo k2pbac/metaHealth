@@ -48,4 +48,24 @@ router.get("/api/clinics/:clinic_name", function (req, res, next) {
   );
 });
 
+
+router.put("/api/clinics/register/existing", function (req, res, next) {
+  const {employee, clinic_id} = req.body;
+  console.log("Employee:", employee)
+  console.log("clinic_id:", clinic_id)
+
+
+  db.query(
+  `UPDATE employee_accounts
+   SET clinic_id = ${clinic_id}
+   WHERE id = ${employee.user.id};`, 
+   (error, results) => {
+    if (error) {
+      throw error;
+    }
+    res.json(results.rows);
+  });
+});
+
+
 module.exports = router;

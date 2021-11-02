@@ -82,9 +82,25 @@ const submitPatientRegistration = (user) => {
   }
 };
 
+
+const submitEmployeeRegistrationForClinic = (employee,clinic_id) => {
+  return axios({
+    method: "PUT",
+    data: {
+      employee,
+      clinic_id
+    },
+    withCredentials: true,
+    url: "/api/clinics/register/existing",
+  })
+
+}
+
+
 export const userServices = {
   authenticateEmployee,
   authenticatePatient,
   submitPatientRegistration,
   submitEmployeeRegistration,
+  submitEmployeeRegistrationForClinic
 };

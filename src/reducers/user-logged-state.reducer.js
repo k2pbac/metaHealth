@@ -27,6 +27,11 @@ const userLoggedReducer = (state = initialState, action) => {
       };
     case authConstants.LOGOUT:
       localStorage.removeItem("user");
+      localStorage.removeItem("isEmployee");
+      localStorage.removeItem("clinic_id");
+      localStorage.removeItem("clinic_name");
+      localStorage.removeItem("clinic_address");
+      localStorage.removeItem("address");
       return { loggedIn: false };
     default:
       return state;

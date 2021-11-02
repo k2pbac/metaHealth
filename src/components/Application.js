@@ -11,11 +11,13 @@ import LoginSelectionPanel from "./Register_and_Login_Selection/LoginSelectionPa
 import LoginForm from "./LoginForm/LoginForm";
 import RegisterSelectionPanel from "./Register_and_Login_Selection/RegisterSelectionPanel";
 import RegisterForm from "./RegisterForm/RegisterForm";
+import RegisterToAClinicForm from "./RegisterForm/RegisterToAClinicForm"
 import PatientMedicalRecords from "./PatientMedicalRecords/PatientMedicalRecords";
 import {
   employeeFormData,
   patientFormData,
   clinicFormData,
+  registerToAClinicFormData,
 } from "./RegisterForm/FormData";
 import BookAppointments from "./BookAppointments/BookAppointments";
 import PatientProfileIndex from "./View_Profile/PatientProfileIndex";
@@ -38,8 +40,12 @@ export default function Application(props) {
   const completeRegisterSelector = useSelector((state) => state.registerUser);
   const userAuth = useSelector((state) => state.userAuth);
   const userLogged = useSelector((state) => state.userLogged);
+
+  const [isEmployee, setIsEmployee] = useState("");
+
   // getting individual clinic for manage appointment component
   const [clinic, setClinic] = useState();
+
   const dispatch = useDispatch();
   // let clinic = {};
   const history = useHistory();
@@ -77,11 +83,13 @@ export default function Application(props) {
       if (userAuth.isEmployee) {
         authenticateEmployee(userAuth).then((res) => {
           dispatch(loginUser(res, true));
+          setIsEmployee(true);
           history.push("/");
         });
       } else if (!userAuth.isEmployee) {
         authenticatePatient(userAuth).then((res) => {
           dispatch(loginUser(res, false));
+          setIsEmployee(false);
           history.push("/");
         });
       }
@@ -120,10 +128,10 @@ export default function Application(props) {
   return (
     <>
       {!userLogged.loggedIn && <LoggedOut></LoggedOut>}
-      {userLogged.loggedIn && !userAuth.isEmployee && (
+      {userLogged.loggedIn && (!isEmployee && !localStorage.getItem("isEmployee")) && (
         <LoggedInPatient></LoggedInPatient>
       )}
-      {userLogged.loggedIn && userAuth.isEmployee && (
+      {userLogged.loggedIn && (isEmployee || localStorage.getItem("isEmployee")) && (
         <LoggedInEmployee></LoggedInEmployee>
       )}
       {/* <div className="bg-light" style={{ paddingBottom: "3.5rem" }}> */}
@@ -161,6 +169,21 @@ export default function Application(props) {
             <RegisterForm formData={clinicFormData}></RegisterForm>
           )}
         />
+
+        <Route
+          path="/register/existing/clinic"
+          component={() => (
+            <RegisterToAClinicForm
+              clinicsList={clinics}
+              clinicName={clinicName}
+              setClinicName={setClinicName}
+            ></RegisterToAClinicForm>
+          )}
+        />
+
+
+
+
         <Route path="/login" component={LoginSelectionPanel} />
         {/* Change Login form for employee vs patient */}
         <Route path="/register" component={RegisterSelectionPanel} />
