@@ -32,6 +32,7 @@ const userLoggedReducer = (state = initialState, action) => {
       localStorage.removeItem("clinic_name");
       localStorage.removeItem("clinic_address");
       localStorage.removeItem("address");
+      localStorage.removeItem("clinic");
       return { loggedIn: false };
     default:
       return state;

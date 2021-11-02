@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Table from "react-bootstrap/Table";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
@@ -7,14 +7,19 @@ import "./PatientSchedule.scss";
 import { format } from "date-fns";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
-const PatientSchedule = ({ clinicRecords, clinicName }) => {
+const PatientSchedule = ({ clinicRecords, clinicName, updatePatientNotes }) => {
   const [show, setShow] = useState(false);
   const [visible, setVisible] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [textAreaValue, setTextAreaValue] = useState("");
+  const [updateText, setUpdateText] = useState(false);
+  const [modalState, setModalState] = useState({ activeModal: null });
 
-  const handleSave = () => {
+  const handleSave = (appointment_id) => {
     setVisible(false);
+    updatePatientNotes({ patient_notes: textAreaValue, appointment_id });
+    setUpdateText(true);
   };
 
   const recordList = Object.keys(clinicRecords) ? (
@@ -34,7 +39,10 @@ const PatientSchedule = ({ clinicRecords, clinicName }) => {
           <td>
             <>
               <a
-                onClick={handleShow}
+                onClick={(e) => {
+                  handleShow();
+                  setModalState({ activeModal: index });
+                }}
                 style={{
                   cursor: "pointer",
                   textDecoration: "underline",
@@ -43,55 +51,67 @@ const PatientSchedule = ({ clinicRecords, clinicName }) => {
               >
                 Appointment Notes
               </a>
-
               <Modal
                 centered
                 animation={false}
-                show={show}
+                show={show && modalState.activeModal === index}
                 backdrop={false}
                 scrollable={true}
                 onExit={() => setVisible(false)}
                 onHide={() => {
                   handleClose();
                   setVisible(false);
+                  setModalState({ activeModal: null });
                 }}
               >
                 <Modal.Header closeButton>
                   <Modal.Title>Appointment Notes</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  {clinicRecords[record].information || (
-                    <span className={visible ? "d-none" : "d-block"}>
-                      No Information entered
-                    </span>
+                  {updateText ? (
+                    <p className={visible ? "d-none" : "d-block"}>
+                      {textAreaValue}
+                    </p>
+                  ) : (
+                    (
+                      <p className={visible ? "d-none" : "d-block"}>
+                        {clinicRecords[record].patient_notes}
+                      </p>
+                    ) || (
+                      <span className={visible ? "d-none" : "d-block"}>
+                        No Information entered
+                      </span>
+                    )
                   )}
-
                   <>
-                    <FloatingLabel
+                    <Form.Control
+                      name="textarea"
+                      // value={textAreaValue}
+                      defaultValue={clinicRecords[record].patient_notes}
+                      onChange={(e) => setTextAreaValue(e.target.value)}
+                      as="textarea"
+                      placeholder="Leave a comment here"
+                      style={{ height: "100px" }}
                       className={visible ? "d-block" : "d-none"}
-                      controlId="floatingTextarea2"
-                      label="Comments"
-                    >
-                      <Form.Control
-                        as="textarea"
-                        placeholder="Leave a comment here"
-                        style={{ height: "100px" }}
-                      />
-                    </FloatingLabel>
+                    />
                   </>
                 </Modal.Body>
                 <Modal.Footer>
                   <Button
                     className={visible ? "d-block" : "d-none"}
                     variant="secondary"
-                    onClick={() => setVisible(false)}
+                    onClick={(e, index) => {
+                      setVisible(false);
+                    }}
                   >
                     Go Back
                   </Button>
                   <Button
                     className={visible ? "d-none" : "d-block"}
                     variant="success"
-                    onClick={() => setVisible(true)}
+                    onClick={(e, index) => {
+                      setVisible(true);
+                    }}
                   >
                     Edit
                   </Button>
@@ -99,7 +119,7 @@ const PatientSchedule = ({ clinicRecords, clinicName }) => {
                     className={visible ? "d-block" : "d-none"}
                     variant="success"
                     onClick={() => {
-                      handleSave();
+                      handleSave(clinicRecords[record].appointment_id);
                     }}
                   >
                     Save Changes

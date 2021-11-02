@@ -70,12 +70,9 @@ CREATE TABLE patient_records (
   updated_at timestamp default CURRENT_DATE,
   medication_prescribed TEXT,
   date_of_symptoms timestamp,
-  appointment_id INTEGER REFERENCES appointments(id),
-  patient_id INTEGER REFERENCES patient_accounts(id) ON DELETE CASCADE
+  patient_id INTEGER DEFAULT NULL,
+  appointment_id INTEGER REFERENCES appointments(id) ON DELETE CASCADE
 );
-
-
-
 
 CREATE TABLE registered (
   id SERIAL PRIMARY KEY NOT NULL,

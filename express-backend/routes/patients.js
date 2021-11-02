@@ -30,24 +30,41 @@ router.get("/api/patients", function (req, res, next) {
     );
   });
 
-  router.put("/api/patient/profile", (req, res, next) => {
-    const {
-      first_name,
-      last_name,
-      username,
-      date_of_birth,
-      profile_description,
-      phone_number,
-      email_address,
-      address,
-      insurance_member_id,
-      insurance_policy_number = 12344234,
-      insurance_plan_name,
-      id,
-    } = req.body;
+  router.put("/api/patient/records", (req, res, next) => {
+    const { patient_notes, appointment_id } = req.body;
 
     db.query(
-      `UPDATE patient_accounts 
+      `UPDATE appointments
+    SET patient_notes = '${patient_notes}'
+    WHERE appointments.id = ${appointment_id}`,
+      (error, results) => {
+        if (error) {
+          throw error;
+        }
+        res.json(results.rows);
+      }
+    );
+  });
+});
+
+router.put("/api/patient/profile", (req, res, next) => {
+  const {
+    first_name,
+    last_name,
+    username,
+    date_of_birth,
+    profile_description,
+    phone_number,
+    email_address,
+    address,
+    insurance_member_id,
+    insurance_policy_number = 12344234,
+    insurance_plan_name,
+    id,
+  } = req.body;
+
+  db.query(
+    `UPDATE patient_accounts 
     SET first_name = '${first_name}',
     last_name = '${last_name}',
     username = '${username}',
@@ -61,33 +78,29 @@ router.get("/api/patients", function (req, res, next) {
     insurance_plan_name = '${insurance_plan_name}'
     WHERE patient_accounts.id = ${id}
     `,
-      (error, results) => {
-        if (error) {
-          throw error;
-        }
-        res.json(results.rows);
+    (error, results) => {
+      if (error) {
+        throw error;
       }
-    );
-  });
+      res.json(results.rows);
+    }
+  );
+});
 
-  router.get(
-    "/api/registered-patients/:patient_name",
-    function (req, res, next) {
-      const { patient_name } = req.params;
+router.get("/api/registered-patients/:patient_name", function (req, res, next) {
+  const { patient_name } = req.params;
 
-      db.query(
-        `SELECT *, registered.clinic_id FROM patient_accounts 
+  db.query(
+    `SELECT *, registered.clinic_id FROM patient_accounts 
         JOIN registered on patient_accounts.id = registered.patient_account_id
         WHERE (first_name ILIKE '${patient_name}%') 
         OR (last_name ILIKE '${patient_name}%')
         ORDER BY last_name;`,
-        (error, results) => {
-          if (error) {
-            throw error;
-          }
-          res.json(results.rows);
-        }
-      );
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.json(results.rows);
     }
   );
 });
