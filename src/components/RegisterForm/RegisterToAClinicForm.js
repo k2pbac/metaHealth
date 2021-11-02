@@ -89,7 +89,7 @@ export default function RegisterToAClinicForm(props) {
         <div>{localStorage.getItem("clinic_address")}</div>
         </section>
         <div className="approval">Your application may take time to get approved by the clinic</div>
-        <div classname="return-link">
+        <div className="return-link">
           <a href="/">Return To Home</a>
         </div>
         </div>

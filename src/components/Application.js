@@ -40,6 +40,7 @@ export default function Application(props) {
   const completeRegisterSelector = useSelector((state) => state.registerUser);
   const userAuth = useSelector((state) => state.userAuth);
   const userLogged = useSelector((state) => state.userLogged);
+  const [isEmployee, setIsEmployee] = useState("");
   const dispatch = useDispatch();
   let clinic = {};
   const history = useHistory();
@@ -72,11 +73,13 @@ export default function Application(props) {
       if (userAuth.isEmployee) {
         authenticateEmployee(userAuth).then((res) => {
           dispatch(loginUser(res, true));
+          setIsEmployee(true);
           history.push("/");
         });
       } else if (!userAuth.isEmployee) {
         authenticatePatient(userAuth).then((res) => {
           dispatch(loginUser(res, false));
+          setIsEmployee(false);
           history.push("/");
         });
       }
@@ -114,10 +117,10 @@ export default function Application(props) {
   return (
     <>
       {!userLogged.loggedIn && <LoggedOut></LoggedOut>}
-      {userLogged.loggedIn && !userAuth.isEmployee && (
+      {userLogged.loggedIn && (!isEmployee && !localStorage.getItem("isEmployee")) && (
         <LoggedInPatient></LoggedInPatient>
       )}
-      {userLogged.loggedIn && userAuth.isEmployee && (
+      {userLogged.loggedIn && (isEmployee || localStorage.getItem("isEmployee")) && (
         <LoggedInEmployee></LoggedInEmployee>
       )}
       <Switch>
