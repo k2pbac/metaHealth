@@ -55,6 +55,7 @@ CREATE TABLE patient_accounts (
 
 CREATE TABLE appointments (
   id SERIAL PRIMARY KEY NOT NULL,
+  patient_notes TEXT DEFAULT NULL,
   date timestamp NOT NULL,
   active BOOLEAN NOT NULL,
   clinic_id INTEGER REFERENCES clinics(id) ON DELETE CASCADE,
