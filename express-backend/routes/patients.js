@@ -14,6 +14,22 @@ router.get("/api/patients", function (req, res, next) {
     }
   );
 
+  router.get("/api/patient/records", (req, res, next) => {
+    db.query(
+      `SELECT * FROM patient_records
+      join appointments on appointment_id = appointments.id
+      join employee_accounts on appointments.employee_account_id = employee_accounts.id 
+      where patient_id = 202
+       ORDER By created_at`,
+      (error, results) => {
+        if (error) {
+          throw error;
+        }
+        res.json(results.rows);
+      }
+    );
+  });
+
   router.put("/api/patient/profile", (req, res, next) => {
     const {
       first_name,
@@ -87,21 +103,23 @@ router.post("/api/patient/book", (req, res, next) => {
   // console.log("formatted:", newDate);
   db.query(
     `INSERT INTO appointments (date, active, clinic_id, patient_account_id, employee_account_id)
-    values ('${newDate}', 'true', '${clinic_id}', ${patient_account_id}, ${employee_account_id} )`,
+    values ('${newDate}', 'true', '${clinic_id}', ${patient_account_id}, ${employee_account_id} ) RETURNING ID`,
     (error, results) => {
       if (error) {
         throw error;
       }
-      res.json(results.rows);
+      console.log(results.rows);
+      db.query(
+        `INSERT INTO patient_records (created_at, updated_at, appointment_id, patient_id) 
+        values ('${newDate}', '${newDate}', ${results.rows[0].id}, ${patient_account_id} )`,
+        (error, results) => {
+          if (error) throw error;
+
+          res.json(results.rows);
+        }
+      );
     }
   );
 });
 
 module.exports = router;
-// SELECT * FROM patient_accounts
-//       JOIN registered on patient_accounts.id = registered.patient_account_id
-//       WHERE (first_name LIKE UPPER('k%'))
-//       OR (first_name LIKE LOWER('k%'))
-//       OR (last_name LIKE UPPER('k%'))
-//       OR (last_name LIKE LOWER('k%'))
-//       ORDER BY last_name;

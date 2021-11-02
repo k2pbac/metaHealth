@@ -1,6 +1,6 @@
 .schedule.scrollable-table {
-  width: 1000px;
-  // table-layout: fixed;
+  width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
   border: 1px solid black;
 
@@ -11,6 +11,10 @@
   }
   thead tr {
     display: block;
+  }
+
+  tr {
+    width: auto !important;
   }
 
   td {

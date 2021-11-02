@@ -53,17 +53,6 @@ CREATE TABLE patient_accounts (
   insurance_plan_name VARCHAR(255) DEFAULT NULL
 );
 
-CREATE TABLE patient_records (
-  id SERIAL PRIMARY KEY NOT NULL,
-  information TEXT NOT NULL,
-  created_at timestamp default CURRENT_DATE,
-  updated_at timestamp default CURRENT_DATE,
-  medication_prescribed TEXT DEFAULT NULL,
-  date_of_symptoms timestamp NOT NULL,
-  patient_id INTEGER REFERENCES patient_accounts(id) ON DELETE CASCADE
-);
-
-
 CREATE TABLE appointments (
   id SERIAL PRIMARY KEY NOT NULL,
   date timestamp NOT NULL,
@@ -72,6 +61,20 @@ CREATE TABLE appointments (
   patient_account_id INTEGER REFERENCES patient_accounts(id) ON DELETE CASCADE,
   employee_account_id INTEGER REFERENCES employee_accounts(id) ON DELETE CASCADE
 );
+
+CREATE TABLE patient_records (
+  id SERIAL PRIMARY KEY NOT NULL,
+  information TEXT,
+  created_at timestamp default CURRENT_DATE,
+  updated_at timestamp default CURRENT_DATE,
+  medication_prescribed TEXT,
+  date_of_symptoms timestamp,
+  appointment_id INTEGER REFERENCES appointments(id),
+  patient_id INTEGER REFERENCES patient_accounts(id) ON DELETE CASCADE
+);
+
+
+
 
 CREATE TABLE registered (
   id SERIAL PRIMARY KEY NOT NULL,

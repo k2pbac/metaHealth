@@ -10,12 +10,14 @@ const LoginForm = ({ isEmployee }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-
   const handleSubmit = (event) => {
     event.preventDefault();
+
     if (isEmployee) {
+      console.log(isEmployee);
       dispatch(authenticateEmployee(username, password, isEmployee));
     } else {
+      console.log(isEmployee);
       dispatch(authenticatePatient(username, password, isEmployee));
     }
   };

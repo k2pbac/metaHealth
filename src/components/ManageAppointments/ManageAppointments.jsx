@@ -11,7 +11,7 @@ import {
   employeeSchedule,
   patientSchedule,
 } from "components/Schedule/AppointmentData";
-import { displayClinicAppointments } from "helpers/selectors";
+import { displayClinicAppointments, getClinicRecords } from "helpers/selectors";
 import { useSelector } from "react-redux";
 import { format } from "date-fns";
 const ManageAppointments = ({
@@ -24,6 +24,7 @@ const ManageAppointments = ({
 }) => {
   const [currentDay, setCurrentDay] = useState(new Date());
   const [appointments, setAppointments] = useState({});
+  const [clinicRecords, setClinicRecords] = useState({});
   const loggedUser = useSelector((state) => state.userLogged);
   // const getAppointments()
   useEffect(() => {
@@ -42,6 +43,14 @@ const ManageAppointments = ({
       date: formattedDate,
       clinic_id: clinic.id,
       bookingDate: currentDay,
+    });
+    setClinicRecords({
+      ...getClinicRecords(
+        appState,
+        formattedDate,
+        loggedUser.user.id,
+        clinic.id
+      ),
     });
   }, [appState]);
 
@@ -63,10 +72,22 @@ const ManageAppointments = ({
       clinic_id: clinic.id,
       bookingDate: value,
     });
+    setClinicRecords({
+      ...getClinicRecords(
+        appState,
+        formattedDate,
+        loggedUser.user.id,
+        clinic.id
+      ),
+    });
   };
 
+  useEffect(() => {
+    console.log(clinicRecords);
+  }, [clinicRecords]);
+
   return (
-    <Row className="p-3">
+    <Row className="p-3 w-100">
       <Column>
         {(isEmployee && (
           <div className="d-flex flex-column align-items-center">
@@ -101,8 +122,9 @@ const ManageAppointments = ({
           </Column>
           <Column>
             <PatientSchedule
-              setAppState={setAppState}
               patient={patient}
+              clinicRecords={clinicRecords}
+              clinicName={clinic.name}
             ></PatientSchedule>
           </Column>
         </Row>

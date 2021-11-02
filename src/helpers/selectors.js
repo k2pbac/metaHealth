@@ -80,11 +80,31 @@ export const displayClinicAppointments = (
     patients: { ...sorted_patients },
   };
 };
-//appointments table for appointments
-//patient_account table
-// -- will need the logged in user
-// -- will need a list of patients who have appointments on that day
-//employee_accounts table
-// -- will need a list of doctors who were the doctor for that appointment
 
-//date format 2021-02-28 23:14:18
+export const getClinicRecords = (
+  { clinicRecords, appointments },
+  date,
+  patient_id,
+  clinic_id
+) => {
+  const records = {};
+  let sorted_appointments = [];
+
+  for (let appointment in appointments) {
+    if (
+      clinic_id === appointments[appointment].clinic_id &&
+      appointments[appointment].patient_account_id === patient_id
+    ) {
+      sorted_appointments.push(appointments[appointment]);
+    }
+  }
+
+  for (let record in clinicRecords) {
+    if (clinicRecords[record].patient_id === patient_id) {
+      records[record] = clinicRecords[record];
+    }
+  }
+
+  console.log(records);
+  return records;
+};
