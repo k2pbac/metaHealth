@@ -109,6 +109,25 @@
   }
 }
 
+.inline{
+  display: flex;
+  flex-direction: row;
+}
+
+.clinic-card label {
+  display: block;
+  background: lightgrey;
+  width: 100%;
+  height: 13px;
+  
+}
+#demo:checked + label {
+  background: green;
+  color: white;
+}
+
+
+
 @media only screen and (max-width: 1400px) {
   .clinic-card {
     grid-column-end: span 6;

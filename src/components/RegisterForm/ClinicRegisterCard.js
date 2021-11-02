@@ -25,6 +25,11 @@ export default function ClinicRegisterCard(props) {
       onClick={storeClinic}
       className="clinic-card"
     >
+      <div className="inline">
+      <input type="checkbox" id="demo"/>
+      <label for="demo"></label>
+      </div>
+
       <div className="clinic-image-container">
         <Image className="clinic-image" src={image} alt={name}></Image>
       </div>
