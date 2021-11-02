@@ -14,7 +14,14 @@ import {
 import { displayClinicAppointments, getClinicRecords } from "helpers/selectors";
 import { useSelector } from "react-redux";
 import { format } from "date-fns";
+
 import Spinner from "react-bootstrap/Spinner";
+
+import ClinicEmployeeList from "./ClinicEmployeeList";
+
+import { userServices } from "hooks/userServices";
+const { getEmployeesForClinic } = userServices;
+
 const ManageAppointments = ({
   clinic,
   isEmployee,
@@ -27,11 +34,15 @@ const ManageAppointments = ({
   const [currentDay, setCurrentDay] = useState(new Date());
   const [appointments, setAppointments] = useState({});
   const [clinicRecords, setClinicRecords] = useState({});
+  // State for employee list in manage appointment index
+  const [employeeList, setEmployeeList] = useState();
+
   const loggedUser = useSelector((state) => state.userLogged);
 
   useEffect(() => {
     const date = new Date(currentDay);
     var formattedDate = format(date, "MMMM do, yyyy");
+
     if (clinic) {
       setAppointments({
         ...displayClinicAppointments(
@@ -53,6 +64,12 @@ const ManageAppointments = ({
           loggedUser.user.id,
           clinic.id
         ),
+      });
+      setEmployeeList(() => {
+        const clinic_id = JSON.parse(
+          localStorage.getItem("user").user.clinic_id
+        );
+        return getEmployeesForClinic(clinic_id);
       });
     }
   }, []);
@@ -129,13 +146,17 @@ const ManageAppointments = ({
                 ))}
             </Column>
             <Column>
-              {!JSON.parse(localStorage.getItem("isEmployee")) && (
+              {(!JSON.parse(localStorage.getItem("isEmployee")) && (
                 <PatientSchedule
                   patient={patient}
                   clinicRecords={clinicRecords}
                   clinicName={clinic.name}
                   updatePatientNotes={updatePatientNotes}
                 ></PatientSchedule>
+              )) || (
+                <ClinicEmployeeList
+                  employeeList={employeeList}
+                ></ClinicEmployeeList>
               )}
             </Column>
           </Row>
