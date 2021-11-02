@@ -14,6 +14,7 @@ import {
 import { displayClinicAppointments, getClinicRecords } from "helpers/selectors";
 import { useSelector } from "react-redux";
 import { format } from "date-fns";
+import Spinner from "react-bootstrap/Spinner";
 const ManageAppointments = ({
   clinic,
   isEmployee,
@@ -21,39 +22,40 @@ const ManageAppointments = ({
   bookAppointment,
   deleteAppointment,
   setAppState,
+  updatePatientNotes,
 }) => {
   const [currentDay, setCurrentDay] = useState(new Date());
   const [appointments, setAppointments] = useState({});
   const [clinicRecords, setClinicRecords] = useState({});
   const loggedUser = useSelector((state) => state.userLogged);
 
-  // const getAppointments()
   useEffect(() => {
     const date = new Date(currentDay);
     var formattedDate = format(date, "MMMM do, yyyy");
-
-    setAppointments({
-      ...displayClinicAppointments(
-        appState,
-        currentDay.toLocaleDateString("en-US"),
-        clinic.id
-      ),
-      isEmployee,
-      patient: loggedUser.user.first_name,
-      id: loggedUser.user.id,
-      date: formattedDate,
-      clinic_id: clinic.id,
-      bookingDate: currentDay,
-    });
-    setClinicRecords({
-      ...getClinicRecords(
-        appState,
-        formattedDate,
-        loggedUser.user.id,
-        clinic.id
-      ),
-    });
-  }, [setAppState]);
+    if (clinic) {
+      setAppointments({
+        ...displayClinicAppointments(
+          appState,
+          currentDay.toLocaleDateString("en-US"),
+          clinic.id
+        ),
+        isEmployee,
+        patient: loggedUser.user.first_name,
+        id: loggedUser.user.id,
+        date: formattedDate,
+        clinic_id: clinic.id,
+        bookingDate: currentDay,
+      });
+      setClinicRecords({
+        ...getClinicRecords(
+          appState,
+          formattedDate,
+          loggedUser.user.id,
+          clinic.id
+        ),
+      });
+    }
+  }, []);
 
   const handleCalendarChange = (value, event) => {
     const date = new Date(value);
@@ -83,56 +85,55 @@ const ManageAppointments = ({
     });
   };
 
-  useEffect(() => {
-    console.log(clinicRecords);
-  }, [clinicRecords]);
-
   return (
-    <Row className="p-3 w-100">
-      <Column>
-        {(isEmployee && (
-          <div className="d-flex flex-column align-items-center">
-            <h3>{employeeSchedule.clinic}</h3>
-            <p style={{ width: "50%" }}>{clinic.address}</p>
-          </div>
-        )) || (
-          <>
-            <span>{clinic.name}</span>
-            <p className="w-50">{clinic.address}</p>
-          </>
-        )}
+    (clinic && (
+      <Row className="p-3 w-100">
+        <Column>
+          {(isEmployee && (
+            <div className="d-flex flex-column align-items-center">
+              <h3>{employeeSchedule.clinic}</h3>
+              <p style={{ width: "50%" }}>{clinic.address}</p>
+            </div>
+          )) || (
+            <>
+              <span>{clinic.name}</span>
+              <p className="w-50">{clinic.address}</p>
+            </>
+          )}
 
-        <Calendar
-          className="mb-5"
-          onChange={handleCalendarChange}
-          value={currentDay}
-        />
-        {isEmployee && <a href="#!">View Patient Medical Records</a>}
-      </Column>
-      <Column>
-        <Row>
-          <Column>
-            {(!isEmployee && (
-              <Schedule
-                setAppointments={setAppointments}
-                bookAppointment={bookAppointment}
-                appointmentData={appointments}
-                deleteAppointment={deleteAppointment}
-              ></Schedule>
-            )) || <Schedule appointmentData={employeeSchedule}></Schedule>}
-          </Column>
-          <Column>
-            {!isEmployee && (
-              <PatientSchedule
-                patient={patient}
-                clinicRecords={clinicRecords}
-                clinicName={clinic.name}
-              ></PatientSchedule>
-            )}
-          </Column>
-        </Row>
-      </Column>
-    </Row>
+          <Calendar
+            className="mb-5"
+            onChange={handleCalendarChange}
+            value={currentDay}
+          />
+          {isEmployee && <a href="#!">View Patient Medical Records</a>}
+        </Column>
+        <Column>
+          <Row>
+            <Column>
+              {(!isEmployee && (
+                <Schedule
+                  setAppointments={setAppointments}
+                  bookAppointment={bookAppointment}
+                  appointmentData={appointments}
+                  deleteAppointment={deleteAppointment}
+                ></Schedule>
+              )) || <Schedule appointmentData={employeeSchedule}></Schedule>}
+            </Column>
+            <Column>
+              {!isEmployee && (
+                <PatientSchedule
+                  patient={patient}
+                  clinicRecords={clinicRecords}
+                  clinicName={clinic.name}
+                  updatePatientNotes={updatePatientNotes}
+                ></PatientSchedule>
+              )}
+            </Column>
+          </Row>
+        </Column>
+      </Row>
+    )) || <Spinner></Spinner>
   );
 };
 

@@ -69,6 +69,7 @@ export default function Application(props) {
     bookAppointment,
     deleteAppointment,
     updatePatientProfile,
+    updatePatientNotes,
   } = useApplicationData();
 
   const {
@@ -221,6 +222,7 @@ export default function Application(props) {
               deleteAppointment={deleteAppointment}
               appState={appState}
               clinic={clinic || getLocalStorage("clinic")}
+              updatePatientNotes={updatePatientNotes}
             ></ManageAppointments>
           )}
         />

@@ -62,6 +62,14 @@ const useApplicationData = () => {
     }
   };
 
+  const updatePatientNotes = (patientUpdates) => {
+    if (patientUpdates) {
+      axios.put("/api/patient/records", patientUpdates).then((res) => {
+        console.log(res);
+      });
+    }
+  };
+
   useEffect(() => {
     Promise.all([
       axios.get("/api/clinics"),
@@ -112,6 +120,7 @@ const useApplicationData = () => {
     updatePatientProfile,
     bookAppointment,
     deleteAppointment,
+    updatePatientNotes,
   };
 };
 
