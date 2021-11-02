@@ -96,11 +96,30 @@ const submitEmployeeRegistrationForClinic = (employee,clinic_id) => {
 
 }
 
+const getPatientRecordsForClinic= (patient_name,clinic_id) => {
+  return axios({
+    method: "POST",
+    data: {
+      patient_name,
+      clinic_id
+    },
+    withCredentials: true,
+    url: "/api/clinics/patient/records",
+  }).then((result)=>{
+    console.log("result:",result.data)
+    return result.data
+  })
+
+}
+
+
+
 
 export const userServices = {
   authenticateEmployee,
   authenticatePatient,
   submitPatientRegistration,
   submitEmployeeRegistration,
-  submitEmployeeRegistrationForClinic
+  submitEmployeeRegistrationForClinic,
+  getPatientRecordsForClinic
 };
