@@ -78,7 +78,11 @@ const submitPatientRegistration = (user) => {
       },
       withCredentials: true,
       url: "/api/patient/register ",
-    });
+    })
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => console.log(err));
   }
 };
 
@@ -122,8 +126,8 @@ const getEmployeesForClinic = async (clinic_id) => {
   });
 };
 
-const verifyEmployee = (employee_id,clinic_id) => {
-  return  axios({
+const verifyEmployee = (employee_id, clinic_id) => {
+  return axios({
     method: "PUT",
     data: {
       employee_id,
@@ -136,8 +140,8 @@ const verifyEmployee = (employee_id,clinic_id) => {
   });
 };
 
-const unverifyEmployee = (employee_id,clinic_id) => {
-  return  axios({
+const unverifyEmployee = (employee_id, clinic_id) => {
+  return axios({
     method: "PUT",
     data: {
       employee_id,
@@ -150,8 +154,7 @@ const unverifyEmployee = (employee_id,clinic_id) => {
   });
 };
 
-
-const getClinicData= (clinic_id) => {
+const getClinicData = (clinic_id) => {
   return axios({
     method: "POST",
     data: {
@@ -164,7 +167,6 @@ const getClinicData= (clinic_id) => {
   });
 };
 
-
 export const userServices = {
   authenticateEmployee,
   authenticatePatient,
@@ -175,5 +177,5 @@ export const userServices = {
   getEmployeesForClinic,
   verifyEmployee,
   unverifyEmployee,
-  getClinicData
+  getClinicData,
 };

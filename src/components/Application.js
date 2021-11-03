@@ -121,9 +121,17 @@ export default function Application(props) {
   useEffect(() => {
     if (completeRegisterSelector) {
       if (completeRegisterSelector.isEmployee) {
-        submitEmployeeRegistration(completeRegisterSelector);
+        submitEmployeeRegistration(completeRegisterSelector).then((res) => {
+          if (res.payload) {
+            history.push("/");
+          }
+        });
       } else {
-        submitPatientRegistration(completeRegisterSelector);
+        submitPatientRegistration(completeRegisterSelector).then((res) => {
+          if (res.payload) {
+            history.push("/");
+          }
+        });
       }
       dispatch(registerComplete());
     }
