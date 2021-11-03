@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import Column from "react-bootstrap/Col";
 import { FloatingLabel, Form } from "react-bootstrap";
-
+import { useSelector } from "react-redux";
 const PatientReport = ({
   patient,
   report,
@@ -15,6 +15,7 @@ const PatientReport = ({
   deleteReport,
   editPatientRecord,
 }) => {
+  const userLogged = useSelector((state) => state.userLogged);
   const [reportData, setReportData] = useState({
     info: report.information,
     medication: report.medication_prescribed,
@@ -40,18 +41,17 @@ const PatientReport = ({
               Currently Editing
             </span>
           )}
-          <p>
-            Created on {new Date(report.created_at).toLocaleDateString() || ""}
-          </p>
+          <p>Created on {new Date(report.created_at).toLocaleString() || ""}</p>
           <p>Created by {report.created_by || "Dr. Smith Jones"}</p>
         </Column>
-        <Column className="d-flex align-items-end flex-column">
-          <p>
-            Last updated{" "}
-            {new Date(report.updated_at).toLocaleDateString() || ""}
-          </p>
-          <p>Last updated by {report.last_updated_by || "Dr. Smith Jones"}</p>
-        </Column>
+        {report.timezone && (
+          <Column className="d-flex align-items-end flex-column">
+            <p>
+              Last updated {new Date(report.timezone).toLocaleString() || ""}
+            </p>
+            <p>Last updated by {report.updated_by}</p>
+          </Column>
+        )}
       </Row>
       <Row
         style={{
@@ -166,7 +166,13 @@ const PatientReport = ({
                           return newForm;
                         });
                         console.log(reportData, patient.id);
-                        editPatientRecord(reportData, patient.id);
+                        editPatientRecord(
+                          reportData,
+                          patient.id,
+                          userLogged.user.first_name +
+                            " " +
+                            userLogged.user.last_name
+                        );
                       }}
                     >
                       Save

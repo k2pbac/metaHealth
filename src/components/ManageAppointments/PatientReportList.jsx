@@ -33,7 +33,6 @@ const PatientReportList = ({
       var today = new Date().toLocaleDateString();
       setReports((prev) => [
         {
-          id: prev[prev.length - 1].id + 1,
           created_on: today,
           created_by: "Dr. Sam Henry",
           last_updated: today,
@@ -56,7 +55,7 @@ const PatientReportList = ({
   return reports.map((report, index) => {
     return (
       <PatientReport
-        key={report.id}
+        key={report.id || Math.random(12314)}
         report={report}
         clinic={reportData.clinic}
         patient={reportData.patient}

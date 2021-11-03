@@ -148,7 +148,7 @@ export const getPatientMedicalRecords = (
     email_address,
     phone_number,
   } = foundPatient[patient_id];
-
+  console.log(reports);
   return {
     clinic: name,
     address: address,

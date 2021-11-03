@@ -70,13 +70,13 @@ const useApplicationData = () => {
     }
   };
 
-  const editPatientRecord = (reportData, patient_id) => {
-    console.log(reportData);
+  const editPatientRecord = (reportData, patient_id, user) => {
     if (reportData) {
       axios
         .put("/api/patient/report", {
           ...reportData,
           patient_id,
+          user,
         })
         .then((res) => {
           console.log(res);

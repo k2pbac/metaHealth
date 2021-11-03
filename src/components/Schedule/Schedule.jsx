@@ -207,7 +207,7 @@ const Schedule = ({ appointmentData, bookAppointment, deleteAppointment }) => {
           })) ||
           [8, 9, 10, 11, 12, 1, 2, 3, 4, 5].map((timeslot, index) => {
             return (
-              <tr key={index}>
+              <tr key={Math.random(123142)}>
                 <td>
                   {timeslot < 12 && timeslot >= 8
                     ? timeslot + ":00 AM"
@@ -277,9 +277,9 @@ const Schedule = ({ appointmentData, bookAppointment, deleteAppointment }) => {
                           </OverlayTrigger>
                         </td>
                       )
-                    ) || <td></td>;
+                    ) || <td key={Math.random(23432)}></td>;
                     return spot;
-                  })) || <td></td>}
+                  })) || <td key={Math.random(23432)}></td>}
               </tr>
             );
           })}
