@@ -45,19 +45,13 @@ const PatientReportList = ({
         "December",
       ];
 
-      var today = new Date(),
-        date =
-          monthNames[today.getMonth() + 1] +
-          " " +
-          today.getDate() +
-          ", " +
-          today.getFullYear();
+      var today = new Date().toLocaleDateString();
       setReports((prev) => [
         {
           id: prev[prev.length - 1].id + 1,
-          created_on: date,
+          created_on: today,
           created_by: "Dr. Sam Henry",
-          last_updated: date,
+          last_updated: today,
           last_updated_by: "Dr. Sam Henry",
           information: "",
           medication_prescribed: "",

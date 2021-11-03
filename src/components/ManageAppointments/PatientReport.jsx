@@ -68,6 +68,7 @@ const PatientReport = ({
                 label="Information"
               >
                 <Form.Control
+                  name="info"
                   as="textarea"
                   placeholder="Leave a comment here"
                   style={{ height: "150px" }}
@@ -93,6 +94,7 @@ const PatientReport = ({
                   label="Prescription"
                 >
                   <Form.Control
+                    name="medication"
                     type="text"
                     placeholder=""
                     value={reportData.medication}
@@ -115,6 +117,7 @@ const PatientReport = ({
                   className=""
                 >
                   <Form.Control
+                    name="referral"
                     value={reportData.referral}
                     type="text"
                     placeholder=""

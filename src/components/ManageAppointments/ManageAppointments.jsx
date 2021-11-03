@@ -20,7 +20,8 @@ import Spinner from "react-bootstrap/Spinner";
 import ClinicEmployeeList from "./ClinicEmployeeList";
 
 import { userServices } from "hooks/userServices";
-const { getEmployeesForClinic } = userServices;
+const { getEmployeesForClinic, verifyEmployee, unverifyEmployee } =
+  userServices;
 
 const ManageAppointments = ({
   clinic,
