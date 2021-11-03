@@ -98,11 +98,11 @@ router.post("/api/clinics/patient/records", function (req, res, next) {
 
 router.put("/api/clinics/register/existing", function (req, res, next) {
   const { employee, clinic_id } = req.body;
-
+  console.log("employee.user.body:",employee.user)
   db.query(
     `UPDATE employee_accounts
    SET clinic_id = ${clinic_id}
-   WHERE id = ${employee.user.id};`,
+   WHERE id = ${employee.user.id}`,
     (error, results) => {
       if (error) {
         throw error;

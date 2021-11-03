@@ -22,6 +22,7 @@ export default function EmployeeProfileIndex(props) {
   const [employedAt, setEmployedAt] = useState();
 
   const {
+    id,
     first_name,
     last_name,
     username,
@@ -79,6 +80,7 @@ export default function EmployeeProfileIndex(props) {
     <article>
       {mode === SHOW && (
         <EmployeeProfile
+          id = {id}
           first_name={first_name}
           last_name={last_name}
           username={username}
@@ -96,6 +98,7 @@ export default function EmployeeProfileIndex(props) {
       )}
       {mode === EDIT && (
         <EmployeeEditProfile
+          id = {id}
           first_name={first_name}
           last_name={last_name}
           username={username}

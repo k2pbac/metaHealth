@@ -29,6 +29,9 @@ export default function EmployeeEditProfile(props) {
     isDoctor,
     onSubmit,
     onBack,
+    clinic_id,
+    clinic_verified,
+    gender,
   } = props;
 
   const [state, setState] = useState({
@@ -44,6 +47,8 @@ export default function EmployeeEditProfile(props) {
     setState({...state, [e.target.name]: e.target.value})
  }
 
+ console.log("props:",props)
+
   //Handles onSubmit for button
  const submitHandler = (event) => {
   event.preventDefault();
@@ -55,9 +60,15 @@ export default function EmployeeEditProfile(props) {
     avatar: avatar,
     phone_number: state.phoneNumber,
     email_address: state.emailAddress,
+    gender: gender,
+    profile_description: profile_description,
+    clinic_id: clinic_id, 
+    clinic_verified: clinic_verified,
+    is_doctor: isDoctor,
+    employedAt: employedAt
   };
 
-  dispatch(updateProfile(newProfile));
+  dispatch(updateProfile(newProfile))
 
   transition("SHOW");
 };

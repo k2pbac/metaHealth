@@ -70,6 +70,7 @@ export default function Application(props) {
     bookAppointment,
     deleteAppointment,
     updatePatientProfile,
+    updateEmployeeProfile,
     updatePatientNotes,
   } = useApplicationData();
 
@@ -100,8 +101,11 @@ export default function Application(props) {
     }
   });
   useEffect(() => {
-    if (userLogged.update_profile) {
+    if (userLogged.update_profile && !getLocalStorage("isEmployee")) {
       updatePatientProfile(userLogged.user);
+    }
+    else if(userLogged.update_profile && getLocalStorage("isEmployee")){
+      updateEmployeeProfile(userLogged.user);
     }
   }, [userLogged.user]);
 

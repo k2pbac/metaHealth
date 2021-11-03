@@ -87,6 +87,37 @@ router.put("/api/patient/profile", (req, res, next) => {
   );
 });
 
+router.put("/api/employee/profile", (req, res, next) => {
+  const {
+    id,
+    first_name,
+    last_name,
+    username,
+    avatar, 
+    phone_number,
+    email_address
+  } = req.body;
+
+  console.log("req.body:",req.body)
+
+  db.query(
+    `UPDATE employee_accounts 
+    SET first_name = '${first_name}',
+    last_name = '${last_name}',
+    username = '${username}',
+    phone_number = '${phone_number}',
+    email_address = '${email_address}'
+    WHERE employee_accounts.id = ${id}
+    `,
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.json(results.rows);
+    }
+  );
+});
+
 router.get("/api/registered-patients/:patient_name", function (req, res, next) {
   const { patient_name } = req.params;
 
