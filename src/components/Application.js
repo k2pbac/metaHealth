@@ -37,6 +37,7 @@ import LoggedInEmployee from "./Navbar/LoggedState/LoggedInEmployee";
 import LoggedOut from "./Navbar/LoggedState/LoggedOut";
 import ManageAppointments from "./ManageAppointments/ManageAppointments";
 import PatientReportView from "./ManageAppointments/PatientReportView";
+import PatientSchedule from "./PatientSchedule/PatientSchedule";
 
 export default function Application(props) {
   const completeRegisterSelector = useSelector((state) => state.registerUser);
@@ -106,8 +107,7 @@ export default function Application(props) {
   useEffect(() => {
     if (userLogged.update_profile && !getLocalStorage("isEmployee")) {
       updatePatientProfile(userLogged.user);
-    }
-    else if(userLogged.update_profile && getLocalStorage("isEmployee")){
+    } else if (userLogged.update_profile && getLocalStorage("isEmployee")) {
       updateEmployeeProfile(userLogged.user);
     }
   }, [userLogged.user]);
@@ -219,8 +219,6 @@ export default function Application(props) {
           )}
         />
 
-
-
         <Route
           path="/clinics"
           component={() => (
@@ -267,6 +265,11 @@ export default function Application(props) {
               updatePatientNotes={updatePatientNotes}
             ></ManageAppointments>
           )}
+        />
+
+        <Route
+          path={`/clinic/appointments`}
+          component={() => <PatientSchedule></PatientSchedule>}
         />
 
         {/* Manage Appointments Routes for Employee and Patient - will need to figure out how to pass params */}

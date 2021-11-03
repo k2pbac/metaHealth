@@ -10,6 +10,7 @@ router.get("/api/patients", function (req, res, next) {
       if (error) {
         throw error;
       }
+      console.log(results);
       res.json(results.rows);
     }
   );
@@ -19,7 +20,7 @@ router.get("/api/patients", function (req, res, next) {
       `SELECT * FROM patient_records
       join appointments on appointment_id = appointments.id
       join employee_accounts on appointments.employee_account_id = employee_accounts.id 
-      ORDER By created_at DESC`,
+      ORDER By created_at ASC`,
       (error, results) => {
         if (error) {
           throw error;
@@ -133,12 +134,12 @@ router.put("/api/employee/profile", (req, res, next) => {
     first_name,
     last_name,
     username,
-    avatar, 
+    avatar,
     phone_number,
-    email_address
+    email_address,
   } = req.body;
 
-  console.log("req.body:",req.body)
+  console.log("req.body:", req.body);
 
   db.query(
     `UPDATE employee_accounts 
