@@ -122,6 +122,34 @@ const getEmployeesForClinic = async (clinic_id) => {
   });
 };
 
+const verifyEmployee = (employee_id,clinic_id) => {
+  return  axios({
+    method: "PUT",
+    data: {
+      employee_id,
+      clinic_id,
+    },
+    withCredentials: true,
+    url: "/api/clinics/employee/verify",
+  }).then((result) => {
+    return result.data;
+  });
+};
+
+const unverifyEmployee = (employee_id,clinic_id) => {
+  return  axios({
+    method: "PUT",
+    data: {
+      employee_id,
+      clinic_id,
+    },
+    withCredentials: true,
+    url: "/api/clinics/employee/unverify",
+  }).then((result) => {
+    return result.data;
+  });
+};
+
 export const userServices = {
   authenticateEmployee,
   authenticatePatient,
@@ -130,4 +158,6 @@ export const userServices = {
   submitEmployeeRegistrationForClinic,
   getPatientRecordsForClinic,
   getEmployeesForClinic,
+  verifyEmployee,
+  unverifyEmployee
 };

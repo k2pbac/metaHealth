@@ -116,6 +116,56 @@ router.post("/api/clinics/employee/list", function (req, res, next) {
   );
 });
 
+// Verify Employee
+router.put("/api/clinics/employee/verify", function (req, res, next) {
+  const { employee_id, clinic_id } = req.body;
+  console.log("Employee:", employee_id);
+  console.log("clinic_id:", clinic_id);
+
+  db.query(
+  `
+  UPDATE employee_accounts 
+  SET clinic_verified = TRUE 
+  FROM clinics
+  WHERE 
+  clinic_id = clinics.id 
+  AND employee_accounts.id = ${employee_id} 
+  AND clinics.id = ${clinic_id};`,
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.json(results.rows);
+    }
+  );
+});
+
+//Unverify Employee
+router.put("/api/clinics/employee/unverify", function (req, res, next) {
+  const { employee_id, clinic_id } = req.body;
+  console.log("Employee:", employee_id);
+  console.log("clinic_id:", clinic_id);
+
+  db.query(
+    `  
+    UPDATE employee_accounts 
+    SET clinic_verified = FALSE,
+    clinic_id = null 
+    FROM clinics
+    WHERE 
+    clinic_id = clinics.id 
+    AND employee_accounts.id = ${employee_id} 
+    AND clinics.id = ${clinic_id};`,
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.json(results.rows);
+    }
+  );
+});
+
+
 module.exports = router;
 
 //TESTING DB QUERIES
@@ -139,3 +189,4 @@ module.exports = router;
 //     OR (patient_accounts.last_name ILIKE 'k%')
 //     AND clinics.id = 5
 //     ORDER BY patient_accounts.last_name;
+
