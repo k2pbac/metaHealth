@@ -46,12 +46,30 @@ export default function ClinicEmployeeList(props) {
                     : "Unverified"}
                 </td>
                 <td className="">
-                  <Button className="accept" onClick={onAccept}>
-                    Accept
-                  </Button>
-                  <Button className="reject" onClick={onReject}>
-                    Reject
-                  </Button>
+                  {(!employeeState[element].clinic_verified && (
+                    <>
+                      <Button
+                        size="sm"
+                        variant="success"
+                        // className="accept"
+                        onClick={onAccept}
+                      >
+                        Accept
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="danger"
+                        // className="reject"
+                        onClick={onReject}
+                      >
+                        Reject
+                      </Button>
+                    </>
+                  )) || (
+                    <Button size="sm" variant="danger">
+                      Remove
+                    </Button>
+                  )}
                 </td>
               </tr>
             );

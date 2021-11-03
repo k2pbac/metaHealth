@@ -104,6 +104,7 @@ router.post("/api/clinics/employee/list", function (req, res, next) {
     `SELECT *, employee_accounts.id FROM employee_accounts
      JOIN clinics on clinics.id = clinic_id
      WHERE clinic_id = ${clinic_id}
+     ORDER by clinic_verified;
     `,
     (error, results) => {
       if (error) {
