@@ -10,17 +10,20 @@ module.exports.patientLogin = function (passport) {
         `SELECT * FROM patient_accounts where username = '${username}'`,
         (error, user) => {
           if (error) {
-            throw error;
+            return error;
           }
-          user;
-          bcrypt.compare(password, user.rows[0].password, (err, result) => {
-            if (err) throw err;
-            if (result === true) {
-              return done(null, user.rows[0]);
-            } else {
-              return done(null, false);
-            }
-          });
+          if (!user.rowCount) {
+            return done(null, false, { message: "No user found" });
+          } else {
+            bcrypt.compare(password, user.rows[0].password, (err, result) => {
+              if (err) return err;
+              if (result === true) {
+                return done(null, user.rows[0]);
+              } else {
+                return done(null, false);
+              }
+            });
+          }
         }
       );
     })
@@ -55,16 +58,20 @@ module.exports.employeeLogin = function (passport) {
           if (error) {
             throw error;
           }
-          console.log(username);
-          bcrypt.compare(password, user.rows[0].password, (err, result) => {
-            if (err) throw err;
-            if (result === true) {
-              return done(null, user.rows[0]);
-            } else {
-              console.log("password didn't match");
-              return done(null, false);
-            }
-          });
+          if (!user.rowCount) {
+            return done(null, false, { message: "No user found" });
+          } else {
+            console.log(username);
+            bcrypt.compare(password, user.rows[0].password, (err, result) => {
+              if (err) throw err;
+              if (result === true) {
+                return done(null, user.rows[0]);
+              } else {
+                console.log("password didn't match");
+                return done(null, false);
+              }
+            });
+          }
         }
       );
     })

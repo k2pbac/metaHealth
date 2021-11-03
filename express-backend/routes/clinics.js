@@ -48,10 +48,9 @@ router.get("/api/clinics", function (req, res, next) {
 //   );
 // });
 
-
 //Get the Clinic Data For A Specific Clinic
 router.post("/api/clinics/data", function (req, res, next) {
-  const {clinic_id } = req.body;
+  const { clinic_id } = req.body;
 
   db.query(
     `SELECT * FROM clinics
@@ -65,13 +64,10 @@ router.post("/api/clinics/data", function (req, res, next) {
   );
 });
 
-
-
 // Query To Get All Patients For a Clinic (Patient Medical Recrods Index Page)
 
 router.post("/api/clinics/patient/records", function (req, res, next) {
   const { patient_name, clinic_id } = req.body;
-  
 
   db.query(
     `SELECT DISTINCT patient_accounts.id as id,patient_accounts.first_name as first_name, patient_accounts.last_name as last_name,
@@ -98,7 +94,6 @@ router.post("/api/clinics/patient/records", function (req, res, next) {
 
 router.put("/api/clinics/register/existing", function (req, res, next) {
   const { employee, clinic_id } = req.body;
-  console.log("employee.user.body:",employee.user)
   db.query(
     `UPDATE employee_accounts
    SET clinic_id = ${clinic_id}
@@ -126,7 +121,6 @@ router.post("/api/clinics/employee/list", function (req, res, next) {
       if (error) {
         throw error;
       }
-      console.log("result.rows:", results.rows);
       res.json(results.rows);
     }
   );
@@ -137,7 +131,7 @@ router.put("/api/clinics/employee/verify", function (req, res, next) {
   const { employee_id, clinic_id } = req.body;
 
   db.query(
-  `
+    `
   UPDATE employee_accounts 
   SET clinic_verified = TRUE 
   FROM clinics
@@ -177,7 +171,6 @@ router.put("/api/clinics/employee/unverify", function (req, res, next) {
   );
 });
 
-
 module.exports = router;
 
 //TESTING DB QUERIES
@@ -201,4 +194,3 @@ module.exports = router;
 //     OR (patient_accounts.last_name ILIKE 'k%')
 //     AND clinics.id = 5
 //     ORDER BY patient_accounts.last_name;
-

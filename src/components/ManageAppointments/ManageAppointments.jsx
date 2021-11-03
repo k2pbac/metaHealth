@@ -32,6 +32,8 @@ const ManageAppointments = ({
   setAppState,
   updatePatientNotes,
 }) => {
+  console.log(clinic);
+
   const [currentDay, setCurrentDay] = useState(new Date());
   const [appointments, setAppointments] = useState({});
   const [clinicRecords, setClinicRecords] = useState({});
@@ -157,11 +159,14 @@ const ManageAppointments = ({
                     updatePatientNotes={updatePatientNotes}
                   ></PatientSchedule>
                 )) ||
-                  (employeeList && (
-                    <ClinicEmployeeList
-                      employeeList={employeeList}
-                    ></ClinicEmployeeList>
-                  ))}
+                  (employeeList &&
+                    loggedUser.user.id === clinic.clinic_owner_id && (
+                      <ClinicEmployeeList
+                        employeeList={employeeList}
+                        verifyEmployee={verifyEmployee}
+                        unverifyEmployee={unverifyEmployee}
+                      ></ClinicEmployeeList>
+                    ))}
               </Column>
             </Row>
           </Column>
