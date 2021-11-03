@@ -1,4 +1,4 @@
-.employee-list-container{
+.employee-list-container {
   margin: 20px;
   box-shadow: 0 0 20px rgba(#273c48, 0.2);
   overflow: auto;
@@ -41,11 +41,11 @@ td {
   font-size: 0.9em;
   min-width: 100%;
   margin: auto;
-  .reject{
+  .reject {
     background: rgb(223, 27, 27);
-    margin-left: 10px;
+    // margin-left: 10px;
   }
-  .accept{
+  .accept {
     background: green;
   }
 }

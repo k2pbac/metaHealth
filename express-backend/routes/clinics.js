@@ -51,9 +51,9 @@ router.get("/api/clinics", function (req, res, next) {
 // Query To Get All Patients For a Clinic (Patient Medical Recrods Index Page)
 
 router.post("/api/clinics/patient/records", function (req, res, next) {
-  const {patient_name, clinic_id} = req.body;
-  console.log("patient_name:", patient_name)
-  console.log("clinic_id:", clinic_id)
+  const { patient_name, clinic_id } = req.body;
+  console.log("patient_name:", patient_name);
+  console.log("clinic_id:", clinic_id);
 
   db.query(
     `SELECT DISTINCT patient_accounts.id as id,patient_accounts.first_name as first_name, patient_accounts.last_name as last_name,
@@ -66,15 +66,15 @@ router.post("/api/clinics/patient/records", function (req, res, next) {
         WHERE (patient_accounts.first_name ILIKE '${patient_name}%') 
         OR (patient_accounts.last_name ILIKE '${patient_name}%')
         AND clinics.id = ${clinic_id}
-        ORDER BY patient_accounts.last_name;`, 
-   (error, results) => {
-    if (error) {
-      throw error;
+        ORDER BY patient_accounts.last_name;`,
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.json(results.rows);
     }
-    res.json(results.rows);
-  });
+  );
 });
-
 
 // Set Clinic Id For Employee When They Register To A Clinic
 
@@ -99,10 +99,9 @@ router.put("/api/clinics/register/existing", function (req, res, next) {
 // Get List of Employees for a Clinic
 
 router.post("/api/clinics/employee/list", function (req, res, next) {
-  const {clinic_id } = req.body;
-
+  const { clinic_id } = req.body;
   db.query(
-    `SELECT * FROM employee_accounts
+    `SELECT *, employee_accounts.id FROM employee_accounts
      JOIN clinics on clinics.id = clinic_id
      WHERE clinic_id = ${clinic_id}
     `,
@@ -110,7 +109,7 @@ router.post("/api/clinics/employee/list", function (req, res, next) {
       if (error) {
         throw error;
       }
-      console.log("result.rows:",result.rows)
+      console.log("result.rows:", results.rows);
       res.json(results.rows);
     }
   );
@@ -118,26 +117,24 @@ router.post("/api/clinics/employee/list", function (req, res, next) {
 
 module.exports = router;
 
-
-
 //TESTING DB QUERIES
 
-// SELECT * FROM patient_accounts 
+// SELECT * FROM patient_accounts
 //     JOIN registered ON patient_accounts.id = patient_account_id
 //     JOIN clinics ON registered.clinic_id = clinics.id
-//     WHERE (patient_accounts.first_name ILIKE '${patient_name}%') 
+//     WHERE (patient_accounts.first_name ILIKE '${patient_name}%')
 //     OR (patient_accounts.last_name ILIKE '${patient_name}%')
 //     AND clinics.id = ${clinic_id}
 //     ORDER BY last_name;
 
 // SELECT DISTINCT patient_accounts.id as id,patient_accounts.first_name as first_name, patient_accounts.last_name as last_name,
-// patient_accounts.gender as gender, patient_accounts.date_of_birth as date_of_birth, 
+// patient_accounts.gender as gender, patient_accounts.date_of_birth as date_of_birth,
 // patient_accounts.address as address, patient_accounts.phone_number as phone_number,
 // patient_accounts.email_address as email_address
-//      FROM patient_accounts 
+//      FROM patient_accounts
 //     JOIN registered ON patient_accounts.id = patient_account_id
 //     JOIN clinics ON registered.clinic_id = clinics.id
-//     WHERE (patient_accounts.first_name ILIKE 'k%') 
+//     WHERE (patient_accounts.first_name ILIKE 'k%')
 //     OR (patient_accounts.last_name ILIKE 'k%')
 //     AND clinics.id = 5
 //     ORDER BY patient_accounts.last_name;
