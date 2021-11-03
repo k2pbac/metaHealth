@@ -40,6 +40,7 @@ const ManageAppointments = ({
   // State for employee list in manage appointment index
   const [employeeList, setEmployeeList] = useState();
 
+
   const loggedUser = useSelector((state) => state.userLogged);
 
   useEffect(() => {
@@ -74,8 +75,19 @@ const ManageAppointments = ({
           return getEmployeesForClinic(clinic_id);
         });
       }
+      
+      
+        // const clinicId = JSON.parse(localStorage.getItem("user")).user.clinic_id;
+        // const clinicVerified = JSON.parse(localStorage.getItem("user")).user.clinic_verified;
+
+        // console.log("clinicID:",clinicId, "clinicVerified:", clinicVerified)
+      
+
     }
   }, [appState]);
+
+  const clinicId = JSON.parse(localStorage.getItem("user")).user.clinic_id;
+  const clinicVerified = JSON.parse(localStorage.getItem("user")).user.clinic_verified;
 
   const handleCalendarChange = (value, event) => {
     const date = new Date(value);
@@ -106,6 +118,10 @@ const ManageAppointments = ({
   };
 
   return (
+    <>
+    {(!clinicId === null && clinicVerified) ? (
+      
+
     (clinic &&
       employeeList &&
       JSON.parse(localStorage.getItem("isEmployee")) && (
@@ -214,6 +230,16 @@ const ManageAppointments = ({
         </Column>
       </Row>
     )) || <Spinner></Spinner>
+
+   
+    ):
+    <div className="default-page">
+      <h1>Sorry, it seems that you haven't registered to a clinic yet or you are waiting to be verified</h1>
+      <h2>If you have not registered the clinic you're currently employed at, please click here to register</h2>
+    </div>
+
+      }
+     </>           
   );
 };
 
