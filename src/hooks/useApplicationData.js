@@ -24,6 +24,22 @@ const useApplicationData = () => {
     }
   };
 
+  const updateEmployeeProfile = (employee) => {
+    if (Object.keys(employee).length) {
+      axios.put("/api/employee/profile", { ...employee }).then((result) => {
+        setAppState((prev) => {
+          return {
+            ...prev,
+            employee: {
+              ...prev.employee,
+              employee,
+            },
+          };
+        });
+      });
+    }
+  };
+
   const bookAppointment = (appointment) => {
     if (appointment && Object.keys(appointment).length) {
       let newDate = new Date(appointment.date).toLocaleDateString();
@@ -121,6 +137,7 @@ const useApplicationData = () => {
     bookAppointment,
     deleteAppointment,
     updatePatientNotes,
+    updateEmployeeProfile,
   };
 };
 

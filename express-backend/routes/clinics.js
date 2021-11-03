@@ -48,12 +48,30 @@ router.get("/api/clinics", function (req, res, next) {
 //   );
 // });
 
+
+//Get the Clinic Data For A Specific Clinic
+router.post("/api/clinics/data", function (req, res, next) {
+  const {clinic_id } = req.body;
+
+  db.query(
+    `SELECT * FROM clinics
+   WHERE clinics.id = ${clinic_id};`,
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.json(results.rows);
+    }
+  );
+});
+
+
+
 // Query To Get All Patients For a Clinic (Patient Medical Recrods Index Page)
 
 router.post("/api/clinics/patient/records", function (req, res, next) {
   const { patient_name, clinic_id } = req.body;
-  console.log("patient_name:", patient_name);
-  console.log("clinic_id:", clinic_id);
+  
 
   db.query(
     `SELECT DISTINCT patient_accounts.id as id,patient_accounts.first_name as first_name, patient_accounts.last_name as last_name,
@@ -80,13 +98,11 @@ router.post("/api/clinics/patient/records", function (req, res, next) {
 
 router.put("/api/clinics/register/existing", function (req, res, next) {
   const { employee, clinic_id } = req.body;
-  console.log("Employee:", employee);
-  console.log("clinic_id:", clinic_id);
-
+  console.log("employee.user.body:",employee.user)
   db.query(
     `UPDATE employee_accounts
    SET clinic_id = ${clinic_id}
-   WHERE id = ${employee.user.id};`,
+   WHERE id = ${employee.user.id}`,
     (error, results) => {
       if (error) {
         throw error;
@@ -119,8 +135,6 @@ router.post("/api/clinics/employee/list", function (req, res, next) {
 // Verify Employee
 router.put("/api/clinics/employee/verify", function (req, res, next) {
   const { employee_id, clinic_id } = req.body;
-  console.log("Employee:", employee_id);
-  console.log("clinic_id:", clinic_id);
 
   db.query(
   `
@@ -143,8 +157,6 @@ router.put("/api/clinics/employee/verify", function (req, res, next) {
 //Unverify Employee
 router.put("/api/clinics/employee/unverify", function (req, res, next) {
   const { employee_id, clinic_id } = req.body;
-  console.log("Employee:", employee_id);
-  console.log("clinic_id:", clinic_id);
 
   db.query(
     `  
