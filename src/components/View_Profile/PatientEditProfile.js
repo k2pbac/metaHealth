@@ -50,7 +50,9 @@ export default function PatientEditProfile(props) {
   );
   const [insurancePlanName, setInsurancePlanName] =
     useState(insurance_plan_name);
+    
   const navClass = classNames("view-profile");
+
   const submitHandler = (event) => {
     event.preventDefault();
     const newProfile = {

@@ -41,7 +41,7 @@ export default function EmployeeProfileIndex(props) {
     } else{
       return getClinicData(clinic_id).then((res)=>{
         console.log("Result:",res[0].name)
-        setEmployedAt(res[0].name)
+        setEmployedAt(`${res[0].name}, ${res[0].address}`)
       })
   }
 }

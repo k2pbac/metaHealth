@@ -52,7 +52,7 @@ router.get("/api/clinics", function (req, res, next) {
 //Get the Clinic Data For A Specific Clinic
 router.post("/api/clinics/data", function (req, res, next) {
   const {clinic_id } = req.body;
- 
+
   db.query(
     `SELECT * FROM clinics
    WHERE clinics.id = ${clinic_id};`,
