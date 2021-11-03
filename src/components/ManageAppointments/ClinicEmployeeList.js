@@ -8,7 +8,8 @@ import Button from "react-bootstrap/Button";
 import "components/ManageAppointments/ClinicEmployeeList.scss";
 
 export default function ClinicEmployeeList(props) {
-  const { employeeList, verifyEmployee, unverifyEmployee } = props;
+  const { employeeList, verifyEmployee, unverifyEmployee, clinic, user_id } =
+    props;
   const [employeeState, setEmployeeState] = useState({});
 
   const onAccept = function (employee_id, clinic_id) {
@@ -26,6 +27,8 @@ export default function ClinicEmployeeList(props) {
     window.location.reload();
   };
 
+  console.log(user_id, clinic);
+
   let employees = [];
   console.log(employeeList);
   employeeList.then((results) => {
@@ -42,7 +45,7 @@ export default function ClinicEmployeeList(props) {
             <th>Phone Number</th>
             <th>Email Address</th>
             <th>Status</th>
-            <th>Acceptance</th>
+            {user_id === clinic.clinic_owner_id && <th>Acceptance</th>}
           </tr>
         </thead>
         <tbody>
@@ -58,50 +61,52 @@ export default function ClinicEmployeeList(props) {
                     ? "Verified"
                     : "Unverified"}
                 </td>
-                <td className="">
-                  {(!employeeState[element].clinic_verified && (
-                    <>
-                      <Button
-                        size="sm"
-                        variant="success"
-                        // className="accept"
-                        onClick={() =>
-                          onAccept(
-                            employeeState[element].id,
-                            employeeState[element].clinic_id
-                          )
-                        }
-                      >
-                        Accept
-                      </Button>
+                {user_id === clinic.clinic_owner_id && (
+                  <td className="">
+                    {(!employeeState[element].clinic_verified && (
+                      <>
+                        <Button
+                          size="sm"
+                          variant="success"
+                          // className="accept"
+                          onClick={() =>
+                            onAccept(
+                              employeeState[element].id,
+                              employeeState[element].clinic_id
+                            )
+                          }
+                        >
+                          Accept
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="danger"
+                          onClick={() =>
+                            onReject(
+                              employeeState[element].id,
+                              employeeState[element].clinic_id
+                            )
+                          }
+                        >
+                          Reject
+                        </Button>
+                      </>
+                    )) || (
                       <Button
                         size="sm"
                         variant="danger"
                         onClick={() =>
-                          onReject(
+                          onRemove(
                             employeeState[element].id,
                             employeeState[element].clinic_id
                           )
                         }
                       >
-                        Reject
+                        Remove
                       </Button>
-                    </>
-                  )) || (
-                    <Button
-                      size="sm"
-                      variant="danger"
-                      onClick={() =>
-                        onRemove(
-                          employeeState[element].id,
-                          employeeState[element].clinic_id
-                        )
-                      }
-                    >
-                      Remove
-                    </Button>
-                  )}
-                </td>
+                    )}
+                  </td>
+                )}
               </tr>
             );
           })}

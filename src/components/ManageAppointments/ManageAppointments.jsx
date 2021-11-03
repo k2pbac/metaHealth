@@ -159,14 +159,15 @@ const ManageAppointments = ({
                     updatePatientNotes={updatePatientNotes}
                   ></PatientSchedule>
                 )) ||
-                  (employeeList &&
-                    loggedUser.user.id === clinic.clinic_owner_id && (
-                      <ClinicEmployeeList
-                        employeeList={employeeList}
-                        verifyEmployee={verifyEmployee}
-                        unverifyEmployee={unverifyEmployee}
-                      ></ClinicEmployeeList>
-                    ))}
+                  (employeeList && (
+                    <ClinicEmployeeList
+                      user_id={loggedUser.user.id}
+                      clinic={clinic}
+                      employeeList={employeeList}
+                      verifyEmployee={verifyEmployee}
+                      unverifyEmployee={unverifyEmployee}
+                    ></ClinicEmployeeList>
+                  ))}
               </Column>
             </Row>
           </Column>
