@@ -86,6 +86,21 @@ const useApplicationData = () => {
     }
   };
 
+  const editPatientRecord = (reportData, patient_id, user) => {
+    if (reportData) {
+      axios
+        .put("/api/patient/report", {
+          ...reportData,
+          patient_id,
+          user,
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
   useEffect(() => {
     Promise.all([
       axios.get("/api/clinics"),
@@ -94,8 +109,9 @@ const useApplicationData = () => {
       axios.get("/api/registered"),
       axios.get("/api/appointments"),
       axios.get("/api/patient/records"),
+      axios.get("/api/patient/medical-records"),
     ]).then((all) => {
-      const [first, second, third, fourth, fifth, sixth] = all;
+      const [first, second, third, fourth, fifth, sixth, seven] = all;
       setAppState({
         clinics: first.data,
         patients: second.data,
@@ -103,6 +119,7 @@ const useApplicationData = () => {
         registered: fourth.data,
         appointments: fifth.data,
         clinicRecords: sixth.data,
+        medicalRecords: seven.data,
       });
     });
   }, []);
@@ -137,6 +154,7 @@ const useApplicationData = () => {
     bookAppointment,
     deleteAppointment,
     updatePatientNotes,
+    editPatientRecord,
     updateEmployeeProfile,
   };
 };

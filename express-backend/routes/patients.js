@@ -19,8 +19,7 @@ router.get("/api/patients", function (req, res, next) {
       `SELECT * FROM patient_records
       join appointments on appointment_id = appointments.id
       join employee_accounts on appointments.employee_account_id = employee_accounts.id 
-      where patient_id = 202
-       ORDER By created_at`,
+      ORDER By created_at DESC`,
       (error, results) => {
         if (error) {
           throw error;
@@ -28,6 +27,47 @@ router.get("/api/patients", function (req, res, next) {
         res.json(results.rows);
       }
     );
+  });
+
+  router.get("/api/patient/medical-records", (req, res, next) => {
+    db.query(
+      `SELECT updated_at at time zone 'utc' at time zone 'est', *  FROM patient_records`,
+      (error, results) => {
+        if (error) {
+          throw error;
+        }
+        res.json(results.rows);
+      }
+    );
+  });
+
+  router.put("/api/patient/report", (req, res, next) => {
+    const { info, medication, referral, id, patient_id, user } = req.body;
+    console.log(id);
+    if (id) {
+      db.query(
+        `UPDATE patient_records
+    SET information = '${info}',
+        medication_prescribed = '${medication}',
+        referral = '${referral}',
+        updated_at = '${new Date().toISOString()}',
+        updated_by = '${user}'
+    WHERE id = ${id}`,
+        (error, results) => {
+          if (error) {
+            throw error;
+          }
+          res.json(results.rows);
+        }
+      );
+    } else {
+      db.query(
+        `INSERT INTO patient_records (information, medication_prescribed, referral, patient_id, appointment_id)
+        VALUES ('${info || ""}', '${medication || ""}', '${
+          referral || ""
+        }', '${patient_id}', '${appointment_id}')`
+      );
+    }
   });
 
   router.put("/api/patient/records", (req, res, next) => {
@@ -152,7 +192,6 @@ router.post("/api/patient/book", (req, res, next) => {
       if (error) {
         throw error;
       }
-      console.log(results.rows);
       db.query(
         `INSERT INTO patient_records (created_at, updated_at, appointment_id, patient_id) 
         values ('${newDate}', '${newDate}', ${results.rows[0].id}, ${patient_account_id} )`,

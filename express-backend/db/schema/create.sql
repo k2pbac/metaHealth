@@ -67,11 +67,13 @@ CREATE TABLE patient_records (
   id SERIAL PRIMARY KEY NOT NULL,
   information TEXT,
   created_at timestamp default CURRENT_DATE,
-  updated_at timestamp default CURRENT_DATE,
+  updated_at timestamp DEFAULT NULL,
+  updated_by VARCHAR(255) DEFAULT NULL, 
   medication_prescribed TEXT,
-  date_of_symptoms timestamp,
+  date_of_symptoms timestamp default CURRENT_DATE,
+  referral VARCHAR(255) default NULL,
   patient_id INTEGER DEFAULT NULL,
-  appointment_id INTEGER REFERENCES appointments(id) ON DELETE CASCADE
+  appointment_id INTEGER DEFAULT NULL
 );
 
 CREATE TABLE registered (
@@ -79,3 +81,4 @@ CREATE TABLE registered (
   clinic_id INTEGER REFERENCES clinics(id) ON DELETE CASCADE,
   patient_account_id INTEGER REFERENCES patient_accounts(id) ON DELETE CASCADE
 );
+

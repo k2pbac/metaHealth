@@ -8,14 +8,12 @@ import Form from "react-bootstrap/Form";
 import "components/PatientMedicalRecords/PatientMedicalRecords.scss";
 import { Link } from "react-router-dom";
 
-import {userServices} from "hooks/userServices"
-const {getPatientRecordsForClinic} = userServices;
+import { userServices } from "hooks/userServices";
+const { getPatientRecordsForClinic } = userServices;
 
 export default function PatientMedicalRecords(props) {
-  const { patientsList, patientName, setPatientName } = props;
+  const { patientName, setPatientName } = props;
   const [patientList, setPatientList] = useState("");
-  
-
   // for (let elements in patientsList) {
   //   Object.keys(patientsList).map((element) => (
   //     <tr key={patientsList[element].id}>
@@ -33,23 +31,23 @@ export default function PatientMedicalRecords(props) {
   //   ));
   // }
 
-  useEffect(()=>{
-    console.log("patientList:",patientList)
+  useEffect(() => {
+    console.log("patientList:", patientList);
+  }, [patientList]);
 
-  }, [patientList])
-
-  const handleChange = async function(e){
+  const handleChange = async function (e) {
     e.preventDefault();
-            // setPatientName(e.target.value);
-            console.log(JSON.parse(localStorage.getItem("user")).user.clinic_id)
+    // setPatientName(e.target.value);
+    console.log(JSON.parse(localStorage.getItem("user")).user.clinic_id);
 
-            const temp = await getPatientRecordsForClinic(e.target.value, JSON.parse(localStorage.getItem("user")).user.clinic_id)
+    const temp = await getPatientRecordsForClinic(
+      e.target.value,
+      JSON.parse(localStorage.getItem("user")).user.clinic_id
+    );
 
-            setPatientList(temp)
-            console.log("patientList:",patientList)
-  }
-
-
+    setPatientList(temp);
+    console.log("patientList:", patientList);
+  };
 
   return (
     <div className="medical-records">
@@ -57,7 +55,7 @@ export default function PatientMedicalRecords(props) {
         <Form.Label className="form-label">Patient Name: </Form.Label>
         <Form.Control
           onChange={(e) => {
-            handleChange(e)
+            handleChange(e);
           }}
           autoFocus
           type="search"
@@ -80,11 +78,9 @@ export default function PatientMedicalRecords(props) {
             </tr>
           </thead>
           <tbody>
-              
-                
-            {(Object.keys(patientList).map((element) => (
+            {Object.keys(patientList).map((element) => (
               <tr key={patientList[element].id}>
-              {/* <tr> */}
+                {/* <tr> */}
                 <td>{patientList[element].first_name}</td>
                 <td>{patientList[element].last_name}</td>
                 <td>{patientList[element].gender}</td>
@@ -93,17 +89,13 @@ export default function PatientMedicalRecords(props) {
                 <td>{patientList[element].phone_number}</td>
                 <td>{patientList[element].email_address}</td>
                 <td>
-                  <Link to={`clinic/patient/record/${patientList[element.id]}`}>
-                    <a href="">Add/Edit Record</a>
+                  <Link to={`clinic/patient/record/${patientList[element].id}`}>
+                    Add/Edit Record
                   </Link>
                 </td>
               </tr>
-          
-            ))
-            )}
-           
+            ))}
           </tbody>
-          
         </table>
       </div>
     </div>

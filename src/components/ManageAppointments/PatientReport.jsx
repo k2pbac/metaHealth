@@ -4,27 +4,31 @@ import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import Column from "react-bootstrap/Col";
 import { FloatingLabel, Form } from "react-bootstrap";
-
+import { useSelector } from "react-redux";
 const PatientReport = ({
+  patient,
   report,
   editing,
   setEditing,
   reportIndex,
   currentlyEditing,
   deleteReport,
+  editPatientRecord,
 }) => {
+  const userLogged = useSelector((state) => state.userLogged);
   const [reportData, setReportData] = useState({
-    info: report.information || "",
-    medication: report.medication_prescribed || "",
-    referral: report.referral || "",
+    info: report.information,
+    medication: report.medication_prescribed,
+    referral: report.referral,
+    id: report.id,
   });
-
+  console.log(report);
   const isEditing = currentlyEditing();
-
   const removeReport = () => {
     deleteReport();
     setEditing(false);
   };
+
   return (
     <Row
       className="report-container py-4 mb-3"
@@ -37,13 +41,17 @@ const PatientReport = ({
               Currently Editing
             </span>
           )}
-          <p>Created on {report.created_on || ""}</p>
-          <p>Created by {report.created_by || ""}</p>
+          <p>Created on {new Date(report.created_at).toLocaleString() || ""}</p>
+          <p>Created by {report.created_by || "Dr. Smith Jones"}</p>
         </Column>
-        <Column className="d-flex align-items-end flex-column">
-          <p>Last updated {report.last_updated || ""}</p>
-          <p>Last updated by {report.last_updated_by || ""}</p>
-        </Column>
+        {report.timezone && (
+          <Column className="d-flex align-items-end flex-column">
+            <p>
+              Last updated {new Date(report.timezone).toLocaleString() || ""}
+            </p>
+            <p>Last updated by {report.updated_by}</p>
+          </Column>
+        )}
       </Row>
       <Row
         style={{
@@ -62,11 +70,20 @@ const PatientReport = ({
                 label="Information"
               >
                 <Form.Control
+                  name="info"
                   as="textarea"
                   placeholder="Leave a comment here"
                   style={{ height: "150px" }}
                   value={reportData.info}
-                  onChange={(e) => setReportData(e.target.value)}
+                  onChange={(e) => {
+                    const { value } = e.target;
+
+                    setReportData((prev) => {
+                      let obj = Object.assign({}, prev);
+                      obj.info = value;
+                      return obj;
+                    });
+                  }}
                   className="my-2"
                   disabled={!editing}
                 />
@@ -79,10 +96,18 @@ const PatientReport = ({
                   label="Prescription"
                 >
                   <Form.Control
+                    name="medication"
                     type="text"
                     placeholder=""
                     value={reportData.medication}
-                    onChange={(e) => setReportData(e.target.value)}
+                    onChange={(e) => {
+                      const { value } = e.target;
+                      setReportData((prev) => {
+                        let obj = Object.assign({}, prev);
+                        obj.medication = value;
+                        return obj;
+                      });
+                    }}
                     disabled={!editing}
                   />
                 </FloatingLabel>
@@ -94,10 +119,19 @@ const PatientReport = ({
                   className=""
                 >
                   <Form.Control
+                    name="referral"
                     value={reportData.referral}
                     type="text"
                     placeholder=""
-                    onChange={(e) => setReportData(e.target.value)}
+                    onChange={(e) => {
+                      const { value } = e.target;
+
+                      setReportData((prev) => {
+                        let obj = Object.assign({}, prev);
+                        obj.referral = value;
+                        return obj;
+                      });
+                    }}
                     disabled={!editing}
                   />
                 </FloatingLabel>
@@ -125,13 +159,21 @@ const PatientReport = ({
                       style={{ width: "100px", marginRight: "10px" }}
                       variant="success"
                       type="button"
-                      onClick={() =>
+                      onClick={() => {
                         setEditing((prev) => {
                           let newForm = Object.assign({}, prev);
                           newForm[reportIndex] = false;
                           return newForm;
-                        })
-                      }
+                        });
+                        console.log(reportData, patient.id);
+                        editPatientRecord(
+                          reportData,
+                          patient.id,
+                          userLogged.user.first_name +
+                            " " +
+                            userLogged.user.last_name
+                        );
+                      }}
                     >
                       Save
                     </Button>

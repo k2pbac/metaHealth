@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Col } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import PatientDetails from "./PatientDetails";
@@ -7,15 +7,27 @@ import "./PatientReportView.scss";
 import Form from "react-bootstrap/Form";
 import { FloatingLabel } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
+import { useParams } from "react-router-dom";
+import { getPatientMedicalRecords } from "helpers/selectors";
 const PatientReportView = (props) => {
+  const { match, appState, editPatientRecord } = props;
+  const [reportData, setReportData] = useState({});
   const [createNewReport, setCreateNewReport] = useState(false);
 
-  return (
+  useEffect(() => {
+    if (Object.keys(appState).length) {
+      const data = getPatientMedicalRecords(appState, match.params.id);
+      setReportData(data);
+    }
+  }, [appState, match.params.id]);
+
+  const report = Object.keys(reportData).length && (
     <Container className="patient-view">
       <Row className="d-flex justify-content-center align-items-center">
         <Col xs={4} className="p-0">
           <PatientDetails
             setCreateNewReport={setCreateNewReport}
+            reportData={reportData}
           ></PatientDetails>
         </Col>
         <Col xs={8} style={{ height: "700px" }}>
@@ -61,16 +73,21 @@ const PatientReportView = (props) => {
                 height: "640px",
               }}
             >
-              <PatientReportList
-                createNewReport={createNewReport}
-                setCreateNewReport={setCreateNewReport}
-              ></PatientReportList>
+              {Object.keys(reportData).length && (
+                <PatientReportList
+                  editPatientRecord={editPatientRecord}
+                  createNewReport={createNewReport}
+                  setCreateNewReport={setCreateNewReport}
+                  reportData={reportData}
+                ></PatientReportList>
+              )}
             </div>
           </Row>
         </Col>
       </Row>
     </Container>
   );
+  return report;
 };
 
 export default PatientReportView;

@@ -132,13 +132,13 @@ const Schedule = ({ appointmentData, bookAppointment, deleteAppointment }) => {
                           const spot = (
                             <td
                               className={`${
-                                (JSON.parse(
-                                  localStorage.getItem("isEmployee") ||
-                                    appointmentData.patient ===
-                                      appointmentData.patients[
-                                        appointment.patient_account_id
-                                      ].first_name
-                                ) &&
+                                ((JSON.parse(
+                                  localStorage.getItem("isEmployee")
+                                ) ||
+                                  appointmentData.patient ===
+                                    appointmentData.patients[
+                                      appointment.patient_account_id
+                                    ].first_name) &&
                                   "booked") ||
                                 "bg-secondary"
                               }`}
@@ -176,25 +176,28 @@ const Schedule = ({ appointmentData, bookAppointment, deleteAppointment }) => {
                           index3 >= appointmentData.appointments.length - 1
                         ) {
                           count++;
-                          return (
-                            <td key={Math.random(434235142)}>
-                              <OverlayTrigger
-                                trigger="click"
-                                placement="right"
-                                overlay={popover2}
-                                rootClose
-                              >
-                                <a
-                                  style={{
-                                    cursor: "pointer",
-                                    color: "transparent",
-                                  }}
+                          const spot = !(
+                            JSON.parse(localStorage.getItem("isEmployee")) && (
+                              <td key={Math.random(434235142)}>
+                                <OverlayTrigger
+                                  trigger="click"
+                                  placement="right"
+                                  overlay={popover2}
+                                  rootClose
                                 >
-                                  CLICK ME
-                                </a>
-                              </OverlayTrigger>
-                            </td>
-                          );
+                                  <a
+                                    style={{
+                                      cursor: "pointer",
+                                      color: "transparent",
+                                    }}
+                                  >
+                                    CLICK ME
+                                  </a>
+                                </OverlayTrigger>
+                              </td>
+                            )
+                          ) || <td></td>;
+                          return spot;
                         }
                       }
                     );
@@ -204,7 +207,7 @@ const Schedule = ({ appointmentData, bookAppointment, deleteAppointment }) => {
           })) ||
           [8, 9, 10, 11, 12, 1, 2, 3, 4, 5].map((timeslot, index) => {
             return (
-              <tr key={index}>
+              <tr key={Math.random(123142)}>
                 <td>
                   {timeslot < 12 && timeslot >= 8
                     ? timeslot + ":00 AM"
@@ -254,26 +257,29 @@ const Schedule = ({ appointmentData, bookAppointment, deleteAppointment }) => {
                         </Popover.Body>
                       </Popover>
                     );
-                    return (
-                      <td key={Math.random(434235142)}>
-                        <OverlayTrigger
-                          trigger="click"
-                          placement="right"
-                          overlay={popover2}
-                          rootClose
-                        >
-                          <a
-                            style={{
-                              cursor: "pointer",
-                              color: "transparent",
-                            }}
+                    const spot = !(
+                      JSON.parse(localStorage.getItem("isEmployee")) && (
+                        <td key={Math.random(434235142)}>
+                          <OverlayTrigger
+                            trigger="click"
+                            placement="right"
+                            overlay={popover2}
+                            rootClose
                           >
-                            CLICK ME
-                          </a>
-                        </OverlayTrigger>{" "}
-                      </td>
-                    );
-                  })) || <td></td>}
+                            <a
+                              style={{
+                                cursor: "pointer",
+                                color: "transparent",
+                              }}
+                            >
+                              CLICK ME
+                            </a>
+                          </OverlayTrigger>
+                        </td>
+                      )
+                    ) || <td key={Math.random(23432)}></td>;
+                    return spot;
+                  })) || <td key={Math.random(23432)}></td>}
               </tr>
             );
           })}

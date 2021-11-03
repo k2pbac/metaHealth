@@ -36,6 +36,7 @@ import { loginUser, registerComplete } from "../actions/index";
 import LoggedInEmployee from "./Navbar/LoggedState/LoggedInEmployee";
 import LoggedOut from "./Navbar/LoggedState/LoggedOut";
 import ManageAppointments from "./ManageAppointments/ManageAppointments";
+import PatientReportView from "./ManageAppointments/PatientReportView";
 
 export default function Application(props) {
   const completeRegisterSelector = useSelector((state) => state.registerUser);
@@ -72,6 +73,8 @@ export default function Application(props) {
     updatePatientProfile,
     updateEmployeeProfile,
     updatePatientNotes,
+
+    editPatientRecord,
   } = useApplicationData();
 
   const {
@@ -238,6 +241,17 @@ export default function Application(props) {
               patientName={patientName}
               patientsList={patients}
             ></PatientMedicalRecords>
+          )}
+        />
+
+        <Route
+          path="/clinic/patient/record/:id"
+          render={(props) => (
+            <PatientReportView
+              appState={appState}
+              {...props}
+              editPatientRecord={editPatientRecord}
+            ></PatientReportView>
           )}
         />
 

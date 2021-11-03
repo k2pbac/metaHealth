@@ -5,11 +5,16 @@ import "./PatientReport";
 import { patientReportData } from "./patientReportData";
 import PatientReport from "./PatientReport";
 
-const PatientReportList = ({ createNewReport, setCreateNewReport }) => {
-  const [reports, setReports] = useState(patientReportData.reports);
-
+const PatientReportList = ({
+  createNewReport,
+  setCreateNewReport,
+  reportData,
+  editPatientRecord,
+}) => {
+  const [reports, setReports] = useState(reportData.reports);
+  console.log(reports);
   let getReportIds = {};
-  for (let i = 0; i < patientReportData.reports.length; i++) {
+  for (let i = 0; i < reportData.reports.length; i++) {
     getReportIds[i] = false;
   }
 
@@ -25,34 +30,12 @@ const PatientReportList = ({ createNewReport, setCreateNewReport }) => {
 
   useEffect(() => {
     if (createNewReport === true) {
-      const monthNames = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-      ];
-
-      var today = new Date(),
-        date =
-          monthNames[today.getMonth() + 1] +
-          " " +
-          today.getDate() +
-          ", " +
-          today.getFullYear();
+      var today = new Date().toLocaleDateString();
       setReports((prev) => [
         {
-          id: prev[prev.length - 1].id + 1,
-          created_on: date,
+          created_on: today,
           created_by: "Dr. Sam Henry",
-          last_updated: date,
+          last_updated: today,
           last_updated_by: "Dr. Sam Henry",
           information: "",
           medication_prescribed: "",
@@ -72,10 +55,10 @@ const PatientReportList = ({ createNewReport, setCreateNewReport }) => {
   return reports.map((report, index) => {
     return (
       <PatientReport
-        key={report.id}
+        key={report.id || Math.random(12314)}
         report={report}
-        clinic={patientReportData.clinic}
-        patient={patientReportData.patient}
+        clinic={reportData.clinic}
+        patient={reportData.patient}
         editing={editing[index]}
         setEditing={setEditing}
         reportIndex={index}
@@ -86,6 +69,7 @@ const PatientReportList = ({ createNewReport, setCreateNewReport }) => {
             return newArr;
           })
         }
+        editPatientRecord={editPatientRecord}
         currentlyEditing={() => getReportEditing()}
       ></PatientReport>
     );

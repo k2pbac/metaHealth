@@ -20,7 +20,8 @@ import Spinner from "react-bootstrap/Spinner";
 import ClinicEmployeeList from "./ClinicEmployeeList";
 
 import { userServices } from "hooks/userServices";
-const { getEmployeesForClinic, verifyEmployee, unverifyEmployee } = userServices;
+const { getEmployeesForClinic, verifyEmployee, unverifyEmployee } =
+  userServices;
 
 const ManageAppointments = ({
   clinic,
@@ -65,10 +66,12 @@ const ManageAppointments = ({
           clinic.id
         ),
       });
-      setEmployeeList(() => {
-        const clinic_id = loggedUser.user.clinic_id;
-        return getEmployeesForClinic(clinic_id);
-      });
+      if (JSON.parse(localStorage.getItem("isEmployee"))) {
+        setEmployeeList(() => {
+          const clinic_id = loggedUser.user.clinic_id;
+          return getEmployeesForClinic(clinic_id);
+        });
+      }
     }
   }, [appState]);
 
@@ -101,20 +104,76 @@ const ManageAppointments = ({
   };
 
   return (
-    (clinic && employeeList && (
+    (clinic &&
+      employeeList &&
+      JSON.parse(localStorage.getItem("isEmployee")) && (
+        <Row className="p-3 w-100">
+          <Column>
+            {(isEmployee && (
+              <div className="d-flex flex-column align-items-center">
+                <h3>{employeeSchedule.clinic}</h3>
+                <p style={{ width: "50%" }}>{clinic.address}</p>
+              </div>
+            )) || (
+              <>
+                <span>{clinic.name}</span>
+                <p className="w-50">{clinic.address}</p>
+              </>
+            )}
+
+            <Calendar
+              className="mb-5"
+              onChange={handleCalendarChange}
+              value={currentDay}
+            />
+            {isEmployee && <a href="#!">View Patient Medical Records</a>}
+          </Column>
+          <Column>
+            <Row>
+              <Column>
+                {(!JSON.parse(localStorage.getItem("isEmployee")) && (
+                  <Schedule
+                    setAppointments={setAppointments}
+                    bookAppointment={bookAppointment}
+                    appointmentData={appointments}
+                    deleteAppointment={deleteAppointment}
+                  ></Schedule>
+                )) ||
+                  (JSON.parse(localStorage.getItem("isEmployee")) && (
+                    <Schedule
+                      setAppointments={setAppointments}
+                      bookAppointment={bookAppointment}
+                      appointmentData={appointments}
+                      deleteAppointment={deleteAppointment}
+                    ></Schedule>
+                  ))}
+              </Column>
+              <Column>
+                {(!JSON.parse(localStorage.getItem("isEmployee")) && (
+                  <PatientSchedule
+                    patient={patient}
+                    clinicRecords={clinicRecords}
+                    clinicName={clinic.name}
+                    updatePatientNotes={updatePatientNotes}
+                  ></PatientSchedule>
+                )) ||
+                  (employeeList && (
+                    <ClinicEmployeeList
+                      employeeList={employeeList}
+                    ></ClinicEmployeeList>
+                  ))}
+              </Column>
+            </Row>
+          </Column>
+        </Row>
+      )) ||
+    (clinic && (
       <Row className="p-3 w-100">
         <Column>
-          {(isEmployee && (
-            <div className="d-flex flex-column align-items-center">
-              <h3>{employeeSchedule.clinic}</h3>
-              <p style={{ width: "50%" }}>{clinic.address}</p>
-            </div>
-          )) || (
-            <>
-              <span>{clinic.name}</span>
-              <p className="w-50">{clinic.address}</p>
-            </>
-          )}
+          <>
+            <span>{clinic.name}</span>
+            <p className="w-50">{clinic.address}</p>
+          </>
 
           <Calendar
             className="mb-5"
@@ -126,39 +185,24 @@ const ManageAppointments = ({
         <Column>
           <Row>
             <Column>
-              {(!JSON.parse(localStorage.getItem("isEmployee")) && (
+              {!JSON.parse(localStorage.getItem("isEmployee")) && (
                 <Schedule
                   setAppointments={setAppointments}
                   bookAppointment={bookAppointment}
                   appointmentData={appointments}
                   deleteAppointment={deleteAppointment}
                 ></Schedule>
-              )) ||
-                (JSON.parse(localStorage.getItem("isEmployee")) && (
-                  <Schedule
-                    setAppointments={setAppointments}
-                    bookAppointment={bookAppointment}
-                    appointmentData={appointments}
-                    deleteAppointment={deleteAppointment}
-                  ></Schedule>
-                ))}
+              )}
             </Column>
             <Column>
-              {(!JSON.parse(localStorage.getItem("isEmployee")) && (
+              {!JSON.parse(localStorage.getItem("isEmployee")) && (
                 <PatientSchedule
                   patient={patient}
                   clinicRecords={clinicRecords}
                   clinicName={clinic.name}
                   updatePatientNotes={updatePatientNotes}
                 ></PatientSchedule>
-              )) ||
-                (employeeList && (
-                  <ClinicEmployeeList
-                    employeeList={employeeList}
-                    verifyEmployee={verifyEmployee}
-                    unverifyEmployee={unverifyEmployee}
-                  ></ClinicEmployeeList>
-                ))}
+              )}
             </Column>
           </Row>
         </Column>
