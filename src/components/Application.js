@@ -21,6 +21,7 @@ import {
 } from "./RegisterForm/FormData";
 import BookAppointments from "./BookAppointments/BookAppointments";
 import PatientProfileIndex from "./View_Profile/PatientProfileIndex";
+import EmployeeProfileIndex from "./View_Profile/EmployeeProfileIndex";
 import { useSelector, useStore, useDispatch } from "react-redux";
 import useApplicationData from "hooks/useApplicationData";
 import {
@@ -70,6 +71,7 @@ export default function Application(props) {
     bookAppointment,
     deleteAppointment,
     updatePatientProfile,
+    updateEmployeeProfile,
     updatePatientNotes,
 
     editPatientRecord,
@@ -102,8 +104,11 @@ export default function Application(props) {
     }
   });
   useEffect(() => {
-    if (userLogged.update_profile) {
+    if (userLogged.update_profile && !getLocalStorage("isEmployee")) {
       updatePatientProfile(userLogged.user);
+    }
+    else if(userLogged.update_profile && getLocalStorage("isEmployee")){
+      updateEmployeeProfile(userLogged.user);
     }
   }, [userLogged.user]);
 
@@ -199,12 +204,22 @@ export default function Application(props) {
         <Route path="/login" component={LoginSelectionPanel} />
         {/* Change Login form for employee vs patient */}
         <Route path="/register" component={RegisterSelectionPanel} />
+
         <Route
           path="/patient/profile"
           component={() => (
             <PatientProfileIndex {...userLogged.user}></PatientProfileIndex>
           )}
         />
+
+        <Route
+          path="/employee/profile"
+          component={() => (
+            <EmployeeProfileIndex {...userLogged.user}></EmployeeProfileIndex>
+          )}
+        />
+
+
 
         <Route
           path="/clinics"

@@ -12,13 +12,17 @@ const userLoggedReducer = (state = initialState, action) => {
       localStorage.setItem("user", JSON.stringify(action.user));
       return { ...action.user, loggedIn: true };
     case authConstants.UPDATE_PROFILE:
+      console.log({
+        ...action.user,
+        ...JSON.parse(localStorage.getItem("user"))
+      })
       localStorage.setItem(
         "user",
         JSON.stringify({
           ...JSON.parse(localStorage.getItem("user")),
           ...action.user,
-        })
-      );
+        }));
+      console.log(JSON.parse(localStorage.getItem("user")));
       return {
         ...JSON.parse(localStorage.getItem("user")),
         ...action.user,
