@@ -5,11 +5,16 @@ import "./PatientReport";
 import { patientReportData } from "./patientReportData";
 import PatientReport from "./PatientReport";
 
-const PatientReportList = ({ createNewReport, setCreateNewReport }) => {
-  const [reports, setReports] = useState(patientReportData.reports);
-
+const PatientReportList = ({
+  createNewReport,
+  setCreateNewReport,
+  reportData,
+  editPatientRecord,
+}) => {
+  const [reports, setReports] = useState(reportData.reports);
+  console.log(reports);
   let getReportIds = {};
-  for (let i = 0; i < patientReportData.reports.length; i++) {
+  for (let i = 0; i < reportData.reports.length; i++) {
     getReportIds[i] = false;
   }
 
@@ -74,8 +79,8 @@ const PatientReportList = ({ createNewReport, setCreateNewReport }) => {
       <PatientReport
         key={report.id}
         report={report}
-        clinic={patientReportData.clinic}
-        patient={patientReportData.patient}
+        clinic={reportData.clinic}
+        patient={reportData.patient}
         editing={editing[index]}
         setEditing={setEditing}
         reportIndex={index}
@@ -86,6 +91,7 @@ const PatientReportList = ({ createNewReport, setCreateNewReport }) => {
             return newArr;
           })
         }
+        editPatientRecord={editPatientRecord}
         currentlyEditing={() => getReportEditing()}
       ></PatientReport>
     );

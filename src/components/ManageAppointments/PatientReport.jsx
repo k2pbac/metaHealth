@@ -6,25 +6,26 @@ import Column from "react-bootstrap/Col";
 import { FloatingLabel, Form } from "react-bootstrap";
 
 const PatientReport = ({
+  patient,
   report,
   editing,
   setEditing,
   reportIndex,
   currentlyEditing,
   deleteReport,
+  editPatientRecord,
 }) => {
   const [reportData, setReportData] = useState({
-    info: report.information || "",
-    medication: report.medication_prescribed || "",
-    referral: report.referral || "",
+    info: report.information,
+    medication: report.medication_prescribed,
+    referral: report.referral,
   });
-
   const isEditing = currentlyEditing();
-
   const removeReport = () => {
     deleteReport();
     setEditing(false);
   };
+
   return (
     <Row
       className="report-container py-4 mb-3"
@@ -37,12 +38,17 @@ const PatientReport = ({
               Currently Editing
             </span>
           )}
-          <p>Created on {report.created_on || ""}</p>
-          <p>Created by {report.created_by || ""}</p>
+          <p>
+            Created on {new Date(report.created_at).toLocaleDateString() || ""}
+          </p>
+          <p>Created by {report.created_by || "Dr. Smith Jones"}</p>
         </Column>
         <Column className="d-flex align-items-end flex-column">
-          <p>Last updated {report.last_updated || ""}</p>
-          <p>Last updated by {report.last_updated_by || ""}</p>
+          <p>
+            Last updated{" "}
+            {new Date(report.updated_at).toLocaleDateString() || ""}
+          </p>
+          <p>Last updated by {report.last_updated_by || "Dr. Smith Jones"}</p>
         </Column>
       </Row>
       <Row
@@ -66,7 +72,15 @@ const PatientReport = ({
                   placeholder="Leave a comment here"
                   style={{ height: "150px" }}
                   value={reportData.info}
-                  onChange={(e) => setReportData(e.target.value)}
+                  onChange={(e) => {
+                    const { value } = e.target;
+
+                    setReportData((prev) => {
+                      let obj = Object.assign({}, prev);
+                      obj.info = value;
+                      return obj;
+                    });
+                  }}
                   className="my-2"
                   disabled={!editing}
                 />
@@ -82,7 +96,14 @@ const PatientReport = ({
                     type="text"
                     placeholder=""
                     value={reportData.medication}
-                    onChange={(e) => setReportData(e.target.value)}
+                    onChange={(e) => {
+                      const { value } = e.target;
+                      setReportData((prev) => {
+                        let obj = Object.assign({}, prev);
+                        obj.medication = value;
+                        return obj;
+                      });
+                    }}
                     disabled={!editing}
                   />
                 </FloatingLabel>
@@ -97,7 +118,15 @@ const PatientReport = ({
                     value={reportData.referral}
                     type="text"
                     placeholder=""
-                    onChange={(e) => setReportData(e.target.value)}
+                    onChange={(e) => {
+                      const { value } = e.target;
+
+                      setReportData((prev) => {
+                        let obj = Object.assign({}, prev);
+                        obj.referral = value;
+                        return obj;
+                      });
+                    }}
                     disabled={!editing}
                   />
                 </FloatingLabel>
@@ -125,13 +154,15 @@ const PatientReport = ({
                       style={{ width: "100px", marginRight: "10px" }}
                       variant="success"
                       type="button"
-                      onClick={() =>
+                      onClick={() => {
                         setEditing((prev) => {
                           let newForm = Object.assign({}, prev);
                           newForm[reportIndex] = false;
                           return newForm;
-                        })
-                      }
+                        });
+                        console.log(reportData, patient.id);
+                        editPatientRecord(reportData, patient.id);
+                      }}
                     >
                       Save
                     </Button>

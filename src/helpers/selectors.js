@@ -108,3 +108,57 @@ export const getClinicRecords = (
   console.log(records);
   return records;
 };
+
+export const getPatientMedicalRecords = (
+  { clinics, patients, registered, medicalRecords },
+  patient_id
+) => {
+  const reports = [];
+  let foundPatient = {};
+  let clinic = {};
+  patient_id = parseInt(patient_id);
+  for (let patient in patients) {
+    if (patient_id === patients[patient].id) {
+      foundPatient[patient_id] = patients[patient];
+      break;
+    }
+  }
+
+  console.log(foundPatient);
+  for (let register in registered) {
+    if (
+      foundPatient[patient_id].id === registered[register].patient_account_id
+    ) {
+      clinic[registered[register].clinic_id + 1] =
+        clinics[registered[register].clinic_id];
+      break;
+    }
+  }
+
+  for (let record in medicalRecords) {
+    if (medicalRecords[record].patient_id === patient_id) {
+      reports.push(medicalRecords[record]);
+    }
+  }
+  const { name, address } = clinic[Object.keys(clinic)[0]];
+  const {
+    first_name,
+    last_name,
+    address: newAddress,
+    email_address,
+    phone_number,
+  } = foundPatient[patient_id];
+
+  return {
+    clinic: name,
+    address: address,
+    reports: reports,
+    patient: {
+      name: first_name + " " + last_name,
+      newAddress,
+      email: email_address,
+      phone: phone_number,
+      id: patient_id,
+    },
+  };
+};

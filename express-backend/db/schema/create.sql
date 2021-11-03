@@ -69,7 +69,8 @@ CREATE TABLE patient_records (
   created_at timestamp default CURRENT_DATE,
   updated_at timestamp default CURRENT_DATE,
   medication_prescribed TEXT,
-  date_of_symptoms timestamp,
+  date_of_symptoms timestamp default CURRENT_DATE,
+  referral VARCHAR(255) default NULL,
   patient_id INTEGER DEFAULT NULL,
   appointment_id INTEGER REFERENCES appointments(id) ON DELETE CASCADE
 );

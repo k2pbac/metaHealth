@@ -19,8 +19,33 @@ router.get("/api/patients", function (req, res, next) {
       `SELECT * FROM patient_records
       join appointments on appointment_id = appointments.id
       join employee_accounts on appointments.employee_account_id = employee_accounts.id 
-      where patient_id = 202
-       ORDER By created_at`,
+      ORDER By created_at`,
+      (error, results) => {
+        if (error) {
+          throw error;
+        }
+        res.json(results.rows);
+      }
+    );
+  });
+
+  router.get("/api/patient/medical-records", (req, res, next) => {
+    db.query(`SELECT * FROM patient_records`, (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.json(results.rows);
+    });
+  });
+
+  router.put("/api/patient/report", (req, res, next) => {
+    const { info, medication, referral, patient_id } = req.body;
+    console.log(info);
+    db.query(
+      `UPDATE patient_records
+    SET information = '${info}',
+        medication_prescribed = '${medication}'
+    WHERE patient_id = ${patient_id}`,
       (error, results) => {
         if (error) {
           throw error;
