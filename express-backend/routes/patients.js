@@ -10,7 +10,6 @@ router.get("/api/patients", function (req, res, next) {
       if (error) {
         throw error;
       }
-      console.log(results);
       res.json(results.rows);
     }
   );
@@ -32,7 +31,8 @@ router.get("/api/patients", function (req, res, next) {
 
   router.get("/api/patient/medical-records", (req, res, next) => {
     db.query(
-      `SELECT updated_at at time zone 'utc' at time zone 'est', *  FROM patient_records`,
+      `SELECT updated_at at time zone 'utc' at time zone 'est', *  FROM patient_records 
+      ORDER By updated_at `,
       (error, results) => {
         if (error) {
           throw error;
@@ -44,7 +44,6 @@ router.get("/api/patients", function (req, res, next) {
 
   router.put("/api/patient/report", (req, res, next) => {
     const { info, medication, referral, id, patient_id, user } = req.body;
-    console.log(id);
     if (id) {
       db.query(
         `UPDATE patient_records
@@ -138,8 +137,6 @@ router.put("/api/employee/profile", (req, res, next) => {
     phone_number,
     email_address,
   } = req.body;
-
-  console.log("req.body:", req.body);
 
   db.query(
     `UPDATE employee_accounts 

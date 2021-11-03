@@ -38,6 +38,7 @@ import LoggedOut from "./Navbar/LoggedState/LoggedOut";
 import ManageAppointments from "./ManageAppointments/ManageAppointments";
 import PatientReportView from "./ManageAppointments/PatientReportView";
 import PatientSchedule from "./PatientSchedule/PatientSchedule";
+import PatientAppointmentList from "./PatientSchedule/PatientAppointmentList";
 
 export default function Application(props) {
   const completeRegisterSelector = useSelector((state) => state.registerUser);
@@ -97,9 +98,10 @@ export default function Application(props) {
       userLogged &&
       userLogged.user &&
       userLogged.user.clinic_id &&
-      nextLocation.pathname ===
-        `/clinic/appointments/${userLogged.user.clinic_id}` &&
       userLogged.user.clinic_id !== null
+      // &&
+      // nextLocation.pathname ===
+      //   `/clinic/appointments/${userLogged.user.clinic_id}`
     ) {
       setClinicAddress(userLogged.user.clinic_id);
     }
@@ -119,9 +121,17 @@ export default function Application(props) {
   useEffect(() => {
     if (completeRegisterSelector) {
       if (completeRegisterSelector.isEmployee) {
-        submitEmployeeRegistration(completeRegisterSelector);
+        submitEmployeeRegistration(completeRegisterSelector).then((res) => {
+          if (res.payload) {
+            history.push("/");
+          }
+        });
       } else {
-        submitPatientRegistration(completeRegisterSelector);
+        submitPatientRegistration(completeRegisterSelector).then((res) => {
+          if (res.payload) {
+            history.push("/");
+          }
+        });
       }
       dispatch(registerComplete());
     }
@@ -133,20 +143,26 @@ export default function Application(props) {
         authenticateEmployee(userAuth).then((res) => {
           dispatch(loginUser(res, true));
           setIsEmployee(true);
-          history.push("/");
+          if (getLocalStorage("user")) {
+            history.push("/");
+          }
         });
       } else if (!userAuth.isEmployee) {
         authenticatePatient(userAuth).then((res) => {
           dispatch(loginUser(res, false));
           setIsEmployee(false);
-          history.push("/");
+          console.log(userLogged);
+
+          if (getLocalStorage("user")) {
+            history.push("/");
+          }
         });
       }
     }
   }, [userAuth]);
 
   return (
-    <>
+    <div className="">
       {!userLogged.loggedIn && <LoggedOut></LoggedOut>}
       {/* Patient Nav View */}
       {userLogged.loggedIn && getLocalStorage("isEmployee") == false && (
@@ -269,7 +285,7 @@ export default function Application(props) {
 
         <Route
           path={`/clinic/appointments`}
-          component={() => <PatientSchedule></PatientSchedule>}
+          component={() => <PatientAppointmentList></PatientAppointmentList>}
         />
 
         {/* Manage Appointments Routes for Employee and Patient - will need to figure out how to pass params */}
@@ -277,6 +293,6 @@ export default function Application(props) {
         {/* Add/Edit Patient Medical Record Page route will need clinic params */}
       </Switch>
       <Footer></Footer>
-    </>
+    </div>
   );
 }

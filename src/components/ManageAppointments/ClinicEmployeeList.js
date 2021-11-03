@@ -11,19 +11,18 @@ export default function ClinicEmployeeList(props) {
   const { employeeList, verifyEmployee, unverifyEmployee } = props;
   const [employeeState, setEmployeeState] = useState({});
 
-
   const onAccept = function (employee_id, clinic_id) {
-    verifyEmployee(employee_id, clinic_id)
+    verifyEmployee(employee_id, clinic_id);
     window.location.reload();
   };
 
   const onReject = function (employee_id, clinic_id) {
-    unverifyEmployee(employee_id, clinic_id)
+    unverifyEmployee(employee_id, clinic_id);
     window.location.reload();
   };
 
-  const onRemove  = function (employee_id, clinic_id) {
-    unverifyEmployee(employee_id, clinic_id)
+  const onRemove = function (employee_id, clinic_id) {
+    unverifyEmployee(employee_id, clinic_id);
     window.location.reload();
   };
 
@@ -66,31 +65,39 @@ export default function ClinicEmployeeList(props) {
                         size="sm"
                         variant="success"
                         // className="accept"
-                        onClick={() => onAccept(
-                          employeeState[element].id,
-                          employeeState[element].clinic_id
-                          )}
+                        onClick={() =>
+                          onAccept(
+                            employeeState[element].id,
+                            employeeState[element].clinic_id
+                          )
+                        }
                       >
                         Accept
                       </Button>
                       <Button
                         size="sm"
                         variant="danger"
-                        onClick={() =>onReject(
-                          employeeState[element].id,
-                          employeeState[element].clinic_id
-                        )}
+                        onClick={() =>
+                          onReject(
+                            employeeState[element].id,
+                            employeeState[element].clinic_id
+                          )
+                        }
                       >
                         Reject
                       </Button>
                     </>
                   )) || (
-                    <Button size="sm" variant="danger"
-                    onClick={() => onRemove(
-                      employeeState[element].id,
-                      employeeState[element].clinic_id
-                    )}
-                  >
+                    <Button
+                      size="sm"
+                      variant="danger"
+                      onClick={() =>
+                        onRemove(
+                          employeeState[element].id,
+                          employeeState[element].clinic_id
+                        )
+                      }
+                    >
                       Remove
                     </Button>
                   )}

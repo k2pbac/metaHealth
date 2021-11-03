@@ -65,7 +65,7 @@ export default function LoggedInEmployee(props) {
             </Dropdown.Menu>
           </Dropdown>
 
-          <Link to="./">
+          <Link to="/">
             <Button onClick={onLogout}>Logout</Button>
           </Link>
         </div>
