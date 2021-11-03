@@ -66,13 +66,11 @@ const ManageAppointments = ({
         ),
       });
       setEmployeeList(() => {
-        const clinic_id = JSON.parse(
-          localStorage.getItem("user").user.clinic_id
-        );
+        const clinic_id = loggedUser.user.clinic_id;
         return getEmployeesForClinic(clinic_id);
       });
     }
-  }, []);
+  }, [appState]);
 
   const handleCalendarChange = (value, event) => {
     const date = new Date(value);
@@ -103,7 +101,7 @@ const ManageAppointments = ({
   };
 
   return (
-    (clinic && (
+    (clinic && employeeList && (
       <Row className="p-3 w-100">
         <Column>
           {(isEmployee && (
@@ -153,11 +151,12 @@ const ManageAppointments = ({
                   clinicName={clinic.name}
                   updatePatientNotes={updatePatientNotes}
                 ></PatientSchedule>
-              )) || (
-                <ClinicEmployeeList
-                  employeeList={employeeList}
-                ></ClinicEmployeeList>
-              )}
+              )) ||
+                (employeeList && (
+                  <ClinicEmployeeList
+                    employeeList={employeeList}
+                  ></ClinicEmployeeList>
+                ))}
             </Column>
           </Row>
         </Column>

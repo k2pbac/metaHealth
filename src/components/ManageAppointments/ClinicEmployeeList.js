@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classNames from "classnames";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import FadeIn from "react-fade-in";
+//import FadeIn from "react-fade-in";
 // import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
 // import { Link } from "react-router-dom";
@@ -9,15 +9,16 @@ import "components/ManageAppointments/ClinicEmployeeList.scss";
 
 export default function ClinicEmployeeList(props) {
   const { employeeList } = props;
+  const [employeeState, setEmployeeState] = useState({});
+  const onAccept = function () {};
 
-  const onAccept= function(){
-
-  }
-
-  const onReject= function(){
-
-  }
-
+  const onReject = function () {};
+  let employees = [];
+  console.log(employeeList);
+  employeeList.then((results) => {
+    setEmployeeState(results);
+  });
+  console.log(employeeState);
   return (
     <div className="employee-list-container">
       <table className="employee-table">
@@ -32,20 +33,29 @@ export default function ClinicEmployeeList(props) {
           </tr>
         </thead>
         <tbody>
-          {(Object.keys(employeeList).map((element) => (
-            <tr key={employeeList[element].id}>
-              <td>{employeeList[element].first_name}</td>
-              <td>{employeeList[element].last_name}</td>
-              <td>{employeeList[element].phone_number}</td>
-              <td>{employeeList[element].email_address}</td>
-              <td>{employeeList[element].clinic_verified ? "Verified" : "Unverified"}</td>
-              <td>
-                <Button className="accept" onClick={onAccept}>Accept</Button>
-                <Button className="reject" onClick={onReject}>Reject</Button>
-              </td>
-            </tr>
-          ))
-          )}
+          {Object.keys(employeeState).map((element) => {
+            return (
+              <tr key={employeeState[element].id}>
+                <td>{employeeState[element].first_name}</td>
+                <td>{employeeState[element].last_name}</td>
+                <td>{employeeState[element].phone_number}</td>
+                <td>{employeeState[element].email_address}</td>
+                <td>
+                  {employeeState[element].clinic_verified
+                    ? "Verified"
+                    : "Unverified"}
+                </td>
+                <td className="">
+                  <Button className="accept" onClick={onAccept}>
+                    Accept
+                  </Button>
+                  <Button className="reject" onClick={onReject}>
+                    Reject
+                  </Button>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

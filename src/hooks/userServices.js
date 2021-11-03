@@ -82,53 +82,45 @@ const submitPatientRegistration = (user) => {
   }
 };
 
-
-const submitEmployeeRegistrationForClinic = (employee,clinic_id) => {
+const submitEmployeeRegistrationForClinic = (employee, clinic_id) => {
   return axios({
     method: "PUT",
     data: {
       employee,
-      clinic_id
+      clinic_id,
     },
     withCredentials: true,
     url: "/api/clinics/register/existing",
-  })
+  });
+};
 
-}
-
-const getPatientRecordsForClinic= (patient_name,clinic_id) => {
+const getPatientRecordsForClinic = (patient_name, clinic_id) => {
   return axios({
     method: "POST",
     data: {
       patient_name,
-      clinic_id
+      clinic_id,
     },
     withCredentials: true,
     url: "/api/clinics/patient/records",
-  }).then((result)=>{
-    console.log("result:",result.data)
-    return result.data
-  })
+  }).then((result) => {
+    console.log("result:", result.data);
+    return result.data;
+  });
+};
 
-}
-
-const getEmployeesForClinic= (clinic_id) => {
-  return axios({
+const getEmployeesForClinic = async (clinic_id) => {
+  return await axios({
     method: "POST",
     data: {
-      clinic_id
+      clinic_id,
     },
     withCredentials: true,
     url: "/api/clinics/employee/list",
-  }).then((result)=>{
-    console.log("result:",result.data)
-    return result.data
-  })
-
-}
-
-
-
+  }).then((result) => {
+    return result.data;
+  });
+};
 
 export const userServices = {
   authenticateEmployee,
@@ -137,5 +129,5 @@ export const userServices = {
   submitEmployeeRegistration,
   submitEmployeeRegistrationForClinic,
   getPatientRecordsForClinic,
-  getEmployeesForClinic
+  getEmployeesForClinic,
 };
