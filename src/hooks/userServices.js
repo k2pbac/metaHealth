@@ -48,7 +48,15 @@ const submitEmployeeRegistration = (user) => {
       is_doctor:
         user["Are you a doctor?"][Object.keys(user["Are you a doctor?"])[0]],
     };
-    return axios.post(`/api/employee/register`, { newUser });
+    return axios
+      .post(`/api/employee/register`, { newUser })
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+        return err;
+      });
   }
 };
 

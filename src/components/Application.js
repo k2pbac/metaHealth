@@ -121,7 +121,10 @@ export default function Application(props) {
   useEffect(() => {
     if (completeRegisterSelector) {
       if (completeRegisterSelector.isEmployee) {
+        console.log("here");
         submitEmployeeRegistration(completeRegisterSelector).then((res) => {
+          console.log("go to main page");
+          console.log(res);
           if (res.payload) {
             history.push("/");
           }
