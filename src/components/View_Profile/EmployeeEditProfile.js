@@ -66,14 +66,6 @@ export default function EmployeeEditProfile(props) {
               <Form.Control type="username" placeholder={username} />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formProfileDescription">
-              <Form.Label>Profile Description</Form.Label>
-              <Form.Control
-                type="profileDescription"
-                as="textarea"
-                placeholder={profile_description}
-              />
-            </Form.Group>
           </div>
         </section>
 

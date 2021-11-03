@@ -150,6 +150,21 @@ const unverifyEmployee = (employee_id,clinic_id) => {
   });
 };
 
+
+const getClinicData= (clinic_id) => {
+  return axios({
+    method: "POST",
+    data: {
+      clinic_id,
+    },
+    withCredentials: true,
+    url: "/api/clinics/data",
+  }).then((result) => {
+    return result.data;
+  });
+};
+
+
 export const userServices = {
   authenticateEmployee,
   authenticatePatient,
@@ -159,5 +174,6 @@ export const userServices = {
   getPatientRecordsForClinic,
   getEmployeesForClinic,
   verifyEmployee,
-  unverifyEmployee
+  unverifyEmployee,
+  getClinicData
 };
