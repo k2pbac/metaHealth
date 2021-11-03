@@ -30,21 +30,6 @@ const PatientReportList = ({
 
   useEffect(() => {
     if (createNewReport === true) {
-      const monthNames = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-      ];
-
       var today = new Date().toLocaleDateString();
       setReports((prev) => [
         {

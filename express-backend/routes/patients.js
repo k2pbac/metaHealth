@@ -39,13 +39,12 @@ router.get("/api/patients", function (req, res, next) {
   });
 
   router.put("/api/patient/report", (req, res, next) => {
-    const { info, medication, referral, patient_id } = req.body;
-    console.log(info);
+    const { info, medication, referral, id } = req.body;
     db.query(
       `UPDATE patient_records
     SET information = '${info}',
         medication_prescribed = '${medication}'
-    WHERE patient_id = ${patient_id}`,
+    WHERE id = ${id}`,
       (error, results) => {
         if (error) {
           throw error;

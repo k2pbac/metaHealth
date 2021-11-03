@@ -19,7 +19,9 @@ const PatientReport = ({
     info: report.information,
     medication: report.medication_prescribed,
     referral: report.referral,
+    id: report.id,
   });
+  console.log(report);
   const isEditing = currentlyEditing();
   const removeReport = () => {
     deleteReport();
