@@ -8,9 +8,11 @@ import Button from "components/Button";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "actions";
+import { useHistory } from "react-router-dom";
 
 export default function LoggedInPatient(props) {
   const { name, avatar } = props;
+  const history = useHistory();
   const navClass = classNames("navbar");
   const userLogged = useSelector((state) => state.userLogged);
   const dispatch = useDispatch();
@@ -19,6 +21,7 @@ export default function LoggedInPatient(props) {
 
   const onLogout = () => {
     dispatch(logoutUser());
+    history.push("/");
   };
 
   return (
