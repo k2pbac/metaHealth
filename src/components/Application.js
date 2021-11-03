@@ -38,6 +38,7 @@ import LoggedOut from "./Navbar/LoggedState/LoggedOut";
 import ManageAppointments from "./ManageAppointments/ManageAppointments";
 import PatientReportView from "./ManageAppointments/PatientReportView";
 import PatientSchedule from "./PatientSchedule/PatientSchedule";
+import PatientAppointmentList from "./PatientSchedule/PatientAppointmentList";
 
 export default function Application(props) {
   const completeRegisterSelector = useSelector((state) => state.registerUser);
@@ -269,7 +270,7 @@ export default function Application(props) {
 
         <Route
           path={`/clinic/appointments`}
-          component={() => <PatientSchedule></PatientSchedule>}
+          component={() => <PatientAppointmentList></PatientAppointmentList>}
         />
 
         {/* Manage Appointments Routes for Employee and Patient - will need to figure out how to pass params */}
