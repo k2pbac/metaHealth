@@ -55,22 +55,29 @@ export const displayClinicAppointments = (
   let sorted_patients = {};
   let sorted_appointments = [];
   let sorted_doctors = {};
+
   for (let appointment in appointments) {
     if (
       appointments[appointment].clinic_id === clinic_id &&
-      !sorted_doctors[appointments[appointment].employee_account_id]
+      !sorted_doctors[appointments[appointment].employee_account_id - 1]
     ) {
+      // if (
+      //   employee[appointments[appointment].employee_account_id - 1]
+      //     .clinic_id === clinic_id
+      // ) {
       sorted_doctors[appointments[appointment].employee_account_id] =
         employee[appointments[appointment].employee_account_id - 1];
-    }
-
-    if (
-      appointments[appointment].date === date &&
-      clinic_id === appointments[appointment].clinic_id
-    ) {
-      sorted_appointments.push(appointments[appointment]);
+      if (
+        appointments[appointment].date === date &&
+        clinic_id === appointments[appointment].clinic_id
+      ) {
+        sorted_appointments.push(appointments[appointment]);
+      }
+      // }
     }
   }
+
+  console.log(sorted_doctors);
 
   for (let appointment of sorted_appointments) {
     sorted_patients[appointment.patient_account_id] =

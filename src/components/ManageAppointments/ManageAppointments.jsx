@@ -113,7 +113,13 @@ const ManageAppointments = ({
       ),
     });
   };
-
+  // if (
+  //   appointments &&
+  //   appointments.doctors &&
+  //   Object.keys(appointments) &&
+  //   Object.keys(appointments.doctors)
+  // )
+  //   const doctor_length = Object.keys(appointments.doctors).length
   return (
     <>
       {(clinicId && clinicVerified) ||
@@ -124,7 +130,13 @@ const ManageAppointments = ({
             <Row className="p-3 w-100">
               <Column>
                 {(isEmployee && (
-                  <div className="d-flex flex-column align-items-center">
+                  <div
+                    className={`d-flex flex-column ${
+                      Object.keys(appointments.doctors).length > 4
+                        ? "flex-reverse"
+                        : ""
+                    }  align-items-center`}
+                  >
                     <h3>{employeeSchedule.clinic}</h3>
                     <p style={{ width: "50%" }}>{clinic.address}</p>
                   </div>
@@ -209,6 +221,7 @@ const ManageAppointments = ({
                       bookAppointment={bookAppointment}
                       appointmentData={appointments}
                       deleteAppointment={deleteAppointment}
+                      // doctor_length={doctor_length}
                     ></Schedule>
                   )}
                 </Column>
