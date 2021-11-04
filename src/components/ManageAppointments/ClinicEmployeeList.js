@@ -34,7 +34,8 @@ export default function ClinicEmployeeList(props) {
   employeeList.then((results) => {
     setEmployeeState(results);
   });
-  console.log(employeeState);
+  console.log("clinic_owner_id:",clinic.clinic_owner_id);
+  console.log("user_id:",user_id);
   return (
     <div className="employee-list-container">
       <table className="employee-table">

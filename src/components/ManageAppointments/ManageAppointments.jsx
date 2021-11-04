@@ -119,7 +119,7 @@ const ManageAppointments = ({
 
   return (
     <>
-    {(!clinicId === null && clinicVerified) ? (
+    {(clinicId && clinicVerified) ? (
       
 
     (clinic &&
@@ -235,7 +235,7 @@ const ManageAppointments = ({
     ):
     <div className="default-page">
       <h1>Sorry, it seems that you haven't registered to a clinic yet or you are waiting to be verified</h1>
-      <h2>If you have not registered the clinic you're currently employed at, please click here to register</h2>
+      <h2>If you have not registered the clinic you're currently employed at, please click <a href="/register/existing/clinic">here</a> to register</h2>
     </div>
 
       }
