@@ -166,25 +166,31 @@ export const getPatientMedicalRecords = (
 };
 
 export const getPatientAppointments = (
-  { appointments, patients, clinics },
+  { appointments, patients, clinics, employee },
   patient_id
 ) => {
   let appointmentData = {};
   let clinicId = [];
   let foundClinic = [];
   let foundPatient = {};
+  let foundDoctor = {};
 
+  console.log(employee);
   for (let appointment in appointments) {
     if (patient_id === appointments[appointment].patient_account_id) {
       clinicId.push(appointments[appointment].clinic_id);
 
       if (appointmentData.hasOwnProperty(appointments[appointment].clinic_id)) {
-        appointmentData[appointments[appointment].clinic_id].push(
-          appointments[appointment]
-        );
+        appointmentData[appointments[appointment].clinic_id].push({
+          ...appointments[appointment],
+          doctor: employee[appointments[appointment].employee_account_id],
+        });
       } else {
         appointmentData[appointments[appointment].clinic_id] = [
-          appointments[appointment],
+          {
+            ...appointments[appointment],
+            doctor: employee[appointments[appointment].employee_account_id],
+          },
         ];
       }
     }
@@ -214,5 +220,6 @@ export const getPatientAppointments = (
     appointments: sorted,
     patient: foundPatient,
     clinics: foundClinic,
+    doctor: foundDoctor,
   };
 };

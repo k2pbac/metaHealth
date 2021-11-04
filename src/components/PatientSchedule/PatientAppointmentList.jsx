@@ -29,7 +29,7 @@ const PatientAppointmentList = (props) => {
       setAppointmentData(getPatientAppointments(appState, userLogged.user.id));
     }
   }, [appState, match.params.id]);
-
+  console.log(appointmentData);
   const data = {};
 
   appointmentData &&
@@ -37,12 +37,19 @@ const PatientAppointmentList = (props) => {
     Object.keys(appointmentData.appointments).map((appointment) => {
       appointmentData.appointments[appointment].map((elements) => {
         const newElement = (
-          <Col key={elements.id} className="shadow-sm p-4">
+          <Col
+            key={elements.id}
+            xs={appointmentData.appointments[appointment].length > 1 ? 4 : 12}
+            className="shadow-sm p-4"
+          >
             <p>
               {elements.date + " "}
               {parseInt(elements.time) > 12
                 ? parseInt(elements.time) - 12 + ":00 PM"
                 : parseInt(elements.time) + ":00 AM"}
+            </p>
+            <p>
+              Dr. {elements.doctor.first_name} {elements.doctor.last_name}
             </p>
           </Col>
         );
@@ -68,7 +75,7 @@ const PatientAppointmentList = (props) => {
           });
         }}
       >
-        <option>Clinics</option>
+        <option disabled>Clinics</option>
         {appointmentData &&
           Array.isArray(appointmentData.clinics) &&
           appointmentData.clinics.length &&
@@ -86,15 +93,15 @@ const PatientAppointmentList = (props) => {
             <h3>
               {appointmentData.clinics[parseInt(currentData.index) - 1].name}
             </h3>
-            <p className="fs-5">{appointmentData.address}</p>
+            <p className="fs-5">
+              {appointmentData.clinics[parseInt(currentData.index) - 1].address}
+            </p>
             <Row className="p-3">
               {data &&
                 Object.keys(data).length !== 0 &&
                 Object.keys(data).map((el) => {
                   return (
-                    parseInt(currentData.index) === parseInt(el) + 1 && (
-                      <div key={data[el]}>{data[el]}</div>
-                    )
+                    parseInt(currentData.index) === parseInt(el) + 1 && data[el]
                   );
                 })}
             </Row>
