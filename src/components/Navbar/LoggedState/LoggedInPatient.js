@@ -55,7 +55,10 @@ export default function LoggedInPatient(props) {
               <Dropdown.Item as={Link} to="/clinics">
                 Book Appointments
               </Dropdown.Item>
-              <Dropdown.Item as={Link} to="/clinic/appointments">
+              <Dropdown.Item
+                as={Link}
+                to={`/patient/${userLogged.user.id}/appointments`}
+              >
                 Manage Appointments
               </Dropdown.Item>
             </Dropdown.Menu>

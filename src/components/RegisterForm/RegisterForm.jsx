@@ -45,6 +45,7 @@ const RegisterForm = ({ formData, isEmployee }) => {
       console.log("HERE")
       dispatch(registerPatient({ ...formValues, clinic_id: 1, isEmployee }));
     }
+
     else if (Object.keys(formValues).includes("Website")){
       dispatch(registerClinic({ ...formValues, clinic_id: 1, isClinic: true }))
     }
@@ -52,6 +53,7 @@ const RegisterForm = ({ formData, isEmployee }) => {
       dispatch(registerEmployee({ ...formValues, clinic_id: 1, isEmployee }));
     } 
     // history.push("/");
+
   };
 
   const handleClick = (viewNumber) => {

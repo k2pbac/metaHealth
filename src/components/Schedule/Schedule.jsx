@@ -59,7 +59,7 @@ const Schedule = ({ appointmentData, bookAppointment, deleteAppointment }) => {
                                 <Button
                                   onClick={() => {
                                     bookAppointment({
-                                      time: timeslot,
+                                      time: parseFloat(timeslot),
                                       date: appointmentData.bookingDate,
                                       clinic_id: appointmentData.clinic_id,
                                       patient_account_id: appointmentData.id,
