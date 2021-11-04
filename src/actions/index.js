@@ -29,6 +29,13 @@ export const registerPatient = (user) => {
   };
 };
 
+export const registerClinic = (user) => {
+  return {
+    type: authConstants.CLINIC_REGISTER_REQUEST,
+    user: user,
+  };
+};
+
 export const registerComplete = () => {
   return {
     type: "REGISTER_COMPLETE",

@@ -82,4 +82,44 @@ router.post("/api/patient/register", function (req, res, next) {
     });
 });
 
+//************************Clinic Register*******************
+
+router.post("/api/clinic/register", function (req, res, next) {
+  const { newUser } = req.body;
+
+  db.query(
+    `INSERT INTO clinics 
+    (name,
+    address,
+    website,
+    phone_number,
+    avatar,
+    clinic_owner_id ,
+    ein_number,
+    insurance_number,
+    tax_id_number) 
+    values
+    (
+    '${newUser.name}',
+    '${newUser.address}',
+    '${newUser.website}',
+    '${newUser.phone_number}',
+    '${newUser.avatar}',
+    '${newUser.clinic_owner_id}' ,
+    '${newUser.ein_number}',
+    '${newUser.insurance_number}',
+    '${newUser.tax_id_number}'
+    )
+    `
+  )
+    .then((results) => {
+      return res.json({
+        message: "Successfully Registered A Clinic!",
+    })
+  })
+    .catch((err) => {
+      if (err) throw err;
+    });
+})
+
 module.exports = router;

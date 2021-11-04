@@ -83,6 +83,7 @@ export default function Application(props) {
   const {
     submitPatientRegistration,
     submitEmployeeRegistration,
+    submitClinicRegistration,
     authenticateEmployee,
     authenticatePatient,
   } = userServices;
@@ -130,8 +131,19 @@ export default function Application(props) {
 
   useEffect(() => {
     if (completeRegisterSelector) {
+
+      if(completeRegisterSelector.isClinic){
+        submitClinicRegistration(completeRegisterSelector).then((res) => {
+          if (res.payload) {
+            history.push("/");
+          }
+        });
+      }
+      else if (completeRegisterSelector.isEmployee) {
+
       if (completeRegisterSelector.isEmployee) {
         console.log("here");
+
         submitEmployeeRegistration(completeRegisterSelector).then((res) => {
           console.log("go to main page");
           console.log(res);
@@ -145,9 +157,10 @@ export default function Application(props) {
             history.push("/");
           }
         });
+      } 
       }
       dispatch(registerComplete());
-    }
+
   }, [completeRegisterSelector]);
 
   useEffect(() => {

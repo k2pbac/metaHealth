@@ -6,7 +6,7 @@ import "./RegisterForm.scss";
 import FadeIn from "react-fade-in";
 import Badge from "react-bootstrap/Badge";
 import { useDispatch } from "react-redux";
-import { registerEmployee, registerPatient } from "actions";
+import { registerEmployee, registerPatient, registerClinic } from "actions";
 import { useHistory } from "react-router-dom";
 
 const RegisterForm = ({ formData, isEmployee }) => {
@@ -41,11 +41,19 @@ const RegisterForm = ({ formData, isEmployee }) => {
   });
 
   const handleSubmit = (event) => {
-    if (isEmployee) {
-      dispatch(registerEmployee({ ...formValues, clinic_id: 1, isEmployee }));
-    } else {
+    if (!JSON.parse(localStorage.getItem("isEmployee"))) {
+      console.log("HERE")
       dispatch(registerPatient({ ...formValues, clinic_id: 1, isEmployee }));
     }
+
+    else if (Object.keys(formValues).includes("Website")){
+      dispatch(registerClinic({ ...formValues, clinic_id: 1, isClinic: true }))
+    }
+    else if(isEmployee) {
+      dispatch(registerEmployee({ ...formValues, clinic_id: 1, isEmployee }));
+    } 
+    // history.push("/");
+
   };
 
   const handleClick = (viewNumber) => {

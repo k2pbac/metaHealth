@@ -94,6 +94,34 @@ const submitPatientRegistration = (user) => {
   }
 };
 
+const submitClinicRegistration = (user) => {
+  if (user) {
+    const newUser = {
+    name : user["Name"].value,
+    address : user["Address"].value,
+    website : user["Website"].value,
+    phone_number : user["Phone Number"].value ,
+    avatar: "http://dummyimage.com/321x848.png/cc0000/ffffff",
+    clinic_owner_id : JSON.parse(localStorage.getItem("user")).user.id,
+    ein_number : user["EIN/TIN Number"].value,
+    insurance_number : user["Insurance Number"].value,
+    tax_id_number : user["Tax ID Number"].value
+    };
+    return axios({
+      method: "POST",
+      data: {
+        newUser,
+      },
+      withCredentials: true,
+      url: "/api/clinic/register ",
+    })
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => console.log(err));
+  }
+};
+
 const submitEmployeeRegistrationForClinic = (employee, clinic_id) => {
   return axios({
     method: "PUT",
@@ -180,6 +208,7 @@ export const userServices = {
   authenticatePatient,
   submitPatientRegistration,
   submitEmployeeRegistration,
+  submitClinicRegistration,
   submitEmployeeRegistrationForClinic,
   getPatientRecordsForClinic,
   getEmployeesForClinic,
