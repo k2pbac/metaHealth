@@ -173,13 +173,20 @@ export const getPatientAppointments = (
   let clinicId;
   let foundClinic;
   let foundPatient = {};
-
+  let sortedAppointments = [];
+  let currentDate;
   for (let appointment in appointments) {
     if (patient_id === appointments[appointment].patient_account_id) {
       appointmentData[appointments[appointment].id] = appointments[appointment];
       clinicId = appointments[appointment].clinic_id;
     }
   }
+
+  let sorted = Object.values(appointmentData).sort(
+    (a, b) => new Date(a.date) - new Date(b.date)
+  );
+
+  sorted = sorted.sort((a, b) => parseInt(a.time) - parseInt(b.time));
 
   for (let clinic in clinics) {
     if (clinics[clinic].id === clinicId) {
@@ -196,7 +203,7 @@ export const getPatientAppointments = (
   let { name, address } = foundClinic;
 
   return {
-    appointments: appointmentData,
+    appointments: sorted,
     patient: foundPatient,
     name,
     address,

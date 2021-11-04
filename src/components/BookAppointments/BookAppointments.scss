@@ -43,9 +43,7 @@
   margin: 0;
 }
 
-
-
-.book-appointments .form-label{
+.book-appointments .form-label {
   font-weight: bold;
 }
 
@@ -53,6 +51,18 @@
   display: grid;
   grid-template-columns: 1fr repeat(12, minmax(auto, 60px)) 1fr;
   grid-gap: 40px;
+  padding: 60px 0;
+  box-shadow: 0 0 10px rgba(#273c48, 0.2);
+  min-height: 400px;
+
+  //scrollable div
+  overflow: scroll;
+  height: 325px;
+  width: 100%;
+}
+
+.book-appointments .container.empty {
+  display: flex;
   padding: 60px 0;
   box-shadow: 0 0 10px rgba(#273c48, 0.2);
   min-height: 400px;
@@ -73,7 +83,7 @@
 .appointment-search {
   height: 10%;
   width: 30%;
-  padding-left: 60px;  
+  padding-left: 60px;
   padding-top: 60px;
 }
 

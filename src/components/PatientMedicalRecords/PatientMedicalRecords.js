@@ -14,6 +14,7 @@ const { getPatientRecordsForClinic } = userServices;
 export default function PatientMedicalRecords(props) {
   const { patientName, setPatientName } = props;
   const [patientList, setPatientList] = useState("");
+  const [currentPatient, setCurrentPatient] = useState(patientName);
   // for (let elements in patientsList) {
   //   Object.keys(patientsList).map((element) => (
   //     <tr key={patientsList[element].id}>
@@ -36,17 +37,13 @@ export default function PatientMedicalRecords(props) {
   }, [patientList]);
 
   const handleChange = async function (e) {
-    e.preventDefault();
-    // setPatientName(e.target.value);
-    console.log(JSON.parse(localStorage.getItem("user")).user.clinic_id);
-
+    setCurrentPatient(e.target.value);
     const temp = await getPatientRecordsForClinic(
       e.target.value,
       JSON.parse(localStorage.getItem("user")).user.clinic_id
     );
 
     setPatientList(temp);
-    console.log("patientList:", patientList);
   };
 
   return (
@@ -60,7 +57,11 @@ export default function PatientMedicalRecords(props) {
           autoFocus
           type="search"
           placeholder="Search"
-          value={patientName}
+          value={currentPatient || ""}
+          onBlur={(e) => {
+            // setPatientList({});
+            // setCurrentPatient("");
+          }}
         />
       </Form.Group>
       <div className="table-container">
@@ -78,23 +79,26 @@ export default function PatientMedicalRecords(props) {
             </tr>
           </thead>
           <tbody>
-            {Object.keys(patientList).map((element) => (
-              <tr key={patientList[element].id}>
-                {/* <tr> */}
-                <td>{patientList[element].first_name}</td>
-                <td>{patientList[element].last_name}</td>
-                <td>{patientList[element].gender}</td>
-                <td>{patientList[element].date_of_birth}</td>
-                <td>{patientList[element].address}</td>
-                <td>{patientList[element].phone_number}</td>
-                <td>{patientList[element].email_address}</td>
-                <td>
-                  <Link to={`clinic/patient/record/${patientList[element].id}`}>
-                    Add/Edit Record
-                  </Link>
-                </td>
-              </tr>
-            ))}
+            {Object.keys(patientList).length !== 0 &&
+              Object.keys(patientList).map((element) => (
+                <tr key={patientList[element].id}>
+                  {/* <tr> */}
+                  <td>{patientList[element].first_name}</td>
+                  <td>{patientList[element].last_name}</td>
+                  <td>{patientList[element].gender}</td>
+                  <td>{patientList[element].date_of_birth}</td>
+                  <td>{patientList[element].address}</td>
+                  <td>{patientList[element].phone_number}</td>
+                  <td>{patientList[element].email_address}</td>
+                  <td>
+                    <Link
+                      to={`clinic/patient/record/${patientList[element].id}`}
+                    >
+                      Add/Edit Record
+                    </Link>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
