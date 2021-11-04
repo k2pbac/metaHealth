@@ -170,17 +170,27 @@ export const getPatientAppointments = (
   patient_id
 ) => {
   let appointmentData = {};
-  let clinicId;
-  let foundClinic;
+  let clinicId = [];
+  let foundClinic = [];
   let foundPatient = {};
-  let sortedAppointments = [];
-  let currentDate;
+
   for (let appointment in appointments) {
     if (patient_id === appointments[appointment].patient_account_id) {
-      appointmentData[appointments[appointment].id] = appointments[appointment];
-      clinicId = appointments[appointment].clinic_id;
+      clinicId.push(appointments[appointment].clinic_id);
+
+      if (appointmentData.hasOwnProperty(appointments[appointment].clinic_id)) {
+        appointmentData[appointments[appointment].clinic_id].push(
+          appointments[appointment]
+        );
+      } else {
+        appointmentData[appointments[appointment].clinic_id] = [
+          appointments[appointment],
+        ];
+      }
     }
   }
+
+  console.log("Temp clinics:", appointmentData);
 
   let sorted = Object.values(appointmentData).sort(
     (a, b) => new Date(a.date) - new Date(b.date)
@@ -189,8 +199,8 @@ export const getPatientAppointments = (
   sorted = sorted.sort((a, b) => parseInt(a.time) - parseInt(b.time));
 
   for (let clinic in clinics) {
-    if (clinics[clinic].id === clinicId) {
-      foundClinic = clinics[clinic];
+    if (clinicId.includes(clinics[clinic].id)) {
+      foundClinic.push(clinics[clinic]);
     }
   }
 
@@ -200,12 +210,9 @@ export const getPatientAppointments = (
     }
   }
 
-  let { name, address } = foundClinic;
-
   return {
     appointments: sorted,
     patient: foundPatient,
-    name,
-    address,
+    clinics: foundClinic,
   };
 };

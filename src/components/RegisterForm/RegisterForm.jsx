@@ -42,18 +42,12 @@ const RegisterForm = ({ formData, isEmployee }) => {
 
   const handleSubmit = (event) => {
     if (!JSON.parse(localStorage.getItem("isEmployee"))) {
-      console.log("HERE")
       dispatch(registerPatient({ ...formValues, clinic_id: 1, isEmployee }));
-    }
-
-    else if (Object.keys(formValues).includes("Website")){
-      dispatch(registerClinic({ ...formValues, clinic_id: 1, isClinic: true }))
-    }
-    else if(isEmployee) {
+    } else if (Object.keys(formValues).includes("Website")) {
+      dispatch(registerClinic({ ...formValues, clinic_id: 1, isClinic: true }));
+    } else if (isEmployee) {
       dispatch(registerEmployee({ ...formValues, clinic_id: 1, isEmployee }));
-    } 
-    // history.push("/");
-
+    }
   };
 
   const handleClick = (viewNumber) => {

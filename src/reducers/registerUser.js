@@ -6,7 +6,7 @@ const registerReducer = (state = null, action) => {
       return action.user;
     case authConstants.PATIENT_REGISTER_REQUEST:
       return action.user;
-      case authConstants.CLINIC_REGISTER_REQUEST:
+    case authConstants.CLINIC_REGISTER_REQUEST:
       return action.user;
     case "REGISTER_USER":
       return null;
