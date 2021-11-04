@@ -1,6 +1,8 @@
 // ***************************Display Clinics for Book Appointments Component*****************************
 //********************************************************************************************************
 
+import { patient } from "components/PatientSchedule/patient_appointment";
+
 export const displayClinics = ({ clinics = {} }, clinicName) => {
   let results = {};
   const regex = new RegExp("^" + clinicName + ".*", "i");
@@ -160,5 +162,43 @@ export const getPatientMedicalRecords = (
       phone: phone_number,
       id: patient_id,
     },
+  };
+};
+
+export const getPatientAppointments = (
+  { appointments, patients, clinics },
+  patient_id
+) => {
+  let appointmentData = {};
+  let clinicId;
+  let foundClinic;
+  let foundPatient = {};
+
+  for (let appointment in appointments) {
+    if (patient_id === appointments[appointment].patient_account_id) {
+      appointmentData[appointments[appointment].id] = appointments[appointment];
+      clinicId = appointments[appointment].clinic_id;
+    }
+  }
+
+  for (let clinic in clinics) {
+    if (clinics[clinic].id === clinicId) {
+      foundClinic = clinics[clinic];
+    }
+  }
+
+  for (let patient in patients) {
+    if (patients[patient].id === patient_id) {
+      foundPatient[patient_id] = patients[patient];
+    }
+  }
+
+  let { name, address } = foundClinic;
+
+  return {
+    appointments: appointmentData,
+    patient: foundPatient,
+    name,
+    address,
   };
 };

@@ -14,6 +14,23 @@ router.get("/api/patients", function (req, res, next) {
     }
   );
 
+  router.get("/api/patient/:id/appointments", (req, res, next) => {
+    const { id } = req.params;
+
+    db.query(
+      `select clinics.name as clinic_name, clinics.address as clinic_address, appointments.date, patient_accounts.first_name, patient_accounts.last_name, patient_notes
+    FROM appointments
+    join patient_accounts on patient_accounts.id = appointments.patient_account_id
+    join clinics on clinics.id = appointments.clinic_id
+    where patient_accounts.id = ${id}
+    ORDER BY appointments.date;`,
+      (err, results) => {
+        if (err) throw err;
+        res.json(results.rows);
+      }
+    );
+  });
+
   router.get("/api/patient/records", (req, res, next) => {
     db.query(
       `SELECT * FROM patient_records

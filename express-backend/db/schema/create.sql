@@ -19,6 +19,8 @@ CREATE TABLE clinics (
   tax_id_number VARCHAR(30) DEFAULT NULL
 );
 
+
+
 CREATE TABLE employee_accounts (
   id SERIAL PRIMARY KEY NOT NULL,
   first_name VARCHAR(255) NOT NULL,

@@ -46,7 +46,6 @@ const RegisterForm = ({ formData, isEmployee }) => {
     } else {
       dispatch(registerPatient({ ...formValues, clinic_id: 1, isEmployee }));
     }
-    // history.push("/");
   };
 
   const handleClick = (viewNumber) => {
