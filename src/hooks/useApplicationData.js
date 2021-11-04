@@ -124,22 +124,6 @@ const useApplicationData = () => {
     });
   }, []);
 
-  // useEffect(() => {
-  //   if (patientName !== "") {
-  //     axios.get(`/api/registered-patients/${patientName}`).then((res) => {
-  //       setPatients(res.data);
-  //     });
-  //   }
-  // }, [patientName]);
-
-  // useEffect(() => {
-  //   if (clinicName !== "") {
-  //     axios.get(`/api/clinics/${clinicName}`).then((res) => {
-  //       setClinics(res.data);
-  //     });
-  //   }
-  // }, [clinicName]);
-
   return {
     appState,
     setAppState,

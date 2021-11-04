@@ -44,6 +44,7 @@ export default function Application(props) {
   const completeRegisterSelector = useSelector((state) => state.registerUser);
   const userAuth = useSelector((state) => state.userAuth);
   const userLogged = useSelector((state) => state.userLogged);
+  const [appointmentList, setAppointmentList] = useState({});
 
   const [isEmployee, setIsEmployee] = useState("");
 
@@ -54,7 +55,6 @@ export default function Application(props) {
 
   // getting individual clinic for manage appointment component
   const [clinic, setClinic] = useState();
-
   const dispatch = useDispatch();
   // let clinic = {};
   const history = useHistory();
@@ -75,6 +75,7 @@ export default function Application(props) {
     updatePatientProfile,
     updateEmployeeProfile,
     updatePatientNotes,
+    getPatientAppointmentsList,
 
     editPatientRecord,
   } = useApplicationData();
@@ -105,6 +106,15 @@ export default function Application(props) {
     ) {
       setClinicAddress(userLogged.user.clinic_id);
     }
+
+    // if (
+    //   !getLocalStorage("isEmployee") &&
+    //   userLogged &&
+    //   nextLocation.pathname === "/clinic/appointments" && nextLocation.p
+    // ) {
+    //   const data = getPatientAppointmentsList(userLogged.user.id);
+    //   setAppointmentList(() => data);
+    // }
   });
   useEffect(() => {
     if (userLogged.update_profile && !getLocalStorage("isEmployee")) {
@@ -287,8 +297,13 @@ export default function Application(props) {
         />
 
         <Route
-          path={`/clinic/appointments`}
-          component={() => <PatientAppointmentList></PatientAppointmentList>}
+          path={`/patient/:id/appointments`}
+          render={(props) => (
+            <PatientAppointmentList
+              {...props}
+              appState={appState}
+            ></PatientAppointmentList>
+          )}
         />
 
         {/* Manage Appointments Routes for Employee and Patient - will need to figure out how to pass params */}
