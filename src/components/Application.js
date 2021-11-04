@@ -159,8 +159,8 @@ export default function Application(props) {
         });
       } 
       }
-      dispatch(registerComplete());
-
+      // dispatch(registerComplete());
+    }
   }, [completeRegisterSelector]);
 
   useEffect(() => {
