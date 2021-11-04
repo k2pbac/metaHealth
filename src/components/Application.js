@@ -101,21 +101,13 @@ export default function Application(props) {
       userLogged.user &&
       userLogged.user.clinic_id &&
       userLogged.user.clinic_id !== null
-      // &&
-      // nextLocation.pathname ===
-      //   `/clinic/appointments/${userLogged.user.clinic_id}`
     ) {
       setClinicAddress(userLogged.user.clinic_id);
     }
 
-    // if (
-    //   !getLocalStorage("isEmployee") &&
-    //   userLogged &&
-    //   nextLocation.pathname === "/clinic/appointments" && nextLocation.p
-    // ) {
-    //   const data = getPatientAppointmentsList(userLogged.user.id);
-    //   setAppointmentList(() => data);
-    // }
+    if (nextLocation.pathname === "/clinics") {
+      setClinicName("");
+    }
   });
   useEffect(() => {
     if (userLogged.update_profile && !getLocalStorage("isEmployee")) {

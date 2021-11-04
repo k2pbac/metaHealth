@@ -4,7 +4,7 @@ import axios from "axios";
 const useApplicationData = () => {
   const [appState, setAppState] = useState({});
   const [patients, setPatients] = useState({});
-  // const [patient, setPatientName] = useState("");
+  const [patient, setPatientName] = useState("");
   const [clinics, setClinics] = useState({});
   const [clinicName, setClinicName] = useState("");
 
@@ -128,8 +128,6 @@ const useApplicationData = () => {
     appState,
     setAppState,
     patients,
-    // patientName,
-    // setPatientName,
     clinics,
     setClinics,
     clinicName,
@@ -140,6 +138,7 @@ const useApplicationData = () => {
     updatePatientNotes,
     editPatientRecord,
     updateEmployeeProfile,
+    setPatientName,
   };
 };
 
