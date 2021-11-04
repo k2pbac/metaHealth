@@ -123,33 +123,31 @@ export default function Application(props) {
 
   useEffect(() => {
     if (completeRegisterSelector) {
-
-      if(completeRegisterSelector.isClinic){
+      if (completeRegisterSelector.isClinic) {
         submitClinicRegistration(completeRegisterSelector).then((res) => {
           if (res.payload) {
             history.push("/");
           }
         });
-      }
-      else if (completeRegisterSelector.isEmployee) {
-
-      if (completeRegisterSelector.isEmployee) {
-        console.log("here");
-
-        submitEmployeeRegistration(completeRegisterSelector).then((res) => {
-          console.log("go to main page");
-          console.log(res);
-          if (res.payload) {
-            history.push("/");
-          }
-        });
+      } else if (completeRegisterSelector.isEmployee) {
+        if (completeRegisterSelector.isEmployee) {
+          submitEmployeeRegistration(completeRegisterSelector).then((res) => {
+            console.log(res);
+            if (res.payload) {
+              history.push("/");
+            }
+          });
+        }
       } else {
-        submitPatientRegistration(completeRegisterSelector).then((res) => {
-          if (res.payload) {
-            history.push("/");
-          }
-        });
-      } 
+        submitPatientRegistration(completeRegisterSelector)
+          .then((res) => {
+            if (res.payload) {
+              history.push("/");
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
       // dispatch(registerComplete());
     }
