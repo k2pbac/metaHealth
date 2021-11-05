@@ -61,10 +61,6 @@ export const displayClinicAppointments = (
       appointments[appointment].clinic_id === clinic_id &&
       !sorted_doctors[appointments[appointment].employee_account_id - 1]
     ) {
-      // if (
-      //   employee[appointments[appointment].employee_account_id - 1]
-      //     .clinic_id === clinic_id
-      // ) {
       sorted_doctors[appointments[appointment].employee_account_id] =
         employee[appointments[appointment].employee_account_id - 1];
       if (
@@ -73,7 +69,6 @@ export const displayClinicAppointments = (
       ) {
         sorted_appointments.push(appointments[appointment]);
       }
-      // }
     }
   }
 
@@ -88,6 +83,18 @@ export const displayClinicAppointments = (
     doctors: { ...sorted_doctors },
     patients: { ...sorted_patients },
   };
+};
+
+export const getEmployer = ({ clinics }, clinic_id) => {
+  let foundClinic = {};
+
+  for (let clinic in clinics) {
+    if (clinics[clinic].id === clinic_id) {
+      foundClinic[clinic_id] = clinics[clinic];
+    }
+  }
+
+  return { ...foundClinic };
 };
 
 export const getClinicRecords = (
