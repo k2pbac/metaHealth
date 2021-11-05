@@ -247,7 +247,10 @@ export default function Application(props) {
         <Route
           path="/employee/profile"
           component={() => (
-            <EmployeeProfileIndex {...userLogged.user}></EmployeeProfileIndex>
+            <EmployeeProfileIndex
+              {...userLogged.user}
+              appState={appState}
+            ></EmployeeProfileIndex>
           )}
         />
 
