@@ -10,16 +10,16 @@ import EmployeeProfile from "./EmployeeProfile";
 import EmployeeEditProfile from "./EmployeeEditProfile";
 
 import { useVisualMode } from "../hooks/useVisualMode";
-
-import {userServices} from "hooks/userServices"
-const {getClinicData} = userServices;
+import { getEmployer } from "helpers/selectors";
+import { userServices } from "hooks/userServices";
+const { getClinicData } = userServices;
 
 const SHOW = "SHOW";
 const EDIT = "EDIT";
 
 export default function EmployeeProfileIndex(props) {
   const { mode, transition, back } = useVisualMode(SHOW);
-  const [employedAt, setEmployedAt] = useState();
+  const [employedAt, setEmployedAt] = useState("");
 
   const {
     id,
@@ -34,26 +34,37 @@ export default function EmployeeProfileIndex(props) {
     clinic_verified,
     clinic_id,
     is_doctor,
+    appState,
   } = props;
 
-  const clinicData = function (clinic_id){
-    if (clinic_id === null){
-      setEmployedAt("Unemployed")
-    } else{
-      return getClinicData(clinic_id).then((res)=>{
-        console.log("Result:",res[0].name)
-        setEmployedAt(`${res[0].name}, ${res[0].address}`)
-      })
-  }
-}
+  const clinicData = function (clinic_id) {};
 
-  useEffect(()=>{
-    clinicData(clinic_id);
-  },[clinic_id])
+  // useEffect(() => {
+  //   // clinicData(clinic_id);
+  // if (clinic_id) {
+  //   if (clinic_id === null) {
+  //     setEmployedAt("Unemployed");
+  //   } else {
+  //     getEmployer()
+  //     // getClinicData(clinic_id).then((res) => {
+  //     //   console.log("Result:", res[0].name);
+  //     //   setEmployedAt(`${res[0].name}, ${res[0].address}`);
+  //     // });
+  //   }
+  // }
+  //   }
+  // }, [id]);
 
-  
-  
-  console.log("employedAt:", employedAt)
+  useEffect(() => {
+    if (clinic_id) {
+      const data = getEmployer(appState, clinic_id);
+      if (Object.values(data).length) {
+        setEmployedAt(Object.values(data)[0]["name"]);
+      }
+    }
+  }, [appState]);
+
+  // console.log("employedAt:", employedAt);
 
   const navClass = classNames("view-profile");
 
@@ -80,7 +91,7 @@ export default function EmployeeProfileIndex(props) {
     <article>
       {mode === SHOW && (
         <EmployeeProfile
-          id = {id}
+          id={id}
           first_name={first_name}
           last_name={last_name}
           username={username}
@@ -98,7 +109,7 @@ export default function EmployeeProfileIndex(props) {
       )}
       {mode === EDIT && (
         <EmployeeEditProfile
-          id = {id}
+          id={id}
           first_name={first_name}
           last_name={last_name}
           username={username}
