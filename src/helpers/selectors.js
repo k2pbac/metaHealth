@@ -59,7 +59,7 @@ export const displayClinicAppointments = (
   for (let appointment in appointments) {
     if (
       appointments[appointment].clinic_id === clinic_id &&
-      !sorted_doctors[appointments[appointment].employee_account_id - 1]
+      !sorted_doctors[appointments[appointment].employee_account_id -1]
     ) {
       sorted_doctors[appointments[appointment].employee_account_id] =
         employee[appointments[appointment].employee_account_id - 1];
