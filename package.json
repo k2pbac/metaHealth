@@ -2,10 +2,6 @@
   "name": "meta-health",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": "20.x",
-    "npm": "10.x"
-  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-brands-svg-icons": "^6.4.0",
