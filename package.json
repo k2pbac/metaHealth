@@ -36,8 +36,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "storybook": "start-storybook -p 9009 -s public --ci",
-    "heroku-postbuild": "build-storybook -s public",
     "db:reset": "node ./express-backend/db/reset.js"
   },
   "resolutions": {
@@ -57,11 +55,6 @@
     ]
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^7.0.24",
-    "@storybook/addon-backgrounds": "^7.0.24",
-    "@storybook/addon-links": "^7.0.24",
-    "@storybook/addons": "^7.0.24",
-    "@storybook/react": "^7.0.24",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "eslint-plugin-react": "^7.32.2",
