@@ -97,15 +97,15 @@ const submitPatientRegistration = (user) => {
 const submitClinicRegistration = (user) => {
   if (user) {
     const newUser = {
-    name : user["Name"].value,
-    address : user["Address"].value,
-    website : user["Website"].value,
-    phone_number : user["Phone Number"].value ,
-    avatar: "http://dummyimage.com/321x848.png/cc0000/ffffff",
-    clinic_owner_id : JSON.parse(localStorage.getItem("user")).user.id,
-    ein_number : user["EIN/TIN Number"].value,
-    insurance_number : user["Insurance Number"].value,
-    tax_id_number : user["Tax ID Number"].value
+      name: user["Name"].value,
+      address: user["Address"].value,
+      website: user["Website"].value,
+      phone_number: user["Phone Number"].value,
+      avatar: "http://dummyimage.com/321x848.png/cc0000/ffffff",
+      clinic_owner_id: JSON.parse(localStorage.getItem("user")).user.id,
+      ein_number: user["EIN/TIN Number"].value,
+      insurance_number: user["Insurance Number"].value,
+      tax_id_number: user["Tax ID Number"].value,
     };
     return axios({
       method: "POST",

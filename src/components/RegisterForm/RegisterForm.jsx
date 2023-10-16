@@ -3,14 +3,11 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./RegisterForm.scss";
-import FadeIn from "react-fade-in";
 import Badge from "react-bootstrap/Badge";
 import { useDispatch } from "react-redux";
 import { registerEmployee, registerPatient, registerClinic } from "actions";
-import { useHistory } from "react-router-dom";
 
 const RegisterForm = ({ formData, isEmployee }) => {
-  const history = useHistory();
   const [infoSelected, setInfoSelected] = useState("");
   const dispatch = useDispatch();
   const formBadges = {};
@@ -112,7 +109,7 @@ const RegisterForm = ({ formData, isEmployee }) => {
           </Badge>
         </div>
         {infoSelected === `badge${index + 1}` && (
-          <FadeIn>
+          <>
             {formData.fields[key].map((el) => (
               <Form.Group className=" mx-auto my-3" key={el.value}>
                 {(el.type !== "radio" && (
@@ -156,7 +153,7 @@ const RegisterForm = ({ formData, isEmployee }) => {
                 )}
               </Form.Group>
             ))}
-          </FadeIn>
+          </>
         )}
       </div>
     );

@@ -6,6 +6,7 @@ import { EmployeeData } from "./EmployeeData";
 import { PatientData } from "./PatientData";
 import Section from "./Section";
 const Home = (props) => {
+  console.log(EmployeeData);
   return (
     <>
       <Header></Header>

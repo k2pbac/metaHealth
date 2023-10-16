@@ -1,6 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import { render } from "react-dom";
+import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import "index.scss";
 import Application from "components/Application";
@@ -13,12 +12,12 @@ let store = createStore(
   allReducers,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
-ReactDOM.render(
+root.render(
   <BrowserRouter>
     <Provider store={store}>
       <Application />
     </Provider>
-  </BrowserRouter>,
-  document.getElementById("root")
+  </BrowserRouter>
 );

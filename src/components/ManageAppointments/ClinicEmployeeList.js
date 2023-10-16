@@ -1,10 +1,6 @@
 import React, { useState } from "react";
-import classNames from "classnames";
 import "bootstrap/dist/css/bootstrap.min.css";
-//import FadeIn from "react-fade-in";
-// import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
-// import { Link } from "react-router-dom";
 import "components/ManageAppointments/ClinicEmployeeList.scss";
 
 export default function ClinicEmployeeList(props) {
@@ -27,15 +23,10 @@ export default function ClinicEmployeeList(props) {
     window.location.reload();
   };
 
-  console.log(user_id, clinic);
-
   let employees = [];
-  console.log(employeeList);
   employeeList.then((results) => {
     setEmployeeState(results);
   });
-  console.log("clinic_owner_id:",clinic.clinic_owner_id);
-  console.log("user_id:",user_id);
   return (
     <div className="employee-list-container">
       <table className="employee-table">

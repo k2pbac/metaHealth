@@ -52,6 +52,7 @@ router.post("/api/patient/register", function (req, res, next) {
      OR email_address = '${newUser.email_address}'`
   )
     .then((results) => {
+      console.log(results);
       if (parseInt(results.rows[0].count) <= 0) {
         const hashedPassword = bcrypt
           .hash(newUser.password, 10)
@@ -115,11 +116,11 @@ router.post("/api/clinic/register", function (req, res, next) {
     .then((results) => {
       return res.json({
         message: "Successfully Registered A Clinic!",
+      });
     })
-  })
     .catch((err) => {
       if (err) throw err;
     });
-})
+});
 
 module.exports = router;

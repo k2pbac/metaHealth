@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "components/Application.scss";
 import Home from "./Home/Home";
 import Footer from "./Footer";
@@ -31,7 +31,7 @@ import {
   displayClinicAppointments,
 } from "helpers/selectors";
 import { userServices } from "hooks/userServices";
-import { useHistory } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { loginUser, registerComplete } from "../actions/index";
 import LoggedInEmployee from "./Navbar/LoggedState/LoggedInEmployee";
 import LoggedOut from "./Navbar/LoggedState/LoggedOut";
@@ -57,7 +57,8 @@ export default function Application(props) {
   const [clinic, setClinic] = useState();
   const dispatch = useDispatch();
   // let clinic = {};
-  const history = useHistory();
+  const navigate = useNavigate();
+  const location = useLocation();
   const {
     setAppState,
     appState,
@@ -94,7 +95,22 @@ export default function Application(props) {
     localStorage.setItem("clinic", JSON.stringify(clinic));
   };
 
-  history.listen((nextLocation) => {
+  // navigate.listen((nextLocation) => {
+  //   if (
+  //     getLocalStorage("isEmployee") &&
+  //     userLogged &&
+  //     userLogged.user &&
+  //     userLogged.user.clinic_id &&
+  //     userLogged.user.clinic_id !== null
+  //   ) {
+  //     setClinicAddress(userLogged.user.clinic_id);
+  //   }
+
+  //   if (nextLocation.pathname === "/clinics") {
+  //     setClinicName("");
+  //   }
+  // });
+  useEffect(() => {
     if (
       getLocalStorage("isEmployee") &&
       userLogged &&
@@ -105,10 +121,11 @@ export default function Application(props) {
       setClinicAddress(userLogged.user.clinic_id);
     }
 
-    if (nextLocation.pathname === "/clinics") {
+    if (location.pathname === "/clinics") {
       setClinicName("");
     }
-  });
+  }, [location]);
+
   useEffect(() => {
     if (userLogged.update_profile && !getLocalStorage("isEmployee")) {
       updatePatientProfile(userLogged.user);
@@ -126,7 +143,7 @@ export default function Application(props) {
       if (completeRegisterSelector.isClinic) {
         submitClinicRegistration(completeRegisterSelector).then((res) => {
           if (res.payload) {
-            history.push("/");
+            navigate("/");
           }
         });
       } else if (completeRegisterSelector.isEmployee) {
@@ -134,7 +151,7 @@ export default function Application(props) {
           submitEmployeeRegistration(completeRegisterSelector).then((res) => {
             console.log(res);
             if (res.payload) {
-              history.push("/");
+              navigate("/");
             }
           });
         }
@@ -142,7 +159,7 @@ export default function Application(props) {
         submitPatientRegistration(completeRegisterSelector)
           .then((res) => {
             if (res.payload) {
-              history.push("/");
+              navigate("/");
             }
           })
           .catch((err) => {
@@ -160,7 +177,7 @@ export default function Application(props) {
           dispatch(loginUser(res, true));
           setIsEmployee(true);
           if (getLocalStorage("user")) {
-            history.push("/");
+            navigate("/");
           }
         });
       } else if (!userAuth.isEmployee) {
@@ -170,7 +187,7 @@ export default function Application(props) {
           console.log(userLogged);
 
           if (getLocalStorage("user")) {
-            history.push("/");
+            navigate("/");
           }
         });
       }
@@ -187,110 +204,107 @@ export default function Application(props) {
       {userLogged.loggedIn && getLocalStorage("isEmployee") == true && (
         <LoggedInEmployee></LoggedInEmployee>
       )}
-      <Switch>
-        <Route exact path="/" component={Home} />
+      <Routes>
+        <Route exact path="/" element={<Home />} />
         <Route
           path="/login/patient"
-          component={() => <LoginForm isEmployee={false}></LoginForm>}
+          element={<LoginForm isEmployee={false}></LoginForm>}
         />
         <Route
           path="/login/employee"
-          component={() => <LoginForm isEmployee={true}></LoginForm>}
+          element={<LoginForm isEmployee={true}></LoginForm>}
         />
         <Route
           path="/register/patient"
-          component={() => (
+          element={
             <RegisterForm
               formData={patientFormData}
               isEmployee={false}
             ></RegisterForm>
-          )}
+          }
         />
         <Route
           path="/register/employee"
-          component={() => (
+          element={
             <RegisterForm
               formData={employeeFormData}
               isEmployee={true}
             ></RegisterForm>
-          )}
+          }
         />
         <Route
           path="/register/clinic"
-          component={() => (
-            <RegisterForm formData={clinicFormData}></RegisterForm>
-          )}
+          element={<RegisterForm formData={clinicFormData}></RegisterForm>}
         />
 
         <Route
           path="/register/existing/clinic"
-          component={() => (
+          element={
             <RegisterToAClinicForm
               clinicsList={clinics}
               clinicName={clinicName}
               setClinicName={setClinicName}
             ></RegisterToAClinicForm>
-          )}
+          }
         />
 
-        <Route path="/login" component={LoginSelectionPanel} />
+        <Route path="/login" element={<LoginSelectionPanel />} />
         {/* Change Login form for employee vs patient */}
-        <Route path="/register" component={RegisterSelectionPanel} />
+        <Route path="/register" element={<RegisterSelectionPanel />} />
 
         <Route
           path="/patient/profile"
-          component={() => (
+          element={
             <PatientProfileIndex {...userLogged.user}></PatientProfileIndex>
-          )}
+          }
         />
 
         <Route
           path="/employee/profile"
-          component={() => (
+          element={
             <EmployeeProfileIndex
               {...userLogged.user}
               appState={appState}
             ></EmployeeProfileIndex>
-          )}
+          }
         />
 
         <Route
           path="/clinics"
-          component={() => (
+          element={
             <BookAppointments
               setClinicAddress={setClinicAddress}
               clinicsList={clinics}
               clinicName={clinicName}
               setClinicName={setClinicName}
             ></BookAppointments>
-          )}
+          }
         />
 
         <Route
           path="/clinic-medical-records"
-          component={() => (
+          element={
             <PatientMedicalRecords
               setPatientName={setPatientName}
               patientName={patientName}
               patientsList={patients}
             ></PatientMedicalRecords>
-          )}
+          }
         />
 
         <Route
           path="/clinic/patient/record/:id"
-          render={(props) => (
+          element={
             <PatientReportView
               appState={appState}
-              {...props}
               editPatientRecord={editPatientRecord}
             ></PatientReportView>
-          )}
+          }
         />
 
         <Route
           path={`/clinic/appointments/:id`}
-          component={() => (
+          element={
             <ManageAppointments
               setAppState={setAppState}
               bookAppointment={bookAppointment}
@@ -299,23 +313,22 @@ export default function Application(props) {
               clinic={clinic || getLocalStorage("clinic")}
               updatePatientNotes={updatePatientNotes}
             ></ManageAppointments>
-          )}
+          }
         />
 
         <Route
           path={`/patient/:id/appointments`}
-          render={(props) => (
+          element={
             <PatientAppointmentList
-              {...props}
               appState={appState}
             ></PatientAppointmentList>
-          )}
+          }
         />
 
         {/* Manage Appointments Routes for Employee and Patient - will need to figure out how to pass params */}
         {/* View Patient Medical Records Routes will also need params passed  */}
         {/* Add/Edit Patient Medical Record Page route will need clinic params */}
-      </Switch>
+      </Routes>
       <Footer></Footer>
     </div>
   );

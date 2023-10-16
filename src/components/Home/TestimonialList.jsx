@@ -6,7 +6,6 @@ import "./TestimonialList.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import FadeIn from "react-fade-in";
 library.add(faArrowRight, faArrowLeft);
 
 const TestimonialList = ({ patientData, employeeData }) => {
@@ -55,16 +54,8 @@ const TestimonialList = ({ patientData, employeeData }) => {
     <div className="d-flex flex-column align-items-center">
       <h1 className="text-center mb-4">{currentRole} Testimonials</h1>
       <div className="d-flex list-container">
-        {currentView && (
-          <FadeIn delay="150" className="d-flex">
-            {patients}
-          </FadeIn>
-        )}
-        {!currentView && (
-          <FadeIn delay="150" className="d-flex">
-            {employees}
-          </FadeIn>
-        )}
+        {currentView && patients}
+        {!currentView && employees}
         <a onClick={updateView} className="arrow-right">
           <FontAwesomeIcon size="2x" icon={faArrowRight} />
         </a>

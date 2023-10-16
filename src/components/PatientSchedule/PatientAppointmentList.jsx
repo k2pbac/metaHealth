@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import "./PatientAppointmentList.scss";
 import Container from "react-bootstrap/Container";
 import Card from "react-bootstrap/Card";
@@ -14,22 +15,23 @@ import {
 import { useSelector } from "react-redux";
 import { getPatientAppointments } from "helpers/selectors";
 const PatientAppointmentList = (props) => {
+  console.log(props);
   const [currentData, setCurrentData] = useState({
     data: {},
     index: null,
     name: "Clinics",
   });
   const userLogged = useSelector((state) => state.userLogged);
-  const { match, appState } = props;
-
+  const { appState } = props;
+  const { id } = useParams();
   const [appointmentData, setAppointmentData] = useState({});
 
   useEffect(() => {
+    console.log(props);
     if (Object.keys(appState).length) {
       setAppointmentData(getPatientAppointments(appState, userLogged.user.id));
     }
-  }, [appState, match.params.id]);
-  console.log(appointmentData);
+  }, [appState, id]);
   const data = {};
 
   appointmentData &&

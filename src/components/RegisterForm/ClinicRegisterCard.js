@@ -1,12 +1,8 @@
-import React, { useState } from "react";
-import classNames from "classnames";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import FadeIn from "react-fade-in";
 import Image from "react-bootstrap/Image";
-import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
 // import "components/BookAppointments/BookAppointments.scss";
-import "components/RegisterForm/RegisterToAClinicForm.scss"
+import "components/RegisterForm/RegisterToAClinicForm.scss";
 
 export default function ClinicRegisterCard(props) {
   const { name, address, image, id } = props;
@@ -21,13 +17,10 @@ export default function ClinicRegisterCard(props) {
   };
 
   return (
-    <div
-      onClick={storeClinic}
-      className="clinic-card"
-    >
+    <div onClick={storeClinic} className="clinic-card">
       <div className="inline">
-      <input type="checkbox" id="demo"/>
-      <label for="demo"></label>
+        <input type="checkbox" id="demo" />
+        <label for="demo"></label>
       </div>
 
       <div className="clinic-image-container">
