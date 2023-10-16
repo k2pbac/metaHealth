@@ -1,0 +1,7 @@
+{
+  "root": "storybook-static",
+  "clean_urls": true,
+  "routes": {
+    "/**": "index.html"
+  }
+}
