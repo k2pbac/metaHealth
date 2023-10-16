@@ -77,7 +77,6 @@ const Schedule = ({ appointmentData, bookAppointment, deleteAppointment }) => {
                     );
                     return appointmentData.appointments.map(
                       (appointment, index3) => {
-                        console.log(appointmentData.doctors, appointment);
                         appointment.time =
                           appointment.time > 12
                             ? appointment.time - 12

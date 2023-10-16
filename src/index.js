@@ -6,7 +6,6 @@ import Application from "components/Application";
 import allReducers from "reducers";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-
 //STORE - Global state for redux
 let store = createStore(
   allReducers,

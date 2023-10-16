@@ -28,10 +28,13 @@
     "react-redux": "^8.1.1",
     "react-router-dom": "^6.14.0",
     "react-scripts": "5.0.1",
-    "redux": "^4.2.1"
+    "redux": "^4.2.1",
+    "serve": "^14.2.1"
   },
+  "proxy": "http://localhost:3003/",
   "scripts": {
-    "start": "react-scripts start",
+    "start": "serve -s build",
+    "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
