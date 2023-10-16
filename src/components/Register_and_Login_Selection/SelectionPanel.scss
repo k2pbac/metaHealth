@@ -6,12 +6,15 @@
   align-items: center;
 }
 
-.selection-title h1{
+.selection-title h1 {
   padding-bottom: 50px;
   font-size: 50px;
   margin-top: -40px;
 }
 
+.large-gap {
+  gap: 40px;
+}
 
 .selection-panel {
   box-shadow: 0 0 20px rgba(#273c48, 0.6);

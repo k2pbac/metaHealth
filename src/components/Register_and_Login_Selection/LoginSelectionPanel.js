@@ -20,8 +20,8 @@ export default function LoginSelectionPanel(props) {
         <h1>LOGIN</h1>
       </div>
 
-      <div className="row d-flex justify-content-center">
-        <div className="col-md-4">
+      <div className="row d-flex justify-content-center large-gap">
+        <div className="col-md-4 col-8">
           <Link to={"/login/patient"}>
             <div className="selection-panel" onClick={onPatientLogin}>
               <Image
@@ -38,7 +38,7 @@ export default function LoginSelectionPanel(props) {
           </Link>
         </div>
 
-        <div className="col-md-4">
+        <div className="col-md-4 col-8">
           <Link to={"/login/employee"}>
             <div className="selection-panel" onClick={onEmployeeLogin}>
               <Image
