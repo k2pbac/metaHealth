@@ -32,9 +32,9 @@
     "redux": "^4.2.1",
     "serve": "^14.2.1"
   },
-  "proxy": "http://localhost:3001/",
+  "proxy": "http://localhost:5000/",
   "scripts": {
-    "start": "serve -s build",
+    "start": "react-scripts start",
     "heroku-postbuild": "cd express-backend && npm install",
     "dev": "concurrently --kill-others \"react-scripts start\" \"node ./express-backend/index.js \"",
     "test": "react-scripts test",

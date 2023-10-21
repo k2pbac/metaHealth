@@ -110,18 +110,22 @@ const useApplicationData = () => {
       axios.get("/api/appointments"),
       axios.get("/api/patient/records"),
       axios.get("/api/patient/medical-records"),
-    ]).then((all) => {
-      const [first, second, third, fourth, fifth, sixth, seven] = all;
-      setAppState({
-        clinics: first.data,
-        patients: second.data,
-        employee: third.data,
-        registered: fourth.data,
-        appointments: fifth.data,
-        clinicRecords: sixth.data,
-        medicalRecords: seven.data,
+    ])
+      .then((all) => {
+        const [first, second, third, fourth, fifth, sixth, seven] = all;
+        setAppState({
+          clinics: first.data,
+          patients: second.data,
+          employee: third.data,
+          registered: fourth.data,
+          appointments: fifth.data,
+          clinicRecords: sixth.data,
+          medicalRecords: seven.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    });
   }, []);
 
   return {

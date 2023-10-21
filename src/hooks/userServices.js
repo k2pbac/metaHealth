@@ -11,10 +11,11 @@ const authenticatePatient = ({ username, password }) => {
     url: "/api/patient/login",
   })
     .then((res) => {
+      console.log("here");
       return { user: res.data.user };
     })
     .catch((err) => {
-      console.log(err);
+      console.log("here in err:", err);
     });
 };
 

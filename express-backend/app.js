@@ -30,13 +30,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-
-app.use(
-  cors({
-    origin: "localhost:3000",
-    credentials: true,
-  })
-);
+app.use(cors());
 
 app.use(
   session({
@@ -45,6 +39,17 @@ app.use(
     saveUninitialized: true,
   })
 );
+
+// if (
+//   (process.env.NODE_ENV = "production" || process.env.NODE_ENV == "staging")
+// ) {
+//   app.use(express.static(path.join(__dirname, "../build")));
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.join(__dirname + "../build/index.html"));
+//   });
+// } else {
+app.use(express.static(path.join(__dirname, "public")));
+// }
 
 app.use(cookieParser("secretcode"));
 app.use(passport.initialize());
@@ -58,8 +63,10 @@ patientLogin(passport);
 app.post("/api/employee/login", function (req, res, next) {
   passport.authenticate("employee-local", (err, user, info) => {
     if (err) throw err;
-    if (!user) res.send("Username or Password is incorrect");
-    else {
+    if (!user) {
+      console.log("no employee found");
+      res.send("Username or Password is incorrect");
+    } else {
       req.logIn(user, (err) => {
         if (err) throw err;
         const newUser = { ...user, password: "" };
@@ -82,6 +89,7 @@ app.post("/api/patient/login", function (req, res, next) {
       throw err;
     }
     if (!user) {
+      console.log("no patient found");
       res.send("Username or Password is incorrect");
     } else {
       req.logIn(user, (err) => {
@@ -102,14 +110,5 @@ app.use("/", patientRouter);
 app.use("/", registeredRouter);
 app.use("/", userAuthenticationRouter);
 app.use("/", appointmentRouter);
-if (
-  (process.env.NODE_ENV = "production" || process.env.NODE_ENV == "staging")
-) {
-  app.use(express.static(path.join(__dirname, "../build")));
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname + "/build/index.html"));
-  });
-} else {
-  app.use(express.static(path.join(__dirname, "public")));
-}
+
 module.exports = app;

@@ -45,7 +45,7 @@ router.post("/api/employee/register", (req, res, next) => {
 //************************Patient Register*******************
 router.post("/api/patient/register", function (req, res, next) {
   const { newUser } = req.body;
-
+  console.log("registering patient");
   db.query(
     `SELECT count(*) from patient_accounts 
      WHERE username = '${newUser.username}' 
@@ -79,6 +79,7 @@ router.post("/api/patient/register", function (req, res, next) {
       }
     })
     .catch((err) => {
+      console.log(err);
       if (err) throw err;
     });
 });
