@@ -3,7 +3,6 @@ const localStrategy = require("passport-local").Strategy;
 const db = require("./db/index");
 
 module.exports.patientLogin = function (passport) {
-  console.log("using ptatient logni");
   passport.use(
     "patient-local",
     new localStrategy((username, password, done) => {

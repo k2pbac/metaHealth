@@ -13,7 +13,7 @@ const appointmentRouter = require("./routes/appointments");
 const passport = require("passport");
 const passportLocal = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs");
-const session = require("express-session");
+const session = require("cookie-session");
 const bodyParser = require("body-parser");
 const path = require("path");
 require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
@@ -74,8 +74,11 @@ app.post("/api/employee/login", function (req, res, next) {
 
 //************************Patient Login*******************
 app.post("/api/patient/login", function (req, res, next) {
+  console.log("Here");
   passport.authenticate("patient-local", (err, user, info) => {
+    console.log("authenticating patient");
     if (err) {
+      console.log(err);
       throw err;
     }
     if (!user) {
