@@ -34,7 +34,8 @@
   },
   "proxy": "http://localhost:3001/",
   "scripts": {
-    "start": "concurrently --kill-others \"serve -s build\" \"node ./express-backend/bin/www \"",
+    "start": "serve -s build",
+    "heroku-postbuild": "cd express-backend && npm install &&  node ./express-backend/bin/www",
     "dev": "concurrently --kill-others \"react-scripts start\" \"node ./express-backend/index.js \"",
     "build": "react-scripts build",
     "test": "react-scripts test",

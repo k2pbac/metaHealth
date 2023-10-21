@@ -30,7 +30,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+
 app.use(
   cors({
     origin: "localhost:3000",
@@ -102,5 +102,14 @@ app.use("/", patientRouter);
 app.use("/", registeredRouter);
 app.use("/", userAuthenticationRouter);
 app.use("/", appointmentRouter);
-
+if (
+  (process.env.NODE_ENV = "production" || process.env.NODE_ENV == "staging")
+) {
+  app.use(express.static(path.join(__dirname, "../build")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname + "/build/index.html"));
+  });
+} else {
+  app.use(express.static(path.join(__dirname, "public")));
+}
 module.exports = app;
