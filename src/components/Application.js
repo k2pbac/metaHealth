@@ -30,11 +30,12 @@ import LoggedOut from "./Navbar/LoggedState/LoggedOut";
 import ManageAppointments from "./ManageAppointments/ManageAppointments";
 import PatientReportView from "./ManageAppointments/PatientReportView";
 import PatientAppointmentList from "./PatientSchedule/PatientAppointmentList";
+import { alertActions } from "actions/userAuthAlerts";
 export default function Application(props) {
   const completeRegisterSelector = useSelector((state) => state.registerUser);
   const alert = useSelector((state) => state.alert);
   const userLogged = useSelector((state) => state.userLogged);
-
+  const dispatch = useDispatch();
   //Get value of local storage with JSON parse
   const getLocalStorage = (item) => {
     return JSON.parse(localStorage.getItem(item));
@@ -61,8 +62,6 @@ export default function Application(props) {
     updatePatientProfile,
     updateEmployeeProfile,
     updatePatientNotes,
-    getPatientAppointmentsList,
-
     editPatientRecord,
   } = useApplicationData();
 
@@ -94,6 +93,7 @@ export default function Application(props) {
   //   }
   // });
   useEffect(() => {
+    dispatch(alertActions.clear());
     if (
       getLocalStorage("isEmployee") &&
       userLogged &&
@@ -286,10 +286,6 @@ export default function Application(props) {
             ></PatientAppointmentList>
           }
         />
-
-        {/* Manage Appointments Routes for Employee and Patient - will need to figure out how to pass params */}
-        {/* View Patient Medical Records Routes will also need params passed  */}
-        {/* Add/Edit Patient Medical Record Page route will need clinic params */}
       </Routes>
       <Footer></Footer>
     </div>
