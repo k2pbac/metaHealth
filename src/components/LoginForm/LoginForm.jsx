@@ -8,8 +8,14 @@ import { authenticateEmployee, authenticatePatient } from "actions";
 import { userServices } from "hooks/userServices";
 import { loginUser, loginUserFailed } from "../../actions/index";
 import { alertActions } from "../../actions/userAuthAlerts";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = ({ isEmployee }) => {
+  const getLocalStorage = (item) => {
+    return JSON.parse(localStorage.getItem(item));
+  };
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const userAuth = useSelector((state) => state.userAuth);
@@ -26,7 +32,6 @@ const LoginForm = ({ isEmployee }) => {
         .then((res) => {
           if (!!res["user"]) {
             dispatch(loginUser(res, true));
-            setIsEmployee(true);
             dispatch(alertActions.success(res.message));
             if (getLocalStorage("user")) {
               navigate("/");
@@ -47,7 +52,6 @@ const LoginForm = ({ isEmployee }) => {
           if (!!res["user"]) {
             dispatch(loginUser(res, false));
             dispatch(alertActions.success(res.message));
-            setIsEmployee(false);
             if (getLocalStorage("user")) {
               navigate("/");
             }
