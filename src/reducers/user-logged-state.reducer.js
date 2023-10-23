@@ -9,20 +9,11 @@ const initialState = user ? { loggedIn: true, ...user } : { loggedIn: false };
 const userLoggedReducer = (state = initialState, action) => {
   switch (action.type) {
     case authConstants.USER_LOGIN_SUCCESS:
-      if (action.user.user) {
-        console.log(action);
-        localStorage.setItem("user", JSON.stringify(action.user));
-        console.log(localStorage.getItem("user"));
-        return { ...action.user, loggedIn: true };
-      } else {
-        console.log("here as well false loggedin");
-        return { loggedIn: false };
-      }
+      localStorage.setItem("user", JSON.stringify(action.user));
+      return { ...action.user, loggedIn: true };
+    case authConstants.USER_LOGIN_FAIL:
+      return { loggedIn: false };
     case authConstants.UPDATE_PROFILE:
-      console.log({
-        ...action.user,
-        ...JSON.parse(localStorage.getItem("user")),
-      });
       localStorage.setItem(
         "user",
         JSON.stringify({
@@ -30,7 +21,6 @@ const userLoggedReducer = (state = initialState, action) => {
           ...action.user,
         })
       );
-      console.log(JSON.parse(localStorage.getItem("user")));
       return {
         ...JSON.parse(localStorage.getItem("user")),
         ...action.user,

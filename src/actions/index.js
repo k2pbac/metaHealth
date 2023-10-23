@@ -51,6 +51,12 @@ export const loginUser = (user) => {
   };
 };
 
+export const loginUserFailed = () => {
+  return {
+    type: authConstants.USER_LOGIN_FAIL,
+  };
+};
+
 export const logoutUser = (user) => {
   return {
     type: authConstants.LOGOUT,

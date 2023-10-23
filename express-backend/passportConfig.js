@@ -3,6 +3,7 @@ const localStrategy = require("passport-local").Strategy;
 const db = require("./db/index");
 
 module.exports.patientLogin = function (passport) {
+  console.log(passport);
   passport.use(
     "patient-local",
     new localStrategy((username, password, done) => {
@@ -17,8 +18,14 @@ module.exports.patientLogin = function (passport) {
             console.log("no user found");
             return done(null, false, { message: "No user found" });
           } else {
-            console.log("comparing password");
+            console.log(
+              "comparing password",
+              username,
+              password,
+              user.rows[0].password
+            );
             bcrypt.compare(password, user.rows[0].password, (err, result) => {
+              console.log(result);
               if (err) {
                 console.log(err);
                 return err;

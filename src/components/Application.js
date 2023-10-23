@@ -6,7 +6,6 @@ import "components/Application.scss";
 import Home from "./Home/Home";
 import Footer from "./Footer";
 import LoggedInPatient from "./Navbar/LoggedState/LoggedInPatient";
-import Navbar from "./Navbar/NavHeader";
 import LoginSelectionPanel from "./Register_and_Login_Selection/LoginSelectionPanel";
 import LoginForm from "./LoginForm/LoginForm";
 import RegisterSelectionPanel from "./Register_and_Login_Selection/RegisterSelectionPanel";
@@ -17,37 +16,26 @@ import {
   employeeFormData,
   patientFormData,
   clinicFormData,
-  registerToAClinicFormData,
 } from "./RegisterForm/FormData";
 import BookAppointments from "./BookAppointments/BookAppointments";
 import PatientProfileIndex from "./View_Profile/PatientProfileIndex";
 import EmployeeProfileIndex from "./View_Profile/EmployeeProfileIndex";
 import { useSelector, useStore, useDispatch } from "react-redux";
 import useApplicationData from "hooks/useApplicationData";
-import {
-  displayClinics,
-  viewPatientProfile,
-  displayClinicAddress,
-  displayClinicAppointments,
-} from "helpers/selectors";
+import { displayClinics, displayClinicAddress } from "helpers/selectors";
 import { userServices } from "hooks/userServices";
 import { useNavigate, useLocation } from "react-router-dom";
-import { loginUser, registerComplete } from "../actions/index";
 import LoggedInEmployee from "./Navbar/LoggedState/LoggedInEmployee";
 import LoggedOut from "./Navbar/LoggedState/LoggedOut";
 import ManageAppointments from "./ManageAppointments/ManageAppointments";
 import PatientReportView from "./ManageAppointments/PatientReportView";
-import PatientSchedule from "./PatientSchedule/PatientSchedule";
 import PatientAppointmentList from "./PatientSchedule/PatientAppointmentList";
-
+import { alertActions } from "actions/userAuthAlerts";
 export default function Application(props) {
   const completeRegisterSelector = useSelector((state) => state.registerUser);
-  const userAuth = useSelector((state) => state.userAuth);
+  const alert = useSelector((state) => state.alert);
   const userLogged = useSelector((state) => state.userLogged);
-  const [appointmentList, setAppointmentList] = useState({});
-
-  const [isEmployee, setIsEmployee] = useState("");
-
+  const dispatch = useDispatch();
   //Get value of local storage with JSON parse
   const getLocalStorage = (item) => {
     return JSON.parse(localStorage.getItem(item));
@@ -55,8 +43,6 @@ export default function Application(props) {
 
   // getting individual clinic for manage appointment component
   const [clinic, setClinic] = useState();
-  const dispatch = useDispatch();
-  // let clinic = {};
   const navigate = useNavigate();
   const location = useLocation();
   const {
@@ -76,8 +62,6 @@ export default function Application(props) {
     updatePatientProfile,
     updateEmployeeProfile,
     updatePatientNotes,
-    getPatientAppointmentsList,
-
     editPatientRecord,
   } = useApplicationData();
 
@@ -85,8 +69,6 @@ export default function Application(props) {
     submitPatientRegistration,
     submitEmployeeRegistration,
     submitClinicRegistration,
-    authenticateEmployee,
-    authenticatePatient,
   } = userServices;
 
   const setClinicAddress = async (clinic_id) => {
@@ -111,6 +93,7 @@ export default function Application(props) {
   //   }
   // });
   useEffect(() => {
+    dispatch(alertActions.clear());
     if (
       getLocalStorage("isEmployee") &&
       userLogged &&
@@ -170,30 +153,6 @@ export default function Application(props) {
     }
   }, [completeRegisterSelector]);
 
-  useEffect(() => {
-    if (userAuth && !userLogged.loggedIn) {
-      if (userAuth.isEmployee) {
-        authenticateEmployee(userAuth).then((res) => {
-          dispatch(loginUser(res, true));
-          setIsEmployee(true);
-          if (getLocalStorage("user")) {
-            navigate("/");
-          }
-        });
-      } else if (!userAuth.isEmployee) {
-        authenticatePatient(userAuth).then((res) => {
-          dispatch(loginUser(res, false));
-          setIsEmployee(false);
-          console.log(userLogged);
-
-          if (getLocalStorage("user")) {
-            navigate("/");
-          }
-        });
-      }
-    }
-  }, [userAuth]);
-
   return (
     <div className="">
       {!userLogged.loggedIn && <LoggedOut></LoggedOut>}
@@ -204,6 +163,9 @@ export default function Application(props) {
       {userLogged.loggedIn && getLocalStorage("isEmployee") == true && (
         <LoggedInEmployee></LoggedInEmployee>
       )}
+      <div className={`alert ${alert.type} text-center`} role="alert">
+        {alert.message}
+      </div>
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route
@@ -324,10 +286,6 @@ export default function Application(props) {
             ></PatientAppointmentList>
           }
         />
-
-        {/* Manage Appointments Routes for Employee and Patient - will need to figure out how to pass params */}
-        {/* View Patient Medical Records Routes will also need params passed  */}
-        {/* Add/Edit Patient Medical Record Page route will need clinic params */}
       </Routes>
       <Footer></Footer>
     </div>
