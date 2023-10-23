@@ -81,16 +81,12 @@ app.post("/api/employee/login", function (req, res, next) {
 
 //************************Patient Login*******************
 app.post("/api/patient/login", function (req, res, next) {
-  console.log("Here");
   passport.authenticate("patient-local", (err, user, info) => {
-    console.log("authenticating patient");
     if (err) {
-      console.log(err);
-      throw err;
+      res.json({ message: "An error occurred", user: null });
     }
     if (!user) {
-      console.log("no patient found");
-      res.send("Username or Password is incorrect");
+      res.json({ message: "Username or Password is incorrect", user: null });
     } else {
       req.logIn(user, (err) => {
         if (err) throw err;

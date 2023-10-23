@@ -14,10 +14,11 @@ const LoginForm = ({ isEmployee }) => {
     event.preventDefault();
 
     if (isEmployee) {
-      console.log(isEmployee);
+      //actions to set the state of whether login attempt is employee or patient
+      console.log("employee:", isEmployee);
       dispatch(authenticateEmployee(username, password, isEmployee));
     } else {
-      console.log(isEmployee);
+      console.log("patient:", isEmployee);
       dispatch(authenticatePatient(username, password, isEmployee));
     }
   };

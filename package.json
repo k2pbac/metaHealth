@@ -32,7 +32,7 @@
     "redux": "^4.2.1",
     "serve": "^14.2.1"
   },
-  "proxy": "http://localhost:5000/",
+  "proxy": "http://localhost:3001/",
   "scripts": {
     "start": "react-scripts start",
     "heroku-postbuild": "cd express-backend && npm install",

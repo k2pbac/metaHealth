@@ -32,17 +32,18 @@ import {
 } from "helpers/selectors";
 import { userServices } from "hooks/userServices";
 import { useNavigate, useLocation } from "react-router-dom";
-import { loginUser, registerComplete } from "../actions/index";
+import { loginUser, registerComplete, loginUserFailed } from "../actions/index";
 import LoggedInEmployee from "./Navbar/LoggedState/LoggedInEmployee";
 import LoggedOut from "./Navbar/LoggedState/LoggedOut";
 import ManageAppointments from "./ManageAppointments/ManageAppointments";
 import PatientReportView from "./ManageAppointments/PatientReportView";
 import PatientSchedule from "./PatientSchedule/PatientSchedule";
 import PatientAppointmentList from "./PatientSchedule/PatientAppointmentList";
-
+import { alertActions } from "../actions/userAuthAlerts";
 export default function Application(props) {
   const completeRegisterSelector = useSelector((state) => state.registerUser);
   const userAuth = useSelector((state) => state.userAuth);
+  const alert = useSelector((state) => state.alert);
   const userLogged = useSelector((state) => state.userLogged);
   const [appointmentList, setAppointmentList] = useState({});
 
@@ -171,6 +172,8 @@ export default function Application(props) {
   }, [completeRegisterSelector]);
 
   useEffect(() => {
+    // auth functions to send request to db to check if user and password are correct
+    console.log("in application, userAuth changed", userAuth);
     if (userAuth && !userLogged.loggedIn) {
       if (userAuth.isEmployee) {
         authenticateEmployee(userAuth).then((res) => {
@@ -181,15 +184,24 @@ export default function Application(props) {
           }
         });
       } else if (!userAuth.isEmployee) {
-        authenticatePatient(userAuth).then((res) => {
-          dispatch(loginUser(res, false));
-          setIsEmployee(false);
-          console.log(userLogged);
-
-          if (getLocalStorage("user")) {
-            navigate("/");
-          }
-        });
+        console.log("logging in patient");
+        authenticatePatient(userAuth)
+          .then((res) => {
+            if (!!res["user"]) {
+              dispatch(loginUser(res, false));
+              dispatch(alertActions.success(res.message));
+              setIsEmployee(false);
+              if (getLocalStorage("user")) {
+                navigate("/");
+              }
+            } else {
+              dispatch(loginUserFailed());
+              dispatch(alertActions.error(res.message));
+            }
+          })
+          .catch((err) => {
+            console.log("Login failed");
+          });
       }
     }
   }, [userAuth]);
@@ -204,6 +216,9 @@ export default function Application(props) {
       {userLogged.loggedIn && getLocalStorage("isEmployee") == true && (
         <LoggedInEmployee></LoggedInEmployee>
       )}
+      <div className={`alert ${alert.type} text-center`} role="alert">
+        {alert.message}
+      </div>
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route

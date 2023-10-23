@@ -11,8 +11,7 @@ const authenticatePatient = ({ username, password }) => {
     url: "/api/patient/login",
   })
     .then((res) => {
-      console.log("here");
-      return { user: res.data.user };
+      return { user: res.data.user, message: res.data.message };
     })
     .catch((err) => {
       console.log("here in err:", err);
@@ -145,7 +144,6 @@ const getPatientRecordsForClinic = (patient_name, clinic_id) => {
     withCredentials: true,
     url: "/api/clinics/patient/records",
   }).then((result) => {
-    console.log("result:", result.data);
     return result.data;
   });
 };
