@@ -54,6 +54,7 @@ router.post("/api/patient/register", function (req, res, next) {
     .then((results) => {
       console.log(results);
       if (parseInt(results.rows[0].count) <= 0) {
+        console.log("creating new patient");
         const hashedPassword = bcrypt
           .hash(newUser.password, 10)
           .then((resultPassword) => {

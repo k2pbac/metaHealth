@@ -77,6 +77,13 @@ export default function Application(props) {
     localStorage.setItem("clinic", JSON.stringify(clinic));
   };
 
+  const scrollTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   // navigate.listen((nextLocation) => {
   //   if (
   //     getLocalStorage("isEmployee") &&
@@ -124,29 +131,45 @@ export default function Application(props) {
   useEffect(() => {
     if (completeRegisterSelector) {
       if (completeRegisterSelector.isClinic) {
-        submitClinicRegistration(completeRegisterSelector).then((res) => {
-          if (res.payload) {
-            navigate("/");
-          }
-        });
-      } else if (completeRegisterSelector.isEmployee) {
-        if (completeRegisterSelector.isEmployee) {
-          submitEmployeeRegistration(completeRegisterSelector).then((res) => {
-            console.log(res);
+        submitClinicRegistration(completeRegisterSelector)
+          .then((res) => {
             if (res.payload) {
               navigate("/");
+            } else {
+              dispatch(alertActions.error(res.message));
+              scrollTop();
             }
+          })
+          .catch((err) => {
+            dispatch(alertActions.error(res.message));
           });
+      } else if (completeRegisterSelector.isEmployee) {
+        if (completeRegisterSelector.isEmployee) {
+          submitEmployeeRegistration(completeRegisterSelector)
+            .then((res) => {
+              if (res.payload) {
+                navigate("/");
+              } else {
+                dispatch(alertActions.error(res.message));
+                scrollTop();
+              }
+            })
+            .catch((err) => {
+              dispatch(alertActions.error(res.message));
+            });
         }
       } else {
         submitPatientRegistration(completeRegisterSelector)
           .then((res) => {
             if (res.payload) {
               navigate("/");
+            } else {
+              dispatch(alertActions.error(res.message));
+              scrollTop();
             }
           })
           .catch((err) => {
-            console.log(err);
+            dispatch(alertActions.error(res.message));
           });
       }
       // dispatch(registerComplete());

@@ -56,17 +56,16 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 const { employeeLogin, patientLogin } = require("./passportConfig");
-employeeLogin(passport);
-patientLogin(passport);
+employeeLogin();
+patientLogin();
 //************************Employee Login*******************
 
-app.post("/api/employee/login", function (req, res, next) {
+app.post("/api/employee/login", (req, res, next) => {
   passport.authenticate("employee-local", (err, user, info) => {
     if (err) {
       res.json({ message: err, user: null });
     }
     if (!user) {
-      console.log("no employee found");
       res.json({ message: "Username or Password is incorrect", user: null });
     } else {
       req.logIn(user, (err) => {
@@ -82,18 +81,16 @@ app.post("/api/employee/login", function (req, res, next) {
 });
 
 //************************Patient Login*******************
-app.post("/api/patient/login", function (req, res, next) {
+app.post("/api/patient/login", (req, res, next) => {
   passport.authenticate("patient-local", (err, user, info) => {
     if (err) {
       console.log(err);
       res.json({ message: "An error occurred", user: null });
     }
     if (!user) {
-      console.log("username or password incorrect");
       res.json({ message: "Username or Password is incorrect", user: null });
     } else {
       req.logIn(user, (err) => {
-        console.log(user);
         if (err) throw err;
         const newUser = { ...user, password: "" };
         res.json({

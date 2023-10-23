@@ -1,11 +1,15 @@
 import axios from "axios";
 
-const authenticatePatient = ({ username, password }) => {
+const authenticatePatient = (username, password) => {
+  console.log(username, password);
   return axios({
     method: "POST",
     data: {
       username,
       password,
+    },
+    headers: {
+      "Content-Type": "application/json",
     },
     withCredentials: true,
     url: "/api/patient/login",
@@ -18,7 +22,7 @@ const authenticatePatient = ({ username, password }) => {
     });
 };
 
-const authenticateEmployee = ({ username, password }) => {
+const authenticateEmployee = (username, password) => {
   return axios({
     method: "POST",
     data: {

@@ -1,43 +1,38 @@
 const bcrypt = require("bcryptjs");
 const localStrategy = require("passport-local").Strategy;
 const db = require("./db/index");
+const passport = require("passport");
 
-module.exports.patientLogin = function (passport) {
-  console.log(passport);
+module.exports.patientLogin = function () {
   passport.use(
     "patient-local",
     new localStrategy((username, password, done) => {
       db.query(
         `SELECT * FROM patient_accounts where username = '${username}'`,
-        (error, user) => {
+        async (error, user) => {
           if (error) {
-            console.log(error);
-            return error;
+            return done(error);
           }
           if (!user.rowCount) {
-            console.log("no user found");
-            return done(null, false, { message: "No user found" });
-          } else {
-            console.log(
-              "comparing password",
-              username,
-              password,
-              user.rows[0].password
-            );
-            bcrypt.compare(password, user.rows[0].password, (err, result) => {
-              console.log(result);
+            return done(null, false, {
+              message: "Incorrect username or password",
+            });
+          }
+          await bcrypt.compare(
+            password,
+            user.rows[0].password,
+            (err, result) => {
               if (err) {
                 console.log(err);
-                return err;
+                return done(err);
               }
-              console.log("result:", result);
               if (result === true) {
                 return done(null, user.rows[0]);
               } else {
                 return done(null, false);
               }
-            });
-          }
+            }
+          );
         }
       );
     })
@@ -62,7 +57,7 @@ module.exports.patientLogin = function (passport) {
   });
 };
 
-module.exports.employeeLogin = function (passport) {
+module.exports.employeeLogin = function () {
   passport.use(
     "employee-local",
     new localStrategy((username, password, done) => {
@@ -70,18 +65,16 @@ module.exports.employeeLogin = function (passport) {
         `SELECT * FROM employee_accounts where username = '${username}'`,
         (error, user) => {
           if (error) {
-            throw error;
+            return done(error);
           }
           if (!user.rowCount) {
             return done(null, false, { message: "No user found" });
           } else {
-            console.log(username);
             bcrypt.compare(password, user.rows[0].password, (err, result) => {
-              if (err) throw err;
+              if (err) return done(err);
               if (result === true) {
                 return done(null, user.rows[0]);
               } else {
-                console.log("password didn't match");
                 return done(null, false);
               }
             });
