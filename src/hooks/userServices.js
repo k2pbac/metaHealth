@@ -29,7 +29,7 @@ const authenticateEmployee = ({ username, password }) => {
     url: "/api/employee/login",
   })
     .then((res) => {
-      return { user: res.data.user };
+      return { user: res.data.user, message: res.data.message };
     })
     .catch((err) => console.log(err));
 };

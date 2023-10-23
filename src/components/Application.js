@@ -6,7 +6,6 @@ import "components/Application.scss";
 import Home from "./Home/Home";
 import Footer from "./Footer";
 import LoggedInPatient from "./Navbar/LoggedState/LoggedInPatient";
-import Navbar from "./Navbar/NavHeader";
 import LoginSelectionPanel from "./Register_and_Login_Selection/LoginSelectionPanel";
 import LoginForm from "./LoginForm/LoginForm";
 import RegisterSelectionPanel from "./Register_and_Login_Selection/RegisterSelectionPanel";
@@ -17,37 +16,24 @@ import {
   employeeFormData,
   patientFormData,
   clinicFormData,
-  registerToAClinicFormData,
 } from "./RegisterForm/FormData";
 import BookAppointments from "./BookAppointments/BookAppointments";
 import PatientProfileIndex from "./View_Profile/PatientProfileIndex";
 import EmployeeProfileIndex from "./View_Profile/EmployeeProfileIndex";
 import { useSelector, useStore, useDispatch } from "react-redux";
 import useApplicationData from "hooks/useApplicationData";
-import {
-  displayClinics,
-  viewPatientProfile,
-  displayClinicAddress,
-  displayClinicAppointments,
-} from "helpers/selectors";
+import { displayClinics, displayClinicAddress } from "helpers/selectors";
 import { userServices } from "hooks/userServices";
 import { useNavigate, useLocation } from "react-router-dom";
-import { loginUser, registerComplete, loginUserFailed } from "../actions/index";
 import LoggedInEmployee from "./Navbar/LoggedState/LoggedInEmployee";
 import LoggedOut from "./Navbar/LoggedState/LoggedOut";
 import ManageAppointments from "./ManageAppointments/ManageAppointments";
 import PatientReportView from "./ManageAppointments/PatientReportView";
-import PatientSchedule from "./PatientSchedule/PatientSchedule";
 import PatientAppointmentList from "./PatientSchedule/PatientAppointmentList";
-import { alertActions } from "../actions/userAuthAlerts";
 export default function Application(props) {
   const completeRegisterSelector = useSelector((state) => state.registerUser);
-  const userAuth = useSelector((state) => state.userAuth);
   const alert = useSelector((state) => state.alert);
   const userLogged = useSelector((state) => state.userLogged);
-  const [appointmentList, setAppointmentList] = useState({});
-
-  const [isEmployee, setIsEmployee] = useState("");
 
   //Get value of local storage with JSON parse
   const getLocalStorage = (item) => {
@@ -56,8 +42,6 @@ export default function Application(props) {
 
   // getting individual clinic for manage appointment component
   const [clinic, setClinic] = useState();
-  const dispatch = useDispatch();
-  // let clinic = {};
   const navigate = useNavigate();
   const location = useLocation();
   const {
@@ -86,8 +70,6 @@ export default function Application(props) {
     submitPatientRegistration,
     submitEmployeeRegistration,
     submitClinicRegistration,
-    authenticateEmployee,
-    authenticatePatient,
   } = userServices;
 
   const setClinicAddress = async (clinic_id) => {
@@ -170,41 +152,6 @@ export default function Application(props) {
       // dispatch(registerComplete());
     }
   }, [completeRegisterSelector]);
-
-  useEffect(() => {
-    // auth functions to send request to db to check if user and password are correct
-    console.log("in application, userAuth changed", userAuth);
-    if (userAuth && !userLogged.loggedIn) {
-      if (userAuth.isEmployee) {
-        authenticateEmployee(userAuth).then((res) => {
-          dispatch(loginUser(res, true));
-          setIsEmployee(true);
-          if (getLocalStorage("user")) {
-            navigate("/");
-          }
-        });
-      } else if (!userAuth.isEmployee) {
-        console.log("logging in patient");
-        authenticatePatient(userAuth)
-          .then((res) => {
-            if (!!res["user"]) {
-              dispatch(loginUser(res, false));
-              dispatch(alertActions.success(res.message));
-              setIsEmployee(false);
-              if (getLocalStorage("user")) {
-                navigate("/");
-              }
-            } else {
-              dispatch(loginUserFailed());
-              dispatch(alertActions.error(res.message));
-            }
-          })
-          .catch((err) => {
-            console.log("Login failed");
-          });
-      }
-    }
-  }, [userAuth]);
 
   return (
     <div className="">

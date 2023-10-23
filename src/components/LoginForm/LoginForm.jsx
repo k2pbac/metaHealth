@@ -3,23 +3,62 @@ import "./LoginForm.scss";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authenticateEmployee, authenticatePatient } from "actions";
+import { userServices } from "hooks/userServices";
+import { loginUser, loginUserFailed } from "../../actions/index";
+import { alertActions } from "../../actions/userAuthAlerts";
 
 const LoginForm = ({ isEmployee }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const userAuth = useSelector((state) => state.userAuth);
+  const userAuthServices = userServices;
   const dispatch = useDispatch();
   const handleSubmit = (event) => {
     event.preventDefault();
 
     if (isEmployee) {
       //actions to set the state of whether login attempt is employee or patient
-      console.log("employee:", isEmployee);
       dispatch(authenticateEmployee(username, password, isEmployee));
+      userAuthServices
+        .authenticateEmployee(userAuth)
+        .then((res) => {
+          if (!!res["user"]) {
+            dispatch(loginUser(res, true));
+            setIsEmployee(true);
+            dispatch(alertActions.success(res.message));
+            if (getLocalStorage("user")) {
+              navigate("/");
+            }
+          } else {
+            dispatch(loginUserFailed());
+            dispatch(alertActions.error(res.message));
+          }
+        })
+        .catch((err) => {
+          console.log(err, "Login Failed");
+        });
     } else {
-      console.log("patient:", isEmployee);
       dispatch(authenticatePatient(username, password, isEmployee));
+      userAuthServices
+        .authenticatePatient(userAuth)
+        .then((res) => {
+          if (!!res["user"]) {
+            dispatch(loginUser(res, false));
+            dispatch(alertActions.success(res.message));
+            setIsEmployee(false);
+            if (getLocalStorage("user")) {
+              navigate("/");
+            }
+          } else {
+            dispatch(loginUserFailed());
+            dispatch(alertActions.error(res.message));
+          }
+        })
+        .catch((err) => {
+          console.log(err, "Login failed");
+        });
     }
   };
 

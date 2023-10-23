@@ -62,10 +62,12 @@ patientLogin(passport);
 
 app.post("/api/employee/login", function (req, res, next) {
   passport.authenticate("employee-local", (err, user, info) => {
-    if (err) throw err;
+    if (err) {
+      res.json({ message: err, user: null });
+    }
     if (!user) {
       console.log("no employee found");
-      res.send("Username or Password is incorrect");
+      res.json({ message: "Username or Password is incorrect", user: null });
     } else {
       req.logIn(user, (err) => {
         if (err) throw err;
