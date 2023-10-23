@@ -28,7 +28,7 @@ const LoginForm = ({ isEmployee }) => {
       //actions to set the state of whether login attempt is employee or patient
       dispatch(authenticateEmployee(username, password, isEmployee));
       userAuthServices
-        .authenticateEmployee(userAuth)
+        .authenticateEmployee(username, password)
         .then((res) => {
           if (!!res["user"]) {
             dispatch(loginUser(res, true));
@@ -42,12 +42,12 @@ const LoginForm = ({ isEmployee }) => {
           }
         })
         .catch((err) => {
-          console.log(err, "Login Failed");
+          console.log(err, "Login failed");
         });
     } else {
       dispatch(authenticatePatient(username, password, isEmployee));
       userAuthServices
-        .authenticatePatient(userAuth)
+        .authenticatePatient(username, password)
         .then((res) => {
           if (!!res["user"]) {
             dispatch(loginUser(res, false));
