@@ -38,6 +38,7 @@ const RegisterForm = ({ formData, isEmployee }) => {
   });
 
   const handleSubmit = (event) => {
+    event.preventDefault();
     if (!JSON.parse(localStorage.getItem("isEmployee"))) {
       dispatch(registerPatient({ ...formValues, clinic_id: 1, isEmployee }));
     } else if (Object.keys(formValues).includes("Website")) {
@@ -135,9 +136,12 @@ const RegisterForm = ({ formData, isEmployee }) => {
                           key={option}
                           className="d-flex justify-content-center align-items-center"
                         >
-                          <label className={"control-label"} htmlFor={el.value}>
+                          <Form.Label
+                            className={"control-label"}
+                            htmlFor={el.value}
+                          >
                             {option}
-                          </label>
+                          </Form.Label>
                           <input
                             className="radio-input"
                             name={option}
