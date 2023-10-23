@@ -85,12 +85,15 @@ app.post("/api/employee/login", function (req, res, next) {
 app.post("/api/patient/login", function (req, res, next) {
   passport.authenticate("patient-local", (err, user, info) => {
     if (err) {
+      console.log(err);
       res.json({ message: "An error occurred", user: null });
     }
     if (!user) {
+      console.log("username or password incorrect");
       res.json({ message: "Username or Password is incorrect", user: null });
     } else {
       req.logIn(user, (err) => {
+        console.log(user);
         if (err) throw err;
         const newUser = { ...user, password: "" };
         res.json({
