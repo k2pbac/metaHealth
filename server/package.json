@@ -1,9 +1,9 @@
 {
-  "name": "express-backend",
+  "name": "server",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "DEBUG=express-backend:* nodemon ./bin/www"
+    "start": "DEBUG=server:* nodemon ./bin/www"
   },
   "dependencies": {
     "@welldone-software/why-did-you-render": "^7.0.1",

@@ -40,15 +40,13 @@ app.use(
   })
 );
 
-// if (
-//   (process.env.NODE_ENV = "production" || process.env.NODE_ENV == "staging")
-// ) {
-//   app.use(express.static(path.join(__dirname, "../build")));
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.join(__dirname + "../build/index.html"));
-//   });
+// if ((process.env.NODE_ENV = "production")) {
+app.use(express.static(path.join(__dirname, "build")));
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 // } else {
-app.use(express.static(path.join(__dirname, "public")));
+//   app.use(express.static(path.join(__dirname, "public")));
 // }
 
 app.use(cookieParser("secretcode"));
