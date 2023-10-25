@@ -39,22 +39,6 @@ export default function EmployeeProfileIndex(props) {
 
   const clinicData = function (clinic_id) {};
 
-  // useEffect(() => {
-  //   // clinicData(clinic_id);
-  // if (clinic_id) {
-  //   if (clinic_id === null) {
-  //     setEmployedAt("Unemployed");
-  //   } else {
-  //     getEmployer()
-  //     // getClinicData(clinic_id).then((res) => {
-  //     //   console.log("Result:", res[0].name);
-  //     //   setEmployedAt(`${res[0].name}, ${res[0].address}`);
-  //     // });
-  //   }
-  // }
-  //   }
-  // }, [id]);
-
   useEffect(() => {
     if (clinic_id) {
       const data = getEmployer(appState, clinic_id);
@@ -63,8 +47,6 @@ export default function EmployeeProfileIndex(props) {
       }
     }
   }, [appState]);
-
-  // console.log("employedAt:", employedAt);
 
   const navClass = classNames("view-profile");
 

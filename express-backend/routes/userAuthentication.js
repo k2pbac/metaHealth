@@ -45,16 +45,13 @@ router.post("/api/employee/register", (req, res, next) => {
 //************************Patient Register*******************
 router.post("/api/patient/register", function (req, res, next) {
   const { newUser } = req.body;
-  console.log("registering patient");
   db.query(
     `SELECT count(*) from patient_accounts 
      WHERE username = '${newUser.username}' 
      OR email_address = '${newUser.email_address}'`
   )
     .then((results) => {
-      console.log(results);
       if (parseInt(results.rows[0].count) <= 0) {
-        console.log("creating new patient");
         const hashedPassword = bcrypt
           .hash(newUser.password, 10)
           .then((resultPassword) => {

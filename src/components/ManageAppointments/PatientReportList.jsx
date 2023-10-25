@@ -12,7 +12,6 @@ const PatientReportList = ({
   editPatientRecord,
 }) => {
   const [reports, setReports] = useState(reportData.reports);
-  console.log(reports);
   let getReportIds = {};
   for (let i = 0; i < reportData.reports.length; i++) {
     getReportIds[i] = false;

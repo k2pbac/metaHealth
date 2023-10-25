@@ -72,11 +72,6 @@ const ManageAppointments = ({
           return getEmployeesForClinic(clinic_id);
         });
       }
-
-      // const clinicId = JSON.parse(localStorage.getItem("user")).user.clinic_id;
-      // const clinicVerified = JSON.parse(localStorage.getItem("user")).user.clinic_verified;
-
-      // console.log("clinicID:",clinicId, "clinicVerified:", clinicVerified)
     }
   }, [appState]);
 

@@ -198,8 +198,6 @@ router.post("/api/patient/book", (req, res, next) => {
   // 2015-03-25T12:00:00Z
   let newDate = new Date(date).toLocaleDateString();
   newDate += time < 10 ? ` 0${time}:00:00` : ` ${time}:00:00`;
-  // console.log("unformatted:", date + "" + time + ":00:00");
-  // console.log("formatted:", newDate);
   db.query(
     `INSERT INTO appointments (date, active, clinic_id, patient_account_id, employee_account_id)
     values ('${newDate}', 'true', '${clinic_id}', ${patient_account_id}, ${employee_account_id} ) RETURNING ID`,

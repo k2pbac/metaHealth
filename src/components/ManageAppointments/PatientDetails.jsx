@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import "./PatientDetails.scss";
 import { patientReportData } from "./patientReportData";
 const PatientDetails = ({ setCreateNewReport, reportData }) => {
-  console.log(reportData);
   return (
     <div className="border p-4 d-flex flex-column" style={{ height: "700px" }}>
       <div className="mb-5">

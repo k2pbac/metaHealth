@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import classNames from "classnames";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -39,40 +39,37 @@ export default function EmployeeEditProfile(props) {
     lastName: last_name,
     userName: username,
     phoneNumber: phone_number,
-    emailAddress: email_address
-  })
+    emailAddress: email_address,
+  });
 
   // Handles on Change for Edit Imputs
-  const changeHandler = e => {
-    setState({...state, [e.target.name]: e.target.value})
- }
-
- console.log("props:",props)
-
-  //Handles onSubmit for button
- const submitHandler = (event) => {
-  event.preventDefault();
-  const newProfile = {
-    id: id,
-    first_name: state.firstName,
-    last_name: state.lastName,
-    username: state.userName,
-    avatar: avatar,
-    phone_number: state.phoneNumber,
-    email_address: state.emailAddress,
-    gender: gender,
-    profile_description: profile_description,
-    clinic_id: clinic_id, 
-    clinic_verified: clinic_verified,
-    is_doctor: isDoctor,
-    employedAt: employedAt
+  const changeHandler = (e) => {
+    setState({ ...state, [e.target.name]: e.target.value });
   };
 
-  dispatch(updateProfile(newProfile))
+  //Handles onSubmit for button
+  const submitHandler = (event) => {
+    event.preventDefault();
+    const newProfile = {
+      id: id,
+      first_name: state.firstName,
+      last_name: state.lastName,
+      username: state.userName,
+      avatar: avatar,
+      phone_number: state.phoneNumber,
+      email_address: state.emailAddress,
+      gender: gender,
+      profile_description: profile_description,
+      clinic_id: clinic_id,
+      clinic_verified: clinic_verified,
+      is_doctor: isDoctor,
+      employedAt: employedAt,
+    };
 
-  transition("SHOW");
-};
+    dispatch(updateProfile(newProfile));
 
+    transition("SHOW");
+  };
 
   const navClass = classNames("view-profile");
 
@@ -80,7 +77,11 @@ export default function EmployeeEditProfile(props) {
     <Form>
       <div className="profile">
         <section className="left-section">
-          <Image className="profile-image" src={avatar} alt={first_name}></Image>
+          <Image
+            className="profile-image"
+            src={avatar}
+            alt={first_name}
+          ></Image>
           <Button
             variant="outline-dark"
             size="lg"
@@ -104,37 +105,36 @@ export default function EmployeeEditProfile(props) {
             <h1>Personal Information: </h1>
             <Form.Group className="mb-3" controlId="formFirstName">
               <Form.Label>First Name</Form.Label>
-              <Form.Control 
-              type="text" 
-              placeholder={first_name}
-              name="firstName"
-              value={state.firstName || ""}
-              onChange={changeHandler}
+              <Form.Control
+                type="text"
+                placeholder={first_name}
+                name="firstName"
+                value={state.firstName || ""}
+                onChange={changeHandler}
               />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formLastName">
               <Form.Label>Last Name</Form.Label>
-              <Form.Control 
-              type="text" 
-              placeholder={last_name} 
-              name="lastName"
-              value={state.lastName || ""}
-              onChange={changeHandler}
+              <Form.Control
+                type="text"
+                placeholder={last_name}
+                name="lastName"
+                value={state.lastName || ""}
+                onChange={changeHandler}
               />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formUsername">
               <Form.Label>Username</Form.Label>
-              <Form.Control 
-              type="text" 
-              placeholder={username} 
-              name="userName"
-              value={state.userName || ""}
-              onChange={changeHandler}
+              <Form.Control
+                type="text"
+                placeholder={username}
+                name="userName"
+                value={state.userName || ""}
+                onChange={changeHandler}
               />
             </Form.Group>
-
           </div>
         </section>
 
@@ -143,23 +143,23 @@ export default function EmployeeEditProfile(props) {
             <h1>Contact Information:</h1>
             <Form.Group className="mb-3" controlId="formPhone">
               <Form.Label>Phone Number</Form.Label>
-              <Form.Control 
-              type="text" 
-              placeholder={phone_number}
-              name="phoneNumber"
-              value={state.phoneNumber || ""}
-              onChange={changeHandler} 
+              <Form.Control
+                type="text"
+                placeholder={phone_number}
+                name="phoneNumber"
+                value={state.phoneNumber || ""}
+                onChange={changeHandler}
               />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formEmail">
               <Form.Label>Email</Form.Label>
-              <Form.Control 
-              type="text" 
-              placeholder={email_address} 
-              name="emailAddress"
-              value={state.emailAddress|| ""}
-              onChange={changeHandler}
+              <Form.Control
+                type="text"
+                placeholder={email_address}
+                name="emailAddress"
+                value={state.emailAddress || ""}
+                onChange={changeHandler}
               />
             </Form.Group>
           </div>

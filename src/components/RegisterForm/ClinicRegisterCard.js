@@ -11,9 +11,6 @@ export default function ClinicRegisterCard(props) {
     localStorage.setItem("clinic_id", id);
     localStorage.setItem("clinic_name", name);
     localStorage.setItem("clinic_address", address);
-    // console.log(localStorage.getItem("clinic_id"))
-    // console.log(localStorage.getItem("clinic_name"))
-    // console.log(localStorage.getItem("clinic_address"))
   };
 
   return (
