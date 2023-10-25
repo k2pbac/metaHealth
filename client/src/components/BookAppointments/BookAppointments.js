@@ -25,7 +25,6 @@ const BookAppointments = (props) => {
             <Form.Control
               onChange={(e) => {
                 e.preventDefault();
-                console.log("Here in book appointments: ", e, e.target);
                 setClinicName(e.target.value);
               }}
               autoFocus

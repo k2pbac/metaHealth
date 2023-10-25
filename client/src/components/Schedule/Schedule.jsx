@@ -64,7 +64,9 @@ const Schedule = ({ appointmentData, bookAppointment, deleteAppointment }) => {
                                   employee_account_id:
                                     appointmentData.doctors[doctor].id,
                                 });
-                                window.location.reload(false);
+                                setTimeout(() => {
+                                  window.location.reload(false);
+                                }, 500);
                               }}
                               size="sm"
                               variant="success"
@@ -118,7 +120,9 @@ const Schedule = ({ appointmentData, bookAppointment, deleteAppointment }) => {
                                       size="sm"
                                       onClick={() => {
                                         deleteAppointment(appointment.id);
-                                        window.location.reload(false);
+                                        setTimeout(() => {
+                                          window.location.reload(false);
+                                        }, 500);
                                       }}
                                     >
                                       Delete Booking
@@ -135,10 +139,9 @@ const Schedule = ({ appointmentData, bookAppointment, deleteAppointment }) => {
                                 ((JSON.parse(
                                   localStorage.getItem("isEmployee")
                                 ) ||
-                                  appointmentData.patient ===
-                                    appointmentData.patients[
-                                      appointment.patient_account_id
-                                    ].first_name) &&
+                                  appointmentData.id ===
+                                    appointmentData.appointments[index3]
+                                      .patient_account_id) &&
                                   "booked") ||
                                 "bg-secondary"
                               }`}
@@ -246,7 +249,9 @@ const Schedule = ({ appointmentData, bookAppointment, deleteAppointment }) => {
                                   employee_account_id:
                                     appointmentData.doctors[doctor].id,
                                 });
-                                window.location.reload(false);
+                                setTimeout(() => {
+                                  window.location.reload(false);
+                                }, 500);
                               }}
                               size="sm"
                               variant="success"
