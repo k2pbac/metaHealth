@@ -37,6 +37,7 @@
     "start": "react-scripts start",
     "localStart": "react-scripts start",
     "heroku-postbuild": "cd express-backend && npm install",
+    "build": "react-scripts build",
     "dev": "concurrently --kill-others \"react-scripts start\" \"node ./express-backend/index.js \"",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
