@@ -15,26 +15,6 @@ export default function PatientMedicalRecords(props) {
   const { patientName, setPatientName } = props;
   const [patientList, setPatientList] = useState("");
   const [currentPatient, setCurrentPatient] = useState(patientName);
-  // for (let elements in patientsList) {
-  //   Object.keys(patientsList).map((element) => (
-  //     <tr key={patientsList[element].id}>
-  //       <td>{patientsList[element].first_name}</td>
-  //       <td>{patientsList[element].last_name}</td>
-  //       <td>{patientsList[element].gender}</td>
-  //       <td>{patientsList[element].date_of_birth}</td>
-  //       <td>{patientsList[element].address}</td>
-  //       <td>{patientsList[element].phone_number}</td>
-  //       <td>{patientsList[element].email_address}</td>
-  //       <td>
-  //         <a href="">Add/Edit Record</a>
-  //       </td>
-  //     </tr>
-  //   ));
-  // }
-
-  useEffect(() => {
-    console.log("patientList:", patientList);
-  }, [patientList]);
 
   const handleChange = async function (e) {
     setCurrentPatient(e.target.value);

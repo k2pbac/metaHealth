@@ -22,7 +22,6 @@ const PatientReport = ({
     referral: report.referral,
     id: report.id,
   });
-  console.log(report);
   const isEditing = currentlyEditing();
   const removeReport = () => {
     deleteReport();
@@ -165,7 +164,6 @@ const PatientReport = ({
                           newForm[reportIndex] = false;
                           return newForm;
                         });
-                        console.log(reportData, patient.id);
                         editPatientRecord(
                           reportData,
                           patient.id,

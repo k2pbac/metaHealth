@@ -59,7 +59,7 @@ export const displayClinicAppointments = (
   for (let appointment in appointments) {
     if (
       appointments[appointment].clinic_id === clinic_id &&
-      !sorted_doctors[appointments[appointment].employee_account_id -1]
+      !sorted_doctors[appointments[appointment].employee_account_id - 1]
     ) {
       sorted_doctors[appointments[appointment].employee_account_id] =
         employee[appointments[appointment].employee_account_id - 1];
@@ -71,8 +71,6 @@ export const displayClinicAppointments = (
       }
     }
   }
-
-  console.log(sorted_doctors);
 
   for (let appointment of sorted_appointments) {
     sorted_patients[appointment.patient_account_id] =
@@ -121,7 +119,6 @@ export const getClinicRecords = (
     }
   }
 
-  console.log(records);
   return records;
 };
 
@@ -140,7 +137,6 @@ export const getPatientMedicalRecords = (
     }
   }
 
-  console.log(foundPatient);
   for (let register in registered) {
     if (
       foundPatient[patient_id].id === registered[register].patient_account_id
@@ -164,7 +160,6 @@ export const getPatientMedicalRecords = (
     email_address,
     phone_number,
   } = foundPatient[patient_id];
-  console.log(reports);
   return {
     clinic: name,
     address: address,
@@ -189,7 +184,6 @@ export const getPatientAppointments = (
   let foundPatient = {};
   let foundDoctor = {};
 
-  console.log(employee);
   for (let appointment in appointments) {
     if (patient_id === appointments[appointment].patient_account_id) {
       clinicId.push(appointments[appointment].clinic_id);
@@ -209,8 +203,6 @@ export const getPatientAppointments = (
       }
     }
   }
-
-  console.log("Temp clinics:", appointmentData);
 
   let sorted = Object.values(appointmentData).sort(
     (a, b) => new Date(a.date) - new Date(b.date)

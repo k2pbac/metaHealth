@@ -15,7 +15,6 @@ import {
 import { useSelector } from "react-redux";
 import { getPatientAppointments } from "helpers/selectors";
 const PatientAppointmentList = (props) => {
-  console.log(props);
   const [currentData, setCurrentData] = useState({
     data: {},
     index: null,
@@ -27,7 +26,6 @@ const PatientAppointmentList = (props) => {
   const [appointmentData, setAppointmentData] = useState({});
 
   useEffect(() => {
-    console.log(props);
     if (Object.keys(appState).length) {
       setAppointmentData(getPatientAppointments(appState, userLogged.user.id));
     }

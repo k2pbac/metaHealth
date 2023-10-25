@@ -47,7 +47,6 @@ const useApplicationData = () => {
         appointment.time < 10
           ? ` 0${appointment.time}:00:00`
           : ` ${appointment.time}:00:00`;
-      console.log(newDate);
       axios
         .post("/api/patient/book", { ...appointment })
         .then((result) => {
@@ -72,7 +71,7 @@ const useApplicationData = () => {
       axios
         .delete(`/api/appointment/${appointment_id}`)
         .then((res) => {
-          console.log(res);
+          console.log("Deleted appointment");
         })
         .catch((err) => console.log(err));
     }
@@ -81,7 +80,7 @@ const useApplicationData = () => {
   const updatePatientNotes = (patientUpdates) => {
     if (patientUpdates) {
       axios.put("/api/patient/records", patientUpdates).then((res) => {
-        console.log(res);
+        console.log("Updated notes");
       });
     }
   };
@@ -95,7 +94,7 @@ const useApplicationData = () => {
           user,
         })
         .then((res) => {
-          console.log(res);
+          console.log("Updated patient record");
         })
         .catch((err) => console.log(err));
     }

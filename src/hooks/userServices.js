@@ -18,7 +18,7 @@ const authenticatePatient = (username, password) => {
       return { user: res.data.user, message: res.data.message };
     })
     .catch((err) => {
-      console.log("here in err:", err);
+      console.log(err);
     });
 };
 

@@ -4,7 +4,6 @@ import "./Schedule.scss";
 import Popover from "react-bootstrap/Popover";
 import { OverlayTrigger, Button } from "react-bootstrap";
 const Schedule = ({ appointmentData, bookAppointment, deleteAppointment }) => {
-  console.log(appointmentData);
   return (
     <Table className="schedule table scrollable-table">
       <thead>
