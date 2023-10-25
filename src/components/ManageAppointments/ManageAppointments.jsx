@@ -32,8 +32,6 @@ const ManageAppointments = ({
   setAppState,
   updatePatientNotes,
 }) => {
-  console.log(clinic);
-
   const [currentDay, setCurrentDay] = useState(new Date());
   const [appointments, setAppointments] = useState({});
   const [clinicRecords, setClinicRecords] = useState({});

@@ -6,7 +6,7 @@ let connectionString = `postgres://${process.env.DB_USER}:${process.env.DB_PASS}
 //   connectionString = process.env.DATABASE_URL;
 // }
 const client = new pg.Client({
-  connectionString: connectionString || process.env.DATABASE_URL,
+  connectionString: connectionString,
   ssl: {
     rejectUnauthorized: false,
   },
