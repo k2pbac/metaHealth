@@ -1,0 +1,46 @@
+$mynewcolor: #77cccc;
+div.body-component {
+  .more-info {
+    height: 645px;
+    margin-bottom: 5rem;
+  }
+  h1 {
+    font-family: "Nunito", sans-serif;
+    margin-bottom: 15px;
+  }
+  div.middle {
+    z-index: -9999;
+    position: relative;
+  }
+  img {
+    height: 400px;
+    width: 100vw;
+    object-fit: cover;
+    opacity: 0.9;
+  }
+  section {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    font-family: "Heebo", sans-serif;
+    position: absolute;
+    bottom: 0;
+    transform: translate(40%, 0%);
+    left: 0%;
+    background-color: white;
+    width: 60%;
+    padding: 50px;
+    text-align: center;
+    font-size: 1.5rem;
+    p {
+      text-align: start;
+      line-height: 2.5rem;
+      font-size: 1.2rem;
+    }
+    button {
+      float: left;
+      margin-top: 15px;
+    }
+    button:hover {
+      background-color: #273c48 !important;
+    }
+  }
+}

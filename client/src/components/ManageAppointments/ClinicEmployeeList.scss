@@ -1,0 +1,76 @@
+.employee-list-container {
+  margin: 20px;
+  box-shadow: 0 0 20px rgba(#273c48, 0.2);
+  overflow: auto;
+  height: 400px;
+  .employee-table-container {
+    width: 100%;
+    // table-layout: fixed;
+    border-collapse: collapse;
+    tbody {
+      display: block;
+      overflow: scroll;
+      height: 325px;
+      width: 100%;
+    }
+    thead tr {
+      display: block;
+    }
+
+    td {
+      border: none;
+    }
+  }
+}
+
+th:nth-child(1) {
+  width: 120px;
+}
+
+th,
+td {
+  vertical-align: middle;
+  text-align: center;
+  padding: 1rem;
+  width: 300px;
+}
+
+.employee-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  min-width: 100%;
+  margin: auto;
+  .reject {
+    
+  }
+  .accept {
+    background: green;
+  }
+}
+
+.employee-table thead tr {
+  // background-color: #273c48;
+  background-color: #273c48e8;
+  color: white;
+  text-align: left;
+  font-weight: bold;
+}
+
+.employee-table th,
+.employee-table td {
+  padding: 12px 15px;
+}
+
+.employee-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.employee-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.employee-table tbody tr:hover {
+  background-color: rgba($color: #273c48, $alpha: 0.3);
+  box-shadow: 0 0 20px rgba(#273c48, 0.2);
+}

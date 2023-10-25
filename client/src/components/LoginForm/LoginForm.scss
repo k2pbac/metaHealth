@@ -1,0 +1,15 @@
+.login-form {
+  padding: 6rem;
+  padding-top: 1rem;
+  form {
+    button {
+      margin-left: 1.5rem;
+    }
+    input {
+      border-radius: 0;
+    }
+    button:hover {
+      background-color: rgb(17, 85, 15) !important;
+    }
+  }
+}
