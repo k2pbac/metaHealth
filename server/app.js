@@ -40,14 +40,11 @@ app.use(
   })
 );
 
-// if ((process.env.NODE_ENV = "production")) {
-app.use(express.static(path.join(__dirname, "build")));
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
-});
-// } else {
-//   app.use(express.static(path.join(__dirname, "public")));
-// }
+if ((process.env.NODE_ENV = "production")) {
+  app.use(express.static(path.join(__dirname, "build")));
+} else {
+  app.use(express.static(path.join(__dirname, "public")));
+}
 
 app.use(cookieParser("secretcode"));
 app.use(passport.initialize());
@@ -106,5 +103,4 @@ app.use("/", patientRouter);
 app.use("/", registeredRouter);
 app.use("/", userAuthenticationRouter);
 app.use("/", appointmentRouter);
-
 module.exports = app;
