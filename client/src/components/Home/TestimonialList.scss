@@ -43,3 +43,10 @@ div h1 {
     right: -55px;
   }
 }
+
+@media only screen and (max-width: 600px) {
+  .list-container {
+    flex-direction: column;
+    gap: 19px;
+  }
+}

@@ -44,3 +44,11 @@ div.body-component {
     }
   }
 }
+
+@media only screen and (max-width: 600px) {
+  div.body-component {
+    .more-info {
+      max-width: 100%;
+    }
+  }
+}

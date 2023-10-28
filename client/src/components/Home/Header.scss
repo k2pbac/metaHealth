@@ -51,3 +51,39 @@ header {
   opacity: 1;
   transition: opacity 1s linear;
 }
+
+@media only screen and (max-width: 600px) {
+  header {
+    .sticky {
+      max-width: 100%;
+      margin-top: 130px;
+      h2 {
+        margin-bottom: 5px;
+        padding-left: 12px;
+      }
+      button {
+        margin-top: 0;
+      }
+    }
+  }
+  div.professionals {
+    max-width: 95%;
+    h2 {
+      margin-bottom: 4rem !important;
+    }
+  }
+  .healthy-life {
+    max-width: 100%;
+    flex-direction: column;
+    padding: 0 !important;
+    align-items: center;
+    p {
+      width: 100% !important;
+    }
+    img {
+      max-width: 100%;
+      width: 300px !important;
+      height: 200px !important;
+    }
+  }
+}

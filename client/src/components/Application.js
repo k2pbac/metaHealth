@@ -186,9 +186,11 @@ export default function Application(props) {
       {userLogged.loggedIn && getLocalStorage("isEmployee") == true && (
         <LoggedInEmployee></LoggedInEmployee>
       )}
-      <div className={`alert ${alert.type} text-center`} role="alert">
-        {alert.message}
-      </div>
+      {!!alert.type && !!alert.message ? (
+        <div className={`alert ${alert.type} text-center`} role="alert">
+          {alert.message}
+        </div>
+      ) : null}
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route

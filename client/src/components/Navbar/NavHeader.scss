@@ -88,3 +88,9 @@
   padding-left: 1rem;
 }
 // Dropdown Menu Styling
+
+@media only screen and (max-width: 600px) {
+  .login-buttons {
+    margin-left: auto;
+  }
+}
