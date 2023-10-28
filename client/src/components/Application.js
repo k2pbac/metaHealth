@@ -84,21 +84,6 @@ export default function Application(props) {
     });
   };
 
-  // navigate.listen((nextLocation) => {
-  //   if (
-  //     getLocalStorage("isEmployee") &&
-  //     userLogged &&
-  //     userLogged.user &&
-  //     userLogged.user.clinic_id &&
-  //     userLogged.user.clinic_id !== null
-  //   ) {
-  //     setClinicAddress(userLogged.user.clinic_id);
-  //   }
-
-  //   if (nextLocation.pathname === "/clinics") {
-  //     setClinicName("");
-  //   }
-  // });
   useEffect(() => {
     dispatch(alertActions.clear());
     if (
@@ -142,6 +127,7 @@ export default function Application(props) {
           })
           .catch((err) => {
             dispatch(alertActions.error(res.message));
+            scrollTop();
           });
       } else if (completeRegisterSelector.isEmployee) {
         if (completeRegisterSelector.isEmployee) {
@@ -156,6 +142,7 @@ export default function Application(props) {
             })
             .catch((err) => {
               dispatch(alertActions.error(res.message));
+              scrollTop();
             });
         }
       } else {
@@ -170,6 +157,7 @@ export default function Application(props) {
           })
           .catch((err) => {
             dispatch(alertActions.error(res.message));
+            scrollTop();
           });
       }
       // dispatch(registerComplete());

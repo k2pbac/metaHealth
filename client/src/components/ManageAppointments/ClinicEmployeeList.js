@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import "components/ManageAppointments/ClinicEmployeeList.scss";
@@ -6,7 +6,7 @@ import "components/ManageAppointments/ClinicEmployeeList.scss";
 export default function ClinicEmployeeList(props) {
   const { employeeList, verifyEmployee, unverifyEmployee, clinic, user_id } =
     props;
-  const [employeeState, setEmployeeState] = useState({});
+  const [employeeState, setEmployeeState] = useState(employeeList);
 
   const onAccept = function (employee_id, clinic_id) {
     verifyEmployee(employee_id, clinic_id);
@@ -23,10 +23,14 @@ export default function ClinicEmployeeList(props) {
     window.location.reload();
   };
 
-  let employees = [];
-  employeeList.then((results) => {
-    setEmployeeState(results);
-  });
+  useEffect(() => {
+    async function fetchData() {
+      const data = await employeeList;
+      setEmployeeState(data);
+    }
+    fetchData();
+  }, [employeeList]);
+  console.log("user_id:", user_id, clinic);
   return (
     <div className="employee-list-container">
       <table className="employee-table">

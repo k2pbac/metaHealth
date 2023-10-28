@@ -21,6 +21,13 @@ const LoginForm = ({ isEmployee }) => {
   const userAuth = useSelector((state) => state.userAuth);
   const userAuthServices = userServices;
   const dispatch = useDispatch();
+  const scrollTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -39,6 +46,7 @@ const LoginForm = ({ isEmployee }) => {
           } else {
             dispatch(loginUserFailed());
             dispatch(alertActions.error(res.message));
+            scrollTop();
           }
         })
         .catch((err) => {
@@ -58,6 +66,7 @@ const LoginForm = ({ isEmployee }) => {
           } else {
             dispatch(loginUserFailed());
             dispatch(alertActions.error(res.message));
+            scrollTop();
           }
         })
         .catch((err) => {

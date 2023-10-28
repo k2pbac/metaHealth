@@ -31,7 +31,7 @@ export default function RegisterToAClinicForm(props) {
       {mode === SHOW && (
         <Container className="text-center shadow-sm border p-5 form-container">
           <h1 className="mb-5"> Register To An Existing Clinic </h1>
-          <Form className="w-50 m-auto">
+          <Form className="existing-clinic m-auto">
             <div className="select-clinic">
               <>
                 <Form.Group className="clinic-search" controlId="clinic-search">

@@ -16,6 +16,18 @@ export default function PatientMedicalRecords(props) {
   const [patientList, setPatientList] = useState("");
   const [currentPatient, setCurrentPatient] = useState(patientName);
 
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const temp = await getPatientRecordsForClinic("", null);
+        setPatientList(temp);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    fetchData();
+  }, []);
+
   const handleChange = async function (e) {
     setCurrentPatient(e.target.value);
     const temp = await getPatientRecordsForClinic(

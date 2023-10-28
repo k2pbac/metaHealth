@@ -4,7 +4,7 @@ import axios from "axios";
 const useApplicationData = () => {
   const [appState, setAppState] = useState({});
   const [patients, setPatients] = useState({});
-  const [patient, setPatientName] = useState("");
+  const [patientName, setPatientName] = useState("");
   const [clinics, setClinics] = useState({});
   const [clinicName, setClinicName] = useState("");
 
