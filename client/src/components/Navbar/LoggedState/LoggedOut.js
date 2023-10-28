@@ -14,7 +14,7 @@ export default function LoggedOut(props) {
       <Link to={"/"}>
         <img className="logo" src={logo} alt="Meta Health Logo"></img>
       </Link>
-      <div>
+      <div className="login-buttons">
         <Link to={"/login"}>
           <Button>Login</Button>
         </Link>

@@ -1,11 +1,13 @@
-.form-container{
+.form-container {
   padding-left: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-
+.existing-clinic {
+  width: 50%;
+}
 .clinic-card {
   grid-column-end: span 4;
   display: flex;
@@ -51,9 +53,7 @@
   margin: 0;
 }
 
-
-
-.select-clinic .form-label{
+.select-clinic .form-label {
   font-weight: bold;
 }
 
@@ -79,37 +79,37 @@
 }
 
 .register-button {
- padding-top: 50px;
+  padding-top: 50px;
 }
 
-.registration-container{
+.registration-container {
   display: flex;
   flex-direction: column;
   text-align: center;
   justify-content: center;
   min-height: 500px;
-  h1{
+  h1 {
     font-size: 60px;
     padding-bottom: 20px;
   }
-  h2{
+  h2 {
     font-size: 30px;
     font-weight: normal;
   }
-  .clinic-details{
+  .clinic-details {
     font-weight: bold;
     font-size: 25px;
   }
-  .approval{
+  .approval {
     padding-top: 20px;
     font-size: 25px;
   }
-  .return-link{
+  .return-link {
     padding-top: 20px;
   }
 }
 
-.inline{
+.inline {
   display: flex;
   flex-direction: row;
 }
@@ -119,14 +119,11 @@
   background: lightgrey;
   width: 100%;
   height: 13px;
-  
 }
 #demo:checked + label {
   background: green;
   color: white;
 }
-
-
 
 @media only screen and (max-width: 1400px) {
   .clinic-card {
@@ -158,3 +155,8 @@
   }
 }
 
+@media only screen and (max-width: 600px) {
+  .existing-clinic {
+    width: 100%;
+  }
+}

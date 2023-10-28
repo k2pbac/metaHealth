@@ -8,7 +8,7 @@ const Section = (props) => {
     <section className="d-flex flex-column justify-content-center section">
       <hr className="my-5 mx-auto" />
       <div
-        className={`content d-flex justify-content-center ${
+        className={`healthy-life content d-flex justify-content-center ${
           props.reverse && reverseSection
         }`}
       >

@@ -41,12 +41,10 @@ app.use(
 );
 
 // if ((process.env.NODE_ENV = "production")) {
-app.use(express.static(path.join(__dirname, "build")));
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
-});
+// app.use(express.static(path.join(__dirname, "build")));
+
 // } else {
-//   app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public")));
 // }
 
 app.use(cookieParser("secretcode"));
@@ -107,4 +105,7 @@ app.use("/", registeredRouter);
 app.use("/", userAuthenticationRouter);
 app.use("/", appointmentRouter);
 
+// app.get("/*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "build", "index.html"));
+// });
 module.exports = app;

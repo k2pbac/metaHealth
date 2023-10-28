@@ -38,6 +38,11 @@ body {
     flex-direction: column;
   }
 }
+@media only screen and (max-width: 600px) {
+  .container {
+    margin-top: 14% !important;
+  }
+}
 
 @media only screen and (max-width: 320px) {
   html {

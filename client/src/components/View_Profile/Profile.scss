@@ -76,3 +76,22 @@ button {
   height: 50px;
   width: 200px;
 }
+
+@media only screen and (max-width: 600px) {
+  button {
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+  .profile {
+    flex-wrap: wrap;
+    overflow: auto;
+
+    .profile-image {
+      height: 100px;
+      width: 100px;
+    }
+    .left-section {
+      margin-bottom: 20px;
+    }
+  }
+}

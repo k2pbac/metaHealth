@@ -43,3 +43,10 @@
   background-color: #2098d1;
   color: white;
 }
+
+@media only screen and (max-width: 600px) {
+  .register-container,
+  .register-form {
+    width: 100%;
+  }
+}

@@ -22,7 +22,9 @@ const Header = (props) => {
   return (
     <header>
       <div
-        className={`top-bar d-flex justify-content-center align-items-center flex-column sticky ${
+        className={`${
+          props.loggedIn ? "add-padding" : ""
+        } top-bar d-flex justify-content-center align-items-center flex-column sticky ${
           (scrollPosition >= 465 && "hidden") || "visible"
         }`}
       >

@@ -68,9 +68,9 @@ router.post("/api/clinics/data", function (req, res, next) {
 
 router.post("/api/clinics/patient/records", function (req, res, next) {
   const { patient_name, clinic_id } = req.body;
-
-  db.query(
-    `SELECT DISTINCT patient_accounts.id as id,patient_accounts.first_name as first_name, patient_accounts.last_name as last_name,
+  if (patient_name) {
+    db.query(
+      `SELECT DISTINCT patient_accounts.id as id,patient_accounts.first_name as first_name, patient_accounts.last_name as last_name,
     patient_accounts.gender as gender, patient_accounts.date_of_birth as date_of_birth, 
     patient_accounts.address as address, patient_accounts.phone_number as phone_number,
     patient_accounts.email_address as email_address
@@ -81,13 +81,31 @@ router.post("/api/clinics/patient/records", function (req, res, next) {
         OR (patient_accounts.last_name ILIKE '${patient_name}%')
         AND clinics.id = ${clinic_id}
         ORDER BY patient_accounts.last_name;`,
-    (error, results) => {
-      if (error) {
-        throw error;
+      (error, results) => {
+        if (error) {
+          throw error;
+        }
+        res.json(results.rows);
       }
-      res.json(results.rows);
-    }
-  );
+    );
+  } else {
+    db.query(
+      `SELECT DISTINCT patient_accounts.id as id,patient_accounts.first_name as first_name, patient_accounts.last_name as last_name,
+    patient_accounts.gender as gender, patient_accounts.date_of_birth as date_of_birth, 
+    patient_accounts.address as address, patient_accounts.phone_number as phone_number,
+    patient_accounts.email_address as email_address
+         FROM patient_accounts 
+        JOIN registered ON patient_accounts.id = patient_account_id
+        JOIN clinics ON registered.clinic_id = clinics.id
+        ORDER BY patient_accounts.last_name;`,
+      (error, results) => {
+        if (error) {
+          throw error;
+        }
+        res.json(results.rows);
+      }
+    );
+  }
 });
 
 // Set Clinic Id For Employee When They Register To A Clinic

@@ -21,6 +21,13 @@ const LoginForm = ({ isEmployee }) => {
   const userAuth = useSelector((state) => state.userAuth);
   const userAuthServices = userServices;
   const dispatch = useDispatch();
+  const scrollTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -39,6 +46,7 @@ const LoginForm = ({ isEmployee }) => {
           } else {
             dispatch(loginUserFailed());
             dispatch(alertActions.error(res.message));
+            scrollTop();
           }
         })
         .catch((err) => {
@@ -58,6 +66,7 @@ const LoginForm = ({ isEmployee }) => {
           } else {
             dispatch(loginUserFailed());
             dispatch(alertActions.error(res.message));
+            scrollTop();
           }
         })
         .catch((err) => {
@@ -67,9 +76,9 @@ const LoginForm = ({ isEmployee }) => {
   };
 
   return (
-    <Container className="login-form w-50 h-100 text-center shadow">
+    <Container className="login-container h-100 text-center shadow-sm border">
       <h1 className="mb-4">Login</h1>
-      <Form className="w-50 mx-auto" onSubmit={handleSubmit}>
+      <Form className="login-form mx-auto" onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="username">
           <Form.Label>Username</Form.Label>
           <Form.Control

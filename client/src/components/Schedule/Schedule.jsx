@@ -150,7 +150,7 @@ const Schedule = ({ appointmentData, bookAppointment, deleteAppointment }) => {
                             >
                               <OverlayTrigger
                                 trigger="click"
-                                placement="right"
+                                placement="bottom"
                                 overlay={popover}
                                 rootClose
                               >
@@ -185,7 +185,7 @@ const Schedule = ({ appointmentData, bookAppointment, deleteAppointment }) => {
                             <td key={Math.random(434235142)}>
                               <OverlayTrigger
                                 trigger="click"
-                                placement="right"
+                                placement="bottom"
                                 overlay={popover2}
                                 rootClose
                               >
@@ -268,7 +268,7 @@ const Schedule = ({ appointmentData, bookAppointment, deleteAppointment }) => {
                       <td key={Math.random(434235142)}>
                         <OverlayTrigger
                           trigger="click"
-                          placement="right"
+                          placement="bottom"
                           overlay={popover2}
                           rootClose
                         >

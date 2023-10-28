@@ -100,6 +100,9 @@
   .clinic-card {
     grid-column-end: span 12;
   }
+  .appointment-search {
+    width: calc(100% - 60px);
+  }
 }
 
 @media only screen and (max-width: 500px) {

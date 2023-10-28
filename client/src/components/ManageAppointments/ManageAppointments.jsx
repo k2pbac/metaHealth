@@ -43,7 +43,6 @@ const ManageAppointments = ({
   useEffect(() => {
     const date = new Date(currentDay);
     var formattedDate = format(date, "MMMM do, yyyy");
-
     if (clinic) {
       setAppointments({
         ...displayClinicAppointments(
@@ -73,7 +72,8 @@ const ManageAppointments = ({
         });
       }
     }
-  }, [appState]);
+    console.log(clinic);
+  }, []);
 
   const clinicId = JSON.parse(localStorage.getItem("user")).user.clinic_id;
   const clinicVerified = JSON.parse(localStorage.getItem("user")).user
@@ -82,37 +82,30 @@ const ManageAppointments = ({
   const handleCalendarChange = (value, event) => {
     const date = new Date(value);
     var formattedDate = format(date, "MMMM do, yyyy");
-
+    console.log(formattedDate);
     setCurrentDay(value);
-    setAppointments({
-      ...displayClinicAppointments(
-        appState,
-        value.toLocaleDateString("en-US"),
-        clinic.id
-      ),
-      isEmployee,
-      patient: loggedUser.user.first_name,
-      id: loggedUser.user.id,
-      date: formattedDate,
-      clinic_id: clinic.id,
-      bookingDate: value,
-    });
-    setClinicRecords({
-      ...getClinicRecords(
-        appState,
-        formattedDate,
-        loggedUser.user.id,
-        clinic.id
-      ),
-    });
+    // setAppointments({
+    //   ...displayClinicAppointments(
+    //     appState,
+    //     value.toLocaleDateString("en-US"),
+    //     clinic.id
+    //   ),
+    //   isEmployee,
+    //   patient: loggedUser.user.first_name,
+    //   id: loggedUser.user.id,
+    //   date: formattedDate,
+    //   clinic_id: clinic.id,
+    //   bookingDate: value,
+    // });
+    // setClinicRecords({
+    //   ...getClinicRecords(
+    //     appState,
+    //     formattedDate,
+    //     loggedUser.user.id,
+    //     clinic.id
+    //   ),
+    // });
   };
-  // if (
-  //   appointments &&
-  //   appointments.doctors &&
-  //   Object.keys(appointments) &&
-  //   Object.keys(appointments.doctors)
-  // )
-  //   const doctor_length = Object.keys(appointments.doctors).length
   return (
     <>
       {(clinicId && clinicVerified) ||

@@ -10,7 +10,7 @@ library.add(fab);
 
 const Footer = (props) => {
   return (
-    <footer className="page-footer pt-4" style={{ marginTop: "100px" }}>
+    <footer className="page-footer pt-4">
       <div className="container-fluid text-center text-md-left">
         <div className="row justify-content-around">
           <div className="col-md-6 mt-md-0">

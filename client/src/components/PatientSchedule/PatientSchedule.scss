@@ -1,5 +1,7 @@
 .individual-scrollable-table {
   width: 900px;
+  max-width: 100%;
+  overflow: auto;
   display: flex;
   justify-content: space-between;
   border-collapse: collapse;
