@@ -1,0 +1,17 @@
+.patient-appointments-container {
+  width: 75%;
+
+  select {
+    width: 25%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .patient-appointments-container {
+    width: 100%;
+
+    select {
+      width: 85%;
+    }
+  }
+}

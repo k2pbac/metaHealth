@@ -60,11 +60,10 @@ const PatientAppointmentList = (props) => {
     });
 
   return (
-    <Container className="justify-content-center align-items-center text-center d-flex flex-column shadow w-75">
+    <Container className="patient-appointments-container justify-content-center align-items-center text-center d-flex flex-column shadow">
       <h1 className="my-4">Upcoming Appointments</h1>
       {/* <FloatingLabel controlId="floatingSelect" label="Works with selects"> */}
       <Form.Select
-        className="w-25"
         aria-label="Floating label select example"
         value={currentData.name}
         onChange={(e) => {
