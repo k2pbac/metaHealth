@@ -164,11 +164,11 @@ const RegisterForm = ({ formData, isEmployee }) => {
   });
 
   return (
-    <Container className="text-center shadow-sm border p-5 form">
+    <Container className="register-container text-center shadow-sm border p-5 form">
       <h1 className="mb-5">{formData["type"]} Registration </h1>
-      <Form className="w-50 m-auto" onSubmit={(e) => handleSubmit(e)}>
+      <Form className="register-form m-auto" onSubmit={(e) => handleSubmit(e)}>
         {formInputs}
-        <div className="d-flex justify-content-center flex-column align-items-center">
+        <div className="d-flex justify-content-center flex-column align-items-center mt-4">
           <Button size="sm" variant="outline-success" type="submit">
             Register
           </Button>
