@@ -192,7 +192,11 @@ export default function Application(props) {
         </div>
       ) : null}
       <Routes>
-        <Route exact path="/" element={<Home />} />
+        <Route
+          exact
+          path="/"
+          element={<Home loggedIn={userLogged.loggedIn}></Home>}
+        />
         <Route
           path="/login/patient"
           element={<LoginForm isEmployee={false}></LoginForm>}

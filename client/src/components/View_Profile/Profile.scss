@@ -82,4 +82,16 @@ button {
     margin-top: 8px;
     margin-bottom: 8px;
   }
+  .profile {
+    flex-wrap: wrap;
+    overflow: auto;
+
+    .profile-image {
+      height: 100px;
+      width: 100px;
+    }
+    .left-section {
+      margin-bottom: 20px;
+    }
+  }
 }

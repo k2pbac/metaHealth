@@ -8,7 +8,7 @@ import Section from "./Section";
 const Home = (props) => {
   return (
     <>
-      <Header></Header>
+      <Header loggedIn={props.loggedIn}></Header>
       <Body></Body>
       <Section></Section>
       <TestimonialList
