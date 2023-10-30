@@ -44,12 +44,13 @@ const ManageAppointments = ({
     const date = new Date(currentDay);
     var formattedDate = format(date, "MMMM do, yyyy");
     if (clinic) {
+      const tempAppointments = displayClinicAppointments(
+        appState,
+        currentDay.toLocaleDateString("en-US"),
+        clinic.id
+      );
       setAppointments({
-        ...displayClinicAppointments(
-          appState,
-          currentDay.toLocaleDateString("en-US"),
-          clinic.id
-        ),
+        ...tempAppointments,
         isEmployee,
         patient: loggedUser.user.first_name,
         id: loggedUser.user.id,
@@ -72,8 +73,7 @@ const ManageAppointments = ({
         });
       }
     }
-    console.log(clinic);
-  }, []);
+  }, [appState]);
 
   const clinicId = JSON.parse(localStorage.getItem("user")).user.clinic_id;
   const clinicVerified = JSON.parse(localStorage.getItem("user")).user

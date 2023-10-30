@@ -7,7 +7,7 @@ const Schedule = ({ appointmentData, bookAppointment, deleteAppointment }) => {
   return (
     <Table className="schedule table scrollable-table">
       <thead>
-        <tr>
+        <tr style={{ overflow: "auto" }}>
           <th></th>
           {(Object.keys(appointmentData).length &&
             Object.keys(appointmentData.doctors).map((doctor) => (

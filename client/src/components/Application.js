@@ -160,7 +160,6 @@ export default function Application(props) {
             scrollTop();
           });
       }
-      // dispatch(registerComplete());
     }
   }, [completeRegisterSelector]);
 
