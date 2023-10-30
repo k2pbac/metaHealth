@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Route, Routes } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  Redirect,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import "components/Application.scss";
 import Home from "./Home/Home";
 import Footer from "./Footer";
@@ -24,7 +30,6 @@ import { useSelector, useStore, useDispatch } from "react-redux";
 import useApplicationData from "hooks/useApplicationData";
 import { displayClinics, displayClinicAddress } from "helpers/selectors";
 import { userServices } from "hooks/userServices";
-import { useNavigate, useLocation } from "react-router-dom";
 import LoggedInEmployee from "./Navbar/LoggedState/LoggedInEmployee";
 import LoggedOut from "./Navbar/LoggedState/LoggedOut";
 import ManageAppointments from "./ManageAppointments/ManageAppointments";
@@ -178,131 +183,169 @@ export default function Application(props) {
           {alert.message}
         </div>
       ) : null}
-      <Routes>
-        <Route
-          exact
-          path="/"
-          element={<Home loggedIn={userLogged.loggedIn}></Home>}
-        />
-        <Route
-          path="/login/patient"
-          element={<LoginForm isEmployee={false}></LoginForm>}
-        />
-        <Route
-          path="/login/employee"
-          element={<LoginForm isEmployee={true}></LoginForm>}
-        />
-        <Route
-          path="/register/patient"
-          element={
-            <RegisterForm
-              formData={patientFormData}
-              isEmployee={false}
-            ></RegisterForm>
-          }
-        />
-        <Route
-          path="/register/employee"
-          element={
-            <RegisterForm
-              formData={employeeFormData}
-              isEmployee={true}
-            ></RegisterForm>
-          }
-        />
-        <Route
-          path="/register/clinic"
-          element={<RegisterForm formData={clinicFormData}></RegisterForm>}
-        />
+      {userLogged.loggedIn ? (
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={<Home loggedIn={userLogged.loggedIn}></Home>}
+          />
+          <Route
+            path="/login/patient"
+            element={<LoginForm isEmployee={false}></LoginForm>}
+          />
+          <Route
+            path="/login/employee"
+            element={<LoginForm isEmployee={true}></LoginForm>}
+          />
+          <Route
+            path="/register/patient"
+            element={
+              <RegisterForm
+                formData={patientFormData}
+                isEmployee={false}
+              ></RegisterForm>
+            }
+          />
+          <Route
+            path="/register/employee"
+            element={
+              <RegisterForm
+                formData={employeeFormData}
+                isEmployee={true}
+              ></RegisterForm>
+            }
+          />
+          <Route
+            path="/register/clinic"
+            element={<RegisterForm formData={clinicFormData}></RegisterForm>}
+          />
 
-        <Route
-          path="/register/existing/clinic"
-          element={
-            <RegisterToAClinicForm
-              clinicsList={clinics}
-              clinicName={clinicName}
-              setClinicName={setClinicName}
-            ></RegisterToAClinicForm>
-          }
-        />
+          <Route
+            path="/register/existing/clinic"
+            element={
+              <RegisterToAClinicForm
+                clinicsList={clinics}
+                clinicName={clinicName}
+                setClinicName={setClinicName}
+              ></RegisterToAClinicForm>
+            }
+          />
 
-        <Route path="/login" element={<LoginSelectionPanel />} />
-        {/* Change Login form for employee vs patient */}
-        <Route path="/register" element={<RegisterSelectionPanel />} />
+          <Route path="/login" element={<LoginSelectionPanel />} />
+          <Route path="/register" element={<RegisterSelectionPanel />} />
 
-        <Route
-          path="/patient/profile"
-          element={
-            <PatientProfileIndex {...userLogged.user}></PatientProfileIndex>
-          }
-        />
+          <Route
+            path="/patient/profile"
+            element={
+              <PatientProfileIndex {...userLogged.user}></PatientProfileIndex>
+            }
+          />
 
-        <Route
-          path="/employee/profile"
-          element={
-            <EmployeeProfileIndex
-              {...userLogged.user}
-              appState={appState}
-            ></EmployeeProfileIndex>
-          }
-        />
+          <Route
+            path="/employee/profile"
+            element={
+              <EmployeeProfileIndex
+                {...userLogged.user}
+                appState={appState}
+              ></EmployeeProfileIndex>
+            }
+          />
 
-        <Route
-          path="/clinics"
-          element={
-            <BookAppointments
-              setClinicAddress={setClinicAddress}
-              clinicsList={clinics}
-              clinicName={clinicName}
-              setClinicName={setClinicName}
-            ></BookAppointments>
-          }
-        />
+          <Route
+            path="/clinics"
+            element={
+              <BookAppointments
+                setClinicAddress={setClinicAddress}
+                clinicsList={clinics}
+                clinicName={clinicName}
+                setClinicName={setClinicName}
+              ></BookAppointments>
+            }
+          />
 
-        <Route
-          path="/clinic-medical-records"
-          element={
-            <PatientMedicalRecords
-              setPatientName={setPatientName}
-              patientName={patientName}
-              patientsList={patients}
-            ></PatientMedicalRecords>
-          }
-        />
+          <Route
+            path="/clinic-medical-records"
+            element={
+              <PatientMedicalRecords
+                setPatientName={setPatientName}
+                patientName={patientName}
+                patientsList={patients}
+              ></PatientMedicalRecords>
+            }
+          />
 
-        <Route
-          path="/clinic/patient/record/:id"
-          element={
-            <PatientReportView
-              appState={appState}
-              editPatientRecord={editPatientRecord}
-            ></PatientReportView>
-          }
-        />
+          <Route
+            path="/clinic/patient/record/:id"
+            element={
+              <PatientReportView
+                appState={appState}
+                editPatientRecord={editPatientRecord}
+              ></PatientReportView>
+            }
+          />
 
-        <Route
-          path={`/clinic/appointments/:id`}
-          element={
-            <ManageAppointments
-              setAppState={setAppState}
-              bookAppointment={bookAppointment}
-              deleteAppointment={deleteAppointment}
-              appState={appState}
-              clinic={clinic || getLocalStorage("clinic")}
-              updatePatientNotes={updatePatientNotes}
-            ></ManageAppointments>
-          }
-        />
+          <Route
+            path={`/clinic/appointments/:id`}
+            element={
+              <ManageAppointments
+                setAppState={setAppState}
+                bookAppointment={bookAppointment}
+                deleteAppointment={deleteAppointment}
+                appState={appState}
+                clinic={clinic || getLocalStorage("clinic")}
+                updatePatientNotes={updatePatientNotes}
+              ></ManageAppointments>
+            }
+          />
 
-        <Route
-          path={`/patient/:id/appointments`}
-          element={
-            <PatientAppointmentList
-              appState={appState}
-            ></PatientAppointmentList>
-          }
-        />
-      </Routes>
+          <Route
+            path={`/patient/:id/appointments`}
+            element={
+              <PatientAppointmentList
+                appState={appState}
+              ></PatientAppointmentList>
+            }
+          />
+        </Routes>
+      ) : (
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={<Home loggedIn={userLogged.loggedIn}></Home>}
+          />
+          <Route
+            path="/login/patient"
+            element={<LoginForm isEmployee={false}></LoginForm>}
+          />
+          <Route
+            path="/login/employee"
+            element={<LoginForm isEmployee={true}></LoginForm>}
+          />
+          <Route
+            path="/register/patient"
+            element={
+              <RegisterForm
+                formData={patientFormData}
+                isEmployee={false}
+              ></RegisterForm>
+            }
+          />
+          <Route
+            path="/register/employee"
+            element={
+              <RegisterForm
+                formData={employeeFormData}
+                isEmployee={true}
+              ></RegisterForm>
+            }
+          />
+          <Route path="/login" element={<LoginSelectionPanel />} />
+          <Route path="/register" element={<RegisterSelectionPanel />} />
+          <Route path="/*" element={<LoginSelectionPanel />} />
+        </Routes>
+      )}
       <Footer></Footer>
     </div>
   );
