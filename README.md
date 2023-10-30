@@ -18,8 +18,8 @@ DB_USER = database username
 DB_PASS = database password
 DB_NAME = meta_health (database name)
 DB_PORT = 5432 (default)
-PATH1 = path to schema folder (/express-backend/db/schema )
-PATH2 = path to seeds folder (/express-backend/db/seeds )
+PATH1 = path to schema folder (/db/schema )
+PATH2 = path to seeds folder (/db/seeds )
 ```
 
 ## Running Webpack Development Server
@@ -46,15 +46,15 @@ npm run storybook
 
 ## Home Page
 
-![Meta Health](/public/images/Meta_Health_1.gif "Home Page")
+![Meta Health](/client/public/images/Meta_Health_1.gif "Home Page")
 
 ## Patient Demo
 
-![Meta Health](/public/images/Meta_Health_3.gif "Home Page")
+![Meta Health](/client/public/images/Meta_Health_3.gif "Home Page")
 
 ## Employee Demo
 
-![Meta Health](/public/images/Meta_Health_2.gif "Home Page")
+![Meta Health](/client/public/images/Meta_Health_2.gif "Home Page")
 
 ## Tech Stack
 
